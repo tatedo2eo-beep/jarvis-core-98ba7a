@@ -62,7 +62,7 @@ renderer.setSize(innerWidth, innerHeight, false);
 renderer.setClearColor(0x02040a, 1);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(MOBILE ? 50 : 40, innerWidth / innerHeight, 0.1, 400);
-const HOME = { pos: new THREE.Vector3(0, 0.35, MOBILE ? 22 : 15), look: new THREE.Vector3(0, 0, 0) };
+const HOME = { pos: new THREE.Vector3(0, 0.35, MOBILE ? 18.5 : 15), look: new THREE.Vector3(0, 0, 0) };
 camera.position.copy(HOME.pos);
 const camLook = HOME.look.clone();
 camera.lookAt(camLook);
@@ -86,7 +86,7 @@ const NA = AGENTS.length;
 const U = {
   uT: { value: 0 }, uMo: { value: REDUCED ? 0.25 : 1 }, uPR: { value: renderer.getPixelRatio() },
   uAct: { value: new Array(NA).fill(0.2) }, uPulse: { value: new Array(NA).fill(0) }, uAT: { value: new Array(NA).fill(0) },
-  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: MOBILE ? 0.3 : 0.24 },
+  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (MOBILE ? 0.15 : 0.15) * (Q.get('fib') ? +Q.get('fib') : 1) },
 };
 const SHARED = /* glsl */`
 uniform float uT, uMo, uPR, uFocusAmt, uFib; uniform float uAct[${NA}], uPulse[${NA}], uAT[${NA}]; uniform int uFocus;
@@ -113,162 +113,186 @@ float backDim(vec3 p){
   return mix(0.22, 1.0, smoothstep(-3.5, 2.5, mv.z - mc.z)) * disc;
 }`;
 
-// ---- fibres: one merged LineSegments geometry, animated in the vertex shader ----
-const NF = MOBILE ? 1150 : 2500, SEG = MOBILE ? 12 : 18;
-const fibres = [];
-for (let f = 0; f < NF; f++) {
-  const d = randDir(); const [si, k] = nearest(d);
-  const st = THREE.MathUtils.smoothstep(k, 0.35, 0.85);
-  const hero = rnd() < 0.16;
-  const len = (hero ? 3.2 : 1.6) + Math.pow(rnd(), 0.8) * (hero ? 2.8 : 2.6);
-  let b = new V3().crossVectors(d, randDir()).normalize();
-  const base = new THREE.Color(0xd8f2ff).lerp(new THREE.Color(0xb9c4ff), Math.max(0, -d.x) * 0.35);
-  const col = base.clone().lerp(SECT[si].col, Math.min(1, st * 1.1)).multiplyScalar(hero ? 1.3 : 0.85);
-  fibres.push({ d, b, len, sd: rnd(), ai: st > 0.25 ? si : 0, col, hero, st });
-}
+// ---- BRAIN: the v3 particle brain (restored from commit fcd8240, "INSIDE: particle brain") seen from the side ----
+// Same generator (hemispheres with folds, flat medial face, cerebellum, stem), same per-dot sizes and the same additive dot shader.
+// v3 axes: x = left/right, y = up, z = front/back. Here the brain is turned so the camera sees it side-on (front to the left).
+const BN = MOBILE ? 9000 : (Q.get('n') ? +Q.get('n') : 26000);
+const BR = 2.75, BY = 0.15;
+const bPos = new Float32Array(BN * 3), bSeed = new Float32Array(BN), bSize = new Float32Array(BN), bSh = new Float32Array(BN), bReg = new Float32Array(BN);
+const bSurf = [];                          // indices of outer-surface dots (fibre roots)
+const bKind = new Uint8Array(BN);          // 0 cortex, 1 cerebellum, 2 stem
 {
-  const n = NF * SEG * 2;
-  const P = new Float32Array(n * 3), B = new Float32Array(n * 3), C = new Float32Array(n * 3), A = new Float32Array(n * 4);
-  let v = 0;
-  for (const F of fibres) for (let s = 0; s < SEG; s++) for (const t of [s / SEG, (s + 1) / SEG]) {
-    P.set([F.d.x, F.d.y, F.d.z], v * 3); B.set([F.b.x, F.b.y, F.b.z], v * 3); C.set([F.col.r, F.col.g, F.col.b], v * 3);
-    A.set([t, F.len, F.sd, F.ai], v * 4); v++;
-  }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('aBend', new THREE.BufferAttribute(B, 3));
-  g.setAttribute('aCol', new THREE.BufferAttribute(C, 3)); g.setAttribute('aP', new THREE.BufferAttribute(A, 4));
-  const m = new THREE.ShaderMaterial({
-    uniforms: U, transparent: true, depthWrite: false, depthTest: true, blending: THREE.AdditiveBlending,
-    vertexShader: SHARED + `
-      attribute vec3 aBend, aCol; attribute vec4 aP; varying vec3 vC; varying float vA;
-      void main(){
-        vec3 p = fpos(position, aBend, aP.x, aP.y, aP.z);
-        float I = inten(int(aP.w + 0.5));
-        float t = aP.x;
-        vC = mix(vec3(0.85, 0.95, 1.0), aCol, smoothstep(0.0, 0.35, t));
-        vA = (0.1 + 0.5 * smoothstep(0.0, 0.55, t)) * smoothstep(1.0, 0.86, t) * I * backDim(p) * uFib;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-      }`,
-    fragmentShader: `varying vec3 vC; varying float vA; void main(){ gl_FragColor = vec4(vC, vA); }`,
-  });
-  var FIB = new THREE.LineSegments(g, m); FIB.frustumCulled = false; FIB.renderOrder = 2; group.add(FIB);
-  FIB.userData.count = n;
-}
-
-// ---- particles: flow outward along fibres, fade at the tips; bright heads on the hero fibres ----
-const NP = MOBILE ? 2600 : 7200;
-{
-  const heads = fibres.filter(f => f.hero);
-  const n = NP + heads.length;
-  const P = new Float32Array(n * 3), B = new Float32Array(n * 3), C = new Float32Array(n * 3), A = new Float32Array(n * 4), Qa = new Float32Array(n * 4);
-  for (let i = 0; i < n; i++) {
-    const head = i >= NP; const F = head ? heads[i - NP] : fibres[(rnd() * NF) | 0];
-    P.set([F.d.x, F.d.y, F.d.z], i * 3); B.set([F.b.x, F.b.y, F.b.z], i * 3); C.set([F.col.r, F.col.g, F.col.b], i * 3);
-    A.set([0, F.len, F.sd, F.ai], i * 4);
-    Qa.set(head ? [0.985, 0, 1.6 + rnd() * 1.2, 1] : [rnd(), 0.05 + rnd() * 0.07, 0.8 + rnd() * 1.4, 0], i * 4);
-  }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('aBend', new THREE.BufferAttribute(B, 3));
-  g.setAttribute('aCol', new THREE.BufferAttribute(C, 3)); g.setAttribute('aP', new THREE.BufferAttribute(A, 4)); g.setAttribute('aQ', new THREE.BufferAttribute(Qa, 4));
-  const m = new THREE.ShaderMaterial({
-    uniforms: U, transparent: true, depthWrite: false, depthTest: true, blending: THREE.AdditiveBlending,
-    vertexShader: SHARED + `
-      attribute vec3 aBend, aCol; attribute vec4 aP, aQ; varying vec3 vC; varying float vA;
-      void main(){
-        int ai = int(aP.w + 0.5);
-        float t = aQ.w > 0.5 ? aQ.x : fract(uAT[ai] * aQ.y + aQ.x);
-        vec3 p = fpos(position, aBend, t, aP.y, aP.z);
-        float I = inten(ai);
-        vC = mix(vec3(1.0), aCol, 0.55 + 0.45 * smoothstep(0.0, 0.4, t));
-        float fade = aQ.w > 0.5 ? 0.9 : smoothstep(0.05, 0.35, t) * smoothstep(1.0, 0.62, t);
-        vA = fade * I * backDim(p) * (aQ.w > 0.5 ? 0.8 : 0.5);
-        vec4 mv = modelViewMatrix * vec4(p, 1.0);
-        gl_PointSize = aQ.z * uPR * (1.0 + uPulse[ai] * 0.6) * 11.0 / -mv.z;
-        gl_Position = projectionMatrix * mv;
-      }`,
-    fragmentShader: `varying vec3 vC; varying float vA;
-      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); gl_FragColor = vec4(mix(vC, vec3(1.0), a * 0.5), vA * a * a); }`,
-  });
-  var PTS = new THREE.Points(g, m); PTS.frustumCulled = false; PTS.renderOrder = 3; group.add(PTS);
-  PTS.userData.count = n; PTS.userData.np = NP;
-}
-
-// ---- node-network webs per sector ----
-{
-  const NN = MOBILE ? 55 : 100;
-  const nodes = [], edges = [];
-  for (const s of SECT) {
-    if (!s.dir) continue;
-    const start = nodes.length;
-    const clusters = Array.from({ length: 5 }, () => s.dir.clone().add(randDir().multiplyScalar(0.48)).normalize().multiplyScalar(2.1 + rnd() * 2.0));
-    for (let k = 0; k < NN; k++) {
-      const c = clusters[k % clusters.length];
-      const p = c.clone().add(randDir().multiplyScalar(0.15 + rnd() * 0.75));
-      if (p.length() < 1.75) p.setLength(1.75 + rnd() * 0.4);
-      nodes.push({ p, ai: s.i, col: s.col, sz: 0.8 + rnd() * 1.8 });
+  const v = new V3();
+  for (let i = 0; i < BN; i++) {
+    const r0 = rnd(); let x, y, z, fold = 0, surface = false;
+    if (r0 < .085) {           // cerebellum
+      v.copy(randDir()); const rr = Math.pow(rnd(), .35);
+      x = v.x * .62 * rr; y = -.62 + v.y * .3 * rr; z = -.78 + v.z * .38 * rr;
+      const f = 1 + .05 * Math.sin(y * 60.); x *= f; z *= f; bKind[i] = 1; surface = rr > .85;
+    } else if (r0 < .1) {      // stem
+      const t = rnd(); x = (rnd() - .5) * .18; y = -.55 - t * .55; z = -.35 + t * .05 + (rnd() - .5) * .16; bKind[i] = 2;
+    } else {
+      const s = rnd() < .5 ? -1 : 1; v.copy(randDir());
+      fold = Math.sin(v.x * 9 + Math.sin(v.z * 7) * 1.5) * Math.sin(v.y * 11 + v.z * 6);
+      const sr = rnd(); const surf = sr < .78 ? (0.9 + rnd() * .1) : Math.pow(rnd(), .5) * .88;
+      const rr = surf * (1 + .11 * fold);
+      let vx = v.x; if (vx * s < 0) vx *= .22;             // flat medial face
+      x = s * .25 + vx * .5 * rr; y = v.y * .66 * rr; z = v.z * .98 * rr;
+      if (y < -.3) y = -.3 + (y + .3) * .55;               // flatter base
+      if (z > .2) y += .06 * (z - .2);                       // taller frontal lobe
+      surface = sr < .78;
     }
-    for (let a = start; a < nodes.length; a++) {
-      const ds = [];
-      for (let b = start; b < nodes.length; b++) if (b !== a) ds.push([nodes[a].p.distanceTo(nodes[b].p), b]);
-      ds.sort((x, y) => x[0] - y[0]);
-      for (const [dd, b] of ds.slice(0, 2)) if (dd < 1.05 && a < b) edges.push([a, b]);
-    }
+    // v3 shading term: inner dots faint, outer shell bright (was computed in the v3 vertex shader from the same expression)
+    bSh[i] = THREE.MathUtils.lerp(.08, 1.15, THREE.MathUtils.smoothstep(Math.hypot(x * 1.6, y * 1.45, z), .5, .9));
+    // side view: v3 (x, y, z) -> scene (-z, y, x)
+    bPos.set([-z * BR, y * BR + BY, x * BR], i * 3);
+    bSeed[i] = rnd(); bSize[i] = (.55 + Math.pow(rnd(), 3) * 2.0) * (fold > .25 ? 1.35 : 1);
+    if (surface && bKind[i] !== 2) bSurf.push(i);
   }
-  const mk = (pos, col, ai, extra) => {
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-    g.setAttribute('aCol', new THREE.BufferAttribute(new Float32Array(col), 3));
-    g.setAttribute('aAi', new THREE.BufferAttribute(new Float32Array(ai), 1));
-    if (extra) g.setAttribute('aSz', new THREE.BufferAttribute(new Float32Array(extra), 1));
-    return g;
-  };
-  const ep = [], ec = [], ea = [];
-  for (const [a, b] of edges) for (const i of [a, b]) { const N = nodes[i]; ep.push(N.p.x, N.p.y, N.p.z); ec.push(N.col.r, N.col.g, N.col.b); ea.push(N.ai); }
-  const np = [], nc = [], na = [], ns = [];
-  for (const N of nodes) { np.push(N.p.x, N.p.y, N.p.z); nc.push(N.col.r, N.col.g, N.col.b); na.push(N.ai); ns.push(N.sz); }
-  const vs = (pt) => SHARED + `
-    attribute vec3 aCol; attribute float aAi; ${pt ? 'attribute float aSz;' : ''} varying vec3 vC; varying float vA;
-    void main(){
-      vec3 p = position * (1.0 + 0.012 * sin(uT * 0.6 + position.x * 3.0) * uMo);
-      int ai = int(aAi + 0.5); float I = inten(ai);
-      vC = aCol; vA = I * backDim(p) * ${pt ? '1.8' : '0.95'};
-      vec4 mv = modelViewMatrix * vec4(p, 1.0);
-      ${pt ? 'gl_PointSize = aSz * uPR * (1.0 + uPulse[ai]) * 19.0 / -mv.z;' : ''}
-      gl_Position = projectionMatrix * mv;
-    }`;
-  const lineM = new THREE.ShaderMaterial({ uniforms: U, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexShader: vs(false),
-    fragmentShader: `varying vec3 vC; varying float vA; void main(){ gl_FragColor = vec4(vC, vA); }` });
-  const ptM = new THREE.ShaderMaterial({ uniforms: U, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexShader: vs(true),
-    fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.05, d); gl_FragColor = vec4(mix(vC, vec3(1.0), a * 0.6), vA * a); }` });
-  const L = new THREE.LineSegments(mk(ep, ec, ea), lineM); L.frustumCulled = false; L.renderOrder = 1; group.add(L);
-  const Pn = new THREE.Points(mk(np, nc, na, ns), ptM); Pn.frustumCulled = false; Pn.renderOrder = 1; group.add(Pn);
 }
-
-// ---- core: dark-blue sphere with a cyan fresnel rim, soft halo ----
-const core = new THREE.Mesh(new THREE.SphereGeometry(1.3, 64, 48), new THREE.ShaderMaterial({
-  uniforms: { uT: U.uT, uBeam: { value: 0 }, uAct: { value: 0.5 } },
-  vertexShader: `varying vec3 vN, vV, vP; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); vP = position; gl_Position = projectionMatrix * mv; }`,
-  fragmentShader: `uniform float uT, uBeam, uAct; varying vec3 vN, vV, vP;
+// regions: each dot belongs to the agent whose sector direction (screen-like x/y) is closest; the stem is Jarvis
+const JI = AGENTS.findIndex(a => a.core);
+{
+  const d = new V3();
+  for (let i = 0; i < BN; i++) {
+    if (bKind[i] === 2) { bReg[i] = JI; continue; }
+    d.set(bPos[i * 3] / (BR * .98), (bPos[i * 3 + 1] - BY) / (BR * .66), bPos[i * 3 + 2] / BR * .35).normalize();
+    bReg[i] = nearest(d)[0];
+  }
+}
+// label anchors: mean of each region's camera-facing surface dots, pushed a little outward
+const ANCH = AGENTS.map(() => new V3()), ANCHN = new Array(NA).fill(0);
+for (const i of bSurf) { const r = bReg[i]; if (bPos[i * 3 + 2] > 0.2) { ANCH[r].x += bPos[i * 3]; ANCH[r].y += bPos[i * 3 + 1]; ANCH[r].z += bPos[i * 3 + 2]; ANCHN[r]++; } }
+ANCH.forEach((p, r) => { if (ANCHN[r]) p.divideScalar(ANCHN[r]); });
+ANCH[JI].set(0.95, BY - 0.95 * BR, 0.1);            // brainstem
+const brainU = {
+  uT: U.uT, uMo: U.uMo, uPR: U.uPR, uAct: U.uAct, uPulse: U.uPulse, uFocus: U.uFocus, uFocusAmt: U.uFocusAmt,
+  uPS: { value: MOBILE ? 21 : 21 }, uBeam: { value: 0 },
+  uCol: { value: AGENTS.map(a => new THREE.Color('#3fdcff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.28)) },
+};
+const brainMat = new THREE.ShaderMaterial({
+  uniforms: brainU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  vertexShader: /* glsl */`
+    attribute float aSeed, aSize, aReg, aSh; uniform float uT, uMo, uPR, uPS, uBeam, uFocusAmt; uniform int uFocus;
+    uniform float uAct[${NA}], uPulse[${NA}]; uniform vec3 uCol[${NA}];
+    varying vec3 vC; varying float vA;
     void main(){
-      float f = 1.0 - max(dot(vN, vV), 0.0);
-      float rim = pow(f, 2.6);
-      float band = 0.5 + 0.5 * sin(vP.y * 9.0 + uT * 0.8) * sin(vP.x * 7.0 - uT * 0.5);
-      vec3 base = mix(vec3(0.001, 0.003, 0.018), vec3(0.003, 0.012, 0.06), pow(1.0 - f, 2.0));
-      base += vec3(0.002, 0.012, 0.04) * band * (0.5 + uAct);
-      vec3 col = base + vec3(0.2, 0.75, 1.0) * rim * (0.9 + uAct * 0.5 + uBeam * 1.5);
-      col += vec3(0.5, 0.9, 1.0) * uBeam * 0.25 * pow(1.0 - abs(vP.x), 8.0);
-      gl_FragColor = vec4(col, 1.0);
+      int r = int(aReg + .5); float fire = clamp(.1 + uAct[r] * .55 + uPulse[r] * .9, 0., 1.4);
+      vec3 p = position + uMo * vec3(sin(uT * 1.3 + aSeed * 40.), cos(uT * 1.1 + aSeed * 31.), sin(uT * .9 + aSeed * 23.)) * (.018 + .05 * fire);
+      float spark = pow(max(0., sin(uT * (1.5 + aSeed * 5.) * (1. + fire * 2.) + aSeed * 120.)), 14.) * (.25 + fire * 2.4);
+      float dim = (uFocus >= 0 && r != uFocus) ? mix(1., .45, uFocusAmt) : 1.;
+      vC = mix(uCol[r] * (1.15 + .3 * fire), vec3(1.), spark * .35);
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25) * dim * aSh;
+      vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
+      gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
     }`,
-}));
-core.renderOrder = 0; group.add(core);
+  fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5); if (d > .5) discard; float a = smoothstep(.5, .0, d); gl_FragColor = vec4(vC * vA * a * a * 1.05, 1.); }`,
+});
+const brainGeo = new THREE.BufferGeometry();
+brainGeo.setAttribute('position', new THREE.BufferAttribute(bPos, 3));
+brainGeo.setAttribute('aSeed', new THREE.BufferAttribute(bSeed, 1)); brainGeo.setAttribute('aSize', new THREE.BufferAttribute(bSize, 1));
+brainGeo.setAttribute('aReg', new THREE.BufferAttribute(bReg, 1)); brainGeo.setAttribute('aSh', new THREE.BufferAttribute(bSh, 1));
+const PTS = new THREE.Points(brainGeo, brainMat); PTS.frustumCulled = false; PTS.renderOrder = 3; group.add(PTS);
+PTS.userData.count = BN;
+const core = PTS;   // the frame loop drives core.material.uniforms.uBeam
+
+// ---- FIBRES: thousands of precomputed curved strands from the brain surface, one indexed LineSegments draw ----
+const NF = MOBILE ? 1500 : 3600, SEG = MOBILE ? 14 : 22;
+const FCOL = {   // fibre palette per agent region: magenta, violet, gold, green, blue, cyan
+  'jarvis': ['#7fe9ff', '#3fdcff'], 'recipe-writer': ['#3fdcff', '#7fe9ff', '#3d8bff'], 'recipe-checker': ['#36f59b', '#7dff6a', '#3fdcff'],
+  'claude-code': ['#ffc53d', '#ff9a3d', '#ffe27a'], 'research': ['#3d7bff', '#5b8cff', '#3fdcff'], 'planner': ['#9b6bff', '#c06bff', '#ff3df0'],
+  'social-media': ['#ff3df0', '#ff5fb0', '#c06bff'], 'video-maker': ['#ff3db0', '#ff3df0', '#ffc53d'], 'video-editor': ['#b38bff', '#7a5bff', '#3d7bff'],
+};
+let FIB;
+{
+  const nv = NF * (SEG + 1);
+  const P = new Float32Array(nv * 3), N = new Float32Array(nv * 3), C = new Float32Array(nv * 3), A = new Float32Array(nv * 4);
+  const idx = new Uint32Array(NF * SEG * 2);
+  const ctr = new V3(0, BY, 0), p = new V3(), dir = new V3(), side = new V3(), tmp = new V3(), up = new V3(0, 1, 0), col = new THREE.Color();
+  let v = 0, k = 0;
+  for (let f = 0; f < NF; f++) {
+    const i = bSurf[(rnd() * bSurf.length) | 0], ai = bReg[i];
+    p.set(bPos[i * 3], bPos[i * 3 + 1], bPos[i * 3 + 2]);
+    const out = tmp.copy(p).sub(ctr).normalize();
+    const sd = SECT[ai].dir ? new V3(SECT[ai].dir.x, SECT[ai].dir.y, SECT[ai].dir.z * .6).normalize() : new V3(0, -1, 0);
+    dir.copy(out).multiplyScalar(.55).add(sd.multiplyScalar(.45)).add(randDir().multiplyScalar(.35)).normalize();
+    side.crossVectors(dir, Math.abs(dir.y) > .9 ? new V3(1, 0, 0) : up).normalize();
+    const hero = rnd() < .14;
+    const len = (hero ? 4.2 : 1.6) + Math.pow(rnd(), 1.4) * (hero ? 4.5 : 3.6);
+    const step = len / SEG, curl = (rnd() - .5) * 1.3, wob = rnd() * 6.28, fq = 1.5 + rnd() * 2.5;
+    const pal = FCOL[AGENTS[ai].id] || ['#3fdcff']; col.set(pal[(rnd() * pal.length) | 0]);
+    const br = hero ? 1.25 : 0.6 + rnd() * 0.5, seedF = rnd();
+    const v0 = v;
+    for (let s = 0; s <= SEG; s++) {
+      const t = s / SEG;
+      P.set([p.x, p.y, p.z], v * 3); N.set([side.x, side.y, side.z], v * 3); C.set([col.r * br, col.g * br, col.b * br], v * 3);
+      A.set([t, seedF, ai, len], v * 4); v++;
+      // bend: rotate the heading around its side axis and roll it slowly (smooth curl, no randomness per step)
+      dir.applyAxisAngle(side, curl * step * 0.9 + Math.sin(wob + t * fq) * 0.1);
+      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.7 + t * fq * 1.3) * 0.05).normalize();
+      side.crossVectors(tmp, dir).normalize();
+      p.addScaledVector(dir, step);
+    }
+    for (let s = 0; s < SEG; s++) { idx[k++] = v0 + s; idx[k++] = v0 + s + 1; }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('aSide', new THREE.BufferAttribute(N, 3));
+  g.setAttribute('aCol', new THREE.BufferAttribute(C, 3)); g.setAttribute('aP', new THREE.BufferAttribute(A, 4));
+  g.setIndex(new THREE.BufferAttribute(idx, 1));
+  const m = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+    vertexShader: SHARED + `
+      attribute vec3 aSide, aCol; attribute vec4 aP; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
+      void main(){
+        float t = aP.x, sd = aP.y; int ai = int(aP.z + .5);
+        float w = uMo * t * t * (.12 + aP.w * .035);
+        vec3 p = position + aSide * sin(uT * .45 + sd * 6.2831 + t * 2.4) * w + cross(aSide, normalize(position)) * cos(uT * .33 + sd * 17. + t * 3.) * w * .6;
+        float I = inten(ai);
+        vI = I; vT = t;
+        vPh = fract(sd * 7.31 + uAT[ai] * (.16 + fract(sd * 3.7) * .14));        // inward pulse position (1 = tip, 0 = brain)
+        vOn = step(.86 - uPulse[ai] * .6 - uAct[ai] * .08, fract(sd * 13.7));
+        vC = mix(aCol * .8 + vec3(.1, .2, .3), aCol, smoothstep(.0, .25, t));
+        vA = smoothstep(.05, .3, t) * pow(1. - t, 1.2) * I * uFib;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
+      }`,
+    fragmentShader: `uniform float uFib; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
+      void main(){
+        float x = (vT - (1. - vPh)) * 22.; float head = exp(-x * x) * vOn;
+        gl_FragColor = vec4(mix(vC, vec3(1.), head * .5) * (vA + head * (.5 + vI) * uFib * 3.2 * smoothstep(.0, .08, vT)), 1.);
+      }`,
+  });
+  FIB = new THREE.LineSegments(g, m); FIB.frustumCulled = false; FIB.renderOrder = 2; group.add(FIB);
+  FIB.userData.count = idx.length;
+}
+
+// ---- fibre tips: a soft glowing node at the end of the longer strands ----
+{
+  const tips = [];
+  const P = FIB.geometry.attributes.position.array, C = FIB.geometry.attributes.aCol.array, A = FIB.geometry.attributes.aP.array;
+  for (let f = 0; f < NF; f++) { const e = f * (SEG + 1) + Math.round(SEG * (.55 + (f % 7) * .05)); if (A[f * (SEG + 1) * 4 + 3] > 3.2 || f % 9 === 0) tips.push(e); }
+  const n = tips.length, TP = new Float32Array(n * 3), TC = new Float32Array(n * 3), TA = new Float32Array(n * 2);
+  tips.forEach((e, j) => { TP.set(P.subarray(e * 3, e * 3 + 3), j * 3); TC.set(C.subarray(e * 3, e * 3 + 3), j * 3); TA.set([A[e * 4 + 2], A[e * 4 + 1]], j * 2); });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(TP, 3)); g.setAttribute('aCol', new THREE.BufferAttribute(TC, 3)); g.setAttribute('aQ', new THREE.BufferAttribute(TA, 2));
+  const m = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+    vertexShader: SHARED + `attribute vec3 aCol; attribute vec2 aQ; varying vec3 vC; varying float vA;
+      void main(){ int ai = int(aQ.x + .5); vC = aCol; vA = inten(ai) * .3; vec4 mv = modelViewMatrix * vec4(position, 1.);
+        gl_PointSize = (1.6 + aQ.y * 2.2) * uPR * (1. + uPulse[ai] * .8) * 14. / -mv.z; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0., d); gl_FragColor = vec4(mix(vC, vec3(1.), a * .6) * vA * a * a, 1.); }`,
+  });
+  const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; group.add(T);
+}
+
+// ---- soft cyan glow behind the brain ----
 const glowTex = (() => {
   const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
   const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
-  g.addColorStop(0, 'rgba(200,240,255,1)'); g.addColorStop(0.25, 'rgba(120,200,255,.35)'); g.addColorStop(0.6, 'rgba(60,110,255,.08)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+  g.addColorStop(0, 'rgba(160,235,255,.9)'); g.addColorStop(0.3, 'rgba(70,190,255,.3)'); g.addColorStop(0.65, 'rgba(40,90,255,.07)'); g.addColorStop(1, 'rgba(0,0,0,0)');
   x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
 })();
-const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: true, transparent: true, opacity: 0.5 }));
-halo.scale.set(5.4, 5.4, 1); halo.renderOrder = 1; scene.add(halo);
+const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0.25 }));
+halo.scale.set(BR * 3.2, BR * 2.4, 1); halo.position.y = BY; halo.renderOrder = 1; scene.add(halo);
 
 // ---- vertical beam (ignites on a "say" event) ----
 const beam = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 26), new THREE.ShaderMaterial({
@@ -290,7 +314,9 @@ const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMateria
   depthWrite: false, depthTest: false,
   vertexShader: `varying vec2 vU; void main(){ vU = uv; gl_Position = vec4(position.xy, 0.9999, 1.0); }`,
   fragmentShader: `varying vec2 vU; void main(){ vec2 p = vU - vec2(0.48, ${MOBILE ? '0.7' : '0.5'}); p.x *= 1.5; float r = length(p);
-    vec3 c = mix(vec3(0.016, 0.03, 0.075), vec3(0.002, 0.004, 0.012), smoothstep(0.0, 0.8, r)); gl_FragColor = vec4(c, 1.0); }`,
+    vec3 c = mix(vec3(0.010, 0.022, 0.065), vec3(0.002, 0.004, 0.016), smoothstep(0.0, 0.75, r));
+    vec2 q = vU - 0.5; float e = smoothstep(0.35, 0.75, length(q * vec2(1.0, 1.25)));
+    c += vec3(0.004, 0.014, 0.07) * e; gl_FragColor = vec4(c, 1.0); }`,
 }));
 bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 
@@ -345,6 +371,20 @@ function meta(a) {
   }
 }
 
+// the second line of a brain label: the same real values, shorter
+function short(a) {
+  const s = snapFresh() ? SNAP : null, R = DATA && DATA.real;
+  switch (a.id) {
+    case 'jarvis': return liveFeed() ? 'connected · live link' : 'reconnecting';
+    case 'recipe-writer': { const t = tonightD(); return t && t.n ? `${fmt(t.n)} written tonight` : s ? `${fmt(s.draftsDone)} batches done` : 'waiting for reporter'; }
+    case 'recipe-checker': return livePages() != null ? `${fmt(livePages())} live on the site` : '–';
+    case 'claude-code': return s ? (s.limitResets ? `waiting · resets ${s.limitResets}` : `${fmt(s.claude)} process${s.claude === 1 ? '' : 'es'}`) : 'waiting for reporter';
+    case 'research': return R ? `${fmt(R.knowledge.techniques)} techniques` : '–';
+    case 'planner': { const b = book(); return b ? `${b.chapters[0]}/${b.chapters[1]} chapters` : '–'; }
+    default: return a.status === 'planned' ? 'not built yet' : '–';
+  }
+}
+
 // ================= LABELS (DOM boxes + 1px leader lines tracking 3D anchors) =================
 const LBL = AGENTS.map((a, i) => {
   const d = el('div', 'lb' + (a.status === 'planned' ? ' planned' : ''));
@@ -355,16 +395,18 @@ const LBL = AGENTS.map((a, i) => {
   const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
   const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', '1.6');
   $('#leaders').append(line, dot);
-  const anchor = a.core ? new V3(-0.55, -0.62, 0.62) : new V3(...a.sector).normalize().multiplyScalar(MOBILE ? 3.1 : 2.75);
+  const anchor = ANCH[i].clone();   // pinned on the agent's brain region
   return { a, i, d, sub: d.querySelector('span'), line, dot, anchor, w: 0, h: 0 };
 });
 function labelSizes() { for (const L of LBL) { L.w = L.d.offsetWidth; L.h = L.d.offsetHeight; } }
 const _v = new V3();
 let labelsOn = 1;
+const _LB = [];
 function placeLabels() {
   const W = innerWidth, H = innerHeight;
   const cx = W * (MOBILE ? 0.5 : 0.455), cy = H * (MOBILE ? 0.3 : 0.485);
   const lr = leftShown && !MOBILE ? $('#left').getBoundingClientRect() : null;
+  let n = 0;
   for (const L of LBL) {
     const show = labelsOn && (focusId == null || focusId === L.a.id);
     if (!show) { if (L.vis !== 0) { L.d.style.opacity = 0; L.line.style.opacity = 0; L.dot.style.opacity = 0; L.vis = 0; } continue; }
@@ -373,11 +415,23 @@ function placeLabels() {
     const x = (_v.x * 0.5 + 0.5) * W, y = (-_v.y * 0.5 + 0.5) * H;
     let dx = x - cx, dy = y - cy; const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;
     const out = MOBILE ? 22 : 46;
-    let bx = x + dx * out, by = y + dy * out;
+    const bx = x + dx * out, by = y + dy * out;
     const right = L.a.core ? false : dx >= -0.15;
-    let left = right ? bx : bx - L.w;
-    let top = by - L.h / 2;
-    left = Math.max(10, Math.min(W - L.w - 10, left)); top = Math.max(60, Math.min(H - L.h - 10, top));
+    L._x = x; L._y = y; L._r = right;
+    L._l = Math.max(8, Math.min(W - L.w - 8, right ? bx : bx - L.w));
+    L._t = Math.max(60, Math.min(H - L.h - 8, by - L.h / 2));
+    _LB[n++] = L;
+  }
+  // keep boxes from overlapping: a few passes pushing overlapping pairs apart vertically
+  for (let pass = 0; pass < 6; pass++) for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const A = _LB[i], B = _LB[j];
+    if (A._l < B._l + B.w + 4 && B._l < A._l + A.w + 4 && A._t < B._t + B.h + 3 && B._t < A._t + A.h + 3) {
+      const ov = (Math.min(A._t + A.h, B._t + B.h) - Math.max(A._t, B._t) + 3) / 2;
+      if (A._t <= B._t) { A._t -= ov; B._t += ov; } else { A._t += ov; B._t -= ov; }
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    const L = _LB[i], left = L._l, top = Math.max(60, Math.min(H - L.h - 8, L._t)), x = L._x, y = L._y, right = L._r;
     L.d.style.transform = `translate3d(${left.toFixed(1)}px,${top.toFixed(1)}px,0)`;
     const hit = lr && lr.height > 0 && left < lr.right + 8 && left + L.w > lr.left && top < lr.bottom + 24 && top + L.h > lr.top - 8;
     if (hit !== !!L.hid) { L.hid = hit; const o = hit ? 0 : 1; L.d.style.opacity = o; L.line.style.opacity = o; L.dot.style.opacity = o; }
@@ -399,8 +453,9 @@ function renderAgents() {
     const b = li.querySelector('.badge'); setText(b, BADGE[st]); b.className = 'badge ' + st;
     setText(li.querySelector('.meta'), '');
     li.title = meta(a);
-    setText(LBL[i].sub, meta(a)); LBL[i].d.classList.toggle('hot', st === 'live');
+    setText(LBL[i].sub, short(a)); LBL[i].d.classList.toggle('hot', st === 'live');
   });
+  setText($('#cx-n'), `${AGENTS.filter(a => status(a) === 'live').length} / ${NA} LIVE`);
   labelSizes();
 }
 function workerState(w) {
@@ -638,7 +693,7 @@ function watchFeeds() {
 let focusId = null, view = 'core';
 const camTween = { p: HOME.pos.clone(), l: HOME.look.clone() };
 const rot = { y: 0, t: 0, on: 1 };
-function sectorWorld(a, r) { return a.core ? new V3(0, 0, 0) : new V3(...a.sector).normalize().multiplyScalar(r).applyMatrix4(group.matrixWorld); }
+function sectorWorld(a, r) { return a.core ? new V3(0, 0, 0) : ANCH[IDX[a.id]].clone().setLength(r).applyMatrix4(group.matrixWorld); }
 function enterAgent(id) {
   const a = AGENTS[IDX[id]]; if (!a) return;
   if (view === 'flow') setView('core', true);
@@ -799,7 +854,7 @@ function applyQuality(level) {
   perf.level = level;
   const f = level >= 2 ? 0.45 : level >= 1 ? 0.65 : 1;
   FIB.geometry.setDrawRange(0, Math.floor(FIB.userData.count * f / (SEG * 2)) * SEG * 2);
-  PTS.geometry.setDrawRange(0, Math.floor(PTS.userData.count * f));
+  PTS.geometry.setDrawRange(0, Math.floor(PTS.userData.count * (level >= 2 ? 0.7 : level >= 1 ? 0.85 : 1)));
   useBloom = level < 2;
   if (level >= 2 && DPR > 1) { DPR = 1; renderer.setPixelRatio(1); composer.setPixelRatio(1); resize(); U.uPR.value = 1; }
 }
@@ -831,8 +886,7 @@ function frame(dt) {
   beamV += (bt - beamV) * (1 - Math.exp(-dt * (bt > beamV ? 6 : 1.4)));
   const pulse = bt ? 0.82 + 0.18 * Math.sin(t * 9) : 1;
   beam.material.uniforms.uBeam.value = beamV * pulse; core.material.uniforms.uBeam.value = beamV;
-  core.material.uniforms.uAct.value = ACT[0] + PULSE[0];
-  halo.material.opacity = 0.32 + ACT[0] * 0.1 + beamV * 0.3 + PULSE[0] * 0.15;
+  halo.material.opacity = 0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1;
   if (rot.on) rot.t += dt * U.uMo.value;
   group.rotation.y = Math.sin(rot.t * 0.05) * 0.44;
   group.rotation.x = Math.sin(rot.t * 0.031) * 0.05;
