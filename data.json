@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T01:34:19+03:00",
+  "updatedAt": "2026-10-23T01:45:08+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -13,7 +13,7 @@
   },
   "headline": {
     "label": "Dishes written",
-    "done": 342,
+    "done": 357,
     "total": 885
   },
   "chapters": [
@@ -69,7 +69,7 @@
       "no": 5,
       "key": "seafood",
       "name": "Seafood",
-      "done": 20,
+      "done": 21,
       "total": 31,
       "flavours": {
         "done": 0,
@@ -117,7 +117,7 @@
       "no": 9,
       "key": "rice",
       "name": "Rice",
-      "done": 18,
+      "done": 21,
       "total": 26,
       "flavours": {
         "done": 9,
@@ -129,7 +129,7 @@
       "no": 10,
       "key": "curries",
       "name": "Curries",
-      "done": 1,
+      "done": 2,
       "total": 9,
       "flavours": {
         "done": 7,
@@ -153,7 +153,7 @@
       "no": 12,
       "key": "eggs",
       "name": "Eggs",
-      "done": 11,
+      "done": 13,
       "total": 15,
       "flavours": {
         "done": 5,
@@ -165,7 +165,7 @@
       "no": 13,
       "key": "soups",
       "name": "Soups",
-      "done": 22,
+      "done": 30,
       "total": 39,
       "flavours": {
         "done": 3,
@@ -795,9 +795,9 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T01:34:19+03:00",
+    "at": "2026-10-23T01:45:08+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
-    "recipesOnSite": 453,
+    "recipesOnSite": 468,
     "chaptersComplete": 8
   },
   "history": [
@@ -903,6 +903,14 @@
       "flavours": 99,
       "extra": 12,
       "metric": "dishes"
+    },
+    {
+      "t": "2026-10-23T01:45:08+03:00",
+      "recipes": 357,
+      "total": 885,
+      "flavours": 99,
+      "extra": 12,
+      "metric": "dishes"
     }
   ],
   "focus": "Meat",
@@ -918,110 +926,110 @@
   },
   "recent": [
     {
-      "title": "Pho Bo: Vietnamese Beef and Rice Noodle Soup",
+      "title": "Clear White Chicken Stock, Slow Simmered",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pho-bo-vietnamese-beef-noodle-soup/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/clear-white-chicken-stock-slow-simmered/",
+      "t": "2026-10-23T01:45:06+03:00"
     },
     {
-      "title": "Matzah Ball Soup with Chicken and Dill",
+      "title": "Poached Eggs on Buttered Sourdough Toast with Chives",
+      "chapter": "eggs",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/poached-eggs-buttered-sourdough-toast-chives/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Eggs Royale: Smoked Salmon and Poached Eggs with Lemon Hollandaise",
+      "chapter": "eggs",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/eggs-royale-smoked-salmon-poached-eggs-lemon-hollandaise/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Chicken Fried Rice with Egg, Peas and Carrot",
+      "chapter": "rice",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chicken-fried-rice-egg-peas-carrot/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Saffron Layered Chicken Biryani with Golden Onions and Boiled Eggs",
+      "chapter": "rice",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/saffron-layered-chicken-biryani-golden-onions-eggs/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Panang Chicken Curry with Makrut Lime Leaves and Peanuts",
+      "chapter": "curries",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/panang-chicken-curry-makrut-lime-leaves-peanuts/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Kedgeree: Curried Basmati Rice with Smoked Haddock and Eggs",
+      "chapter": "rice",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/kedgeree-smoked-haddock-curried-rice-eggs/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Brandade de Morue: Baked Salt Cod and Potato Gratin with Garlic Toasts",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/brandade-de-morue-baked-salt-cod-potato-gratin/",
+      "t": "2026-10-23T01:45:06+03:00"
+    },
+    {
+      "title": "Dashi: Japanese Kombu and Bonito Stock",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/matzah-ball-soup-chicken-dill/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/dashi-kombu-bonito-japanese-stock/",
+      "t": "2026-10-23T01:36:01+03:00"
     },
     {
-      "title": "Ukrainian Borscht with Beef, Beetroot and Cabbage",
+      "title": "Curry Laksa with Chicken, Prawns and Tofu Puffs",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/ukrainian-borscht-beef-beetroot-cabbage/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/curry-laksa-chicken-prawn-coconut-noodle-soup/",
+      "t": "2026-10-23T01:36:01+03:00"
     },
     {
-      "title": "Pumpkin Soup with Caramelised Onion and Crisp Sage",
+      "title": "Egusi Soup with Beef and Greens",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pumpkin-soup-caramelised-onion-sage/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/egusi-soup-beef-spinach-palm-oil/",
+      "t": "2026-10-23T01:36:01+03:00"
     },
     {
-      "title": "Miso Soup with Tofu and Wakame",
+      "title": "Chorba: Algerian Lamb, Chickpea and Tomato Soup",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/miso-soup-tofu-wakame/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chorba-algerian-lamb-chickpea-tomato-soup/",
+      "t": "2026-10-23T01:36:01+03:00"
     },
     {
-      "title": "Pappa al Pomodoro: Tuscan Tomato and Bread Soup",
+      "title": "Galbitang: Korean Beef Short Rib and Radish Soup",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pappa-al-pomodoro-tuscan-tomato-bread-soup/",
-      "t": "2026-10-23T01:27:44+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/galbitang-korean-beef-short-rib-radish-soup/",
+      "t": "2026-10-23T01:36:01+03:00"
     },
     {
-      "title": "Ribollita: Tuscan Bean, Cavolo Nero and Bread Soup",
+      "title": "Groundnut Soup with Sweet Potato and Kale",
       "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/ribollita-tuscan-bean-kale-bread-soup/",
-      "t": "2026-10-23T01:27:44+03:00"
-    },
-    {
-      "title": "Vichyssoise: Chilled Leek and Potato Soup",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/vichyssoise-chilled-leek-potato-soup/",
-      "t": "2026-10-23T01:27:44+03:00"
-    },
-    {
-      "title": "Scotch Broth with Lamb, Barley and Kale",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/scotch-broth-lamb-barley-kale/",
-      "t": "2026-10-23T01:27:44+03:00"
-    },
-    {
-      "title": "Mulligatawny with Chicken, Red Lentils and Coconut",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/mulligatawny-chicken-red-lentil-coconut/",
-      "t": "2026-10-23T01:27:44+03:00"
-    },
-    {
-      "title": "Slow-Roasted Spiced Lamb Shoulder with Cumin Salt and Flatbread",
-      "chapter": "meat",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/slow-roasted-spiced-lamb-shoulder-cumin-salt/",
-      "t": "2026-10-23T01:13:12+03:00"
-    },
-    {
-      "title": "Harira: Moroccan Lentil and Chickpea Soup with Herbs",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/harira-moroccan-lentil-chickpea-soup/",
-      "t": "2026-10-23T01:13:11+03:00"
-    },
-    {
-      "title": "Egg Drop Soup with Ginger and Spring Onion",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/egg-drop-soup-ginger-spring-onion/",
-      "t": "2026-10-23T01:13:11+03:00"
-    },
-    {
-      "title": "Avgolemono: Greek Chicken and Rice Soup with Egg and Lemon",
-      "chapter": "soups",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/avgolemono-greek-chicken-rice-soup-egg-lemon/",
-      "t": "2026-10-23T01:13:11+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/groundnut-soup-sweet-potato-kale-peanut/",
+      "t": "2026-10-23T01:36:01+03:00"
     }
   ],
-  "recipeFiles": 453,
+  "recipeFiles": 468,
   "real": {
-    "at": "2026-10-23T01:34:19+03:00",
+    "at": "2026-10-23T01:45:08+03:00",
     "book": {
       "dishes": [
-        342,
+        357,
         885
       ],
       "flavours": [
@@ -1035,8 +1043,8 @@
       ],
       "focus": "Meat"
     },
-    "pages": 453,
-    "pagesInGit": 453,
+    "pages": 468,
+    "pagesInGit": 460,
     "knowledge": {
       "files": 6,
       "techniques": 74,
@@ -1070,7 +1078,7 @@
         },
         {
           "d": "2026-10-23",
-          "n": 161
+          "n": 168
         }
       ],
       "hours": [
@@ -1192,12 +1200,16 @@
         {
           "h": "01",
           "t": 1792706400,
-          "n": 101
+          "n": 108
         }
       ],
       "source": "public-site git history: first commit that added each content/recipes/*.json (Cairo time)"
     },
     "commits": [
+      {
+        "t": 1792708580,
+        "s": "Soups sp5: soto ayam, groundnut, galbitang, chorba, laksa, egusi, dashi (7 recipes)"
+      },
       {
         "t": 1792708092,
         "s": "Soups sp4: 10 new soup dishes (manual prose)"
@@ -1225,21 +1237,22 @@
       {
         "t": 1792707263,
         "s": "Publish soups sp1 (4), sp2 (4), sp3 (6)"
-      },
-      {
-        "t": 1792704663,
-        "s": "Publish home kitchen fly-through + drinks showcase (built from 6308dd05)"
       }
     ],
-    "commitCount": 61,
+    "commitCount": 62,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
-    "livePages": 453,
+    "livePages": 460,
     "tonight": {
-      "n": 109,
-      "batches": 17,
+      "n": 116,
+      "batches": 18,
       "first": "00:54",
-      "last": "01:28",
+      "last": "01:36",
       "recent": [
+        [
+          "01:36",
+          "sp5",
+          7
+        ],
         [
           "01:28",
           "sp4",
@@ -1264,11 +1277,6 @@
           "00:58",
           "cx1",
           6
-        ],
-        [
-          "00:57",
-          "d1",
-          4
         ]
       ]
     }
@@ -1396,7 +1404,7 @@
     {"s":"chili-crab","n":"Chili crab","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"ackee-and-saltfish","n":"Ackee and saltfish","c":5,"b":0,"f":[0,0],"x":0},
     {"s":"cullen-skink","n":"Cullen skink","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"brandade","n":"Brandade","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"brandade","n":"Brandade","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"fritto-misto","n":"Fritto misto","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"crawfish-etouffee","n":"Crawfish étouffée","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"shrimp-cocktail","n":"Shrimp cocktail","c":5,"b":1,"f":[0,0],"x":0},
@@ -1487,8 +1495,8 @@
     {"s":"manti","n":"Manti","c":8,"b":1,"f":[0,0],"x":0},
     {"s":"potstickers-guotie-jiaozi","n":"Potstickers (guotie/jiaozi)","c":8,"b":1,"f":[0,0],"x":0},
     {"s":"steamed-pilaf","n":"Steamed/pilaf","c":9,"b":1,"f":[0,0],"x":0},
-    {"s":"fried-rice","n":"Fried rice","c":9,"b":0,"f":[3,3],"x":0},
-    {"s":"biryani","n":"Biryani","c":9,"b":0,"f":[2,2],"x":0},
+    {"s":"fried-rice","n":"Fried rice","c":9,"b":1,"f":[3,3],"x":0},
+    {"s":"biryani","n":"Biryani","c":9,"b":1,"f":[2,2],"x":0},
     {"s":"sushi-rice","n":"Sushi rice","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"congee-porridge","n":"Congee/porridge","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"stuffed-peppers","n":"Stuffed peppers","c":9,"b":1,"f":[0,0],"x":0},
@@ -1508,7 +1516,7 @@
     {"s":"nasi-goreng","n":"Nasi goreng","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"bibimbap-dolsot","n":"Bibimbap (dolsot)","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"onigiri","n":"Onigiri","c":9,"b":1,"f":[0,0],"x":0},
-    {"s":"kedgeree","n":"Kedgeree","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"kedgeree","n":"Kedgeree","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"dolma-stuffed-vine-leaves","n":"Dolma/stuffed vine leaves","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"kimbap","n":"Kimbap","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"mexican-rice-arroz-rojo","n":"Mexican rice (arroz rojo)","c":9,"b":1,"f":[0,0],"x":0},
@@ -1518,7 +1526,7 @@
     {"s":"korma","n":"Korma","c":10,"b":0,"f":[1,1],"x":0},
     {"s":"japanese-curry","n":"Japanese curry","c":10,"b":1,"f":[0,0],"x":0},
     {"s":"khao-soi","n":"Khao soi","c":10,"b":0,"f":[1,1],"x":0},
-    {"s":"panang-curry","n":"Panang curry","c":10,"b":0,"f":[1,1],"x":0},
+    {"s":"panang-curry","n":"Panang curry","c":10,"b":1,"f":[1,1],"x":0},
     {"s":"thai-yellow-curry-kaeng-kari","n":"Thai yellow curry (kaeng kari)","c":10,"b":0,"f":[1,1],"x":0},
     {"s":"gaeng-som-thai-sour-curry","n":"Gaeng som (Thai sour curry)","c":10,"b":0,"f":[0,0],"x":0},
     {"s":"taco","n":"Taco","c":11,"b":0,"f":[3,3],"x":0},
@@ -1553,11 +1561,11 @@
     {"s":"clbr","n":"Çılbır","c":12,"b":1,"f":[0,0],"x":0},
     {"s":"egg-curry","n":"Egg curry","c":12,"b":1,"f":[0,0],"x":0},
     {"s":"oeufs-mayonnaise","n":"Oeufs mayonnaise","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"eggs-royale-smoked-salmon-benedict","n":"Eggs Royale (smoked-salmon Benedict)","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"poached-eggs","n":"Poached eggs","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"white-brown-chicken","n":"White/brown chicken","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"eggs-royale-smoked-salmon-benedict","n":"Eggs Royale (smoked-salmon Benedict)","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"poached-eggs","n":"Poached eggs","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"white-brown-chicken","n":"White/brown chicken","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"vegetable","n":"Vegetable","c":13,"b":1,"f":[0,0],"x":0},
-    {"s":"dashi","n":"Dashi","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"dashi","n":"Dashi","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"chicken-noodle","n":"Chicken noodle","c":13,"b":1,"f":[1,1],"x":0},
     {"s":"minestrone","n":"Minestrone","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"french-onion","n":"French onion","c":13,"b":1,"f":[0,0],"x":0},
@@ -1568,17 +1576,17 @@
     {"s":"ash-reshteh","n":"Ash reshteh","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"canh-chua","n":"Canh chua","c":13,"b":0,"f":[0,1],"x":0},
     {"s":"bulalo","n":"Bulalo","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"soto","n":"Soto","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"groundnut-soup","n":"Groundnut soup","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"egusi-soup","n":"Egusi soup","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"soto","n":"Soto","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"groundnut-soup","n":"Groundnut soup","c":13,"b":1,"f":[0,1],"x":0},
+    {"s":"egusi-soup","n":"Egusi soup","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"pepper-soup","n":"Pepper soup","c":13,"b":0,"f":[0,1],"x":0},
     {"s":"miyeok-guk","n":"Miyeok-guk","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"galbitang","n":"Galbitang","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"galbitang","n":"Galbitang","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"doenjang-jjigae","n":"Doenjang-jjigae","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"egg-drop-soup","n":"Egg drop soup","c":13,"b":1,"f":[1,1],"x":0},
     {"s":"pappa-al-pomodoro","n":"Pappa al pomodoro","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"scotch-broth","n":"Scotch broth","c":13,"b":1,"f":[0,0],"x":0},
-    {"s":"chorba","n":"Chorba","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"chorba","n":"Chorba","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"matzah-ball-soup","n":"Matzah ball soup","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"pumpkin-soup","n":"Pumpkin soup","c":13,"b":1,"f":[0,1],"x":0},
     {"s":"vichyssoise","n":"Vichyssoise","c":13,"b":1,"f":[0,0],"x":0},
@@ -1591,7 +1599,7 @@
     {"s":"harira","n":"Harira","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"mulligatawny","n":"Mulligatawny","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"ribollita","n":"Ribollita","c":13,"b":1,"f":[0,0],"x":0},
-    {"s":"laksa","n":"Laksa","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"laksa","n":"Laksa","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"ajo-blanco","n":"Ajo blanco","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"beef-stock","n":"Beef stock","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"green-garden","n":"Green/garden","c":14,"b":1,"f":[0,0],"x":0},
