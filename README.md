@@ -88,3 +88,9 @@ tail -f reporter.log          # rotated above 5 MB
 `./publish.sh` runs `derive4.py`, which writes `data.json`, then commits and pushes **to this repo only** using GH_TOKEN via `gh`.
 
 Built with three.js r169 and GSAP, vendored. Fonts: Inter and JetBrains Mono (OFL).
+
+## v7: outside / inside views + orbit controls
+- OUTSIDE (first screen): saturated neon burst (deep blue, white-cyan hot core, long neon fibres).
+- INSIDE (tap/click the core, or "Enter core"): the v6 dot-brain look from commit 5613e14 (same fibres, tips, background, bloom, brain colours, grey glass panels). "Outside" or Esc goes back. The two looks cross-fade during a smooth camera zoom.
+- Orbit controls in both views (three.js OrbitControls, as in v3 fcd8240): drag/touch to rotate freely, pinch/scroll to zoom, damped glide, gentle auto-rotate when idle (pauses while dragging, resumes after 3.5 s). Labels on the far side of the brain dim.
+- `tools_fps2.py` measures fps idle and while actively dragging (desktop mouse, phone CDP touch at 4x CPU throttle), both views. Results in shots/fps_rotate.json.

@@ -6,6 +6,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const Q = new URLSearchParams(location.search);
 const CAPTURE = Q.has('capture');
@@ -62,7 +63,7 @@ renderer.setSize(innerWidth, innerHeight, false);
 renderer.setClearColor(0x01020e, 1);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(MOBILE ? 50 : 40, innerWidth / innerHeight, 0.1, 400);
-const HOME = { pos: new THREE.Vector3(0, 0.35, MOBILE ? 18.5 : 15), look: new THREE.Vector3(0, 0, 0) };
+const HOME = { pos: new THREE.Vector3(0, 0.35, MOBILE ? 21 : 17.5), look: new THREE.Vector3(0, 0, 0) };
 camera.position.copy(HOME.pos);
 const camLook = HOME.look.clone();
 camera.lookAt(camLook);
@@ -86,7 +87,7 @@ const NA = AGENTS.length;
 const U = {
   uT: { value: 0 }, uMo: { value: REDUCED ? 0.25 : 1 }, uPR: { value: renderer.getPixelRatio() },
   uAct: { value: new Array(NA).fill(0.2) }, uPulse: { value: new Array(NA).fill(0) }, uAT: { value: new Array(NA).fill(0) },
-  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (MOBILE ? 0.6 : 0.5) * (Q.get('fib') ? +Q.get('fib') : 1) },
+  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (Q.get('fib') ? +Q.get('fib') : 1) }, uM: { value: 0 },
 };
 const SHARED = /* glsl */`
 uniform float uT, uMo, uPR, uFocusAmt, uFib; uniform float uAct[${NA}], uPulse[${NA}], uAT[${NA}]; uniform int uFocus;
@@ -169,21 +170,24 @@ const brainU = {
   uT: U.uT, uMo: U.uMo, uPR: U.uPR, uAct: U.uAct, uPulse: U.uPulse, uFocus: U.uFocus, uFocusAmt: U.uFocusAmt,
   uPS: { value: MOBILE ? 21 : 21 }, uBeam: { value: 0 },
   uCol: { value: AGENTS.map(a => new THREE.Color('#38e8ff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.12)) },
+  uColIn: { value: AGENTS.map(a => new THREE.Color('#3fdcff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.28)) },   // v6 inside colours
+  uM: U.uM,
 };
 const brainMat = new THREE.ShaderMaterial({
   uniforms: brainU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
   vertexShader: /* glsl */`
     attribute float aSeed, aSize, aReg, aSh; uniform float uT, uMo, uPR, uPS, uBeam, uFocusAmt; uniform int uFocus;
-    uniform float uAct[${NA}], uPulse[${NA}]; uniform vec3 uCol[${NA}];
+    uniform float uAct[${NA}], uPulse[${NA}], uM; uniform vec3 uCol[${NA}], uColIn[${NA}];
     varying vec3 vC; varying float vA;
     void main(){
       int r = int(aReg + .5); float fire = clamp(.1 + uAct[r] * .55 + uPulse[r] * .9, 0., 1.4);
       vec3 p = position + uMo * vec3(sin(uT * 1.3 + aSeed * 40.), cos(uT * 1.1 + aSeed * 31.), sin(uT * .9 + aSeed * 23.)) * (.018 + .05 * fire);
       float spark = pow(max(0., sin(uT * (1.5 + aSeed * 5.) * (1. + fire * 2.) + aSeed * 120.)), 14.) * (.25 + fire * 2.4);
       float dim = (uFocus >= 0 && r != uFocus) ? mix(1., .45, uFocusAmt) : 1.;
-      float hot = 1. - smoothstep(.04, .4, length(position.xy - vec2(0., .15)) / 2.75);
-      vC = mix(uCol[r] * (1.2 + .3 * fire), vec3(1.), clamp(spark * .35 + hot * .55, 0., 1.));
-      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .5) * dim * max(aSh, hot * .7);
+      float hot = (1. - smoothstep(.04, .45, length(position - vec3(0., .15, 0.)) / 2.75)) * (1. - uM);   // outside only: white-cyan burst
+      vec3 col = mix(uCol[r], uColIn[r], uM);
+      vC = mix(col * (1.15 + .3 * fire + .05 * (1. - uM)), vec3(1.), clamp(spark * .35 + hot * .6, 0., 1.));
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .7) * dim * max(aSh, hot * .8);
       vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
       gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
     }`,
@@ -197,17 +201,31 @@ const PTS = new THREE.Points(brainGeo, brainMat); PTS.frustumCulled = false; PTS
 PTS.userData.count = BN;
 const core = PTS;   // the frame loop drives core.material.uniforms.uBeam
 
-// ---- FIBRES: thousands of precomputed curved strands from the brain surface, one indexed LineSegments draw ----
-const NF = MOBILE ? 360 : 700, SEG = MOBILE ? 16 : 26;
-const FCOL = {   // fibre palette per agent region: magenta, violet, gold, green, blue, cyan
+// ---- FIBRES: two precomputed sets of curved strands, each one indexed LineSegments draw.
+// OUT = the outside neon burst (fewer, longer, saturated); IN = the v6 inside look (commit 5613e14), unchanged. uM cross-fades them.
+const FCOL_OUT = {   // saturated neon: cyan, magenta, violet, lime, gold, blue
   'jarvis': ['#00f0ff', '#40c8ff'], 'recipe-writer': ['#00e5ff', '#00b4ff', '#ff1fd2'], 'recipe-checker': ['#8dff1f', '#2bff7a', '#00e5ff'],
   'claude-code': ['#ffd21f', '#ff9a1f', '#8dff1f'], 'research': ['#1f6bff', '#00b4ff', '#00f0ff'], 'planner': ['#8a2bff', '#c41fff', '#ff1fd2'],
   'social-media': ['#ff1fd2', '#ff1f8f', '#a21fff'], 'video-maker': ['#ff1fd2', '#ff2b6b', '#ffd21f'], 'video-editor': ['#8a2bff', '#5a2bff', '#00b4ff'],
 };
-let FIB;
-{
-  const nv = NF * (SEG + 1);
-  const P = new Float32Array(nv * 3), N = new Float32Array(nv * 3), C = new Float32Array(nv * 3), A = new Float32Array(nv * 4);
+const FCOL_IN = {
+  'jarvis': ['#7fe9ff', '#3fdcff'], 'recipe-writer': ['#3fdcff', '#7fe9ff', '#3d8bff'], 'recipe-checker': ['#36f59b', '#7dff6a', '#3fdcff'],
+  'claude-code': ['#ffc53d', '#ff9a3d', '#ffe27a'], 'research': ['#3d7bff', '#5b8cff', '#3fdcff'], 'planner': ['#9b6bff', '#c06bff', '#ff3df0'],
+  'social-media': ['#ff3df0', '#ff5fb0', '#c06bff'], 'video-maker': ['#ff3db0', '#ff3df0', '#ffc53d'], 'video-editor': ['#b38bff', '#7a5bff', '#3d7bff'],
+};
+const FCFG = {
+  out: { nf: MOBILE ? 380 : 720, seg: MOBILE ? 16 : 26, pal: FCOL_OUT, wOut: .78, wSec: .2, wRnd: .2, hero: .34, len: [6.5, 2.8, 7.5, 4.2, 1.2], br: [1.0, .55, .35],
+         curl: (l) => (rnd() - .5) * 2.6 / l, bend: .04, roll: .015, gain: MOBILE ? 0.62 : 0.55, ws: 'uWo',
+         vc: 'vC = aCol;', va: 'vA = smoothstep(.03, .16, t) * pow(1. - t, .85) * I * uG * uFib * uWo;', head: 'head * (.4 + vI) * .75 * uWo' },
+  in:  { nf: MOBILE ? 1500 : 3600, seg: MOBILE ? 14 : 22, pal: FCOL_IN, wOut: .55, wSec: .45, wRnd: .35, hero: .14, len: [4.2, 1.6, 4.5, 3.6, 1.4], br: [1.25, .6, .5],
+         curl: () => (rnd() - .5) * 1.3, bend: .1, roll: .05, gain: 0.15, ws: 'uWi',
+         vc: 'vC = mix(aCol * .8 + vec3(.1, .2, .3), aCol, smoothstep(.0, .25, t));', va: 'vA = smoothstep(.05, .3, t) * pow(1. - t, 1.2) * I * uG * uFib * uWi;',
+         head: 'head * (.5 + vI) * uG * 3.2 * uWi' },
+};
+U.uWo = { value: 1 }; U.uWi = { value: 0 };
+function buildFib(C) {
+  const NF = C.nf, SEG = C.seg, nv = NF * (SEG + 1);
+  const P = new Float32Array(nv * 3), N = new Float32Array(nv * 3), Cc = new Float32Array(nv * 3), A = new Float32Array(nv * 4);
   const idx = new Uint32Array(NF * SEG * 2);
   const ctr = new V3(0, BY, 0), p = new V3(), dir = new V3(), side = new V3(), tmp = new V3(), up = new V3(0, 1, 0), col = new THREE.Color();
   let v = 0, k = 0;
@@ -216,21 +234,20 @@ let FIB;
     p.set(bPos[i * 3], bPos[i * 3 + 1], bPos[i * 3 + 2]);
     const out = tmp.copy(p).sub(ctr).normalize();
     const sd = SECT[ai].dir ? new V3(SECT[ai].dir.x, SECT[ai].dir.y, SECT[ai].dir.z * .6).normalize() : new V3(0, -1, 0);
-    dir.copy(out).multiplyScalar(.55).add(sd.multiplyScalar(.45)).add(randDir().multiplyScalar(.35)).normalize();
+    dir.copy(out).multiplyScalar(C.wOut).add(sd.multiplyScalar(C.wSec)).add(randDir().multiplyScalar(C.wRnd)).normalize();
     side.crossVectors(dir, Math.abs(dir.y) > .9 ? new V3(1, 0, 0) : up).normalize();
-    const hero = rnd() < .3;
-    const len = (hero ? 6.5 : 2.6) + Math.pow(rnd(), 1.2) * (hero ? 6.5 : 4.0);
-    const step = len / SEG, curl = (rnd() - .5) * 2.6 / len, wob = rnd() * 6.28, fq = 1.5 + rnd() * 2.5;
-    const pal = FCOL[AGENTS[ai].id] || ['#3fdcff']; col.set(pal[(rnd() * pal.length) | 0]);
-    const br = hero ? 1.0 : 0.55 + rnd() * 0.35, seedF = rnd();
+    const hero = rnd() < C.hero;
+    const len = (hero ? C.len[0] : C.len[1]) + Math.pow(rnd(), C.len[4]) * (hero ? C.len[2] : C.len[3]);
+    const step = len / SEG, curl = C.curl(len), wob = rnd() * 6.28, fq = 1.5 + rnd() * 2.5;
+    const pal = C.pal[AGENTS[ai].id] || ['#3fdcff']; col.set(pal[(rnd() * pal.length) | 0]);
+    const br = hero ? C.br[0] : C.br[1] + rnd() * C.br[2], seedF = rnd();
     const v0 = v;
     for (let s = 0; s <= SEG; s++) {
       const t = s / SEG;
-      P.set([p.x, p.y, p.z], v * 3); N.set([side.x, side.y, side.z], v * 3); C.set([col.r * br, col.g * br, col.b * br], v * 3);
+      P.set([p.x, p.y, p.z], v * 3); N.set([side.x, side.y, side.z], v * 3); Cc.set([col.r * br, col.g * br, col.b * br], v * 3);
       A.set([t, seedF, ai, len], v * 4); v++;
-      // bend: rotate the heading around its side axis and roll it slowly (smooth curl, no randomness per step)
-      dir.applyAxisAngle(side, curl * step * 0.9 + Math.sin(wob + t * fq) * 0.04);
-      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.7 + t * fq * 1.3) * 0.015).normalize();
+      dir.applyAxisAngle(side, curl * step * 0.9 + Math.sin(wob + t * fq) * C.bend);
+      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.7 + t * fq * 1.3) * C.roll).normalize();
       side.crossVectors(tmp, dir).normalize();
       p.addScaledVector(dir, step);
     }
@@ -238,11 +255,12 @@ let FIB;
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('aSide', new THREE.BufferAttribute(N, 3));
-  g.setAttribute('aCol', new THREE.BufferAttribute(C, 3)); g.setAttribute('aP', new THREE.BufferAttribute(A, 4));
+  g.setAttribute('aCol', new THREE.BufferAttribute(Cc, 3)); g.setAttribute('aP', new THREE.BufferAttribute(A, 4));
   g.setIndex(new THREE.BufferAttribute(idx, 1));
   const m = new THREE.ShaderMaterial({
-    uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+    uniforms: { ...U, uG: { value: C.gain } }, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
     vertexShader: SHARED + `
+      uniform float uG, uWo, uWi;
       attribute vec3 aSide, aCol; attribute vec4 aP; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
       void main(){
         float t = aP.x, sd = aP.y; int ai = int(aP.z + .5);
@@ -252,48 +270,49 @@ let FIB;
         vI = I; vT = t;
         vPh = fract(sd * 7.31 + uAT[ai] * (.16 + fract(sd * 3.7) * .14));        // inward pulse position (1 = tip, 0 = brain)
         vOn = step(.86 - uPulse[ai] * .6 - uAct[ai] * .08, fract(sd * 13.7));
-        vC = aCol;
-        vA = smoothstep(.04, .2, t) * pow(1. - t, .9) * I * uFib;
+        ${C.vc}
+        ${C.va}
         gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
       }`,
-    fragmentShader: `uniform float uFib; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
+    fragmentShader: `uniform float uG, uWo, uWi; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
       void main(){
         float x = (vT - (1. - vPh)) * 22.; float head = exp(-x * x) * vOn;
-        gl_FragColor = vec4(mix(vC, vec3(1.), head * .5) * (vA + head * (.4 + vI) * .65 * smoothstep(.0, .08, vT)), 1.);
+        gl_FragColor = vec4(mix(vC, vec3(1.), head * .5) * (vA + ${C.head} * smoothstep(.0, .08, vT)), 1.);
       }`,
   });
-  FIB = new THREE.LineSegments(g, m); FIB.frustumCulled = false; FIB.renderOrder = 2; group.add(FIB);
-  FIB.userData.count = idx.length;
+  const L = new THREE.LineSegments(g, m); L.frustumCulled = false; L.renderOrder = 2; group.add(L);
+  L.userData = { count: idx.length, seg: SEG, nf: NF };
+  return L;
 }
+const FIB = buildFib(FCFG.out), FIBI = buildFib(FCFG.in);
+const SEG = FCFG.out.seg;
 
-// ---- fibre tips: a soft glowing node at the end of the longer strands ----
-{
-  const tips = [];
-  const P = FIB.geometry.attributes.position.array, C = FIB.geometry.attributes.aCol.array, A = FIB.geometry.attributes.aP.array;
-  for (let f = 0; f < NF; f++) { const e = f * (SEG + 1) + Math.round(SEG * (.55 + (f % 7) * .05)); if (A[f * (SEG + 1) * 4 + 3] > 3.2 || f % 9 === 0) tips.push(e); }
+// ---- inside only: soft glowing nodes part-way along the longer v6 strands ----
+const TIPS = (() => {
+  const S = FIBI.userData.seg, NFI = FIBI.userData.nf, tips = [];
+  const P = FIBI.geometry.attributes.position.array, C = FIBI.geometry.attributes.aCol.array, A = FIBI.geometry.attributes.aP.array;
+  for (let f = 0; f < NFI; f++) { const e = f * (S + 1) + Math.round(S * (.55 + (f % 7) * .05)); if (A[f * (S + 1) * 4 + 3] > 3.2 || f % 9 === 0) tips.push(e); }
   const n = tips.length, TP = new Float32Array(n * 3), TC = new Float32Array(n * 3), TA = new Float32Array(n * 2);
   tips.forEach((e, j) => { TP.set(P.subarray(e * 3, e * 3 + 3), j * 3); TC.set(C.subarray(e * 3, e * 3 + 3), j * 3); TA.set([A[e * 4 + 2], A[e * 4 + 1]], j * 2); });
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(TP, 3)); g.setAttribute('aCol', new THREE.BufferAttribute(TC, 3)); g.setAttribute('aQ', new THREE.BufferAttribute(TA, 2));
   const m = new THREE.ShaderMaterial({
     uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
-    vertexShader: SHARED + `attribute vec3 aCol; attribute vec2 aQ; varying vec3 vC; varying float vA;
-      void main(){ int ai = int(aQ.x + .5); vC = aCol; vA = inten(ai) * .14; vec4 mv = modelViewMatrix * vec4(position, 1.);
-        gl_PointSize = (1.2 + aQ.y * 1.4) * uPR * (1. + uPulse[ai] * .8) * 14. / -mv.z; gl_Position = projectionMatrix * mv; }`,
+    vertexShader: SHARED + `uniform float uWi; attribute vec3 aCol; attribute vec2 aQ; varying vec3 vC; varying float vA;
+      void main(){ int ai = int(aQ.x + .5); vC = aCol; vA = inten(ai) * .3 * uWi; vec4 mv = modelViewMatrix * vec4(position, 1.);
+        gl_PointSize = (1.6 + aQ.y * 2.2) * uPR * (1. + uPulse[ai] * .8) * 14. / -mv.z; gl_Position = projectionMatrix * mv; }`,
     fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0., d); gl_FragColor = vec4(mix(vC, vec3(1.), a * .6) * vA * a * a, 1.); }`,
   });
-  const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; if (Q.has('tips')) group.add(T);
-}
-
-// ---- soft cyan glow behind the brain ----
-const glowTex = (() => {
-  const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
-  const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
-  g.addColorStop(0, 'rgba(235,255,255,1)'); g.addColorStop(0.18, 'rgba(120,235,255,.55)'); g.addColorStop(0.45, 'rgba(0,150,255,.12)'); g.addColorStop(1, 'rgba(0,0,0,0)');
-  x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
+  const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; group.add(T); return T;
 })();
-const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0.4 }));
-halo.scale.set(BR * 2.0, BR * 1.6, 1); halo.position.y = BY; halo.renderOrder = 1; scene.add(halo);
+
+// ---- glow behind the brain: hot white-cyan burst outside, the v6 soft cyan glow inside ----
+const mkGlow = stops => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+  const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); stops.forEach(([o, col]) => g.addColorStop(o, col)); x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); };
+const mkHalo = (tex, sx, sy) => { const h = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0 }));
+  h.scale.set(sx, sy, 1); h.position.y = BY; h.renderOrder = 1; scene.add(h); return h; };
+const halo = mkHalo(mkGlow([[0, 'rgba(235,255,255,1)'], [0.18, 'rgba(120,235,255,.55)'], [0.45, 'rgba(0,150,255,.12)'], [1, 'rgba(0,0,0,0)']]), BR * 2.2, BR * 1.8);
+const haloIn = mkHalo(mkGlow([[0, 'rgba(160,235,255,.9)'], [0.3, 'rgba(70,190,255,.3)'], [0.65, 'rgba(40,90,255,.07)'], [1, 'rgba(0,0,0,0)']]), BR * 3.2, BR * 2.4);
 
 // ---- vertical beam (ignites on a "say" event) ----
 const beam = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 26), new THREE.ShaderMaterial({
@@ -314,17 +333,23 @@ beam.renderOrder = 10; scene.add(beam);
 const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
   depthWrite: false, depthTest: false,
   vertexShader: `varying vec2 vU; void main(){ vU = uv; gl_Position = vec4(position.xy, 0.9999, 1.0); }`,
-  fragmentShader: `varying vec2 vU; void main(){ vec2 p = vU - vec2(0.46, ${MOBILE ? '0.3' : '0.5'}); p.x *= ${MOBILE ? '1.0' : '1.6'}; float r = length(p);
-    vec3 c = mix(vec3(0.0002, 0.0005, 0.014), vec3(0.0005, 0.0025, 0.075), smoothstep(0.05, 0.6, r));
-    vec2 q = abs(vU - 0.5) * 2.0; float e = pow(max(q.x, q.y), 3.0);
-    c += vec3(0.001, 0.008, 0.15) * e; gl_FragColor = vec4(c, 1.0); }`,
+  uniforms: { uM: U.uM },
+  fragmentShader: `uniform float uM; varying vec2 vU; void main(){
+    vec2 p = vU - vec2(0.46, ${MOBILE ? '0.7' : '0.5'}); p.x *= ${MOBILE ? '1.0' : '1.6'}; float r = length(p);
+    vec3 o = mix(vec3(0.0002, 0.0005, 0.014), vec3(0.0005, 0.0025, 0.075), smoothstep(0.05, 0.6, r));
+    vec2 q = abs(vU - 0.5) * 2.0; o += vec3(0.001, 0.008, 0.15) * pow(max(q.x, q.y), 3.0);
+    vec2 pi = vU - vec2(0.48, ${MOBILE ? '0.7' : '0.5'}); pi.x *= 1.5; float ri = length(pi);
+    vec3 n = mix(vec3(0.010, 0.022, 0.065), vec3(0.002, 0.004, 0.016), smoothstep(0.0, 0.75, ri));
+    vec2 qi = vU - 0.5; n += vec3(0.004, 0.014, 0.07) * smoothstep(0.35, 0.75, length(qi * vec2(1.0, 1.25)));
+    gl_FragColor = vec4(mix(o, n, uM), 1.0); }`,
 }));
 bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 
 // ---- post: half-resolution bloom ----
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), MOBILE ? 0.9 : 0.95, 0.25, 0.5);
+const BLOOM_OUT = [MOBILE ? 0.9 : 0.95, 0.25, 0.5], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), ...BLOOM_OUT);
 const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / 2), Math.max(2, h / 2));
 composer.addPass(bloom); composer.addPass(new OutputPass());
 composer.setPixelRatio(DPR); composer.setSize(innerWidth, innerHeight);
@@ -403,15 +428,19 @@ function labelSizes() { for (const L of LBL) { L.w = L.d.offsetWidth; L.h = L.d.
 const _v = new V3();
 let labelsOn = 1;
 const _LB = [];
+const _w = new THREE.Vector3(), _cd = new THREE.Vector3();
 function placeLabels() {
   const W = innerWidth, H = innerHeight;
-  const cx = W * (MOBILE ? 0.5 : 0.455), cy = H * (MOBILE ? 0.3 : 0.485);
+  _v.set(0, BY, 0).project(camera); const cx = (_v.x * 0.5 + 0.5) * W, cy = (-_v.y * 0.5 + 0.5) * H;   // brain centre on screen (follows orbit/zoom)
+  _cd.copy(camera.position).sub(controls.target).normalize();
   const lr = leftShown && !MOBILE ? $('#left').getBoundingClientRect() : null;
   let n = 0;
   for (const L of LBL) {
     const show = labelsOn && (focusId == null || focusId === L.a.id);
     if (!show) { if (L.vis !== 0) { L.d.style.opacity = 0; L.line.style.opacity = 0; L.dot.style.opacity = 0; L.vis = 0; } continue; }
     if (L.vis !== 1) { L.hid = false; L.d.style.opacity = 1; L.line.style.opacity = 1; L.dot.style.opacity = 1; L.vis = 1; }
+    const back = !L.a.core && _w.copy(L.anchor).setY(L.anchor.y - BY).normalize().dot(_cd) < -0.15;   // anchor on the far side of the brain
+    if (back !== L.back) { L.back = back; L.d.classList.toggle('far', back); L.line.style.opacity = back ? 0.3 : 1; L.dot.style.opacity = back ? 0.3 : 1; }
     _v.copy(L.anchor).applyMatrix4(group.matrixWorld).project(camera);
     const x = (_v.x * 0.5 + 0.5) * W, y = (-_v.y * 0.5 + 0.5) * H;
     let dx = x - cx, dy = y - cy; const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;
@@ -692,35 +721,88 @@ function watchFeeds() {
 
 // ================= INSIDE VIEW (fly to a sector) =================
 let focusId = null, view = 'core';
-const camTween = { p: HOME.pos.clone(), l: HOME.look.clone() };
-const rot = { y: 0, t: 0, on: 1 };
+// ---- orbit controls (as in v3 fcd8240): drag/touch rotate in 3D, pinch/scroll zoom, damping glide, idle auto-rotate ----
+const DIST = { out: HOME.pos.z, in: MOBILE ? 16 : 12.5 };
+const LIM = { out: [9.5, MOBILE ? 32 : 28], in: [4.6, MOBILE ? 22 : 18] };
+const AUTO = !REDUCED && (!CAPTURE || Q.has('spin'));
+const controls = new OrbitControls(camera, canvas);
+Object.assign(controls, { enableDamping: true, dampingFactor: 0.055, enablePan: false, rotateSpeed: MOBILE ? 0.8 : 0.62, zoomSpeed: 0.75,
+  minDistance: LIM.out[0], maxDistance: LIM.out[1], autoRotate: AUTO, autoRotateSpeed: 0.42 });
+controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_ROTATE };
+controls.target.copy(HOME.look); controls.update();
+let idleTimer = 0, dragging = false;
+controls.addEventListener('start', () => { dragging = true; controls.autoRotate = false; clearTimeout(idleTimer); document.body.classList.add('grabbing'); });
+controls.addEventListener('end', () => { dragging = false; document.body.classList.remove('grabbing'); clearTimeout(idleTimer); idleTimer = setTimeout(() => { controls.autoRotate = AUTO; }, 3500); });
+// fly the camera along a smooth arc around the target (direction slerps, distance eases) so zooms and sector visits glide
+let fly = null; const FL = { p0: new V3(), l0: new V3(), p1: new V3(), l1: new V3(), n0: new V3(), n1: new V3(), q: new THREE.Quaternion(), qi: new THREE.Quaternion(), r0: 1, r1: 1, k: 0 };
+function flyTo(pos, look, dur, ease = 'power3.inOut') {
+  if (fly) fly.kill();
+  FL.l0.copy(controls.target); FL.p0.copy(camera.position); FL.p1.copy(pos); FL.l1.copy(look);
+  FL.n0.copy(FL.p0).sub(FL.l0); FL.r0 = FL.n0.length(); FL.n0.normalize();
+  FL.n1.copy(FL.p1).sub(FL.l1); FL.r1 = FL.n1.length(); FL.n1.normalize();
+  FL.q.setFromUnitVectors(FL.n0, FL.n1); FL.k = 0; controls.enabled = false;
+  fly = gsap.to(FL, { k: 1, duration: dur, ease, onComplete: () => { fly = null; controls.enabled = true; } });
+}
+function flyStep() {
+  const k = FL.k;
+  controls.target.lerpVectors(FL.l0, FL.l1, k);
+  FL.qi.identity().slerp(FL.q, k);
+  camera.position.copy(FL.n0).applyQuaternion(FL.qi).multiplyScalar(FL.r0 + (FL.r1 - FL.r0) * k).add(controls.target);
+  camera.lookAt(controls.target);
+}
+const camAt = (dist, look = HOME.look) => { const d = camera.position.clone().sub(controls.target); if (d.lengthSq() < 1e-6) d.set(0, 0, 1); return d.setLength(dist).add(look); };
+// ---- outside (neon burst) <-> inside (v6 dot brain), cross-faded by U.uM with a zoom ----
+let depth = 'out';
+function setDepth(d, instant) {
+  if (d === depth && !instant) return;
+  if (focusId) exitAgent(true);
+  depth = d; const inn = d === 'in', dur = instant ? 0.01 : 1.9;
+  document.body.classList.toggle('inside', inn);
+  controls.minDistance = Math.min(LIM[d][0], camera.position.distanceTo(controls.target)); controls.maxDistance = Math.max(LIM[d][1], camera.position.distanceTo(controls.target));
+  flyTo(camAt(DIST[d]), HOME.look, dur, 'power3.inOut');
+  gsap.to(U.uM, { value: inn ? 1 : 0, duration: dur * 0.9, ease: 'sine.inOut', onComplete: () => { controls.minDistance = LIM[d][0]; controls.maxDistance = LIM[d][1]; } });
+  $('#depth').innerHTML = inn ? '<i>←</i> Outside' : '<i>◉</i> Enter core';
+  $('#depth').classList.toggle('in', inn);
+}
+$('#depth').onclick = () => setDepth(depth === 'in' ? 'out' : 'in');
+// a tap or click on the core (not a drag) zooms inside
+let downAt = null;
+canvas.addEventListener('pointerdown', e => { downAt = { x: e.clientX, y: e.clientY, t: performance.now() }; });
+canvas.addEventListener('pointerup', e => {
+  if (!downAt || view !== 'core' || focusId || fly) return;
+  const moved = Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y), quick = performance.now() - downAt.t < 450; downAt = null;
+  if (moved > 7 || !quick) return;
+  _v.set(0, BY, 0).project(camera); const cx = (_v.x * .5 + .5) * innerWidth, cy = (-_v.y * .5 + .5) * innerHeight;
+  _w.set(BR, BY, 0).project(camera); const rpx = Math.max(60, Math.abs((_w.x - _v.x) * .5 * innerWidth) * 1.25);
+  if (Math.hypot(e.clientX - cx, e.clientY - cy) < rpx && depth === 'out') setDepth('in');
+});
+let preFocus = null;
 function sectorWorld(a, r) { return a.core ? new V3(0, 0, 0) : ANCH[IDX[a.id]].clone().setLength(r).applyMatrix4(group.matrixWorld); }
 function enterAgent(id) {
   const a = AGENTS[IDX[id]]; if (!a) return;
   if (view === 'flow') setView('core', true);
-  focusId = id; rot.on = 0; hideLeft();
+  if (!focusId) preFocus = camera.position.clone();
+  focusId = id; hideLeft(); controls.autoRotate = false;
   const tgt = sectorWorld(a, 2.4);
   const dir = a.core ? new V3(0, 0.15, 1) : tgt.clone().normalize().multiplyScalar(0.7).add(new V3(0, 0.1, 1)).normalize();
   const pos = a.core ? new V3(0, 0.6, MOBILE ? 10 : 7.2) : dir.multiplyScalar(MOBILE ? 13 : 9.6).add(tgt.clone().multiplyScalar(0.25));
   const look = a.core ? new V3(0, 0, 0) : tgt.clone().multiplyScalar(MOBILE ? 0.55 : 0.75);
   if (!MOBILE && !a.core) look.add(new V3(-1.6, 0, 0));   // keep the sector right of the panel
-  gsap.to(camTween.p, { x: pos.x, y: pos.y, z: pos.z, duration: 1.6, ease: 'power3.inOut' });
-  gsap.to(camTween.l, { x: look.x, y: look.y, z: look.z, duration: 1.6, ease: 'power3.inOut' });
+  flyTo(pos, look, 1.6);
   U.uFocus.value = IDX[id]; gsap.to(U.uFocusAmt, { value: 1, duration: 1.2 });
   gsap.to(['#right'], { autoAlpha: 0, duration: 0.4 });
   const P = $('#agentview'); P.classList.remove('hidden'); renderAgentView();
   gsap.fromTo(P, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' });
 }
-function exitAgent() {
-  if (!focusId) return; focusId = null; rot.on = 1;
-  gsap.to(camTween.p, { x: HOME.pos.x, y: HOME.pos.y, z: HOME.pos.z, duration: 1.4, ease: 'power3.inOut' });
-  gsap.to(camTween.l, { x: 0, y: 0, z: 0, duration: 1.4, ease: 'power3.inOut' });
+function exitAgent(noFly) {
+  if (!focusId) return; focusId = null; controls.autoRotate = AUTO;
+  if (!noFly) flyTo(preFocus ? preFocus.setLength(DIST[depth]) : camAt(DIST[depth]), HOME.look, 1.4);
   gsap.to(U.uFocusAmt, { value: 0, duration: 1, onComplete: () => { if (!focusId) U.uFocus.value = -1; } });
   gsap.to(['#right'], { autoAlpha: 1, duration: 0.6, delay: 0.6 });
   const P = $('#agentview'); gsap.to(P, { opacity: 0, duration: 0.35, onComplete: () => { if (!focusId) P.classList.add('hidden'); } });
 }
 $('#back').onclick = exitAgent;
-addEventListener('keydown', e => { if (e.key === 'Escape') { if (focusId) exitAgent(); else if (view === 'flow') setView('core'); } });
+addEventListener('keydown', e => { if (e.key === 'Escape') { if (focusId) exitAgent(); else if (view === 'flow') setView('core'); else if (depth === 'in') setDepth('out'); } });
 function renderAgentView() {
   const a = AGENTS[IDX[focusId]]; if (!a) return;
   const st = status(a), s = snapFresh() ? SNAP : null, R = DATA && DATA.real, b = book();
@@ -836,13 +918,13 @@ function setView(v, instant) {
   if (v === 'flow') {
     if (focusId) exitAgent();
     view = 'flow'; $('#flow').classList.remove('hidden'); layoutFlow(); renderFlowCards(); hideLeft();
-    gsap.to(['#right', '#labels', '#leaders', '#subs'], { autoAlpha: 0, duration: d * 0.6 });
+    gsap.to(['#right', '#labels', '#leaders', '#subs', '#depth'], { autoAlpha: 0, duration: d * 0.6 });
     gsap.fromTo('#flow', { autoAlpha: 0 }, { autoAlpha: 1, duration: d });
     gsap.fromTo('.fn', { opacity: 0, y: 8 }, { opacity: (i, x) => x.classList.contains('planned') ? 0.5 : 1, y: 0, duration: d, stagger: instant ? 0 : 0.03, ease: 'power3.out', clearProps: 'transform' });
   } else {
     view = 'core';
     gsap.to('#flow', { autoAlpha: 0, duration: d, onComplete: () => $('#flow').classList.add('hidden') });
-    gsap.to(['#right', '#labels', '#leaders', '#subs'], { autoAlpha: 1, duration: d });
+    gsap.to(['#right', '#labels', '#leaders', '#subs', '#depth'], { autoAlpha: 1, duration: d });
   }
   document.querySelectorAll('#views button').forEach(b => b.classList.toggle('on', b.dataset.v === view));
 }
@@ -854,7 +936,7 @@ window.__perf = perf;
 function applyQuality(level) {
   perf.level = level;
   const f = level >= 2 ? 0.45 : level >= 1 ? 0.65 : 1;
-  FIB.geometry.setDrawRange(0, Math.floor(FIB.userData.count * f / (SEG * 2)) * SEG * 2);
+  for (const L of [FIB, FIBI]) { const S2 = L.userData.seg * 2; L.geometry.setDrawRange(0, Math.floor(L.userData.count * f / S2) * S2); }
   PTS.geometry.setDrawRange(0, Math.floor(PTS.userData.count * (level >= 2 ? 0.7 : level >= 1 ? 0.85 : 1)));
   useBloom = level < 2;
   if (level >= 2 && DPR > 1) { DPR = 1; renderer.setPixelRatio(1); composer.setPixelRatio(1); resize(); U.uPR.value = 1; }
@@ -887,12 +969,12 @@ function frame(dt) {
   beamV += (bt - beamV) * (1 - Math.exp(-dt * (bt > beamV ? 6 : 1.4)));
   const pulse = bt ? 0.82 + 0.18 * Math.sin(t * 9) : 1;
   beam.material.uniforms.uBeam.value = beamV * pulse; core.material.uniforms.uBeam.value = beamV;
-  halo.material.opacity = 0.38 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15;
-  if (rot.on) rot.t += dt * U.uMo.value;
-  group.rotation.y = Math.sin(rot.t * 0.05) * 0.44;
-  group.rotation.x = Math.sin(rot.t * 0.031) * 0.05;
-  camera.position.copy(camTween.p); camera.lookAt(camTween.l);
-  group.updateMatrixWorld();
+  const M = U.uM.value;
+  halo.material.opacity = (0.5 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15) * (1 - M);
+  haloIn.material.opacity = (0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1) * M;
+  U.uWo.value = 1 - M; U.uWi.value = M; FIB.visible = M < 0.999; FIBI.visible = TIPS.visible = M > 0.001;
+  bloom.strength = BLOOM_OUT[0] + (BLOOM_IN[0] - BLOOM_OUT[0]) * M; bloom.radius = BLOOM_OUT[1] + (BLOOM_IN[1] - BLOOM_OUT[1]) * M; bloom.threshold = BLOOM_OUT[2] + (BLOOM_IN[2] - BLOOM_OUT[2]) * M;
+  if (fly) flyStep(); else controls.update(dt * U.uMo.value);
   if (view === 'core') placeLabels(); else tickFlow(dt, t);
   if (useBloom) composer.render(dt); else renderer.render(scene, camera);
   secAcc += dt;
@@ -918,6 +1000,9 @@ window.__inject = ev => handle({ id: 'inj' + Math.random().toString(36).slice(2)
 window.__reconnect = () => { connectLive(); connectMs(); };
 window.__view = v => v === 'flow' || v === 'core' ? setView(v) : enterAgent(v);
 window.__exit = () => exitAgent();
+window.__cam = () => ({ p: camera.position.toArray().map(v => +v.toFixed(2)), depth, m: +U.uM.value.toFixed(2), auto: controls.autoRotate });
+window.__depth = (d, instant) => setDepth(d, instant);
+window.__orbit = (az, el) => { const o = camera.position.clone().sub(controls.target); const sp = new THREE.Spherical().setFromVector3(o); sp.theta += az; sp.phi = Math.min(3.0, Math.max(0.15, sp.phi + el)); camera.position.setFromSpherical(sp).add(controls.target); controls.update(0); };
 window.__left = (b, ms) => showLeft(b, ms);
 window.__texts = () => [...document.querySelectorAll('#ui *, #labels *, #flow *')].filter(n => n.childNodes.length && [...n.childNodes].some(c => c.nodeType === 3 && c.textContent.trim()) && n.offsetParent !== null).map(n => n.textContent.trim());
 
