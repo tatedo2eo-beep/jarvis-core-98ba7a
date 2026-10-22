@@ -1,38 +1,88 @@
-# Jarvis Board v3 — Jarvis Core
+# Jarvis Board v4 — Jarvis Core
 
-A live sci-fi command centre for Team Joe's AI agents (the recipe-website crew).
+A live command centre for Joe's AI agents (the recipe-website crew). It is an original design: reference videos were used for mood and layout ideas only, and nothing was copied.
 
-**Live:** https://tatedo2eo-beep.github.io/jarvis-core-98ba7a/ (noindex, nofollow)
+**Live:** https://tatedo2eo-beep.github.io/jarvis-core-98ba7a/ (`noindex, nofollow`)
 
 ## Views
-- **Core (outside):** a glowing 3D core, with an orbital ring of agent nodes and beams of data flowing to each one. It stays dim when idle and erupts when an event arrives: kinetic numbers, word-by-word subtitles, a shockwave and sparks. The left panel holds the 7-day / 24-hour output graph and metrics. The right panel lists the agents with status dots, success rings, a 12-hour activity heatmap and the event stream.
-- **Flow:** a node graph of how work moves between agents (Joe → Jarvis → Research / Planner / Claude Code → Recipe Writer → Recipe Checker → Test site → Social / Video). Drag nodes to rearrange them; the layout is saved in your browser. Edges animate, and they light up when an event touches either end. Double-click a node to enter its brain. Press `F` or use the CORE/FLOW switch.
-- **Brain (inside):** click any node to fly into that agent's particle brain. It shows coloured regions with live "firing %", the current task and progress, a live step feed and results with links. Drag to rotate and scroll to zoom. Press `Esc` or click "Back to core" to leave. The "Feed the brain…" box only filters the on-screen feed. It also takes the commands `/region drafting`, `/clear`, `/flow` and `/back`. It sends nothing anywhere.
+- **Core (default):** a 3D neural "dandelion" (three.js) with thousands of hair fibres, GPU particles and node webs. It has one colour sector per agent around a dark-blue core with a cyan rim.
+  - **Agent sectors.** Each agent owns a sector. Its brightness and particle speed follow the agent's **real** status: live, waiting, idle or planned. A real event pulses the sector.
+  - **Labels and panels.** Floating label boxes show one real stat per agent. The right panel (*Neural link / Cortex status*) lists agents with LIVE / WAITING / IDLE / PLANNED badges and the real draft-worker queue.
+  - **Left panel.** It stays hidden when idle and slides in on `say` and `done` events, cycling titled data blocks: the book, the queue, 7-day and 24-hour commit charts, and the site. Click the top pill to open it by hand.
+  - **Say events.** A `say` event lights a vertical beam while the subtitle types.
+  - **Header.** The top pill shows `last real event … ago`, ticking every second.
+- **Inside an agent:** click a label or a list row. The camera flies into that sector, which shows real stats and that agent's real event feed. Press `Esc` or *Back to core* to leave.
+- **Flow:** a draggable node graph of how work moves. Your layout is saved in your browser. Cards show only real values.
 
-Planned agents (Social Media, Video Maker, Video Editor) show as dim standby nodes. The board respects `prefers-reduced-motion` and uses fewer particles on mobile, where the panels stack.
+Rotation, fibres and particles are decorative motion. **No number on the page is random or simulated.** Every number changes only when its real source changes (see the table). Elements that could not be backed by real data (the old "firing %", fake counters) were removed.
 
-## Live events (ntfy.sh)
-The page subscribes to `https://ntfy.sh/<topic>/sse`. On each connect it backfills with `json?poll=1&since=12h`, and it reconnects automatically with backoff. It also reloads `data.json` every 5 minutes.
+## Where every number comes from
+| UI text | Source |
+|---|---|
+| Book dishes written `261/885`, flavours `85/227`, extra flavours, chapters complete `7/34`, "now writing" | `derive.py` (read-only) on the book recipe files. Computed live by `reporter.py` (cached by recipes-folder mtime and site commit) and sent in every heartbeat. `data.json` (`derive4.py`) is the fallback. |
+| Recipe pages live `352` | Recipe page files in the test-site repo, counted by `reporter.py` every 1.5 s. |
+| Draft batches done · all time / queued | `runq` logs and the queue files of the draft workers (`reporter.py` probe). |
+| Queue rows (batch, chapter, dishes, `limit · retry HH:MM`, `drafting m:ss`, `list x/y`) | Running `runq2.sh` processes: their argument list, `sleep` child and outline files. |
+| Claude processes, session-limit reset time | `ps` count of Claude Code processes; the reset time is parsed from the worker's limit message. |
+| Techniques, sources, knowledge files | The research knowledge-base files (`derive4.py`). |
+| 7-day / 24-hour charts | **Git commit timestamps** of the test-site repo (`derive4.py`, `real.chart`). |
+| Latest site commit | `git log -1` of the site repo. |
+| Last real event / heartbeat ago, clock | Timestamps of received ntfy messages; Cairo time. |
+| Real events · 30 min / 12 h | Count of real events received from the two topics. |
 
-The topic lives in **`config.json`**.
+## Live feed — two public ntfy topics
+- **Live channel** (heartbeat every 6 s plus every event): `https://ntfy.envs.net/jarvis-v4-live-no6j144aue080rgcgb9ue7hzd7`
+- **Milestones** (12 h history plus a fallback): `https://ntfy.sh/jarvis-v4-ynemhypj7av5ov3hozqijgawzzn5`
 
-> **Note:** the topic name is in the public page source, so anyone can read or post to it. That is accepted because this is a non-sensitive work-status feed. **Only post work-status text. Never post secrets, tokens, passwords or private data.** `post.sh` / `post.py` refuse anything that looks like a secret.
+The page subscribes to both (SSE, with a backfill poll on connect and auto-reconnect) and de-duplicates by event id.
 
-Event JSON: `{"agent","type":"start|step|done|metric|say","text","value","progress","link","region","label"}`
+> **Note:** both topic names are in the public page source, so anyone can read or post to them. This is accepted for a non-sensitive work-status feed. **Only work-status text is posted. Never post secrets, tokens, passwords or private data.** `post.sh`, `post.py` and `reporter.py` drop anything that looks like a secret.
+
+**Why two servers (ntfy limits):**
+- ntfy.sh's free tier allows about **250 messages/day per IP**, with bursts of 60 refilling at 1 per 5 s. A 5–6 s heartbeat (14,400/day) is impossible there.
+- The heartbeat therefore goes to **ntfy.envs.net** (17,280/day anonymous, CORS open). The reporter rate-limits itself to at most 1 message per 6 s, with a burst of 5, and batches events into the next heartbeat.
+- Milestones go to ntfy.sh within a self-imposed budget of 120/day, always keeping 60 in reserve, and are checked against `/v1/account`.
+- Messages are capped well under 4096 bytes.
+- MQTT was not possible: this box only has outbound 80/443.
+
+## Posting events
+```bash
+./post.sh jarvis say "Batch m4 resumes at 4:20am when the Claude limit resets."
+./post.sh recipe-writer done "Batch r3 drafted · 5 dishes · Rice" 1 value=5 label="dishes drafted"
+./post.sh research metric "Techniques indexed" value=74 label=techniques
+python3 post.py recipe-checker step "Checking oven temperatures" --progress 0.6
+```
+- Types: `start | step | done | metric | say`.
+- Agents: `jarvis, recipe-writer, recipe-checker, claude-code, research, planner, social-media, video-maker, video-editor`.
+- `post.sh` posts to the milestone topic.
+
+## Live reporter (`reporter.py`)
+`reporter.py` polls every **1.5 s**, using read-only probes of processes, the runq log, site pages, git and book files. It posts an event on every real change:
+- a batch started or drafted
+- a session limit
+- recipe pages +N
+- book dishes changed
+- a new site commit
+- a change in the Claude process count
+- the research worker starting or stopping
+
+It sends a heartbeat with a full status snapshot every 6 s.
 
 ```bash
-./post.sh jarvis say "Evening Joe. Three agents on shift."
-./post.sh recipe-writer start "Cakes batch 7: 6 layer cakes" 0.05
-./post.sh recipe-writer step "Drafting Victoria sponge" 0.4 region=drafting
-./post.sh recipe-writer done "Cakes batch 7 published" 1 value=6 label=recipes link=https://example.com/
-./post.sh research metric "Techniques indexed" value=74 label=techniques
-python3 post.py recipe-checker step "Checking oven temps" --progress 0.6
+./start-reporter.sh           # idempotent: starts it under nohup unless already running
+./start-reporter.sh --watch   # also starts a watchdog that re-checks every 30 s (idempotent)
+./start-reporter.sh --stop    # stops watchdog and reporter
+tail -f reporter.log          # rotated above 5 MB
 ```
-Agent ids: `jarvis, recipe-writer, recipe-checker, claude-code, research, planner, social-media, video-maker, video-editor`.
 
-## Data
-- `data.json` comes from `derive3.py`. It wraps the v2 `derive.py`, which is read-only on the book and site folders, and adds the newest recipe links. Book counts, chapters, flavours, pipeline, milestones, knowledge and recent recipes are **real**.
-- Live events are real when an agent posts them. Brain region "firing %" is derived from recent events plus a gentle idle shimmer, so it is illustrative.
-- `./publish.sh` re-derives the data and pushes it to this repo only.
+## Performance
+- **Rendering.** One merged `LineSegments` buffer with all fibre motion in a GPU vertex shader, and GPU particles.
+- **Bloom.** Half-resolution bloom.
+- **Resolution.** DPR is capped at 1.5 on desktop and 1 on phones.
+- **Adaptive quality.** fps is measured for the first 2–4 s. If it is below 55, the board steps down: fewer fibres, then no bloom. Force a level with `?q=0|1|2`, or disable adapting with `?adaptive=0`.
+- **Hidden tabs.** The board pauses when the tab is hidden.
 
-Built with three.js (bloom post-processing) and GSAP, vendored locally. It is an original design; other dashboards were used for ideas only.
+## Data and publishing
+`./publish.sh` runs `derive4.py`, which writes `data.json`, then commits and pushes **to this repo only** using GH_TOKEN via `gh`.
+
+Built with three.js r169 and GSAP, vendored. Fonts: Inter and JetBrains Mono (OFL).

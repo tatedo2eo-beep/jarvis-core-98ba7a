@@ -1,7 +1,12 @@
 {
-  "_note": "Public, non-sensitive work-status feed. Anyone who reads the page source can see (and post to) this topic. Never post secrets or private data.",
+  "_note": "Public, non-sensitive work-status feeds. Anyone who reads the page source can see (and post to) these topics. Never post secrets or private data.",
   "ntfyServer": "https://ntfy.sh",
-  "topic": "jarvis-core-yfivt36jwj3hx7wq0oqn29wwthw14hwk",
+  "topic": "jarvis-v4-ynemhypj7av5ov3hozqijgawzzn5",
+  "live": {
+    "server": "https://ntfy.envs.net",
+    "topic": "jarvis-v4-live-no6j144aue080rgcgb9ue7hzd7",
+    "_note": "reporter.py heartbeat + every real event, max 1 message / 6 s (ntfy.envs.net anonymous limit 17,280/day)"
+  },
   "historySince": "12h",
   "dataRefreshSeconds": 300
 }

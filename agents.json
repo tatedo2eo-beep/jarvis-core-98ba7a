@@ -1,12 +1,12 @@
 {
- "_note": "Agents shown on Jarvis Board v3. status: active | idle | planned (planned = dim standby node). regions = the agent's sub-tasks/skills shown as brain regions. color = hex.",
+ "_note": "Agents shown on the board. color = its sector colour in the neural core; sector = direction of its fibre sector (x right, y up, z toward viewer).",
  "agents": [
   {
    "id": "jarvis",
    "name": "Jarvis",
    "code": "JRV-00",
    "role": "Core assistant · orchestrates every agent",
-   "color": "#3df2ff",
+   "color": "#dff8ff",
    "status": "active",
    "core": true,
    "regions": [
@@ -35,6 +35,11 @@
      "name": "Report",
      "desc": "Updates Joe and this board"
     }
+   ],
+   "sector": [
+    0,
+    0,
+    0
    ]
   },
   {
@@ -42,7 +47,7 @@
    "name": "Recipe Writer",
    "code": "RCP-W1",
    "role": "Writes the book's recipes, chapter by chapter",
-   "color": "#ff3df0",
+   "color": "#39d9ff",
    "status": "active",
    "regions": [
     {
@@ -70,6 +75,11 @@
      "name": "Publish",
      "desc": "Pushes the recipe to the test site"
     }
+   ],
+   "sector": [
+    0.05,
+    1,
+    0.25
    ]
   },
   {
@@ -77,7 +87,7 @@
    "name": "Recipe Checker",
    "code": "RCP-C1",
    "role": "Audits every recipe against sources and rules",
-   "color": "#ffe93d",
+   "color": "#36f59b",
    "status": "active",
    "regions": [
     {
@@ -100,6 +110,11 @@
      "name": "Fixes",
      "desc": "Applies corrections and logs them"
     }
+   ],
+   "sector": [
+    1,
+    0.08,
+    0.15
    ]
   },
   {
@@ -107,7 +122,7 @@
    "name": "Claude Code",
    "code": "HLP-CC",
    "role": "Helper · code and draft generation",
-   "color": "#ff9a3d",
+   "color": "#ff8a3d",
    "status": "idle",
    "regions": [
     {
@@ -130,6 +145,11 @@
      "name": "Hand-off",
      "desc": "Returns the draft to Jarvis for review"
     }
+   ],
+   "sector": [
+    0.72,
+    -0.72,
+    0.15
    ]
   },
   {
@@ -137,7 +157,7 @@
    "name": "Research",
    "code": "RSC-01",
    "role": "Chef knowledge base · techniques and sources",
-   "color": "#3d7bff",
+   "color": "#5b8cff",
    "status": "active",
    "regions": [
     {
@@ -160,6 +180,11 @@
      "name": "Sources",
      "desc": "Tracks every source URL"
     }
+   ],
+   "sector": [
+    -0.85,
+    0.62,
+    0.2
    ]
   },
   {
@@ -167,7 +192,7 @@
    "name": "Planner",
    "code": "PLN-01",
    "role": "Milestones, schedule and open decisions",
-   "color": "#7dff3d",
+   "color": "#9b7bff",
    "status": "idle",
    "regions": [
     {
@@ -190,6 +215,11 @@
      "name": "Risks",
      "desc": "Blockers and follow-ups"
     }
+   ],
+   "sector": [
+    0.72,
+    0.72,
+    -0.25
    ]
   },
   {
@@ -197,7 +227,7 @@
    "name": "Social Media",
    "code": "SOC-01",
    "role": "Planned · TikTok, Instagram, YouTube Shorts",
-   "color": "#ff3d7b",
+   "color": "#ff3dbd",
    "status": "planned",
    "regions": [
     {
@@ -220,6 +250,11 @@
      "name": "Replies",
      "desc": "Comment replies"
     }
+   ],
+   "sector": [
+    0.02,
+    -1,
+    0.2
    ]
   },
   {
@@ -227,7 +262,7 @@
    "name": "Video Maker",
    "code": "VID-M1",
    "role": "Planned · shoots and generates recipe clips",
-   "color": "#b83dff",
+   "color": "#ff4d6a",
    "status": "planned",
    "regions": [
     {
@@ -250,6 +285,11 @@
      "name": "Render",
      "desc": "First cut"
     }
+   ],
+   "sector": [
+    -0.68,
+    -0.72,
+    0.1
    ]
   },
   {
@@ -257,7 +297,7 @@
    "name": "Video Editor",
    "code": "VID-E1",
    "role": "Planned · cuts, captions and exports",
-   "color": "#3dffb8",
+   "color": "#cdbfff",
    "status": "planned",
    "regions": [
     {
@@ -280,6 +320,11 @@
      "name": "Export",
      "desc": "Formats per platform"
     }
+   ],
+   "sector": [
+    -1,
+    -0.04,
+    0.05
    ]
   }
  ],

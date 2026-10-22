@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Post one work-status event to Jarvis Board v3 (public ntfy.sh topic from config.json).
+# Post one work-status event to Jarvis Board (public ntfy.sh milestone topic from config.json; ntfy.sh free = 250 msgs/day per IP, shared with reporter.py).
 # Usage: ./post.sh AGENT TYPE "TEXT" [PROGRESS 0..1] [value=N] [link=URL] [region=ID] [label=TEXT]
 #   TYPE: start | step | done | metric | say
 #   ./post.sh jarvis say "Evening Joe. Six agents online."

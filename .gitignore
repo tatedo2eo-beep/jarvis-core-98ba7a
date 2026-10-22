@@ -3,3 +3,8 @@ shots/
 frames/
 *.mp4
 tools_*.py
+reporter.pid
+reporter.log*
+reporter_state.json*
+watchdog.pid
+ref/

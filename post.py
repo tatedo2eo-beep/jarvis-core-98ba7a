@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Post work-status events to Jarvis Board v3 from Python (public ntfy.sh topic in config.json).
+"""Post work-status events to Jarvis Board v4 from Python (public ntfy.sh topic in config.json).
 
     from post import post
     post("recipe-writer", "step", "Drafting cakes batch 7", progress=0.3, region="drafting")
@@ -32,7 +32,7 @@ def post(agent, type, text, progress=None, value=None, link=None, region=None, l
 
 if __name__ == "__main__":
     import argparse
-    p = argparse.ArgumentParser(description="Post an event to Jarvis Board v3")
+    p = argparse.ArgumentParser(description="Post an event to Jarvis Board v4")
     p.add_argument("agent"); p.add_argument("type", choices=TYPES); p.add_argument("text")
     p.add_argument("--progress", type=float); p.add_argument("--value", type=float)
     p.add_argument("--link"); p.add_argument("--region"); p.add_argument("--label")
