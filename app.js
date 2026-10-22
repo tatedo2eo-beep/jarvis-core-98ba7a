@@ -231,7 +231,7 @@ const NP = MOBILE ? 2600 : 7200;
     void main(){
       vec3 p = position * (1.0 + 0.012 * sin(uT * 0.6 + position.x * 3.0) * uMo);
       int ai = int(aAi + 0.5); float I = inten(ai);
-      vC = aCol; vA = I * backDim(p) * ${pt ? '1.2' : '0.6'};
+      vC = aCol; vA = I * backDim(p) * ${pt ? '1.8' : '0.95'};
       vec4 mv = modelViewMatrix * vec4(p, 1.0);
       ${pt ? 'gl_PointSize = aSz * uPR * (1.0 + uPulse[ai]) * 19.0 / -mv.z;' : ''}
       gl_Position = projectionMatrix * mv;
@@ -290,7 +290,7 @@ const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMateria
   depthWrite: false, depthTest: false,
   vertexShader: `varying vec2 vU; void main(){ vU = uv; gl_Position = vec4(position.xy, 0.9999, 1.0); }`,
   fragmentShader: `varying vec2 vU; void main(){ vec2 p = vU - vec2(0.48, ${MOBILE ? '0.7' : '0.5'}); p.x *= 1.5; float r = length(p);
-    vec3 c = mix(vec3(0.045, 0.075, 0.16), vec3(0.008, 0.016, 0.04), smoothstep(0.0, 0.75, r)); gl_FragColor = vec4(c, 1.0); }`,
+    vec3 c = mix(vec3(0.016, 0.03, 0.075), vec3(0.002, 0.004, 0.012), smoothstep(0.0, 0.8, r)); gl_FragColor = vec4(c, 1.0); }`,
 }));
 bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 
@@ -327,14 +327,17 @@ function status(a) {
 }
 const BADGE = { live: 'LIVE', wait: 'WAITING', idle: 'IDLE', planned: 'PLANNED' };
 const book = () => (snapFresh() && SNAP.book) || (DATA && DATA.real && DATA.real.book) || null;
-const pages = () => (snapFresh() && SNAP.pages) || (DATA && DATA.real && DATA.real.pages) || null;
+const pages = () => (snapFresh() && SNAP.pages) || (DATA && DATA.real && DATA.real.pages) || null;      // recipe files in the site build (incl. not yet published)
+const livePages = () => (snapFresh() && SNAP.livePages) || (DATA && DATA.real && DATA.real.livePages) || null;  // recipe pages in the PUBLIC site's sitemap
+const tonightD = () => (snapFresh() && SNAP.tonight) || (DATA && DATA.real && DATA.real.tonight) || null;   // rw/manual_progress.log
+const commitsL = () => (snapFresh() && SNAP.commits && SNAP.commits.length && SNAP.commits) || (DATA && DATA.real && DATA.real.commits) || [];
 // one short, real line per agent (no number here is invented; each comes from the reporter or data.json)
 function meta(a) {
   const s = snapFresh() ? SNAP : null, R = DATA && DATA.real;
   switch (a.id) {
     case 'jarvis': return liveFeed() ? 'link live · heartbeat every 6 s' : 'link reconnecting';
-    case 'recipe-writer': return s ? `${fmt(s.draftsDone)} draft batches done · ${fmt(s.batches.left)} queued` : 'waiting for reporter';
-    case 'recipe-checker': return pages() != null ? `${fmt(pages())} recipe pages live` : '–';
+    case 'recipe-writer': { const t = tonightD(); return t && t.n ? `${fmt(t.n)} recipes written tonight · ${fmt(t.batches)} batches` : s ? `${fmt(s.draftsDone)} draft batches done · ${fmt(s.batches.left)} queued` : 'waiting for reporter'; }
+    case 'recipe-checker': return livePages() != null ? `${fmt(livePages())} recipes live on the site` : '–';
     case 'claude-code': return s ? `${fmt(s.claude)} process${s.claude === 1 ? '' : 'es'}` + (s.limitResets ? ` · limit resets ${s.limitResets}` : '') : 'waiting for reporter';
     case 'research': return R ? `${fmt(R.knowledge.techniques)} techniques · ${fmt(R.knowledge.sources)} sources` : '–';
     case 'planner': { const b = book(); return b ? `${b.chapters[0]}/${b.chapters[1]} chapters complete` : '–'; }
@@ -431,11 +434,19 @@ function tickWorkers() {        // only the elapsed-time text ticks each second 
 }
 
 // ---- left panel: titled data blocks, hidden when idle, shown on say/done ----
-const BLOCKS = ['book', 'queue', 'days', 'hours', 'site'];
+const BLOCKS = ['tonight', 'book', 'queue', 'days', 'hours', 'site'];
 let blockIdx = 0, leftUntil = 0, leftShown = false, blockAt = 0;
 function blockHTML(k) {
   const R = DATA && DATA.real, b = book(), s = snapFresh() ? SNAP : null;
   const row = (k, v, sub, small) => `<div class="row"><span class="k">${k}${sub ? `<small>${sub}</small>` : ''}</span><span class="v">${v}${small ? `<small>${small}</small>` : ''}</span></div>`;
+  if (k === 'tonight') {
+    const t = tonightD(); if (!t) return '';
+    return `<h3><span>[ TONIGHT ]</span><em>RECIPES WRITTEN</em></h3>
+      ${row('Recipes written tonight', fmt(t.n), t.first ? `${fmt(t.batches)} batches · ${esc(t.first)}–${esc(t.last)} Cairo` : 'no batch logged yet')}
+      ${(t.recent || []).slice(0, 4).map(r => row(`Batch ${esc(r[1])}`, fmt(r[2]), esc(r[0]) + ' Cairo', 'recipes')).join('')}
+      ${livePages() != null ? row('Recipes live on the site', fmt(livePages()), 'public sitemap.xml') : ''}
+      <div class="src">rw/manual_progress.log · one line per finished batch</div>`;
+  }
   if (k === 'book') {
     if (!b) return '';
     const src = s && s.book ? 'live from reporter.py (recounted when the site changes)' : `derived ${R ? hm(Date.parse(R.at) / 1000) : '–'} Cairo`;
@@ -443,7 +454,8 @@ function blockHTML(k) {
       ${row('Book dishes written', fmt(b.dishes[0]), 'base recipe of each book dish', '/ ' + fmt(b.dishes[1]))}
       ${row('Book flavours written', fmt(b.flavours[0]), 'flavour variants listed in the book', '/ ' + fmt(b.flavours[1]))}
       ${row('Extra flavours', fmt(b.extra), 'beyond the book list')}
-      ${row('Recipe pages live', fmt(pages()), 'every recipe file on the test site')}
+      ${livePages() != null ? row('Recipes live on the site', fmt(livePages()), 'pages in the public sitemap.xml') : ''}
+      ${row('Recipe files in the build', fmt(pages()), 'content/recipes · incl. not yet published')}
       ${row('Chapters complete', fmt(b.chapters[0]), b.focus ? 'now writing: ' + esc(b.focus) : '', '/ ' + fmt(b.chapters[1]))}
       <div class="src">${src}</div>`;
   }
@@ -471,10 +483,11 @@ function blockHTML(k) {
   }
   if (k === 'site') {
     if (!R) return '';
-    const cs = (R.commits || []).slice(0, 5);
-    return `<h3><span>[ LATEST ]</span><em>TEST SITE</em></h3>
+    const cs = commitsL().slice(0, 5), s2 = snapFresh() ? SNAP : null;
+    return `<h3><span>[ PUBLISH ]</span><em>SITE COMMITS</em></h3>
+      ${s2 && s2.commitsToday != null ? row('Site commits today', fmt(s2.commitsToday), 'since 00:00 Cairo') : ''}
       ${cs.map(c => `<div class="row"><span class="k">${esc(c.s)}</span><span class="v" style="font-size:12px">${hm(c.t)}</span></div>`).join('')}
-      <div class="src">public-site git log · ${fmt(R.commitCount)} commits</div>`;
+      <div class="src">public-site git log · ${fmt(R.commitCount)} commits at last board build</div>`;
   }
   return '';
 }
@@ -553,8 +566,8 @@ function handle(ev, live) {
   const fresh = live && nowS() - ev.t < 180;
   if (fresh) {
     const i = IDX[ev.agent]; PULSE[i] = 1; PULSE[0] = Math.max(PULSE[0], 0.5);
-    if (ev.type === 'say') { say(ev); showLeft('book'); }
-    else if (ev.type === 'done') showLeft(ev.agent === 'recipe-writer' ? 'queue' : 'book', 30000);
+    if (ev.type === 'say') { say(ev); showLeft('tonight'); }
+    else if (ev.type === 'done') showLeft(ev.agent === 'recipe-writer' ? (/written tonight/.test(ev.text) ? 'tonight' : 'queue') : ev.agent === 'recipe-checker' ? 'site' : 'book', 30000);
     flowOnEvent(ev);
   }
   scheduleRender();
@@ -663,8 +676,8 @@ function renderAgentView() {
   let rows = '';
   switch (a.id) {
     case 'jarvis': rows = row('Live link', liveFeed() ? 'connected' : 'reconnecting') + row('Last heartbeat', lastLiveMsg ? hms(lastLiveMsg) : '–') + row('Real events · all agents · 12 h', fmt(EVENTS.length)) + row('Last real event', lastReal ? hms(lastReal * 1000) : '–'); break;
-    case 'recipe-writer': rows = s ? row('Draft batches done · all time', fmt(s.draftsDone)) + row('Queued batches drafted', `${fmt(s.batches.done)} / ${fmt(s.batches.tracked)}`) + row('Batches left', fmt(s.batches.left)) + (s.workers || []).map(w => row(`Batch ${esc(w.batch)}${w.ch ? ' · ' + esc(w.ch) : ''}`, esc(workerState(w)))).join('') : row('Reporter', 'no heartbeat'); break;
-    case 'recipe-checker': rows = (b ? row('Book dishes written', `${fmt(b.dishes[0])} / ${fmt(b.dishes[1])}`) + row('Book flavours written', `${fmt(b.flavours[0])} / ${fmt(b.flavours[1])}`) : '') + row('Recipe pages live', fmt(pages())) + (s && s.commit ? row('Latest site commit', hm(s.commit.t)) + `<div class="src">${esc(s.commit.s)}</div>` : ''); break;
+    case 'recipe-writer': rows = (tonightD() ? row('Recipes written tonight', fmt(tonightD().n)) + row('Batches logged tonight', fmt(tonightD().batches)) : '') + (s ? row('Draft batches done · all time', fmt(s.draftsDone)) + row('Queued batches drafted', `${fmt(s.batches.done)} / ${fmt(s.batches.tracked)}`) + row('Batches left', fmt(s.batches.left)) + (s.workers || []).map(w => row(`Batch ${esc(w.batch)}${w.ch ? ' · ' + esc(w.ch) : ''}`, esc(workerState(w)))).join('') : row('Reporter', 'no heartbeat')); break;
+    case 'recipe-checker': rows = (b ? row('Book dishes written', `${fmt(b.dishes[0])} / ${fmt(b.dishes[1])}`) + row('Book flavours written', `${fmt(b.flavours[0])} / ${fmt(b.flavours[1])}`) : '') + row('Recipes live on the site', fmt(livePages())) + row('Recipe files in the build', fmt(pages())) + (s && s.commit ? row('Latest site commit', hm(s.commit.t)) + `<div class="src">${esc(s.commit.s)}</div>` : ''); break;
     case 'claude-code': rows = s ? row('Claude processes', fmt(s.claude)) + row('Session limit resets', s.limitResets ? esc(s.limitResets) : 'no limit') + row('Draft workers', fmt((s.workers || []).length)) : row('Reporter', 'no heartbeat'); break;
     case 'research': rows = R ? row('Knowledge files', fmt(R.knowledge.files)) + row('Techniques', fmt(R.knowledge.techniques)) + row('Unique sources', fmt(R.knowledge.sources)) + row('Research worker', s && s.research ? 'running' : 'not running') : ''; break;
     case 'planner': rows = b ? row('Chapters complete', `${fmt(b.chapters[0])} / ${fmt(b.chapters[1])}`) + row('Now writing', esc(b.focus || '–')) : ''; break;
@@ -739,7 +752,7 @@ function renderFlowCards() {
   for (const id in FN) {
     const n = FN[id], a = AGENTS[IDX[id]];
     if (!a) {
-      if (id === 'site') { setText(n.st, BADGE.live); n.st.className = 'badge live'; setText(n.ft, pages() != null ? `${fmt(pages())} recipe pages live` : n.m.role); n.pb.style.width = b ? (100 * b.dishes[0] / b.dishes[1]).toFixed(1) + '%' : '0'; n.d.title = b ? `book dishes written ${b.dishes[0]}/${b.dishes[1]}` : ''; }
+      if (id === 'site') { setText(n.st, BADGE.live); n.st.className = 'badge live'; setText(n.ft, livePages() != null ? `${fmt(livePages())} recipes live` : n.m.role); n.pb.style.width = b ? (100 * b.dishes[0] / b.dishes[1]).toFixed(1) + '%' : '0'; n.d.title = b ? `book dishes written ${b.dishes[0]}/${b.dishes[1]}` : ''; }
       else { setText(n.st, 'OWNER'); n.st.className = 'badge'; setText(n.ft, n.m.role); n.pb.style.width = '0'; }
       continue;
     }

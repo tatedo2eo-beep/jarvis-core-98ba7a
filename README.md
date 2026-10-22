@@ -20,13 +20,15 @@ Rotation, fibres and particles are decorative motion. **No number on the page is
 | UI text | Source |
 |---|---|
 | Book dishes written `261/885`, flavours `85/227`, extra flavours, chapters complete `7/34`, "now writing" | `derive.py` (read-only) on the book recipe files. Computed live by `reporter.py` (cached by recipes-folder mtime and site commit) and sent in every heartbeat. `data.json` (`derive4.py`) is the fallback. |
-| Recipe pages live `352` | Recipe page files in the test-site repo, counted by `reporter.py` every 1.5 s. |
+| Recipes live on the site | Recipe pages listed in the **public test site's `sitemap.xml`** (what visitors can open), fetched by `reporter.py` every 20 s; `derive4.py` (`real.livePages`) is the fallback. |
+| Recipe files in the build | `content/recipes/*.json` in the site working copy, counted every 1.5 s. This includes recipes written but not yet published. |
+| Recipes written tonight, batches, per-batch rows | `rw/manual_progress.log` (one line `HH:MM:SS batch N` per finished batch), re-read by `reporter.py` whenever the file changes. |
 | Draft batches done · all time / queued | `runq` logs and the queue files of the draft workers (`reporter.py` probe). |
 | Queue rows (batch, chapter, dishes, `limit · retry HH:MM`, `drafting m:ss`, `list x/y`) | Running `runq2.sh` processes: their argument list, `sleep` child and outline files. |
 | Claude processes, session-limit reset time | `ps` count of Claude Code processes; the reset time is parsed from the worker's limit message. |
 | Techniques, sources, knowledge files | The research knowledge-base files (`derive4.py`). |
 | 7-day / 24-hour charts | **Git commit timestamps** of the test-site repo (`derive4.py`, `real.chart`). |
-| Latest site commit | `git log -1` of the site repo. |
+| Latest site commit, site commits today, publish list | `git log` of the site repo (last 5 commits, and commits since 00:00 Cairo), live in every heartbeat. |
 | Last real event / heartbeat ago, clock | Timestamps of received ntfy messages; Cairo time. |
 | Real events · 30 min / 12 h | Count of real events received from the two topics. |
 

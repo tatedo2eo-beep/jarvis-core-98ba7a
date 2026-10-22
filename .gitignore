@@ -8,3 +8,5 @@ reporter.log*
 reporter_state.json*
 watchdog.pid
 ref/
+ffmpeg2pass*
+demo.log

@@ -8,6 +8,8 @@ real.pages       recipe pages live = every content/recipes/*.json (dishes + flav
 real.knowledge   knowledge/*.md stats (techniques, unique source URLs)
 real.chart       recipe pages first added per Cairo day (7 d) and per hour (24 h), from public-site git history
 real.commits     newest public-site commits (time + subject)
+real.livePages   recipe pages in the PUBLIC test site sitemap.xml (what visitors can open)
+real.tonight     rw/manual_progress.log ("HH:MM:SS batch N" per finished batch)
 Usage: python3 derive4.py"""
 import json, os, subprocess, sys, datetime, zoneinfo, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); SITE = "/workspace/public-site"
@@ -49,6 +51,19 @@ d["real"] = {
     "commitCount": int(git("rev-list", "--count", "HEAD").strip()),
     "site": d.get("site", {}).get("url"),
 }
+import urllib.request, re
+try:
+    x = urllib.request.urlopen("https://tatedo2eo-beep.github.io/stack-site-5fa39e/sitemap.xml?b=%d" % now.timestamp(), timeout=15).read().decode("utf-8", "replace")
+    d["real"]["livePages"] = len(set(re.findall(r"<loc>[^<]*/recipes/([^/<]+)/?</loc>", x)))
+except Exception as e: print("sitemap failed", e); d["real"]["livePages"] = None
+rows = []
+try:
+    for line in open("/workspace/rw/manual_progress.log", encoding="utf-8", errors="replace"):
+        m = re.match(r"\s*(\d\d:\d\d(?::\d\d)?)\s+(\S+)\s+(\d+)\s*$", line)
+        if m: rows.append((m.group(1)[:5], m.group(2)[:20], int(m.group(3))))
+except OSError: pass
+d["real"]["tonight"] = {"n": sum(r[2] for r in rows), "batches": len(rows), "first": rows[0][0] if rows else None,
+                        "last": rows[-1][0] if rows else None, "recent": [list(r) for r in rows[-6:]][::-1]}
 sys.path.insert(0, HERE); from derive import dump
 dump(d, p); json.load(open(p, encoding="utf-8"))
-r = d["real"]; print("real:", r["book"], "pages", r["pages"], "git", r["pagesInGit"], "7d", [x["n"] for x in r["chart"]["days"]], "24h sum", sum(x["n"] for x in r["chart"]["hours"]))
+r = d["real"]; print("real:", r["book"], "live", r["livePages"], "tonight", r["tonight"]["n"], "pages", r["pages"], "git", r["pagesInGit"], "7d", [x["n"] for x in r["chart"]["days"]], "24h sum", sum(x["n"] for x in r["chart"]["hours"]))

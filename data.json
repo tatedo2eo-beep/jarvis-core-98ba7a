@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T00:36:01+03:00",
+  "updatedAt": "2026-10-23T01:10:19+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -13,7 +13,7 @@
   },
   "headline": {
     "label": "Dishes written",
-    "done": 261,
+    "done": 332,
     "total": 885
   },
   "chapters": [
@@ -57,10 +57,10 @@
       "no": 4,
       "key": "meat",
       "name": "Meat",
-      "done": 20,
+      "done": 37,
       "total": 42,
       "flavours": {
-        "done": 5,
+        "done": 9,
         "total": 9
       },
       "extra": 0
@@ -69,7 +69,7 @@
       "no": 5,
       "key": "seafood",
       "name": "Seafood",
-      "done": 11,
+      "done": 20,
       "total": 31,
       "flavours": {
         "done": 0,
@@ -81,7 +81,7 @@
       "no": 6,
       "key": "pizza",
       "name": "Pizza",
-      "done": 0,
+      "done": 17,
       "total": 17,
       "flavours": {
         "done": 0,
@@ -105,10 +105,10 @@
       "no": 8,
       "key": "dumplings",
       "name": "Dumplings",
-      "done": 0,
+      "done": 2,
       "total": 3,
       "flavours": {
-        "done": 0,
+        "done": 2,
         "total": 2
       },
       "extra": 0
@@ -117,10 +117,10 @@
       "no": 9,
       "key": "rice",
       "name": "Rice",
-      "done": 12,
+      "done": 18,
       "total": 26,
       "flavours": {
-        "done": 5,
+        "done": 9,
         "total": 9
       },
       "extra": 0
@@ -153,10 +153,10 @@
       "no": 12,
       "key": "eggs",
       "name": "Eggs",
-      "done": 2,
+      "done": 11,
       "total": 15,
       "flavours": {
-        "done": 4,
+        "done": 5,
         "total": 5
       },
       "extra": 0
@@ -165,10 +165,10 @@
       "no": 13,
       "key": "soups",
       "name": "Soups",
-      "done": 1,
+      "done": 12,
       "total": 39,
       "flavours": {
-        "done": 0,
+        "done": 3,
         "total": 9
       },
       "extra": 0
@@ -339,7 +339,7 @@
         "done": 13,
         "total": 13
       },
-      "extra": 0
+      "extra": 6
     },
     {
       "no": 28,
@@ -795,10 +795,10 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T00:36:01+03:00",
+    "at": "2026-10-23T01:10:19+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
-    "recipesOnSite": 352,
-    "chaptersComplete": 7
+    "recipesOnSite": 450,
+    "chaptersComplete": 8
   },
   "history": [
     {
@@ -887,139 +887,147 @@
       "flavours": 85,
       "extra": 6,
       "metric": "dishes"
+    },
+    {
+      "t": "2026-10-23T01:07:40+03:00",
+      "recipes": 332,
+      "total": 885,
+      "flavours": 99,
+      "extra": 12,
+      "metric": "dishes"
     }
   ],
   "focus": "Meat",
   "dishesInProgress": [],
   "flavours": {
     "label": "Book flavours",
-    "done": 85,
+    "done": 99,
     "total": 227
   },
   "extraFlavours": {
     "label": "Extra flavours",
-    "done": 6
+    "done": 12
   },
   "recent": [
     {
-      "title": "Vegetable Fried Rice with Red Pepper, Peas and Sweetcorn",
-      "chapter": "rice",
-      "flavour": "Vegetable",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/vegetable-fried-rice-red-pepper-peas-sweetcorn/",
-      "t": "2026-10-23T00:15:18+03:00"
-    },
-    {
-      "title": "Seasoned Short-Grain Rice for Sushi",
-      "chapter": "rice",
+      "title": "Fried Mini Pizzas with Tomato, Mozzarella and Basil",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/seasoned-short-grain-rice-for-sushi/",
-      "t": "2026-10-23T00:15:18+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/fried-mini-pizzas-tomato-mozzarella-basil/",
+      "t": "2026-10-23T01:06:59+03:00"
     },
     {
-      "title": "Prawn Fried Rice with Egg, Peas and Sweetcorn",
-      "chapter": "rice",
-      "flavour": "Shrimp",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/prawn-fried-rice-egg-peas-sweetcorn/",
-      "t": "2026-10-23T00:15:18+03:00"
-    },
-    {
-      "title": "Egg Fried Rice with Spring Onions",
-      "chapter": "rice",
-      "flavour": "Egg",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/egg-fried-rice-spring-onions/",
-      "t": "2026-10-23T00:15:18+03:00"
-    },
-    {
-      "title": "Buttery Rice Pilaf with Toasted Vermicelli and Herbs",
-      "chapter": "rice",
+      "title": "Spinach, Ricotta and Mozzarella Stromboli with Garlic Crust",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/buttery-rice-pilaf-toasted-vermicelli-herbs/",
-      "t": "2026-10-23T00:15:18+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/spinach-ricotta-mozzarella-stromboli-garlic-crust/",
+      "t": "2026-10-23T01:06:59+03:00"
     },
     {
-      "title": "Steamed Masa Parcels with Red Chilli Chicken",
-      "chapter": "mexican-latin-american",
+      "title": "Roman-Style Sheet-Pan Pizza with Tomato-Mozzarella and Rosemary-Potato Halves",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/steamed-masa-parcels-red-chilli-chicken/",
-      "t": "2026-10-23T00:15:12+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/roman-style-sheet-pan-pizza-tomato-mozzarella-rosemary-potato/",
+      "t": "2026-10-23T01:06:59+03:00"
     },
     {
-      "title": "Steamed Masa Parcels with Chicken and Tomatillo Salsa Verde",
-      "chapter": "mexican-latin-american",
-      "flavour": "Chicken in salsa verde",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/steamed-masa-parcels-chicken-tomatillo-salsa-verde/",
-      "t": "2026-10-23T00:15:12+03:00"
-    },
-    {
-      "title": "Green Chilli and Tomatillo Chicken Soup with Hominy",
-      "chapter": "mexican-latin-american",
+      "title": "Chicago-Style Deep-Dish Cheese Pizza with Buttery Crust and Chunky Tomato",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/green-chilli-tomatillo-chicken-hominy-soup/",
-      "t": "2026-10-23T00:15:12+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chicago-style-deep-dish-pizza-buttery-crust-chunky-tomato/",
+      "t": "2026-10-23T01:06:59+03:00"
     },
     {
-      "title": "Silky Rice Congee with Ginger, Crispy Shallots and Spring Onion",
-      "chapter": "rice",
+      "title": "Sicilian-Style Thick Pan Pizza with Onion, Tomato and Crisp Crumbs",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/silky-rice-congee-ginger-crispy-shallots-spring-onion/",
-      "t": "2026-10-23T00:10:04+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/sicilian-style-thick-pan-pizza-onion-tomato-crisp-crumbs/",
+      "t": "2026-10-23T01:06:59+03:00"
     },
     {
-      "title": "Layered Vegetable Biryani with Cauliflower, Potato and Cashews",
-      "chapter": "rice",
-      "flavour": "Vegetable",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/layered-vegetable-biryani-cauliflower-potato-cashews/",
-      "t": "2026-10-23T00:10:04+03:00"
-    },
-    {
-      "title": "Saffron Layered Lamb Biryani with Golden Onions and Mint",
-      "chapter": "rice",
-      "flavour": "Lamb",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/saffron-layered-lamb-biryani-golden-onions-mint/",
-      "t": "2026-10-23T00:10:04+03:00"
-    },
-    {
-      "title": "Folded Butter Omelette with Melted Cheese",
-      "chapter": "eggs",
-      "flavour": "Cheese",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/folded-butter-omelette-melted-cheese/",
-      "t": "2026-10-23T00:10:04+03:00"
-    },
-    {
-      "title": "Oven-Finished Frittata with Spinach and Feta",
-      "chapter": "eggs",
-      "flavour": "Spinach-feta",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/oven-finished-frittata-spinach-feta/",
-      "t": "2026-10-23T00:10:04+03:00"
-    },
-    {
-      "title": "Oven-Finished Frittata with Red Pepper and Spinach",
-      "chapter": "eggs",
+      "title": "Detroit-Style Pan Pizza with Crisp Cheese Edges and Tomato Stripes",
+      "chapter": "pizza",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/oven-finished-frittata-red-pepper-spinach/",
-      "t": "2026-10-23T00:10:04+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/detroit-style-pan-pizza-crisp-cheese-edges-tomato-stripes/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "New York-Style Cheese Pizza with Oregano Tomato Sauce",
+      "chapter": "pizza",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/new-york-style-cheese-pizza-oregano-tomato-sauce/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Neapolitan-Style Margherita Pizza with Tomato, Mozzarella and Basil",
+      "chapter": "pizza",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/neapolitan-style-margherita-pizza-tomato-mozzarella-basil/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Malaysian-Style Fish Head Curry with Okra and Aubergine",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/malaysian-style-fish-head-curry-okra-aubergine/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Libyan-Style Fish in Spicy Tomato and Pepper Sauce",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/libyan-style-fish-spicy-tomato-pepper-sauce/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Gently Poached Prawns with Classic Cocktail Sauce",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/poached-prawns-classic-cocktail-sauce/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Louisiana-Style Crayfish Tail Stew with Rice",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/louisiana-style-crayfish-tail-stew-rice/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Crisp Fried Mixed Seafood and Courgette with Lemon",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/crisp-fried-mixed-seafood-courgette/",
+      "t": "2026-10-23T01:06:59+03:00"
+    },
+    {
+      "title": "Brazilian-Style Fish and Prawn Stew with Coconut and Peppers",
+      "chapter": "seafood",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/brazilian-style-fish-prawn-coconut-stew/",
+      "t": "2026-10-23T01:06:59+03:00"
     }
   ],
-  "recipeFiles": 352,
+  "recipeFiles": 450,
   "real": {
-    "at": "2026-10-23T00:36:01+03:00",
+    "at": "2026-10-23T01:10:19+03:00",
     "book": {
       "dishes": [
-        261,
+        332,
         885
       ],
       "flavours": [
-        85,
+        99,
         227
       ],
-      "extra": 6,
+      "extra": 12,
       "chapters": [
-        7,
+        8,
         34
       ],
       "focus": "Meat"
     },
-    "pages": 352,
+    "pages": 450,
     "pagesInGit": 352,
     "knowledge": {
       "files": 6,
@@ -1058,11 +1066,6 @@
         }
       ],
       "hours": [
-        {
-          "h": "01",
-          "t": 1792620000,
-          "n": 0
-        },
         {
           "h": "02",
           "t": 1792623600,
@@ -1177,6 +1180,11 @@
           "h": "00",
           "t": 1792702800,
           "n": 60
+        },
+        {
+          "h": "01",
+          "t": 1792706400,
+          "n": 0
         }
       ],
       "source": "public-site git history: first commit that added each content/recipes/*.json (Cairo time)"
@@ -1216,7 +1224,46 @@
       }
     ],
     "commitCount": 54,
-    "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/"
+    "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
+    "livePages": 352,
+    "tonight": {
+      "n": 76,
+      "batches": 12,
+      "first": "00:54",
+      "last": "01:00",
+      "recent": [
+        [
+          "01:00",
+          "z2",
+          9
+        ],
+        [
+          "00:58",
+          "z1",
+          8
+        ],
+        [
+          "00:57",
+          "d1",
+          4
+        ],
+        [
+          "00:56",
+          "m7",
+          8
+        ],
+        [
+          "00:56",
+          "sp1",
+          4
+        ],
+        [
+          "00:56",
+          "sp2",
+          4
+        ]
+      ]
+    }
   },
   "dishes": [
     {"s":"french-fries-double-fried","n":"French fries (double-fried)","c":1,"b":1,"f":[0,0],"x":0},
@@ -1313,40 +1360,40 @@
     {"s":"irish-stew","n":"Irish stew","c":4,"b":1,"f":[0,0],"x":0},
     {"s":"chili-con-carne","n":"Chili con carne","c":4,"b":1,"f":[0,0],"x":0},
     {"s":"bunny-chow","n":"Bunny chow","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"harees","n":"Harees","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"porkolt","n":"Pörkölt","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"reverse-sear-steak","n":"Reverse-sear steak","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"rack-of-lamb-persillade","n":"Rack of lamb/persillade","c":4,"b":0,"f":[0,1],"x":0},
-    {"s":"tagine","n":"Tagine","c":4,"b":0,"f":[0,1],"x":0},
-    {"s":"bulgogi-galbi","n":"Bulgogi/galbi","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"shawarma-doner","n":"Shawarma/döner","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"wiener-schnitzel","n":"Wiener schnitzel","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"brisket-smoked","n":"Brisket (smoked)","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"chateaubriand","n":"Châteaubriand","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"duck-a-lorange","n":"Duck à l'orange","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"duck-confit","n":"Duck confit","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"harees","n":"Harees","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"porkolt","n":"Pörkölt","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"reverse-sear-steak","n":"Reverse-sear steak","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"rack-of-lamb-persillade","n":"Rack of lamb/persillade","c":4,"b":1,"f":[1,1],"x":0},
+    {"s":"tagine","n":"Tagine","c":4,"b":1,"f":[1,1],"x":0},
+    {"s":"bulgogi-galbi","n":"Bulgogi/galbi","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"shawarma-doner","n":"Shawarma/döner","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"wiener-schnitzel","n":"Wiener schnitzel","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"brisket-smoked","n":"Brisket (smoked)","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"chateaubriand","n":"Châteaubriand","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"duck-a-lorange","n":"Duck à l'orange","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"duck-confit","n":"Duck confit","c":4,"b":1,"f":[0,0],"x":0},
     {"s":"steak-tartare","n":"Steak tartare","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"bistecca-alla-fiorentina","n":"Bistecca alla fiorentina","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"lomo-saltado","n":"Lomo saltado","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"bistecca-alla-fiorentina","n":"Bistecca alla fiorentina","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"lomo-saltado","n":"Lomo saltado","c":4,"b":1,"f":[0,0],"x":0},
     {"s":"anticucho","n":"Anticucho","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"ghormeh-sabzi","n":"Ghormeh sabzi","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"ghormeh-sabzi","n":"Ghormeh sabzi","c":4,"b":1,"f":[0,0],"x":0},
     {"s":"mansaf","n":"Mansaf","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"mechoui","n":"Mechoui","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"keema","n":"Keema","c":4,"b":0,"f":[0,2],"x":0},
+    {"s":"mechoui","n":"Mechoui","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"keema","n":"Keema","c":4,"b":1,"f":[2,2],"x":0},
     {"s":"corned-beef-and-cabbage","n":"Corned beef and cabbage","c":4,"b":0,"f":[0,0],"x":0},
-    {"s":"fish-cakes","n":"Fish cakes","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"calamari","n":"Calamari","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"moqueca","n":"Moqueca","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"fish-cakes","n":"Fish cakes","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"calamari","n":"Calamari","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"moqueca","n":"Moqueca","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"kinilaw","n":"Kinilaw","c":5,"b":0,"f":[0,1],"x":0},
-    {"s":"chili-crab","n":"Chili crab","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"chili-crab","n":"Chili crab","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"ackee-and-saltfish","n":"Ackee and saltfish","c":5,"b":0,"f":[0,0],"x":0},
     {"s":"cullen-skink","n":"Cullen skink","c":5,"b":0,"f":[0,0],"x":0},
     {"s":"brandade","n":"Brandade","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"fritto-misto","n":"Fritto misto","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"crawfish-etouffee","n":"Crawfish étouffée","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"shrimp-cocktail","n":"Shrimp cocktail","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"chraime","n":"Chraime","c":5,"b":0,"f":[0,0],"x":0},
-    {"s":"fish-head-curry","n":"Fish head curry","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"fritto-misto","n":"Fritto misto","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"crawfish-etouffee","n":"Crawfish étouffée","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"shrimp-cocktail","n":"Shrimp cocktail","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"chraime","n":"Chraime","c":5,"b":1,"f":[0,0],"x":0},
+    {"s":"fish-head-curry","n":"Fish head curry","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"sole-meuniere","n":"Sole meunière","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"en-papillote","n":"En papillote","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"salt-crusted-fish","n":"Salt-crusted fish","c":5,"b":1,"f":[0,0],"x":0},
@@ -1365,23 +1412,23 @@
     {"s":"seared-scallops","n":"Seared scallops","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"cantonese-steamed-whole-fish","n":"Cantonese steamed whole fish","c":5,"b":1,"f":[0,0],"x":0},
     {"s":"salt-and-pepper-squid","n":"Salt and pepper squid","c":5,"b":1,"f":[0,0],"x":0},
-    {"s":"neapolitan","n":"Neapolitan","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"new-york","n":"New York","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"pan-detroit","n":"Pan/Detroit","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"chicago-deep-dish","n":"Chicago deep-dish","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"sicilian-sfincione","n":"Sicilian/sfincione","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"stromboli","n":"Stromboli","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"pizza-al-taglio-roman-teglia","n":"Pizza al taglio (Roman teglia)","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"pizza-fritta-montanara","n":"Pizza fritta/montanara","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"lahmacun","n":"Lahmacun","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"pissaladiere","n":"Pissaladière","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"manakish","n":"Manakish","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"khachapuri","n":"Khachapuri","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"okonomiyaki-japanese-pizza-debatable","n":"Okonomiyaki (Japanese \"pizza\" – debatable)","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"calzone","n":"Calzone","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"grandma-pizza","n":"Grandma pizza","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"st-louis-style-pizza","n":"St. Louis-style pizza","c":6,"b":0,"f":[0,0],"x":0},
-    {"s":"bar-tavern-style-pizza","n":"Bar/tavern-style pizza","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"neapolitan","n":"Neapolitan","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"new-york","n":"New York","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"pan-detroit","n":"Pan/Detroit","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"chicago-deep-dish","n":"Chicago deep-dish","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"sicilian-sfincione","n":"Sicilian/sfincione","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"stromboli","n":"Stromboli","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"pizza-al-taglio-roman-teglia","n":"Pizza al taglio (Roman teglia)","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"pizza-fritta-montanara","n":"Pizza fritta/montanara","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"lahmacun","n":"Lahmacun","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"pissaladiere","n":"Pissaladière","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"manakish","n":"Manakish","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"khachapuri","n":"Khachapuri","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"okonomiyaki-japanese-pizza-debatable","n":"Okonomiyaki (Japanese \"pizza\" – debatable)","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"calzone","n":"Calzone","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"grandma-pizza","n":"Grandma pizza","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"st-louis-style-pizza","n":"St. Louis-style pizza","c":6,"b":1,"f":[0,0],"x":0},
+    {"s":"bar-tavern-style-pizza","n":"Bar/tavern-style pizza","c":6,"b":1,"f":[0,0],"x":0},
     {"s":"long-dried-spaghetti-linguine-bucatini","n":"Long dried (spaghetti, linguine, bucatini)","c":7,"b":1,"f":[0,0],"x":1},
     {"s":"short-penne-rigatoni-fusilli","n":"Short (penne, rigatoni, fusilli)","c":7,"b":1,"f":[0,0],"x":0},
     {"s":"ribbons-fresh-egg-tagliatelle-fettuccine-pappardelle","n":"Ribbons/fresh egg (tagliatelle, fettuccine, pappardelle)","c":7,"b":1,"f":[0,0],"x":0},
@@ -1428,24 +1475,24 @@
     {"s":"pasta-primavera","n":"Pasta primavera","c":7,"b":1,"f":[0,0],"x":0},
     {"s":"baked-ziti","n":"Baked ziti","c":7,"b":1,"f":[0,0],"x":0},
     {"s":"pasta-al-limone","n":"Pasta al limone","c":7,"b":1,"f":[0,0],"x":0},
-    {"s":"pierogi","n":"Pierogi","c":8,"b":0,"f":[0,2],"x":0},
-    {"s":"manti","n":"Manti","c":8,"b":0,"f":[0,0],"x":0},
-    {"s":"potstickers-guotie-jiaozi","n":"Potstickers (guotie/jiaozi)","c":8,"b":0,"f":[0,0],"x":0},
+    {"s":"pierogi","n":"Pierogi","c":8,"b":0,"f":[2,2],"x":0},
+    {"s":"manti","n":"Manti","c":8,"b":1,"f":[0,0],"x":0},
+    {"s":"potstickers-guotie-jiaozi","n":"Potstickers (guotie/jiaozi)","c":8,"b":1,"f":[0,0],"x":0},
     {"s":"steamed-pilaf","n":"Steamed/pilaf","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"fried-rice","n":"Fried rice","c":9,"b":0,"f":[3,3],"x":0},
     {"s":"biryani","n":"Biryani","c":9,"b":0,"f":[2,2],"x":0},
     {"s":"sushi-rice","n":"Sushi rice","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"congee-porridge","n":"Congee/porridge","c":9,"b":1,"f":[0,0],"x":0},
-    {"s":"stuffed-peppers","n":"Stuffed peppers","c":9,"b":0,"f":[0,0],"x":0},
-    {"s":"maqluba","n":"Maqluba","c":9,"b":0,"f":[0,2],"x":0},
-    {"s":"kabsa","n":"Kabsa","c":9,"b":0,"f":[0,1],"x":0},
-    {"s":"arroz-caldo","n":"Arroz caldo","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"stuffed-peppers","n":"Stuffed peppers","c":9,"b":1,"f":[0,0],"x":0},
+    {"s":"maqluba","n":"Maqluba","c":9,"b":0,"f":[2,2],"x":0},
+    {"s":"kabsa","n":"Kabsa","c":9,"b":0,"f":[1,1],"x":0},
+    {"s":"arroz-caldo","n":"Arroz caldo","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"nasi-lemak","n":"Nasi lemak","c":9,"b":1,"f":[0,0],"x":0},
-    {"s":"khichdi","n":"Khichdi","c":9,"b":0,"f":[0,0],"x":0},
-    {"s":"curd-rice","n":"Curd rice","c":9,"b":0,"f":[0,0],"x":0},
-    {"s":"lemon-rice","n":"Lemon rice","c":9,"b":0,"f":[0,0],"x":0},
-    {"s":"kimchi-fried-rice","n":"Kimchi fried rice","c":9,"b":0,"f":[0,0],"x":0},
-    {"s":"omurice","n":"Omurice","c":9,"b":0,"f":[0,1],"x":0},
+    {"s":"khichdi","n":"Khichdi","c":9,"b":1,"f":[0,0],"x":0},
+    {"s":"curd-rice","n":"Curd rice","c":9,"b":1,"f":[0,0],"x":0},
+    {"s":"lemon-rice","n":"Lemon rice","c":9,"b":1,"f":[0,0],"x":0},
+    {"s":"kimchi-fried-rice","n":"Kimchi fried rice","c":9,"b":1,"f":[0,0],"x":0},
+    {"s":"omurice","n":"Omurice","c":9,"b":0,"f":[1,1],"x":0},
     {"s":"maki-sushi","n":"Maki sushi","c":9,"b":0,"f":[0,0],"x":0},
     {"s":"arroz-negro","n":"Arroz negro","c":9,"b":0,"f":[0,0],"x":0},
     {"s":"tahdig-persian-polo","n":"Tahdig/Persian polo","c":9,"b":1,"f":[0,0],"x":0},
@@ -1485,31 +1532,31 @@
     {"s":"tamal","n":"Tamal","c":11,"b":1,"f":[1,1],"x":0},
     {"s":"carne-asada","n":"Carne asada","c":11,"b":1,"f":[0,0],"x":0},
     {"s":"pozole-verde","n":"Pozole verde","c":11,"b":1,"f":[0,0],"x":0},
-    {"s":"boiled-soft-hard","n":"Boiled (soft/hard)","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"fried","n":"Fried","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"scrambled","n":"Scrambled","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"boiled-soft-hard","n":"Boiled (soft/hard)","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"fried","n":"Fried","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"scrambled","n":"Scrambled","c":12,"b":1,"f":[0,0],"x":0},
     {"s":"omelette","n":"Omelette","c":12,"b":1,"f":[2,2],"x":0},
     {"s":"frittata","n":"Frittata","c":12,"b":1,"f":[2,2],"x":0},
-    {"s":"egg-salad","n":"Egg salad","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"baked-eggs-en-cocotte","n":"Baked eggs (en cocotte)","c":12,"b":0,"f":[0,1],"x":0},
-    {"s":"souffle-savory","n":"Soufflé (savory)","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"menemen","n":"Menemen","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"egg-salad","n":"Egg salad","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"baked-eggs-en-cocotte","n":"Baked eggs (en cocotte)","c":12,"b":1,"f":[1,1],"x":0},
+    {"s":"souffle-savory","n":"Soufflé (savory)","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"menemen","n":"Menemen","c":12,"b":1,"f":[0,0],"x":0},
     {"s":"century-salted-egg","n":"Century/salted egg","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"clbr","n":"Çılbır","c":12,"b":0,"f":[0,0],"x":0},
-    {"s":"egg-curry","n":"Egg curry","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"clbr","n":"Çılbır","c":12,"b":1,"f":[0,0],"x":0},
+    {"s":"egg-curry","n":"Egg curry","c":12,"b":1,"f":[0,0],"x":0},
     {"s":"oeufs-mayonnaise","n":"Oeufs mayonnaise","c":12,"b":0,"f":[0,0],"x":0},
     {"s":"eggs-royale-smoked-salmon-benedict","n":"Eggs Royale (smoked-salmon Benedict)","c":12,"b":0,"f":[0,0],"x":0},
     {"s":"poached-eggs","n":"Poached eggs","c":12,"b":0,"f":[0,0],"x":0},
     {"s":"white-brown-chicken","n":"White/brown chicken","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"vegetable","n":"Vegetable","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"vegetable","n":"Vegetable","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"dashi","n":"Dashi","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"chicken-noodle","n":"Chicken noodle","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"minestrone","n":"Minestrone","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"french-onion","n":"French onion","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"potato-leek","n":"Potato-leek","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"chicken-noodle","n":"Chicken noodle","c":13,"b":1,"f":[1,1],"x":0},
+    {"s":"minestrone","n":"Minestrone","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"french-onion","n":"French onion","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"potato-leek","n":"Potato-leek","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"lentil","n":"Lentil","c":13,"b":1,"f":[0,0],"x":0},
-    {"s":"butternut-squash","n":"Butternut squash","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"gazpacho","n":"Gazpacho","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"butternut-squash","n":"Butternut squash","c":13,"b":1,"f":[1,1],"x":0},
+    {"s":"gazpacho","n":"Gazpacho","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"ash-reshteh","n":"Ash reshteh","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"canh-chua","n":"Canh chua","c":13,"b":0,"f":[0,1],"x":0},
     {"s":"bulalo","n":"Bulalo","c":13,"b":0,"f":[0,0],"x":0},
@@ -1520,7 +1567,7 @@
     {"s":"miyeok-guk","n":"Miyeok-guk","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"galbitang","n":"Galbitang","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"doenjang-jjigae","n":"Doenjang-jjigae","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"egg-drop-soup","n":"Egg drop soup","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"egg-drop-soup","n":"Egg drop soup","c":13,"b":1,"f":[1,1],"x":0},
     {"s":"pappa-al-pomodoro","n":"Pappa al pomodoro","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"scotch-broth","n":"Scotch broth","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"chorba","n":"Chorba","c":13,"b":0,"f":[0,0],"x":0},
@@ -1529,11 +1576,11 @@
     {"s":"vichyssoise","n":"Vichyssoise","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"pho","n":"Pho","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"miso","n":"Miso","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"tom-yum","n":"Tom yum","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"tom-yum","n":"Tom yum","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"tom-kha","n":"Tom kha","c":13,"b":0,"f":[0,1],"x":0},
     {"s":"borscht","n":"Borscht","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"avgolemono","n":"Avgolemono","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"harira","n":"Harira","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"avgolemono","n":"Avgolemono","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"harira","n":"Harira","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"mulligatawny","n":"Mulligatawny","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"ribollita","n":"Ribollita","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"laksa","n":"Laksa","c":13,"b":0,"f":[0,0],"x":0},
@@ -1885,22 +1932,22 @@
     {"s":"cronut-style-laminated","n":"Cronut-style laminated","c":26,"b":0,"f":[0,0],"x":0},
     {"s":"youtiao","n":"Youtiao","c":26,"b":0,"f":[0,0],"x":0},
     {"s":"fritters-apple-fritters","n":"Fritters/apple fritters","c":26,"b":0,"f":[0,0],"x":0},
-    {"s":"new-york-baked-dense","n":"New York (baked, dense)","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"new-york-baked-dense","n":"New York (baked, dense)","c":27,"b":1,"f":[0,0],"x":2},
     {"s":"basque-burnt-san-sebastian","n":"Basque burnt (San Sebastián)","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"japanese-souffle-cotton","n":"Japanese soufflé/cotton","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"butter-layer-cake-yellow-vanilla","n":"Butter/layer cake (yellow/vanilla)","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"chocolate-layer","n":"Chocolate layer","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"sponge-genoise","n":"Sponge (genoise)","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"chiffon","n":"Chiffon","c":27,"b":1,"f":[3,3],"x":0},
-    {"s":"angel-food","n":"Angel food","c":27,"b":1,"f":[1,1],"x":0},
+    {"s":"angel-food","n":"Angel food","c":27,"b":1,"f":[1,1],"x":1},
     {"s":"pound-cake","n":"Pound cake","c":27,"b":1,"f":[2,2],"x":0},
-    {"s":"bundt","n":"Bundt","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"bundt","n":"Bundt","c":27,"b":1,"f":[0,0],"x":1},
     {"s":"carrot","n":"Carrot","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"red-velvet","n":"Red velvet","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"coffee-cake","n":"Coffee cake","c":27,"b":1,"f":[2,2],"x":0},
     {"s":"upside-down","n":"Upside-down","c":27,"b":1,"f":[2,2],"x":0},
-    {"s":"sheet-cake","n":"Sheet cake","c":27,"b":1,"f":[0,0],"x":0},
-    {"s":"cupcakes","n":"Cupcakes","c":27,"b":1,"f":[1,1],"x":0},
+    {"s":"sheet-cake","n":"Sheet cake","c":27,"b":1,"f":[0,0],"x":1},
+    {"s":"cupcakes","n":"Cupcakes","c":27,"b":1,"f":[1,1],"x":1},
     {"s":"boston-cream-pie","n":"Boston cream pie","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"whoopie-pie","n":"Whoopie pie","c":27,"b":1,"f":[1,1],"x":0},
     {"s":"entremets-mousse-cake","n":"Entremets (mousse cake)","c":27,"b":1,"f":[0,0],"x":0},

@@ -1,9 +1,0 @@
-150 frames 31 s outer
-300 frames 62 s outer
-450 frames 94 s outer
-600 frames 124 s toIn
-750 frames 152 s inner
-900 frames 183 s inner
-1050 frames 213 s toOut
-events 30 errors []
-size 26463009

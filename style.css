@@ -96,8 +96,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #workers .tot{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--ink2)}
 
 #left{position:absolute;left:var(--pad);top:140px;width:310px;padding:18px 20px 16px;opacity:0;visibility:hidden;transform:translateX(-16px)}
-.blocks{position:relative;min-height:236px}
-.blk{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.blocks{position:relative;display:grid;min-height:236px}
+.blk{grid-area:1/1;position:relative;opacity:0;transition:opacity .9s ease;pointer-events:none}
 .blk.on{opacity:1;pointer-events:auto}
 .blk h3{display:flex;justify-content:space-between;font-family:var(--mono);font-weight:300;font-size:9.5px;letter-spacing:.24em;color:var(--ink3);margin-bottom:14px}
 .blk h3 em{font-style:normal;color:var(--ink2)}

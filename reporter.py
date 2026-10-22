@@ -4,6 +4,8 @@
 Sources (all read-only):  /workspace/rw/runq.log, raw_*.done, raw_*_limit.txt, outline_*.txt, queue.txt
                           runq2.sh / claude / claude_research.py processes (ps)
                           /workspace/public-site/content/recipes/*.json count and git commits
+                          /workspace/rw/manual_progress.log ("HH:MM:SS batch N" = N recipes written in that batch tonight)
+                          the PUBLIC test site's sitemap.xml (recipe pages actually live), fetched every 20 s
 Channels:
   live       ntfy.envs.net  (config.json live.*): heartbeat snapshot + every real event, token bucket 1 msg / 6 s
              (anonymous limit there is 17,280 msgs/day = 1 per 5 s; we stay at <= 14,400/day). Events are batched
@@ -28,6 +30,35 @@ def log(*a): print(datetime.datetime.now(TZ).strftime("%H:%M:%S"), *a, flush=Tru
 def clean(s): s = str(s); return "[filtered]" if SECRET.search(s) else s[:300]
 
 # ---------- read-only probes ----------
+SITE_URL = "https://tatedo2eo-beep.github.io/stack-site-5fa39e/"
+_liveSite = {"pages": None, "at": None}
+def site_watch():
+    """count recipe pages in the live site's sitemap (what visitors can actually open); every 20 s."""
+    while True:
+        try:
+            req = urllib.request.Request(SITE_URL + "sitemap.xml?b=" + str(int(time.time())), headers={"Cache-Control": "no-cache"})
+            x = urllib.request.urlopen(req, timeout=12).read().decode("utf-8", "replace")
+            slugs = set(re.findall(r"<loc>[^<]*/recipes/([^/<]+)/?</loc>", x))
+            _liveSite.update(pages=len(slugs), at=int(time.time()))
+        except Exception as e: log("sitemap fetch failed:", repr(e)[:120])
+        time.sleep(20)
+
+_tn = {"key": None, "v": None}
+def tonight():
+    """rw/manual_progress.log: one line per finished batch, 'HH:MM:SS batch N'. Re-read only when the file changes."""
+    f = f"{RW}/manual_progress.log"
+    try: stt = os.stat(f); key = (stt.st_mtime, stt.st_size)
+    except OSError: return None
+    if key == _tn["key"]: return _tn["v"]
+    rows = []
+    for line in open(f, encoding="utf-8", errors="replace"):
+        m = re.match(r"\s*(\d\d:\d\d(?::\d\d)?)\s+(\S+)\s+(\d+)\s*$", line)
+        if m: rows.append((m.group(1)[:5], m.group(2)[:20], int(m.group(3))))
+    _tn["key"] = key
+    _tn["v"] = {"n": sum(r[2] for r in rows), "batches": len(rows), "first": rows[0][0] if rows else None,
+                "last": rows[-1][0] if rows else None, "recent": [list(r) for r in rows[-6:]][::-1]} if rows else {"n": 0, "batches": 0, "recent": []}
+    return _tn["v"]
+
 def ps():
     out = subprocess.run(["ps", "-eo", "pid=,ppid=,etimes=,args="], capture_output=True, text=True).stdout
     rows = []
@@ -93,7 +124,14 @@ def probe():
         c = subprocess.run(["git", "-C", SITE, "log", "-1", "--format=%H\t%ct\t%s"], capture_output=True, text=True).stdout.strip().split("\t")
         commit = {"h": c[0][:8], "t": int(c[1]), "s": clean(c[2])[:100]}
     except Exception: commit = None
-    return {"workers": workers, "batches": {"tracked": len(tracked), "done": sum(b in done_files for b in tracked),
+    try:
+        commits = [dict(zip(("t", "s"), l.split("\t", 1))) for l in subprocess.run(["git", "-C", SITE, "log", "-5", "--format=%ct\t%s"], capture_output=True, text=True).stdout.splitlines()]
+        for c in commits: c["t"] = int(c["t"]); c["s"] = clean(c["s"])[:80]
+        midnight = datetime.datetime.now(TZ).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
+        today = int(subprocess.run(["git", "-C", SITE, "rev-list", "--count", f"--since={int(midnight)}", "HEAD"], capture_output=True, text=True).stdout.strip() or 0)
+    except Exception: commits, today = [], None
+    return {"commits": commits, "commitsToday": today, "tonight": tonight(), "livePages": _liveSite["pages"], "liveAt": _liveSite["at"],
+            "workers": workers, "batches": {"tracked": len(tracked), "done": sum(b in done_files for b in tracked),
             "left": sum(b not in done_files for b in tracked)}, "draftsDone": len(done_files), "pages": pages,
             "commit": commit, "claude": claude, "research": research, "limitResets": limit_txt}
 
@@ -171,7 +209,7 @@ def milestone(ev, st):
 
 # ---------- main loop ----------
 def main():
-    live = Live(); live.start(); st = load_state()
+    live = Live(); live.start(); st = load_state(); threading.Thread(target=site_watch, daemon=True).start()
     prev = None; logpos = st.get("logpos")
     try: size = os.path.getsize(f"{RW}/runq.log")
     except OSError: size = 0
@@ -216,12 +254,19 @@ def main():
                     emit("recipe-writer", "metric", f"Draft batches done: {snap['draftsDone']}", value=snap["draftsDone"], label="draft batches done")
                 if snap["pages"] != prev["pages"]:
                     d = snap["pages"] - prev["pages"]
-                    emit("recipe-checker", "done", f"{'+' if d > 0 else ''}{d} recipe pages · {snap['pages']} live on the test site", ms=True, value=snap["pages"], label="recipe pages live")
+                    emit("recipe-checker", "step", f"{'+' if d > 0 else ''}{d} recipe files in the site build · {snap['pages']} total", value=snap["pages"], label="recipe files in build")
+                if snap["livePages"] is not None and prev.get("livePages") is not None and snap["livePages"] != prev["livePages"]:
+                    d = snap["livePages"] - prev["livePages"]
+                    emit("recipe-checker", "done", f"Published: {'+' if d > 0 else ''}{d} recipe pages · {snap['livePages']} live on the test site", ms=True, value=snap["livePages"], label="recipes live on site")
+                tn, ptn = snap.get("tonight"), prev.get("tonight")
+                if tn and ptn and tn["n"] != ptn["n"]:
+                    r = tn["recent"][0] if tn["recent"] else None
+                    emit("recipe-writer", "done", (f"Batch {r[1]} written · {r[2]} recipes · " if r else "") + f"{tn['n']} recipes written tonight", value=tn["n"], label="recipes written tonight")
                 if snap["book"] and prev.get("book") and snap["book"]["dishes"] != prev["book"]["dishes"]:
                     b = snap["book"]; d = b["dishes"][0] - prev["book"]["dishes"][0]
                     emit("recipe-checker", "metric", f"Book dishes written: {b['dishes'][0]}/{b['dishes'][1]} ({'+' if d > 0 else ''}{d})", value=b["dishes"][0], label="book dishes written")
                 if snap["commit"] and prev["commit"] and snap["commit"]["h"] != prev["commit"]["h"]:
-                    emit("recipe-checker", "step", f"Site commit: {snap['commit']['s']}")
+                    emit("recipe-checker", "step", f"Site commit: {snap['commit']['s']}", ms=True)
                 if snap["claude"] != prev["claude"]:
                     emit("claude-code", "metric", f"Claude Code processes running: {snap['claude']}", value=snap["claude"], label="claude processes")
                 if snap["research"] != prev["research"]:
