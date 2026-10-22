@@ -59,7 +59,7 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPrefer
 let DPR = MOBILE ? 1 : Math.min(devicePixelRatio || 1, 1.5);
 renderer.setPixelRatio(DPR);
 renderer.setSize(innerWidth, innerHeight, false);
-renderer.setClearColor(0x02040a, 1);
+renderer.setClearColor(0x01020e, 1);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(MOBILE ? 50 : 40, innerWidth / innerHeight, 0.1, 400);
 const HOME = { pos: new THREE.Vector3(0, 0.35, MOBILE ? 18.5 : 15), look: new THREE.Vector3(0, 0, 0) };
@@ -86,7 +86,7 @@ const NA = AGENTS.length;
 const U = {
   uT: { value: 0 }, uMo: { value: REDUCED ? 0.25 : 1 }, uPR: { value: renderer.getPixelRatio() },
   uAct: { value: new Array(NA).fill(0.2) }, uPulse: { value: new Array(NA).fill(0) }, uAT: { value: new Array(NA).fill(0) },
-  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (MOBILE ? 0.15 : 0.15) * (Q.get('fib') ? +Q.get('fib') : 1) },
+  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (MOBILE ? 0.6 : 0.5) * (Q.get('fib') ? +Q.get('fib') : 1) },
 };
 const SHARED = /* glsl */`
 uniform float uT, uMo, uPR, uFocusAmt, uFib; uniform float uAct[${NA}], uPulse[${NA}], uAT[${NA}]; uniform int uFocus;
@@ -168,7 +168,7 @@ ANCH[JI].set(0.95, BY - 0.95 * BR, 0.1);            // brainstem
 const brainU = {
   uT: U.uT, uMo: U.uMo, uPR: U.uPR, uAct: U.uAct, uPulse: U.uPulse, uFocus: U.uFocus, uFocusAmt: U.uFocusAmt,
   uPS: { value: MOBILE ? 21 : 21 }, uBeam: { value: 0 },
-  uCol: { value: AGENTS.map(a => new THREE.Color('#3fdcff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.28)) },
+  uCol: { value: AGENTS.map(a => new THREE.Color('#38e8ff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.12)) },
 };
 const brainMat = new THREE.ShaderMaterial({
   uniforms: brainU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
@@ -181,8 +181,9 @@ const brainMat = new THREE.ShaderMaterial({
       vec3 p = position + uMo * vec3(sin(uT * 1.3 + aSeed * 40.), cos(uT * 1.1 + aSeed * 31.), sin(uT * .9 + aSeed * 23.)) * (.018 + .05 * fire);
       float spark = pow(max(0., sin(uT * (1.5 + aSeed * 5.) * (1. + fire * 2.) + aSeed * 120.)), 14.) * (.25 + fire * 2.4);
       float dim = (uFocus >= 0 && r != uFocus) ? mix(1., .45, uFocusAmt) : 1.;
-      vC = mix(uCol[r] * (1.15 + .3 * fire), vec3(1.), spark * .35);
-      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25) * dim * aSh;
+      float hot = 1. - smoothstep(.04, .4, length(position.xy - vec2(0., .15)) / 2.75);
+      vC = mix(uCol[r] * (1.2 + .3 * fire), vec3(1.), clamp(spark * .35 + hot * .55, 0., 1.));
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .5) * dim * max(aSh, hot * .7);
       vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
       gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
     }`,
@@ -197,11 +198,11 @@ PTS.userData.count = BN;
 const core = PTS;   // the frame loop drives core.material.uniforms.uBeam
 
 // ---- FIBRES: thousands of precomputed curved strands from the brain surface, one indexed LineSegments draw ----
-const NF = MOBILE ? 1500 : 3600, SEG = MOBILE ? 14 : 22;
+const NF = MOBILE ? 360 : 700, SEG = MOBILE ? 16 : 26;
 const FCOL = {   // fibre palette per agent region: magenta, violet, gold, green, blue, cyan
-  'jarvis': ['#7fe9ff', '#3fdcff'], 'recipe-writer': ['#3fdcff', '#7fe9ff', '#3d8bff'], 'recipe-checker': ['#36f59b', '#7dff6a', '#3fdcff'],
-  'claude-code': ['#ffc53d', '#ff9a3d', '#ffe27a'], 'research': ['#3d7bff', '#5b8cff', '#3fdcff'], 'planner': ['#9b6bff', '#c06bff', '#ff3df0'],
-  'social-media': ['#ff3df0', '#ff5fb0', '#c06bff'], 'video-maker': ['#ff3db0', '#ff3df0', '#ffc53d'], 'video-editor': ['#b38bff', '#7a5bff', '#3d7bff'],
+  'jarvis': ['#00f0ff', '#40c8ff'], 'recipe-writer': ['#00e5ff', '#00b4ff', '#ff1fd2'], 'recipe-checker': ['#8dff1f', '#2bff7a', '#00e5ff'],
+  'claude-code': ['#ffd21f', '#ff9a1f', '#8dff1f'], 'research': ['#1f6bff', '#00b4ff', '#00f0ff'], 'planner': ['#8a2bff', '#c41fff', '#ff1fd2'],
+  'social-media': ['#ff1fd2', '#ff1f8f', '#a21fff'], 'video-maker': ['#ff1fd2', '#ff2b6b', '#ffd21f'], 'video-editor': ['#8a2bff', '#5a2bff', '#00b4ff'],
 };
 let FIB;
 {
@@ -217,19 +218,19 @@ let FIB;
     const sd = SECT[ai].dir ? new V3(SECT[ai].dir.x, SECT[ai].dir.y, SECT[ai].dir.z * .6).normalize() : new V3(0, -1, 0);
     dir.copy(out).multiplyScalar(.55).add(sd.multiplyScalar(.45)).add(randDir().multiplyScalar(.35)).normalize();
     side.crossVectors(dir, Math.abs(dir.y) > .9 ? new V3(1, 0, 0) : up).normalize();
-    const hero = rnd() < .14;
-    const len = (hero ? 4.2 : 1.6) + Math.pow(rnd(), 1.4) * (hero ? 4.5 : 3.6);
-    const step = len / SEG, curl = (rnd() - .5) * 1.3, wob = rnd() * 6.28, fq = 1.5 + rnd() * 2.5;
+    const hero = rnd() < .3;
+    const len = (hero ? 6.5 : 2.6) + Math.pow(rnd(), 1.2) * (hero ? 6.5 : 4.0);
+    const step = len / SEG, curl = (rnd() - .5) * 2.6 / len, wob = rnd() * 6.28, fq = 1.5 + rnd() * 2.5;
     const pal = FCOL[AGENTS[ai].id] || ['#3fdcff']; col.set(pal[(rnd() * pal.length) | 0]);
-    const br = hero ? 1.25 : 0.6 + rnd() * 0.5, seedF = rnd();
+    const br = hero ? 1.0 : 0.55 + rnd() * 0.35, seedF = rnd();
     const v0 = v;
     for (let s = 0; s <= SEG; s++) {
       const t = s / SEG;
       P.set([p.x, p.y, p.z], v * 3); N.set([side.x, side.y, side.z], v * 3); C.set([col.r * br, col.g * br, col.b * br], v * 3);
       A.set([t, seedF, ai, len], v * 4); v++;
       // bend: rotate the heading around its side axis and roll it slowly (smooth curl, no randomness per step)
-      dir.applyAxisAngle(side, curl * step * 0.9 + Math.sin(wob + t * fq) * 0.1);
-      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.7 + t * fq * 1.3) * 0.05).normalize();
+      dir.applyAxisAngle(side, curl * step * 0.9 + Math.sin(wob + t * fq) * 0.04);
+      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.7 + t * fq * 1.3) * 0.015).normalize();
       side.crossVectors(tmp, dir).normalize();
       p.addScaledVector(dir, step);
     }
@@ -251,14 +252,14 @@ let FIB;
         vI = I; vT = t;
         vPh = fract(sd * 7.31 + uAT[ai] * (.16 + fract(sd * 3.7) * .14));        // inward pulse position (1 = tip, 0 = brain)
         vOn = step(.86 - uPulse[ai] * .6 - uAct[ai] * .08, fract(sd * 13.7));
-        vC = mix(aCol * .8 + vec3(.1, .2, .3), aCol, smoothstep(.0, .25, t));
-        vA = smoothstep(.05, .3, t) * pow(1. - t, 1.2) * I * uFib;
+        vC = aCol;
+        vA = smoothstep(.04, .2, t) * pow(1. - t, .9) * I * uFib;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
       }`,
     fragmentShader: `uniform float uFib; varying vec3 vC; varying float vA, vT, vPh, vOn, vI;
       void main(){
         float x = (vT - (1. - vPh)) * 22.; float head = exp(-x * x) * vOn;
-        gl_FragColor = vec4(mix(vC, vec3(1.), head * .5) * (vA + head * (.5 + vI) * uFib * 3.2 * smoothstep(.0, .08, vT)), 1.);
+        gl_FragColor = vec4(mix(vC, vec3(1.), head * .5) * (vA + head * (.4 + vI) * .65 * smoothstep(.0, .08, vT)), 1.);
       }`,
   });
   FIB = new THREE.LineSegments(g, m); FIB.frustumCulled = false; FIB.renderOrder = 2; group.add(FIB);
@@ -277,22 +278,22 @@ let FIB;
   const m = new THREE.ShaderMaterial({
     uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
     vertexShader: SHARED + `attribute vec3 aCol; attribute vec2 aQ; varying vec3 vC; varying float vA;
-      void main(){ int ai = int(aQ.x + .5); vC = aCol; vA = inten(ai) * .3; vec4 mv = modelViewMatrix * vec4(position, 1.);
-        gl_PointSize = (1.6 + aQ.y * 2.2) * uPR * (1. + uPulse[ai] * .8) * 14. / -mv.z; gl_Position = projectionMatrix * mv; }`,
+      void main(){ int ai = int(aQ.x + .5); vC = aCol; vA = inten(ai) * .14; vec4 mv = modelViewMatrix * vec4(position, 1.);
+        gl_PointSize = (1.2 + aQ.y * 1.4) * uPR * (1. + uPulse[ai] * .8) * 14. / -mv.z; gl_Position = projectionMatrix * mv; }`,
     fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0., d); gl_FragColor = vec4(mix(vC, vec3(1.), a * .6) * vA * a * a, 1.); }`,
   });
-  const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; group.add(T);
+  const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; if (Q.has('tips')) group.add(T);
 }
 
 // ---- soft cyan glow behind the brain ----
 const glowTex = (() => {
   const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
   const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
-  g.addColorStop(0, 'rgba(160,235,255,.9)'); g.addColorStop(0.3, 'rgba(70,190,255,.3)'); g.addColorStop(0.65, 'rgba(40,90,255,.07)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+  g.addColorStop(0, 'rgba(235,255,255,1)'); g.addColorStop(0.18, 'rgba(120,235,255,.55)'); g.addColorStop(0.45, 'rgba(0,150,255,.12)'); g.addColorStop(1, 'rgba(0,0,0,0)');
   x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
 })();
-const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0.25 }));
-halo.scale.set(BR * 3.2, BR * 2.4, 1); halo.position.y = BY; halo.renderOrder = 1; scene.add(halo);
+const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0.4 }));
+halo.scale.set(BR * 2.0, BR * 1.6, 1); halo.position.y = BY; halo.renderOrder = 1; scene.add(halo);
 
 // ---- vertical beam (ignites on a "say" event) ----
 const beam = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 26), new THREE.ShaderMaterial({
@@ -313,17 +314,17 @@ beam.renderOrder = 10; scene.add(beam);
 const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
   depthWrite: false, depthTest: false,
   vertexShader: `varying vec2 vU; void main(){ vU = uv; gl_Position = vec4(position.xy, 0.9999, 1.0); }`,
-  fragmentShader: `varying vec2 vU; void main(){ vec2 p = vU - vec2(0.48, ${MOBILE ? '0.7' : '0.5'}); p.x *= 1.5; float r = length(p);
-    vec3 c = mix(vec3(0.010, 0.022, 0.065), vec3(0.002, 0.004, 0.016), smoothstep(0.0, 0.75, r));
-    vec2 q = vU - 0.5; float e = smoothstep(0.35, 0.75, length(q * vec2(1.0, 1.25)));
-    c += vec3(0.004, 0.014, 0.07) * e; gl_FragColor = vec4(c, 1.0); }`,
+  fragmentShader: `varying vec2 vU; void main(){ vec2 p = vU - vec2(0.46, ${MOBILE ? '0.3' : '0.5'}); p.x *= ${MOBILE ? '1.0' : '1.6'}; float r = length(p);
+    vec3 c = mix(vec3(0.0002, 0.0005, 0.014), vec3(0.0005, 0.0025, 0.075), smoothstep(0.05, 0.6, r));
+    vec2 q = abs(vU - 0.5) * 2.0; float e = pow(max(q.x, q.y), 3.0);
+    c += vec3(0.001, 0.008, 0.15) * e; gl_FragColor = vec4(c, 1.0); }`,
 }));
 bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 
 // ---- post: half-resolution bloom ----
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), MOBILE ? 0.85 : 0.9, 0.5, 0.16);
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), MOBILE ? 0.9 : 0.95, 0.25, 0.5);
 const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / 2), Math.max(2, h / 2));
 composer.addPass(bloom); composer.addPass(new OutputPass());
 composer.setPixelRatio(DPR); composer.setSize(innerWidth, innerHeight);
@@ -886,7 +887,7 @@ function frame(dt) {
   beamV += (bt - beamV) * (1 - Math.exp(-dt * (bt > beamV ? 6 : 1.4)));
   const pulse = bt ? 0.82 + 0.18 * Math.sin(t * 9) : 1;
   beam.material.uniforms.uBeam.value = beamV * pulse; core.material.uniforms.uBeam.value = beamV;
-  halo.material.opacity = 0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1;
+  halo.material.opacity = 0.38 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15;
   if (rot.on) rot.t += dt * U.uMo.value;
   group.rotation.y = Math.sin(rot.t * 0.05) * 0.44;
   group.rotation.x = Math.sin(rot.t * 0.031) * 0.05;
