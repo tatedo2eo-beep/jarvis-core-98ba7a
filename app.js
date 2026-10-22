@@ -87,10 +87,22 @@ const NA = AGENTS.length;
 const U = {
   uT: { value: 0 }, uMo: { value: REDUCED ? 0.25 : 1 }, uPR: { value: renderer.getPixelRatio() },
   uAct: { value: new Array(NA).fill(0.2) }, uPulse: { value: new Array(NA).fill(0) }, uAT: { value: new Array(NA).fill(0) },
-  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (Q.get('fib') ? +Q.get('fib') : 1) }, uM: { value: 0 },
+  uFocus: { value: -1 }, uFocusAmt: { value: 0 }, uFib: { value: (Q.get('fib') ? +Q.get('fib') : 1) }, uM: { value: 0 }, uDeep: { value: 0 },
 };
-const SHARED = /* glsl */`
-uniform float uT, uMo, uPR, uFocusAmt, uFib; uniform float uAct[${NA}], uPulse[${NA}], uAT[${NA}]; uniform int uFocus;
+// colour waves: a smooth cyclic palette cyan → blue → violet → magenta → cyan → green (cyan weighted, like the reference)
+const WPAL = /* glsl */`
+vec3 wpal(float x){
+  x = fract(x) * 6.;
+  vec3 c0 = vec3(.0, .92, 1.), c1 = vec3(.15, .55, 1.), c2 = vec3(.58, .22, 1.), c3 = vec3(1., .16, .82), c4 = vec3(.0, .9, 1.), c5 = vec3(.2, 1., .5);
+  float f = smoothstep(0., 1., fract(x));
+  if (x < 1.) return mix(c0, c1, f); if (x < 2.) return mix(c1, c2, f); if (x < 3.) return mix(c2, c3, f);
+  if (x < 4.) return mix(c3, c4, f); if (x < 5.) return mix(c4, c5, f); return mix(c5, c0, f);
+}`;
+const WSTOPS = [[0, .92, 1], [.15, .55, 1], [.58, .22, 1], [1, .16, .82], [0, .9, 1], [.2, 1, .5]].map(c => new THREE.Color(...c));
+const WHITE = new THREE.Color(1, 1, 1);
+function wpalJS(x, out) { x = (x % 1 + 1) % 1 * 6; const i = Math.floor(x), f = x - i, k = f * f * (3 - 2 * f); return out.copy(WSTOPS[i]).lerp(WSTOPS[(i + 1) % 6], k); }
+const SHARED = WPAL + /* glsl */`
+uniform float uT, uMo, uPR, uFocusAmt, uFib, uDeep; uniform float uAct[${NA}], uPulse[${NA}], uAT[${NA}]; uniform int uFocus;
 vec3 fpos(vec3 d, vec3 b, float t, float len, float sd){
   vec3 s = normalize(cross(d, b));
   float r = 1.22 + t * len;
@@ -105,7 +117,7 @@ float inten(int ai){
   float I = 0.32 + uAct[ai] * 0.85 + uPulse[ai] * 1.5;
   if (uFocus >= 0 && ai != uFocus) I *= mix(1.0, 0.16, uFocusAmt);
   if (uFocus >= 0 && ai == uFocus) I *= mix(1.0, 1.35, uFocusAmt);
-  return I;
+  return I * mix(1.0, 0.3, uDeep);
 }
 float backDim(vec3 p){
   vec4 mv = modelViewMatrix * vec4(p, 1.0); vec4 mc = modelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0);
@@ -171,23 +183,26 @@ const brainU = {
   uPS: { value: MOBILE ? 21 : 21 }, uBeam: { value: 0 },
   uCol: { value: AGENTS.map(a => new THREE.Color('#38e8ff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.12)) },
   uColIn: { value: AGENTS.map(a => new THREE.Color('#3fdcff').lerp(new THREE.Color(a.color), a.core ? 0 : 0.28)) },   // v6 inside colours
-  uM: U.uM,
+  uM: U.uM, uDeep: U.uDeep,
 };
 const brainMat = new THREE.ShaderMaterial({
   uniforms: brainU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
   vertexShader: /* glsl */`
-    attribute float aSeed, aSize, aReg, aSh; uniform float uT, uMo, uPR, uPS, uBeam, uFocusAmt; uniform int uFocus;
-    uniform float uAct[${NA}], uPulse[${NA}], uM; uniform vec3 uCol[${NA}], uColIn[${NA}];
+    attribute float aSeed, aSize, aReg, aSh; uniform float uT, uMo, uPR, uPS, uBeam, uFocusAmt, uDeep; uniform int uFocus;
+    uniform float uAct[${NA}], uPulse[${NA}], uM;${WPAL} uniform vec3 uCol[${NA}], uColIn[${NA}];
     varying vec3 vC; varying float vA;
     void main(){
       int r = int(aReg + .5); float fire = clamp(.1 + uAct[r] * .55 + uPulse[r] * .9, 0., 1.4);
       vec3 p = position + uMo * vec3(sin(uT * 1.3 + aSeed * 40.), cos(uT * 1.1 + aSeed * 31.), sin(uT * .9 + aSeed * 23.)) * (.018 + .05 * fire);
       float spark = pow(max(0., sin(uT * (1.5 + aSeed * 5.) * (1. + fire * 2.) + aSeed * 120.)), 14.) * (.25 + fire * 2.4);
       float dim = (uFocus >= 0 && r != uFocus) ? mix(1., .45, uFocusAmt) : 1.;
-      float hot = (1. - smoothstep(.04, .45, length(position - vec3(0., .15, 0.)) / 2.75)) * (1. - uM);   // outside only: white-cyan burst
-      vec3 col = mix(uCol[r], uColIn[r], uM);
+      float rr = length(position - vec3(0., .15, 0.)) / 2.75;
+      float hot = (1. - smoothstep(.04, .62, rr)) * (1. - uM);   // outside only: white-cyan burst
+      // outside only: slow colour waves travelling outward through the core
+      vec3 wv = wpal(uT * .035 + aSeed * .08 - rr * .55 + position.x * .05);
+      vec3 col = mix(mix(uCol[r], wv, .55 * (.6 + .4 * sin(uT * .7 - rr * 5. + aSeed * 3.))), uColIn[r], uM);
       vC = mix(col * (1.15 + .3 * fire + .05 * (1. - uM)), vec3(1.), clamp(spark * .35 + hot * .6, 0., 1.));
-      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .7) * dim * max(aSh, hot * .8);
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .9) * dim * max(aSh, hot * .8) * mix(1., .22, uDeep);
       vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
       gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
     }`,
@@ -214,9 +229,9 @@ const FCOL_IN = {
   'social-media': ['#ff3df0', '#ff5fb0', '#c06bff'], 'video-maker': ['#ff3db0', '#ff3df0', '#ffc53d'], 'video-editor': ['#b38bff', '#7a5bff', '#3d7bff'],
 };
 const FCFG = {
-  out: { nf: MOBILE ? 380 : 720, seg: MOBILE ? 16 : 26, pal: FCOL_OUT, wOut: .78, wSec: .2, wRnd: .2, hero: .34, len: [6.5, 2.8, 7.5, 4.2, 1.2], br: [1.0, .55, .35],
-         curl: (l) => (rnd() - .5) * 2.6 / l, bend: .04, roll: .015, gain: MOBILE ? 0.62 : 0.55, ws: 'uWo',
-         vc: 'vC = aCol;', va: 'vA = smoothstep(.03, .16, t) * pow(1. - t, .85) * I * uG * uFib * uWo;', head: 'head * (.4 + vI) * .75 * uWo' },
+  out: { nf: MOBILE ? 70 : 130, seg: MOBILE ? 16 : 26, pal: FCOL_OUT, wOut: .78, wSec: .2, wRnd: .2, hero: .34, len: [6.5, 2.8, 7.5, 4.2, 1.2], br: [1.0, .55, .35],
+         curl: (l) => (rnd() - .5) * 2.6 / l, bend: .04, roll: .015, gain: MOBILE ? 0.5 : 0.42, ws: 'uWo',
+         vc: 'vC = mix(aCol, wpal(uT * .035 + sd * .3 - t * .5) * 1.1, .55);', va: 'vA = smoothstep(.03, .16, t) * pow(1. - t, .85) * I * uG * uFib * uWo;', head: 'head * (.4 + vI) * .75 * uWo' },
   in:  { nf: MOBILE ? 1500 : 3600, seg: MOBILE ? 14 : 22, pal: FCOL_IN, wOut: .55, wSec: .45, wRnd: .35, hero: .14, len: [4.2, 1.6, 4.5, 3.6, 1.4], br: [1.25, .6, .5],
          curl: () => (rnd() - .5) * 1.3, bend: .1, roll: .05, gain: 0.15, ws: 'uWi',
          vc: 'vC = mix(aCol * .8 + vec3(.1, .2, .3), aCol, smoothstep(.0, .25, t));', va: 'vA = smoothstep(.05, .3, t) * pow(1. - t, 1.2) * I * uG * uFib * uWi;',
@@ -306,12 +321,128 @@ const TIPS = (() => {
   const T = new THREE.Points(g, m); T.frustumCulled = false; T.renderOrder = 2; group.add(T); return T;
 })();
 
+// ---- OUTSIDE tendrils (v8): fewer, thick, curvy, tapering camera-facing ribbons. Each ribbon carries its own hot core line and
+// soft halo in the fragment shader, so the glow never depends on bloom. Bright nodes ride the tips; colour waves travel outward.
+const TEND = (() => {
+  const NT = MOBILE ? 44 : 72, SG = MOBILE ? 22 : 30, ctr = new V3(0, BY, 0), up = new V3(0, 1, 0);
+  const paths = [];
+  const pickCol = d => {   // reference: cyan dominant, magenta/violet to one side, green low
+    const r = rnd();
+    if (d.x > .2 && r < .78) return rnd() < .5 ? '#ff2bd6' : '#a63dff';
+    if (d.y < -.3 && r < .7) return '#2dff7a';
+    return r < .8 ? (rnd() < .6 ? '#00f0ff' : '#5fd8ff') : '#b45cff';
+  };
+  function grow(p0, dir0, len, w, col, ai, parent) {
+    const p = p0.clone(), dir = dir0.clone().normalize(), pts = [];
+    const side = new V3().crossVectors(dir, Math.abs(dir.y) > .9 ? new V3(1, 0, 0) : up).normalize(), tmp = new V3();
+    const curl = (rnd() - .5) * 2.4 / Math.sqrt(len), wob = rnd() * 6.28, fq = 1.2 + rnd() * 1.8, step = len / SG;
+    for (let s = 0; s <= SG; s++) {
+      pts.push(p.clone()); const t = s / SG;
+      dir.applyAxisAngle(side, curl * step * .55 + Math.sin(wob + t * fq * 3.2) * .07);
+      tmp.crossVectors(dir, side).normalize(); dir.addScaledVector(tmp, Math.cos(wob * 1.3 + t * fq * 2.4) * .06).normalize(); side.crossVectors(tmp, dir).normalize();
+      p.addScaledVector(dir, step);
+    }
+    paths.push({ pts, w, col: new THREE.Color(col), sd: rnd(), ai, tip: !parent || rnd() < .7 });
+    return pts;
+  }
+  for (let f = 0; f < NT; f++) {
+    const i = bSurf[(rnd() * bSurf.length) | 0], ai = bReg[i];
+    const out = new V3(bPos[i * 3], bPos[i * 3 + 1], bPos[i * 3 + 2]).sub(ctr).normalize();
+    const d = out.clone().add(randDir().multiplyScalar(.4)); d.z *= .5; d.y *= .85; d.normalize();
+    const hero = rnd() < .5, len = hero ? 4.2 + rnd() * 3.6 : 2.0 + rnd() * 2.2, w = hero ? .11 + rnd() * .06 : .06 + rnd() * .04;
+    const col = pickCol(d);
+    const pts = grow(ctr.clone().addScaledVector(out, BR * (.25 + rnd() * .25)), d, len, w, col, ai, null);
+    const nb = hero ? 1 + (rnd() < .6) + (rnd() < .3) : (rnd() < .35 ? 1 : 0);
+    for (let b = 0; b < nb; b++) {
+      const k = Math.floor(SG * (.3 + rnd() * .45)), dd = pts[k + 1].clone().sub(pts[k]).normalize().add(randDir().multiplyScalar(.75)).normalize();
+      grow(pts[k], dd, len * (.25 + rnd() * .35), w * (.45 + rnd() * .2), rnd() < .7 ? col : pickCol(dd), ai, true);
+    }
+  }
+  const NP = paths.length, nv = NP * (SG + 1) * 2;
+  const P = new Float32Array(nv * 3), Nx = new Float32Array(nv * 4), Qa = new Float32Array(nv * 4), Cc = new Float32Array(nv * 3), Ai = new Float32Array(nv);
+  const idx = new Uint32Array(NP * SG * 6);
+  let v = 0, k = 0;
+  paths.forEach(pa => {
+    const v0 = v;
+    for (let s = 0; s <= SG; s++) {
+      const a = pa.pts[s], b = s < SG ? pa.pts[s + 1] : a.clone().multiplyScalar(2).sub(pa.pts[s - 1]), tn = Math.min(1, (s + 1) / SG);
+      for (const sd of [-1, 1]) {
+        P.set([a.x, a.y, a.z], v * 3); Nx.set([b.x, b.y, b.z, tn], v * 4); Qa.set([s / SG, sd, pa.sd, pa.w], v * 4);
+        Cc.set([pa.col.r, pa.col.g, pa.col.b], v * 3); Ai[v] = pa.ai; v++;
+      }
+    }
+    for (let s = 0; s < SG; s++) { const a = v0 + s * 2; idx.set([a, a + 1, a + 2, a + 1, a + 3, a + 2], k); k += 6; }
+  });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('aNext', new THREE.BufferAttribute(Nx, 4));
+  g.setAttribute('aQ', new THREE.BufferAttribute(Qa, 4)); g.setAttribute('aCol', new THREE.BufferAttribute(Cc, 3)); g.setAttribute('aAi', new THREE.BufferAttribute(Ai, 1));
+  g.setIndex(new THREE.BufferAttribute(idx, 1));
+  const WOB = `vec3 wob(vec3 p, float t, float sd){ float w = uMo * t * t * .42;
+    return p + vec3(sin(uT * .5 + sd * 6.28 + t * 2.6), cos(uT * .41 + sd * 9.1 + t * 3.1), sin(uT * .37 + sd * 4.7 + t * 2.2)) * w; }`;
+  const m = new THREE.ShaderMaterial({
+    uniforms: { ...U, uG: { value: (Q.get('tg') ? +Q.get('tg') : 0.5) } }, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+    vertexShader: SHARED + WOB + `
+      uniform float uG, uWo; attribute vec4 aNext, aQ; attribute vec3 aCol; attribute float aAi;
+      varying vec3 vC; varying float vU, vA, vT;
+      void main(){
+        float t = aQ.x, sd = aQ.z; int ai = int(aAi + .5);
+        vec4 a = modelViewMatrix * vec4(wob(position, t, sd), 1.), b = modelViewMatrix * vec4(wob(aNext.xyz, aNext.w, sd), 1.);
+        vec2 tg = b.xy - a.xy; tg = length(tg) < 1e-5 ? vec2(1., 0.) : normalize(tg);
+        float w = aQ.w * mix(1., .14, pow(t, .75));
+        w = max(w, 1.1 * -a.z / (projectionMatrix[1][1] * 400. * uPR));   // never thinner than ~1 px
+        a.xy += vec2(-tg.y, tg.x) * aQ.y * w * 3.2;
+        gl_Position = projectionMatrix * a;
+        float I = .72 + .38 * inten(ai);                                       // outside never goes dark
+        float wave = .5 + .5 * sin(uT * .9 - t * 6.5 + sd * 6.2831);            // brightness wave running outward
+        float x = (t - fract(uT * .16 + sd * 3.7)) * 16.; float pulse = exp(-x * x) * .9;   // a signal riding out along the strand
+        vC = mix(aCol, wpal(uT * .035 + sd * .22 - t * .5), .3 * smoothstep(.05, .4, t));
+        vC = max(vC - .8 * min(vC.r, min(vC.g, vC.b)), 0.) * 1.6;                 // keep the hue saturated
+        vC = mix(vC, vec3(1.), (1. - smoothstep(.0, .1, t)) * .5 + pulse * .2);
+        vU = aQ.y * 3.2; vT = t;
+        vA = uG * uWo * uFib * I * (.62 + .55 * wave + pulse) * smoothstep(.0, .05, t) * pow(1. - t, .3);
+      }`,
+    fragmentShader: `varying vec3 vC; varying float vU, vA, vT;
+      void main(){ float u = vU; float core = exp(-u * u * 3.2), glow = exp(-u * u * .5) * .2;
+        gl_FragColor = vec4((vC * (core * .9 + glow * 1.3) + vec3(.55) * pow(core, 6.) * .5) * vA, 1.); }`,
+  });
+  const R = new THREE.Mesh(g, m); R.frustumCulled = false; R.renderOrder = 2; group.add(R);
+  R.userData = { count: idx.length, per: SG * 6, np: NP };
+  // tip nodes
+  const tips = paths.filter(p => p.tip), TPp = new Float32Array(tips.length * 3), TPc = new Float32Array(tips.length * 3), TPq = new Float32Array(tips.length * 2);
+  tips.forEach((p, j) => { const e = p.pts[SG]; TPp.set([e.x, e.y, e.z], j * 3); TPc.set([p.col.r, p.col.g, p.col.b], j * 3); TPq.set([p.sd, p.w * 10], j * 2); });
+  const tg = new THREE.BufferGeometry(); tg.setAttribute('position', new THREE.BufferAttribute(TPp, 3)); tg.setAttribute('aCol', new THREE.BufferAttribute(TPc, 3)); tg.setAttribute('aQ', new THREE.BufferAttribute(TPq, 2));
+  const tm = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+    vertexShader: SHARED + WOB + `uniform float uWo; attribute vec3 aCol; attribute vec2 aQ; varying vec3 vC; varying float vA;
+      void main(){ float sd = aQ.x; vec4 mv = modelViewMatrix * vec4(wob(position, 1., sd), 1.);
+        float tw = .75 + .25 * sin(uT * 1.7 + sd * 40.);
+        vC = mix(aCol, wpal(uT * .035 + sd * .22 - .5), .55); vA = uWo * tw * mix(1., .45, uDeep);
+        gl_PointSize = (9. + aQ.y * 9.) * uPR * (17. / -mv.z) * tw; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5) * 2.; if (d > 1.) discard;
+      float core = exp(-d * d * 22.), glow = exp(-d * d * 4.) * .45; gl_FragColor = vec4(mix(vC, vec3(1.), core) * (core * 1.3 + glow) * vA, 1.); }`,
+  });
+  const T = new THREE.Points(tg, tm); T.frustumCulled = false; T.renderOrder = 4; group.add(T);
+  R.userData.tips = T;
+  return R;
+})();
+
 // ---- glow behind the brain: hot white-cyan burst outside, the v6 soft cyan glow inside ----
 const mkGlow = stops => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
   const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); stops.forEach(([o, col]) => g.addColorStop(o, col)); x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); };
 const mkHalo = (tex, sx, sy) => { const h = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0 }));
   h.scale.set(sx, sy, 1); h.position.y = BY; h.renderOrder = 1; scene.add(h); return h; };
-const halo = mkHalo(mkGlow([[0, 'rgba(235,255,255,1)'], [0.18, 'rgba(120,235,255,.55)'], [0.45, 'rgba(0,150,255,.12)'], [1, 'rgba(0,0,0,0)']]), BR * 2.2, BR * 1.8);
+const halo = mkHalo(mkGlow([[0, 'rgba(235,255,255,1)'], [0.18, 'rgba(90,225,255,.6)'], [0.45, 'rgba(0,120,255,.16)'], [1, 'rgba(0,0,0,0)']]), BR * 1.9, BR * 2.6);
+// v8: a baked starburst (hot white core + fine rays) and a wide royal-blue halo. Sprites, so the glow is there at every quality level.
+const burstTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const x = c.getContext('2d'); x.globalCompositeOperation = 'lighter';
+  let g = x.createRadialGradient(256, 256, 0, 256, 256, 256);
+  [[0, 'rgba(255,255,255,1)'], [.12, 'rgba(235,252,255,.95)'], [.26, 'rgba(150,235,255,.5)'], [.5, 'rgba(40,150,255,.14)'], [1, 'rgba(0,0,0,0)']].forEach(([o, k]) => g.addColorStop(o, k));
+  x.fillStyle = g; x.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 220; i++) { const a = rnd() * 6.2832, L = 60 + Math.pow(rnd(), 1.6) * 190, w = .6 + rnd() * 1.6;
+    const lg = x.createLinearGradient(256, 256, 256 + Math.cos(a) * L, 256 + Math.sin(a) * L); lg.addColorStop(0, 'rgba(230,250,255,.5)'); lg.addColorStop(1, 'rgba(80,200,255,0)');
+    x.strokeStyle = lg; x.lineWidth = w; x.beginPath(); x.moveTo(256, 256); x.lineTo(256 + Math.cos(a) * L, 256 + Math.sin(a) * L); x.stroke(); }
+  return new THREE.CanvasTexture(c); })();
+const burst = mkHalo(burstTex, BR * 3.1, BR * 3.5); burst.renderOrder = 5;
+const haloWide = mkHalo(mkGlow([[0, 'rgba(40,90,255,.6)'], [0.3, 'rgba(25,40,255,.2)'], [0.65, 'rgba(15,10,190,.05)'], [1, 'rgba(0,0,0,0)']]), BR * 4.6, BR * 5);
 const haloIn = mkHalo(mkGlow([[0, 'rgba(160,235,255,.9)'], [0.3, 'rgba(70,190,255,.3)'], [0.65, 'rgba(40,90,255,.07)'], [1, 'rgba(0,0,0,0)']]), BR * 3.2, BR * 2.4);
 
 // ---- vertical beam (ignites on a "say" event) ----
@@ -336,8 +467,9 @@ const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMateria
   uniforms: { uM: U.uM },
   fragmentShader: `uniform float uM; varying vec2 vU; void main(){
     vec2 p = vU - vec2(0.46, ${MOBILE ? '0.7' : '0.5'}); p.x *= ${MOBILE ? '1.0' : '1.6'}; float r = length(p);
-    vec3 o = mix(vec3(0.0002, 0.0005, 0.014), vec3(0.0005, 0.0025, 0.075), smoothstep(0.05, 0.6, r));
-    vec2 q = abs(vU - 0.5) * 2.0; o += vec3(0.001, 0.008, 0.15) * pow(max(q.x, q.y), 3.0);
+    vec3 o = mix(vec3(0.004, 0.006, 0.10), vec3(0.0010, 0.0015, 0.042), smoothstep(0.0, 0.5, r));      // deep royal blue, brighter round the core
+    vec2 q = abs(vU - 0.5) * 2.0; o *= mix(1.0, 0.55, smoothstep(0.6, 1.0, max(q.x, q.y)));
+    o += vec3(0.004, 0.16, 0.75) * exp(-vU.y * 70.0) + vec3(0.002, 0.03, 0.2) * exp(-vU.y * 9.0);    // bright blue bottom edge
     vec2 pi = vU - vec2(0.48, ${MOBILE ? '0.7' : '0.5'}); pi.x *= 1.5; float ri = length(pi);
     vec3 n = mix(vec3(0.010, 0.022, 0.065), vec3(0.002, 0.004, 0.016), smoothstep(0.0, 0.75, ri));
     vec2 qi = vU - 0.5; n += vec3(0.004, 0.014, 0.07) * smoothstep(0.35, 0.75, length(qi * vec2(1.0, 1.25)));
@@ -348,9 +480,10 @@ bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 // ---- post: half-resolution bloom ----
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const BLOOM_OUT = [MOBILE ? 0.9 : 0.95, 0.25, 0.5], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
+const BLOOM_OUT = [MOBILE ? 0.62 : 0.66, 0.3, 0.62], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), ...BLOOM_OUT);
-const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / 2), Math.max(2, h / 2));
+let BDIV = 2;   // bloom buffer divisor: half resolution, quarter on slow devices (bloom is NEVER switched off)
+const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / BDIV), Math.max(2, h / BDIV));
 composer.addPass(bloom); composer.addPass(new OutputPass());
 composer.setPixelRatio(DPR); composer.setSize(innerWidth, innerHeight);
 let useBloom = true;
@@ -436,7 +569,7 @@ function placeLabels() {
   const lr = leftShown && !MOBILE ? $('#left').getBoundingClientRect() : null;
   let n = 0;
   for (const L of LBL) {
-    const show = labelsOn && (focusId == null || focusId === L.a.id);
+    const show = labelsOn && focusId == null;
     if (!show) { if (L.vis !== 0) { L.d.style.opacity = 0; L.line.style.opacity = 0; L.dot.style.opacity = 0; L.vis = 0; } continue; }
     if (L.vis !== 1) { L.hid = false; L.d.style.opacity = 1; L.line.style.opacity = 1; L.dot.style.opacity = 1; L.vis = 1; }
     const back = !L.a.core && _w.copy(L.anchor).setY(L.anchor.y - BY).normalize().dot(_cd) < -0.15;   // anchor on the far side of the brain
@@ -756,7 +889,7 @@ let depth = 'out';
 function setDepth(d, instant) {
   if (d === depth && !instant) return;
   if (focusId) exitAgent(true);
-  depth = d; const inn = d === 'in', dur = instant ? 0.01 : 1.9;
+  depth = d; setTimeout(renderCrumbs, 0); const inn = d === 'in', dur = instant ? 0.01 : 1.9;
   document.body.classList.toggle('inside', inn);
   controls.minDistance = Math.min(LIM[d][0], camera.position.distanceTo(controls.target)); controls.maxDistance = Math.max(LIM[d][1], camera.position.distanceTo(controls.target));
   flyTo(camAt(DIST[d]), HOME.look, dur, 'power3.inOut');
@@ -765,44 +898,10 @@ function setDepth(d, instant) {
   $('#depth').classList.toggle('in', inn);
 }
 $('#depth').onclick = () => setDepth(depth === 'in' ? 'out' : 'in');
-// a tap or click on the core (not a drag) zooms inside
 let downAt = null;
 canvas.addEventListener('pointerdown', e => { downAt = { x: e.clientX, y: e.clientY, t: performance.now() }; });
-canvas.addEventListener('pointerup', e => {
-  if (!downAt || view !== 'core' || focusId || fly) return;
-  const moved = Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y), quick = performance.now() - downAt.t < 450; downAt = null;
-  if (moved > 7 || !quick) return;
-  _v.set(0, BY, 0).project(camera); const cx = (_v.x * .5 + .5) * innerWidth, cy = (-_v.y * .5 + .5) * innerHeight;
-  _w.set(BR, BY, 0).project(camera); const rpx = Math.max(60, Math.abs((_w.x - _v.x) * .5 * innerWidth) * 1.25);
-  if (Math.hypot(e.clientX - cx, e.clientY - cy) < rpx && depth === 'out') setDepth('in');
-});
 let preFocus = null;
 function sectorWorld(a, r) { return a.core ? new V3(0, 0, 0) : ANCH[IDX[a.id]].clone().setLength(r).applyMatrix4(group.matrixWorld); }
-function enterAgent(id) {
-  const a = AGENTS[IDX[id]]; if (!a) return;
-  if (view === 'flow') setView('core', true);
-  if (!focusId) preFocus = camera.position.clone();
-  focusId = id; hideLeft(); controls.autoRotate = false;
-  const tgt = sectorWorld(a, 2.4);
-  const dir = a.core ? new V3(0, 0.15, 1) : tgt.clone().normalize().multiplyScalar(0.7).add(new V3(0, 0.1, 1)).normalize();
-  const pos = a.core ? new V3(0, 0.6, MOBILE ? 10 : 7.2) : dir.multiplyScalar(MOBILE ? 13 : 9.6).add(tgt.clone().multiplyScalar(0.25));
-  const look = a.core ? new V3(0, 0, 0) : tgt.clone().multiplyScalar(MOBILE ? 0.55 : 0.75);
-  if (!MOBILE && !a.core) look.add(new V3(-1.6, 0, 0));   // keep the sector right of the panel
-  flyTo(pos, look, 1.6);
-  U.uFocus.value = IDX[id]; gsap.to(U.uFocusAmt, { value: 1, duration: 1.2 });
-  gsap.to(['#right'], { autoAlpha: 0, duration: 0.4 });
-  const P = $('#agentview'); P.classList.remove('hidden'); renderAgentView();
-  gsap.fromTo(P, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' });
-}
-function exitAgent(noFly) {
-  if (!focusId) return; focusId = null; controls.autoRotate = AUTO;
-  if (!noFly) flyTo(preFocus ? preFocus.setLength(DIST[depth]) : camAt(DIST[depth]), HOME.look, 1.4);
-  gsap.to(U.uFocusAmt, { value: 0, duration: 1, onComplete: () => { if (!focusId) U.uFocus.value = -1; } });
-  gsap.to(['#right'], { autoAlpha: 1, duration: 0.6, delay: 0.6 });
-  const P = $('#agentview'); gsap.to(P, { opacity: 0, duration: 0.35, onComplete: () => { if (!focusId) P.classList.add('hidden'); } });
-}
-$('#back').onclick = exitAgent;
-addEventListener('keydown', e => { if (e.key === 'Escape') { if (focusId) exitAgent(); else if (view === 'flow') setView('core'); else if (depth === 'in') setDepth('out'); } });
 function renderAgentView() {
   const a = AGENTS[IDX[focusId]]; if (!a) return;
   const st = status(a), s = snapFresh() ? SNAP : null, R = DATA && DATA.real, b = book();
@@ -823,8 +922,234 @@ function renderAgentView() {
   }
   rows += row('Real events · 30 min', fmt(e30)) + row('Real events · 12 h', fmt(ev.filter(e => nowS() - e.t < 43200).length));
   setHTML($('#av-rows'), rows);
+  if (DC && DC.id === focusId) { buildDeep(a); renderDeepPanel(); }
   setHTML($('#av-feed'), ev.slice(-25).reverse().map(e => `<li><time>${hm(e.t)}</time><span>${esc(e.text)}</span></li>`).join('') || '<li><span>No real events in the last 12 h.</span></li>');
 }
+
+// ================= DEEP LEVEL (v8): each agent's own dot cloud, one cluster per REAL task, dot count = real count =================
+const DCAP = 90, ITEMCAP = 14;
+const prettyFile = f => f.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+function clustersFor(a) {
+  const R = DATA && DATA.real, D = R && R.deep, s = snapFresh() ? SNAP : null, L = [];
+  switch (a.id) {
+    case 'recipe-writer':
+      for (const w of (s && s.workers) || []) L.push({ key: 'w' + w.pid, name: `${w.batch}${w.ch ? ' · ' + w.ch : ''}`, n: w.n || w.total || 1, unit: w.n ? 'dishes' : 'running', items: [], live: 1,
+        note: `drafting now · ${workerState(w)} · list ${fmt(w.done)}/${fmt(w.total)}`, src: 'reporter heartbeat (runq2 worker)' });
+      for (const b of ((D && D.batches) || []).slice().reverse()) L.push({ key: 'b' + b.id + b.t, name: b.id, n: b.n, unit: b.n === 1 ? 'recipe' : 'recipes', items: b.names || [],
+        note: `logged ${b.t} Cairo${b.ch ? ' · ' + b.ch : ''}`, src: 'rw/manual_progress.log' + (b.names && b.names.length ? (b.ch ? ' + SPEC-PROGRESS.md' : ' + site commit') : '') });
+      break;
+    case 'recipe-checker':
+      for (const p of ((D && D.publishes) || []).filter(p => p.n > 0)) L.push({ key: 'p' + p.h, name: p.h.slice(0, 7), n: p.n, unit: p.n === 1 ? 'recipe' : 'recipes', items: p.names || [],
+        note: `published ${hm(p.t)} Cairo · ${p.s}`, src: 'public-site git log' });
+      break;
+    case 'research':
+      for (const k of (D && D.knowledge) || []) L.push({ key: 'k' + k.file, name: prettyFile(k.file), n: k.techniques, unit: 'techniques', items: k.names || [],
+        note: `${fmt(k.sources)} sources`, src: `knowledge/${k.file}.md` });
+      break;
+    case 'planner': {
+      const ch = (D && D.chapters) || [], grp = [['Complete', c => c.total && c.done >= c.total], ['In progress', c => c.done > 0 && c.done < c.total], ['Not started', c => !c.done]];
+      for (const [nm, f] of grp) { const m = ch.filter(f); if (m.length) L.push({ key: 'c' + nm, name: nm, n: m.length, unit: m.length === 1 ? 'chapter' : 'chapters', items: m.map(c => `${c.name} ${c.done}/${c.total}`),
+        note: `${fmt(m.reduce((x, c) => x + c.done, 0))} of ${fmt(m.reduce((x, c) => x + c.total, 0))} dishes written`, src: 'data chapters + rw/CHAPTER-DONE.md', all: 1 }); }
+      break;
+    }
+    case 'claude-code':
+      if (s && s.claude) L.push({ key: 'cc', name: 'Claude', n: s.claude, unit: s.claude === 1 ? 'process' : 'processes', items: [], live: 1, note: s.limitResets ? `session limit resets ${s.limitResets}` : 'running', src: 'reporter heartbeat' });
+      for (const w of (s && s.workers) || []) L.push({ key: 'cw' + w.pid, name: `worker ${w.batch}`, n: w.n || 1, unit: w.n ? 'dishes' : 'running', items: [], live: 1, note: workerState(w), src: 'reporter heartbeat' });
+      break;
+    case 'jarvis': {
+      const by = {};
+      for (const e of EVENTS) if (nowS() - e.t < 43200) (by[e.agent] = by[e.agent] || []).push(e);
+      for (const id in by) { const ag = AGENTS[IDX[id]]; if (!ag) continue; const ev = by[id];
+        L.push({ key: 'j' + id, name: ag.name, n: ev.length, unit: ev.length === 1 ? 'event' : 'events', items: ev.slice(-ITEMCAP).reverse().map(e => `${hm(e.t)} ${e.text}`), all: 1, note: 'real events · last 12 h', src: 'ntfy live feed' }); }
+      break;
+    }
+  }
+  return L;
+}
+const DEEP = new THREE.Group(); DEEP.visible = false; group.add(DEEP);
+const dU = { uDA: { value: 0 }, uSel: { value: -1 }, uSelAmt: { value: 0 } };
+const deepMat = new THREE.ShaderMaterial({
+  uniforms: { ...U, ...dU }, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+  vertexShader: SHARED + `uniform float uDA, uSel, uSelAmt; attribute vec3 aCol; attribute vec3 aQ; varying vec3 vC; varying float vA;
+    void main(){ float k = aQ.x, sd = aQ.y, it = aQ.z; float sel = step(abs(k - uSel), .5);
+      vec3 p = position + vec3(sin(uT * .6 + sd * 40.), cos(uT * .5 + sd * 31.), sin(uT * .45 + sd * 23.)) * .035 * uMo;
+      vec4 mv = modelViewMatrix * vec4(p, 1.);
+      float tw = .78 + .22 * sin(uT * 2.1 + sd * 60.);
+      float dim = mix(1., mix(.18, 1.25, sel), uSelAmt);
+      vC = mix(aCol, wpal(uT * .035 + k * .09 + sd * .1), .3);
+      vA = uDA * tw * dim;
+      gl_PointSize = (it > .5 ? 15. : 8.) * uPR * (7. / -mv.z) * mix(1., mix(.8, 1.35, sel), uSelAmt);
+      gl_Position = projectionMatrix * mv; }`,
+  fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5) * 2.; if (d > 1.) discard;
+    float core = exp(-d * d * 14.), glow = max(exp(-d * d * 4.) - .02, 0.) * .45 * (1. - d); gl_FragColor = vec4(mix(vC, vec3(1.), core * .7) * (core * 1.2 + glow) * vA, 1.); }`,
+});
+const deepLineMat = new THREE.LineBasicMaterial({ transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, opacity: 0 });
+const deepHub = mkHalo(mkGlow([[0, 'rgba(255,255,255,1)'], [0.2, 'rgba(160,230,255,.5)'], [0.55, 'rgba(60,120,255,.1)'], [1, 'rgba(0,0,0,0)']]), 1.4, 1.4);
+scene.remove(deepHub); DEEP.add(deepHub);
+const CLP = $('#labels');
+const CL = [];   // pooled cluster / item labels
+function clLabel(i) { if (!CL[i]) { const d = el('div', 'cl'); d.innerHTML = '<b></b><span></span>'; d.onclick = () => d._k != null && enterSub(d._k); CLP.appendChild(d); CL[i] = { d, b: d.firstChild, s: d.lastChild }; } return CL[i]; }
+let DC = null;   // current cloud: {id, list, sig, cen:[V3], rc:[], items:[[V3]], R}
+function buildDeep(a) {
+  const list = clustersFor(a), sig = a.id + '|' + list.map(c => c.key + ':' + c.n + ':' + c.items.length).join(',');
+  if (DC && DC.sig === sig) return;
+  const K = list.length, R = K ? 0.9 + 0.32 * Math.sqrt(K) : 0, col0 = new THREE.Color(a.color), tc = new THREE.Color();
+  const cen = [], rc = [], items = [], P = [], C = [], Qa = [], LP = [];
+  let s0 = 777 + K; const r2 = () => (s0 = (s0 * 16807) % 2147483647) / 2147483647;
+  list.forEach((c, k) => {
+    const y = K === 1 ? 0 : 1 - 2 * (k + .5) / K, rr = Math.sqrt(1 - y * y), th = k * 2.39996;
+    const o = new V3(Math.cos(th) * rr, y * .8, Math.sin(th) * rr).multiplyScalar(K === 1 ? 0 : R);
+    const m = Math.max(1, Math.min(DCAP, c.n | 0)), r = 0.12 + 0.07 * Math.cbrt(m); cen.push(o); rc.push(r);
+    tc.copy(col0).lerp(wpalJS(k * .13, new THREE.Color()), .35);
+    const ni = Math.min(m, c.items.length, ITEMCAP), its = [];
+    for (let j = 0; j < m; j++) {
+      let p;
+      if (j < ni) { const yy = ni === 1 ? 0 : 1 - 2 * (j + .5) / ni, q = Math.sqrt(1 - yy * yy), t2 = j * 2.39996; p = new V3(Math.cos(t2) * q, yy, Math.sin(t2) * q).multiplyScalar(r * 1.05).add(o); its.push(p); }
+      else { const u = r2() * 2 - 1, t2 = r2() * 6.2832, q = Math.sqrt(1 - u * u), rad = r * Math.cbrt(r2()) * .9; p = new V3(q * Math.cos(t2), u, q * Math.sin(t2)).multiplyScalar(rad).add(o); }
+      P.push(p.x, p.y, p.z); C.push(tc.r, tc.g, tc.b); Qa.push(k, r2(), j < ni ? 1 : 0);
+    }
+    items.push(its); LP.push(0, 0, 0, o.x, o.y, o.z);
+  });
+  DEEP.children.filter(c => c !== deepHub).forEach(c => { DEEP.remove(c); c.geometry.dispose(); });
+  if (K) {
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setAttribute('aCol', new THREE.Float32BufferAttribute(C, 3)); g.setAttribute('aQ', new THREE.Float32BufferAttribute(Qa, 3));
+    const pts = new THREE.Points(g, deepMat); pts.frustumCulled = false; pts.renderOrder = 6; DEEP.add(pts);
+    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(LP, 3)); deepLineMat.color.copy(col0);
+    const ln = new THREE.LineSegments(lg, deepLineMat); ln.frustumCulled = false; ln.renderOrder = 5; DEEP.add(ln);
+  }
+  deepHub.material.color.copy(col0).lerp(WHITE, .4);
+  DC = { id: a.id, list, sig, cen, rc, items, R };
+  if (subK >= K) subK = -1;
+  renderDeepPanel();
+}
+function deepCentre(a) { const d = a.core ? new V3(0, 0, 1) : ANCH[IDX[a.id]].clone().setY(ANCH[IDX[a.id]].y - BY).normalize(); return d.multiplyScalar(a.core ? BR + 2.2 : BR + 2.6).add(new V3(0, BY, 0)); }
+let subK = -1, preDeep = null;
+const deepDist = () => Math.max(MOBILE ? 8.5 : 6.2, (DC ? DC.R : 1) * (MOBILE ? 4.4 : 3.3));
+function deepCam(c, dist) { const dir = c.clone().sub(new V3(0, BY, 0)).normalize().add(new V3(0, .18, 0)).normalize(); if (!MOBILE) { const s = new V3().crossVectors(new V3(0, 1, 0), dir).normalize(); return { pos: c.clone().addScaledVector(dir, dist).addScaledVector(s, -dist * .2), look: c.clone().addScaledVector(s, -dist * .2) }; } return { pos: c.clone().addScaledVector(dir, dist), look: c.clone().add(new V3(0, -dist * .1, 0)) }; }
+function enterAgent(id) {
+  const a = AGENTS[IDX[id]]; if (!a) return;
+  if (view === 'flow') setView('core', true);
+  if (focusId === id) { if (subK >= 0) exitSub(); return; }
+  if (!focusId) preFocus = camera.position.clone().sub(controls.target).setLength(DIST.in);
+  if (depth !== 'in') { depth = 'in'; document.body.classList.add('inside'); gsap.to(U.uM, { value: 1, duration: 1.6, ease: 'sine.inOut' }); $('#depth').innerHTML = '<i>←</i> Outside'; $('#depth').classList.add('in'); }
+  focusId = id; subK = -1; DC = null; hideLeft();
+  document.body.classList.add('deep'); document.body.classList.remove('item');
+  DEEP.position.copy(deepCentre(a)); DEEP.visible = true; buildDeep(a);
+  const c = DEEP.position.clone(), v = deepCam(c, deepDist());
+  controls.minDistance = 1.6; controls.maxDistance = 18; controls.autoRotateSpeed = 0.22; controls.autoRotate = AUTO;
+  flyTo(v.pos, v.look, 1.8);
+  U.uFocus.value = IDX[id]; gsap.to(U.uFocusAmt, { value: 1, duration: 1.2 });
+  gsap.to(U.uDeep, { value: 1, duration: 1.4, ease: 'sine.inOut' }); gsap.to(dU.uDA, { value: 1, duration: 1.2, delay: .5 }); gsap.to(deepLineMat, { opacity: .22, duration: 1.2, delay: .6 });
+  gsap.to(dU.uSelAmt, { value: 0, duration: .5 });
+  gsap.to(['#right'], { autoAlpha: 0, duration: 0.4 });
+  const P = $('#agentview'); P.classList.remove('hidden'); renderAgentView();
+  gsap.fromTo(P, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' });
+  renderCrumbs();
+}
+function enterSub(k) {
+  if (!DC || !DC.list[k]) return;
+  subK = k; document.body.classList.add('item');
+  const c = DEEP.localToWorld(DC.cen[k].clone()), v = deepCam(c, Math.max(2.1, DC.rc[k] * 7.5));
+  flyTo(v.pos, v.look, 1.4); dU.uSel.value = k; gsap.to(dU.uSelAmt, { value: 1, duration: .8 });
+  renderDeepPanel(); renderCrumbs();
+}
+function exitSub() {
+  if (subK < 0) return; subK = -1; document.body.classList.remove('item');
+  const v = deepCam(DEEP.position.clone(), deepDist()); flyTo(v.pos, v.look, 1.3);
+  gsap.to(dU.uSelAmt, { value: 0, duration: .7 }); renderDeepPanel(); renderCrumbs();
+}
+function exitAgent(noFly) {
+  if (!focusId) return; focusId = null; subK = -1; controls.autoRotate = AUTO; controls.autoRotateSpeed = 0.42;
+  document.body.classList.remove('deep', 'item');
+  controls.minDistance = LIM[depth][0]; controls.maxDistance = LIM[depth][1];
+  if (!noFly) flyTo(preFocus ? preFocus.clone().setLength(DIST[depth]) : camAt(DIST[depth]), HOME.look, 1.5);
+  gsap.to(U.uFocusAmt, { value: 0, duration: 1, onComplete: () => { if (!focusId) U.uFocus.value = -1; } });
+  gsap.to(U.uDeep, { value: 0, duration: 1.2 }); gsap.to(deepLineMat, { opacity: 0, duration: .5 });
+  gsap.to(dU.uDA, { value: 0, duration: .6, onComplete: () => { if (!focusId) DEEP.visible = false; } });
+  gsap.to(['#right'], { autoAlpha: 1, duration: 0.6, delay: 0.6 });
+  const P = $('#agentview'); gsap.to(P, { opacity: 0, duration: 0.35, onComplete: () => { if (!focusId) P.classList.add('hidden'); } });
+  for (const L of CL) L.d.style.opacity = 0;
+  renderCrumbs();
+}
+function goUp() { if (subK >= 0) exitSub(); else if (focusId) exitAgent(); else if (view === 'flow') setView('core'); else if (depth === 'in') setDepth('out'); }
+$('#back').onclick = goUp;
+addEventListener('keydown', e => { if (e.key === 'Escape') goUp(); });
+function renderCrumbs() {
+  const a = focusId && AGENTS[IDX[focusId]], c = a && subK >= 0 && DC && DC.list[subK];
+  const parts = [['out', 'Outside'], ['in', 'Core']];
+  if (a) parts.push(['agent', a.name]); if (c) parts.push(['item', c.name]);
+  const lvl = c ? 'item' : a ? 'agent' : depth;
+  setHTML($('#crumbs'), parts.filter((p, i) => i <= parts.findIndex(q => q[0] === lvl)).map(([k, t]) => `<button data-k="${k}" class="${k === lvl ? 'on' : ''}">${esc(t)}</button>`).join('<i>/</i>'));
+  $('#back').innerHTML = lvl === 'item' ? `← ${esc(a.name)}` : '← Core';
+}
+$('#crumbs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const k = b.dataset.k;
+  if (k === 'out') { if (focusId) exitAgent(true); setDepth('out'); } else if (k === 'in') { if (focusId) exitAgent(); else setDepth('in'); } else if (k === 'agent') exitSub(); renderCrumbs(); });
+function renderDeepPanel() {
+  const box = $('#av-deep'); if (!box || !DC) return;
+  const a = AGENTS[IDX[DC.id]];
+  if (!DC.list.length) { setHTML(box, `<h4 class="micro">Tasks</h4><p class="none">Nothing running</p><p class="src">${a.status === 'planned' ? 'This agent is planned and not built yet.' : 'No real task data for this agent right now.'}</p>`); return; }
+  if (subK >= 0) {
+    const c = DC.list[subK], its = c.all ? c.items : c.items.slice(0, 40);
+    setHTML(box, `<h4 class="micro">${esc(c.name)}</h4><div class="big"><span class="num">${fmt(c.n)}</span><span>${esc(c.unit)}</span></div><p class="note">${esc(c.note)}</p>
+      ${its.length ? `<ol class="names">${its.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : '<p class="none">Names not recorded for this batch</p>'}<p class="src">source · ${esc(c.src)}</p>`);
+    return;
+  }
+  const tot = DC.list.reduce((x, c) => x + (c.n || 0), 0);
+  setHTML(box, `<h4 class="micro">Tasks · ${fmt(DC.list.length)}</h4><ul class="tasks">${DC.list.map((c, k) => `<li data-k="${k}"${c.live ? ' class="live"' : ''}><span class="nm">${esc(c.name)}</span><span class="num">${fmt(c.n)}</span><span class="u">${esc(c.unit)}</span></li>`).join('')}</ul>`);
+}
+$('#av-deep').addEventListener('click', e => { const li = e.target.closest('li[data-k]'); if (li) enterSub(+li.dataset.k); });
+function placeDeep() {
+  const on = focusId && DC && dU.uDA.value > .05;
+  let n = 0;
+  if (on) {
+    const W = innerWidth, H = innerHeight, boxes = [];
+    DC.list.forEach((c, k) => {
+      if (subK >= 0 && k !== subK && !MOBILE) { } else if (subK >= 0 && k !== subK) return;
+      _v.copy(DC.cen[k]).applyMatrix4(DEEP.matrixWorld); const z = _v.clone().applyMatrix4(camera.matrixWorldInverse).z; if (z > -0.3) return;
+      _v.project(camera); const x = (_v.x * .5 + .5) * W, y = (-_v.y * .5 + .5) * H;
+      const L = clLabel(n++); L.d._k = k; L.d.className = 'cl' + (k === subK ? ' sel' : '') + (c.live ? ' live' : '');
+      setText(L.b, c.name); setText(L.s, `${fmt(c.n)} ${c.unit}`);
+      const pr = DC.rc[k] / (-z) * H * .9;
+      boxes.push({ L, x, y: y - pr - 8, o: subK >= 0 && k !== subK ? .35 : 1 });
+    });
+    if (subK >= 0) DC.items[subK].forEach((p, j) => {
+      _v.copy(p).applyMatrix4(DEEP.matrixWorld); const z = _v.clone().applyMatrix4(camera.matrixWorldInverse).z; if (z > -0.2) return;
+      _v.project(camera); const L = clLabel(n++); L.d._k = null; L.d.className = 'cl it';
+      setText(L.b, DC.list[subK].items[j]); setText(L.s, '');
+      boxes.push({ L, x: (_v.x * .5 + .5) * W + 10, y: (-_v.y * .5 + .5) * H - 7, o: 1, left: 1 });
+    });
+    for (const B of boxes) { B.w = B.L.d.offsetWidth; B.h = B.L.d.offsetHeight; B.l = B.left ? B.x : B.x - B.w / 2; B.t = B.left ? B.y : B.y - B.h; }
+    for (let pass = 0; pass < 5; pass++) for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+      const A = boxes[i], B = boxes[j];
+      if (A.l < B.l + B.w && B.l < A.l + A.w && A.t < B.t + B.h + 2 && B.t < A.t + A.h + 2) { const ov = (Math.min(A.t + A.h, B.t + B.h) - Math.max(A.t, B.t) + 2) / 2; if (A.t <= B.t) { A.t -= ov; B.t += ov; } else { A.t += ov; B.t -= ov; } }
+    }
+    for (const B of boxes) { B.L.d.style.transform = `translate3d(${Math.max(6, Math.min(W - B.w - 6, B.l)).toFixed(1)}px,${Math.max(56, Math.min(H - B.h - 6, B.t)).toFixed(1)}px,0)`; B.L.d.style.opacity = (B.o * Math.min(1, dU.uDA.value * 1.4)).toFixed(2); }
+  }
+  for (let i = n; i < CL.length; i++) if (CL[i].d.style.opacity !== '0') CL[i].d.style.opacity = 0;
+}
+// tap: outside core -> inside; inside near an agent region -> that agent; agent level near a cluster -> that task
+canvas.addEventListener('pointerup', e => {
+  if (!downAt || view !== 'core' || fly) return;
+  const moved = Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y), quick = performance.now() - downAt.t < 450; downAt = null;
+  if (moved > 7 || !quick) return;
+  const W = innerWidth, H = innerHeight, px = e.clientX, py = e.clientY;
+  const scr = p => { _v.copy(p).project(camera); return [(_v.x * .5 + .5) * W, (-_v.y * .5 + .5) * H, _v.z]; };
+  if (focusId && DC) {
+    let bk = -1, bd = MOBILE ? 60 : 48;
+    DC.cen.forEach((c, k) => { const [x, y, z] = scr(DEEP.localToWorld(c.clone())); if (z > 1) return; const d = Math.hypot(px - x, py - y); if (d < bd) { bd = d; bk = k; } });
+    if (bk >= 0 && bk !== subK) enterSub(bk); else if (bk < 0 && subK >= 0) exitSub();
+    return;
+  }
+  if (depth === 'in') {
+    let bi = -1, bd = 80;
+    AGENTS.forEach((a, i) => { const [x, y] = scr(ANCH[i].clone().applyMatrix4(group.matrixWorld)); const d = Math.hypot(px - x, py - y); if (d < bd) { bd = d; bi = i; } });
+    if (bi >= 0) enterAgent(AGENTS[bi].id);
+    return;
+  }
+  _v.set(0, BY, 0).project(camera); const cx = (_v.x * .5 + .5) * W, cy = (-_v.y * .5 + .5) * H;
+  _w.set(BR, BY, 0).project(camera); const rpx = Math.max(60, Math.abs((_w.x - _v.x) * .5 * W) * 1.25);
+  if (Math.hypot(px - cx, py - cy) < rpx) setDepth('in');
+});
 
 // ================= FLOW VIEW (draggable nodes, bezier edges; values are real only) =================
 const FLOW = AG.flow || { virtual: [], layout: {}, edges: [] };
@@ -933,17 +1258,22 @@ document.querySelectorAll('#views button').forEach(b => b.onclick = () => setVie
 // ================= FRAME LOOP =================
 const perf = { level: +(Q.get('q') ?? -1), frames: [], measureFrom: 0, checks: 0 };
 window.__perf = perf;
+// v8: the glow is never dropped. Slow devices lose strand / dot COUNT and get a quarter-resolution bloom; bloom, halo sprites
+// and the ribbons' own built-in glow always stay on.
 function applyQuality(level) {
   perf.level = level;
-  const f = level >= 2 ? 0.45 : level >= 1 ? 0.65 : 1;
+  const f = [1, .65, .45, .3][Math.min(3, level)], ft = [1, .85, .7, .55][Math.min(3, level)];
   for (const L of [FIB, FIBI]) { const S2 = L.userData.seg * 2; L.geometry.setDrawRange(0, Math.floor(L.userData.count * f / S2) * S2); }
-  PTS.geometry.setDrawRange(0, Math.floor(PTS.userData.count * (level >= 2 ? 0.7 : level >= 1 ? 0.85 : 1)));
-  useBloom = level < 2;
-  if (level >= 2 && DPR > 1) { DPR = 1; renderer.setPixelRatio(1); composer.setPixelRatio(1); resize(); U.uPR.value = 1; }
+  TEND.geometry.setDrawRange(0, Math.floor(TEND.userData.np * ft) * TEND.userData.per);
+  PTS.geometry.setDrawRange(0, Math.floor(PTS.userData.count * [1, .85, .7, .55][Math.min(3, level)]));
+  useBloom = true;
+  if (level >= 2 && DPR > 1) { DPR = 1; renderer.setPixelRatio(1); composer.setPixelRatio(1); U.uPR.value = 1; }
+  if (level >= 2 && BDIV !== 4) BDIV = 4;
+  resize();
 }
 if (perf.level >= 0) applyQuality(perf.level);
 function adapt(now) {
-  if (CAPTURE || Q.get('adaptive') === '0' || perf.level >= 2 || perf.checks >= 2) return;
+  if (CAPTURE || Q.get('adaptive') === '0' || perf.level >= 3 || perf.checks >= 3) return;
   if (!perf.measureFrom) { perf.measureFrom = now + 600; return; }
   if (now < perf.measureFrom) return;
   perf.frames.push(now);
@@ -970,12 +1300,17 @@ function frame(dt) {
   const pulse = bt ? 0.82 + 0.18 * Math.sin(t * 9) : 1;
   beam.material.uniforms.uBeam.value = beamV * pulse; core.material.uniforms.uBeam.value = beamV;
   const M = U.uM.value;
-  halo.material.opacity = (0.5 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15) * (1 - M);
+  const O = 1 - M, wv = 0.5 + 0.5 * Math.sin(t * 0.7);
+  halo.material.opacity = (0.75 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15) * O;
+  burst.material.opacity = (0.82 + 0.1 * wv + beamV * 0.15) * O * (1 - U.uDeep.value * 0.6); burst.material.rotation = t * 0.012;
+  burst.scale.set(BR * (2.5 + 0.1 * wv), BR * (3.6 + 0.14 * wv), 1);
+  haloWide.material.opacity = (0.32 + 0.08 * wv) * O * (1 - U.uDeep.value * 0.5);
+  wpalJS(t * 0.035 + 0.1, haloWide.material.color); halo.material.color.copy(haloWide.material.color).lerp(WHITE, 0.35);
   haloIn.material.opacity = (0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1) * M;
-  U.uWo.value = 1 - M; U.uWi.value = M; FIB.visible = M < 0.999; FIBI.visible = TIPS.visible = M > 0.001;
+  U.uWo.value = 1 - M; U.uWi.value = M; FIB.visible = TEND.visible = TEND.userData.tips.visible = M < 0.999; FIBI.visible = TIPS.visible = M > 0.001;
   bloom.strength = BLOOM_OUT[0] + (BLOOM_IN[0] - BLOOM_OUT[0]) * M; bloom.radius = BLOOM_OUT[1] + (BLOOM_IN[1] - BLOOM_OUT[1]) * M; bloom.threshold = BLOOM_OUT[2] + (BLOOM_IN[2] - BLOOM_OUT[2]) * M;
   if (fly) flyStep(); else controls.update(dt * U.uMo.value);
-  if (view === 'core') placeLabels(); else tickFlow(dt, t);
+  if (view === 'core') { placeLabels(); placeDeep(); } else tickFlow(dt, t);
   if (useBloom) composer.render(dt); else renderer.render(scene, camera);
   secAcc += dt;
   if (secAcc >= 1) { secAcc = 0; renderTop(); tickWorkers(); tickLeft(); watchFeeds(); renderAgents(); if (focusId) renderAgentView(); if (view === 'flow') renderFlowCards(); }
@@ -1000,6 +1335,9 @@ window.__inject = ev => handle({ id: 'inj' + Math.random().toString(36).slice(2)
 window.__reconnect = () => { connectLive(); connectMs(); };
 window.__view = v => v === 'flow' || v === 'core' ? setView(v) : enterAgent(v);
 window.__exit = () => exitAgent();
+window.__sub = k => k < 0 ? exitSub() : enterSub(k);
+window.__up = () => goUp();
+window.__deep = () => DC && ({ id: DC.id, sub: subK, list: DC.list.map(c => [c.name, c.n, c.unit, c.items.length]) });
 window.__cam = () => ({ p: camera.position.toArray().map(v => +v.toFixed(2)), depth, m: +U.uM.value.toFixed(2), auto: controls.autoRotate });
 window.__depth = (d, instant) => setDepth(d, instant);
 window.__orbit = (az, el) => { const o = camera.position.clone().sub(controls.target); const sp = new THREE.Spherical().setFromVector3(o); sp.theta += az; sp.phi = Math.min(3.0, Math.max(0.15, sp.phi + el)); camera.position.setFromSpherical(sp).add(controls.target); controls.update(0); };
@@ -1007,7 +1345,7 @@ window.__left = (b, ms) => showLeft(b, ms);
 window.__texts = () => [...document.querySelectorAll('#ui *, #labels *, #flow *')].filter(n => n.childNodes.length && [...n.childNodes].some(c => c.nodeType === 3 && c.textContent.trim()) && n.offsetParent !== null).map(n => n.textContent.trim());
 
 // ================= START =================
-renderAll(); labelSizes();
+renderAll(); labelSizes(); renderCrumbs();
 await loadData();
 connectLive(); connectMs();
 setInterval(loadData, (CFG.dataRefreshSeconds || 300) * 1000);

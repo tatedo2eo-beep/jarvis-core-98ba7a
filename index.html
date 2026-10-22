@@ -27,6 +27,8 @@
     <div class="micro" id="link">NEURAL LINK · <span>CONNECTING</span></div>
   </header>
 
+  <nav id="crumbs" aria-label="Depth"></nav>
+
   <div id="pill" class="glass"><i class="dot"></i><span id="pill-state">CONNECTING</span><span class="sep"></span><span id="pill-ago">waiting for the first real event</span></div>
 
   <div id="status">
@@ -52,11 +54,12 @@
   </aside>
 
   <section id="agentview" class="glass card hidden">
-    <button class="back" id="back">← Back to core <kbd>esc</kbd></button>
+    <button class="back" id="back">← Core</button>
     <div class="av-head"><i class="sw" id="av-sw"></i><div><div class="micro" id="av-code"></div><h2 id="av-name"></h2></div><span class="badge" id="av-badge"></span></div>
     <p class="role" id="av-role"></p>
     <div class="rows" id="av-rows"></div>
-    <h4 class="micro">REAL EVENTS · LAST 12 H</h4>
+    <div id="av-deep"></div>
+    <h4 class="micro">Real events · last 12 h</h4>
     <ol id="av-feed"></ol>
   </section>
 

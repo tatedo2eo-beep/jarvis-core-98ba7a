@@ -64,6 +64,53 @@ try:
 except OSError: pass
 d["real"]["tonight"] = {"n": sum(r[2] for r in rows), "batches": len(rows), "first": rows[0][0] if rows else None,
                         "last": rows[-1][0] if rows else None, "recent": [list(r) for r in rows[-6:]][::-1]}
+# ---- deep level (tap an agent): real sub-clusters per task. All read-only sources. ----
+import glob
+spec = {}
+try:
+    for line in open("/workspace/rw/SPEC-PROGRESS.md", encoding="utf-8", errors="replace"):
+        m = re.match(r"-\s*(\w+)\s*\|\s*(\d+)\s*dish", line)
+        if not m: continue
+        cm = re.search(r"\|\s*ch\s*(\d+)\s+([^()|]+?)\s*\(([^)]*)\)", line)
+        spec[m.group(1)] = {"ch": (cm.group(2).strip()[:28] if cm else None), "dishes": int(m.group(2)),
+                            "names": [x.strip()[:40] for x in re.split(r"[;,]", cm.group(3)) if x.strip()][:14] if cm else []}
+except OSError: pass
+log = [l.split("\t") for l in git("log", "-60", "--format=%h\t%ct\t%s").splitlines()]
+def commit_names(h):
+    out = []
+    for f in git("show", "--diff-filter=A", "--name-only", "--format=", h).split():
+        if f.startswith("content/recipes/") and f.endswith(".json") and os.path.exists(os.path.join(SITE, f)):
+            try: out.append(json.load(open(os.path.join(SITE, f), encoding="utf-8")).get("title", "")[:64])
+            except Exception: pass
+    return out
+batches = []
+for t, b, n in rows:
+    sp = spec.get(b, {}); names = []
+    hit = [c for c in log if re.search(r"\b%s\b" % re.escape(b), c[2])]
+    if hit and len(re.findall(r"\b[a-z]{1,2}\d\b", hit[0][2])) <= 1: names = commit_names(hit[0][0])[:14]   # single-batch publish commit
+    fromSpec = not names
+    if fromSpec: names = list(sp.get("names", []))
+    batches.append({"id": b, "t": t, "n": n, "ch": sp.get("ch") if fromSpec and names else None, "names": names})
+pubs = []
+for h, t, subj in log[:10]:
+    nm = commit_names(h)
+    pubs.append({"h": h, "t": int(t), "s": subj[:70], "n": len(nm), "names": nm[:14]})
+kn = []
+for f in sorted(glob.glob(f"{SITE}/knowledge/*.md")):
+    if re.search(r"(INDEX|CHECKLIST|SOURCES-LOCKED)\.md$", f): continue
+    t = open(f, encoding="utf-8").read()
+    tech = sorted(set(re.findall(r"^#{2,4}\s*\(?([A-Z]{1,2}\d{1,2})\b", t, re.M)))
+    titles = [x.strip()[:40] for x in re.findall(r"^#{2,4}\s*\(?[A-Z]{1,2}\d{1,2}\)?[\s:.\-–—]*(.+)$", t, re.M)][:14]
+    kn.append({"file": os.path.basename(f)[:-3][:30], "techniques": len(tech), "sources": len({u for u in re.findall(r"https?://[^\s)>\]]+", t)}), "names": titles})
+done = []
+try:
+    for line in open("/workspace/rw/CHAPTER-DONE.md", encoding="utf-8", errors="replace"):
+        m = re.search(r"chapter\s+(\S+)\s+(\d+)/(\d+)", line)
+        if m: done.append(m.group(1))
+except OSError: pass
+d["real"]["deep"] = {"batches": batches, "publishes": pubs, "knowledge": kn,
+    "chapters": [{"name": c["name"], "done": c["done"], "total": c["total"]} for c in ch], "chapterDoneLog": sorted(set(done)),
+    "sources": "rw/manual_progress.log + rw/SPEC-PROGRESS.md (batches), public-site git log (publishes), public-site/knowledge/*.md, data chapters + rw/CHAPTER-DONE.md"}
 sys.path.insert(0, HERE); from derive import dump
 dump(d, p); json.load(open(p, encoding="utf-8"))
 r = d["real"]; print("real:", r["book"], "live", r["livePages"], "tonight", r["tonight"]["n"], "pages", r["pages"], "git", r["pagesInGit"], "7d", [x["n"] for x in r["chart"]["days"]], "24h sum", sum(x["n"] for x in r["chart"]["hours"]))
