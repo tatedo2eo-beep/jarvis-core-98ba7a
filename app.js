@@ -510,7 +510,7 @@ function status(a) {
     default: return recent(id, 900) ? 'live' : a.status === 'planned' ? 'planned' : 'idle';
   }
 }
-const BADGE = { live: 'LIVE', wait: 'WAITING', idle: 'IDLE', planned: 'PLANNED' };
+const BADGE = { live: 'Live', wait: 'Waiting', idle: 'Idle', planned: 'Planned' };
 const book = () => (snapFresh() && SNAP.book) || (DATA && DATA.real && DATA.real.book) || null;
 const pages = () => (snapFresh() && SNAP.pages) || (DATA && DATA.real && DATA.real.pages) || null;      // recipe files in the site build (incl. not yet published)
 const livePages = () => (snapFresh() && SNAP.livePages) || (DATA && DATA.real && DATA.real.livePages) || null;  // recipe pages in the PUBLIC site's sitemap
@@ -659,7 +659,7 @@ function blockHTML(k) {
   const row = (k, v, sub, small) => `<div class="row"><span class="k">${k}${sub ? `<small>${sub}</small>` : ''}</span><span class="v">${v}${small ? `<small>${small}</small>` : ''}</span></div>`;
   if (k === 'tonight') {
     const t = tonightD(); if (!t) return '';
-    return `<h3><span>[ TONIGHT ]</span><em>RECIPES WRITTEN</em></h3>
+    return `<h3><span>Tonight</span><em>Recipes written</em></h3>
       ${row('Recipes written tonight', fmt(t.n), t.first ? `${fmt(t.batches)} batches · ${esc(t.first)}–${esc(t.last)} Cairo` : 'no batch logged yet')}
       ${(t.recent || []).slice(0, 4).map(r => row(`Batch ${esc(r[1])}`, fmt(r[2]), esc(r[0]) + ' Cairo', 'recipes')).join('')}
       ${livePages() != null ? row('Recipes live on the site', fmt(livePages()), 'public sitemap.xml') : ''}
@@ -668,7 +668,7 @@ function blockHTML(k) {
   if (k === 'book') {
     if (!b) return '';
     const src = s && s.book ? 'live from reporter.py (recounted when the site changes)' : `derived ${R ? hm(Date.parse(R.at) / 1000) : '–'} Cairo`;
-    return `<h3><span>[ SUMMARY ]</span><em>THE BOOK</em></h3>
+    return `<h3><span>Summary</span><em>The book</em></h3>
       ${row('Book dishes written', fmt(b.dishes[0]), 'base recipe of each book dish', '/ ' + fmt(b.dishes[1]))}
       ${row('Book flavours written', fmt(b.flavours[0]), 'flavour variants listed in the book', '/ ' + fmt(b.flavours[1]))}
       ${row('Extra flavours', fmt(b.extra), 'beyond the book list')}
@@ -680,7 +680,7 @@ function blockHTML(k) {
   if (k === 'queue') {
     if (!s) return '';
     const ws = s.workers || [];
-    return `<h3><span>[ QUEUE ]</span><em>DRAFTING</em></h3>
+    return `<h3><span>Queue</span><em>Drafting</em></h3>
       ${row('Queued batches drafted', fmt(s.batches.done), 'runq2 workers + queue.txt', '/ ' + fmt(s.batches.tracked))}
       ${row('Batches left', fmt(s.batches.left))}
       ${row('Draft batches done', fmt(s.draftsDone), 'all time · raw_*.done files')}
@@ -694,7 +694,7 @@ function blockHTML(k) {
     const mx = Math.max(1, ...arr.map(x => x.n)), tot = arr.reduce((a, x) => a + x.n, 0);
     const lab = x => k === 'days' ? new Date(x.d + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short' }).slice(0, 2) : x.h;
     const bars = arr.map((x, i) => `<div class="c">${k === 'days' ? `<b class="tnum">${x.n || ''}</b>` : ''}<i style="height:${(100 * x.n / mx).toFixed(1)}%"></i><span>${k === 'hours' && i % 3 ? '' : lab(x)}</span></div>`).join('');
-    return `<h3><span>[ OUTPUT ]</span><em>${k === 'days' ? '7 DAYS' : 'LAST 24 H'}</em></h3>
+    return `<h3><span>Output</span><em>${k === 'days' ? '7 days' : 'Last 24 h'}</em></h3>
       ${row(k === 'days' ? 'Recipe pages added · 7 days' : 'Recipe pages added · 24 h', fmt(tot))}
       <div class="chart ${k === 'hours' ? 'h' : ''}">${bars}</div>
       <div class="src">first git commit that added each recipe file · derived ${hm(Date.parse(R.at) / 1000)} Cairo</div>`;
@@ -702,7 +702,7 @@ function blockHTML(k) {
   if (k === 'site') {
     if (!R) return '';
     const cs = commitsL().slice(0, 5), s2 = snapFresh() ? SNAP : null;
-    return `<h3><span>[ PUBLISH ]</span><em>SITE COMMITS</em></h3>
+    return `<h3><span>Publish</span><em>Site commits</em></h3>
       ${s2 && s2.commitsToday != null ? row('Site commits today', fmt(s2.commitsToday), 'since 00:00 Cairo') : ''}
       ${cs.map(c => `<div class="row"><span class="k">${esc(c.s)}</span><span class="v" style="font-size:12px">${hm(c.t)}</span></div>`).join('')}
       <div class="src">public-site git log · ${fmt(R.commitCount)} commits at last board build</div>`;

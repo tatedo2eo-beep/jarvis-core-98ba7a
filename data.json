@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T02:06:56+03:00",
+  "updatedAt": "2026-10-23T02:09:00+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -795,7 +795,7 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T02:06:56+03:00",
+    "at": "2026-10-23T02:09:00+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
     "recipesOnSite": 489,
     "chaptersComplete": 8
@@ -1042,7 +1042,7 @@
   ],
   "recipeFiles": 489,
   "real": {
-    "at": "2026-10-23T02:06:56+03:00",
+    "at": "2026-10-23T02:09:00+03:00",
     "book": {
       "dishes": [
         378,
@@ -1257,13 +1257,18 @@
     ],
     "commitCount": 66,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
-    "livePages": 481,
+    "livePages": 489,
     "tonight": {
-      "n": 137,
-      "batches": 21,
+      "n": 145,
+      "batches": 22,
       "first": "00:54",
-      "last": "01:57",
+      "last": "02:07",
       "recent": [
+        [
+          "02:07",
+          "nb2",
+          8
+        ],
         [
           "01:57",
           "nx1",
@@ -1288,11 +1293,6 @@
           "01:28",
           "sp4",
           10
-        ],
-        [
-          "01:00",
-          "z2",
-          9
         ]
       ]
     },
@@ -1512,6 +1512,22 @@
             "Carne Asada Street Tacos with Onion, Coriander and Lime",
             "Golden Crisp Cheddar Grilled Cheese Sandwich",
             "Smoky Chipotle and Lime Chicken Fajitas with Peppers and Guacamo"
+          ]
+        },
+        {
+          "id": "nb2",
+          "t": "02:07",
+          "n": 8,
+          "ch": null,
+          "names": [
+            "Chipotle-Lime Chicken, Black Bean and Rice Burritos",
+            "Crisp Melted Monterey Jack Cheese Quesadillas with Fresh Tomato ",
+            "Liège Waffles with Caramelised Pearl Sugar",
+            "Pandan Coconut Kaya Toast with Cold Butter and Set Soft Eggs",
+            "Red Chile Chicken Enchiladas with Cheddar and Lime Crema",
+            "Soft Steamed Rice and Lentil Idli with Coconut Chutney",
+            "Thick Açaí Bowl with Banana, Berries and Granola",
+            "Yeasted Buckwheat Blini with Soured Cream and Jam"
           ]
         }
       ],

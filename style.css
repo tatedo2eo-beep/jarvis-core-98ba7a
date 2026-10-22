@@ -273,3 +273,93 @@ body:not(.inside) .lb{background:rgba(6,20,90,.5);border-color:rgba(100,170,255,
 #av-deep .names li:before{content:counter(n,decimal-leading-zero);font-family:var(--mono);font-size:10px;color:var(--ink3);padding-top:2px}
 #av-deep .none{margin-top:8px;font-size:13px;color:var(--ink2)}
 @media (max-width:860px){#crumbs{top:calc(52px + env(safe-area-inset-top));font-size:10px}.cl b{font-size:11px}.cl span{font-size:9px}}
+
+/* ================= v8 panels: hand-set, quiet, frosted ================= */
+@font-face{font-family:JBM;font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2')}
+:root{--sheet:rgba(10,16,40,.34);--hair:rgba(255,255,255,.075);--ease:cubic-bezier(.2,.8,.2,1)}
+.frame,.cnr,.cross,#fx .scan{display:none!important}
+.micro{font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.16em}
+.glass,#cortex,body:not(.inside) .glass,body:not(.inside) #cortex{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)) ,var(--sheet);
+  border:1px solid rgba(255,255,255,.08);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 20px 60px rgba(0,0,20,.35);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.card{padding:20px 22px}
+.card h3,.blk h3{font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+#cortex h3 span{color:var(--ink2);letter-spacing:.16em}
+.card h3 em,.blk h3 em{font-weight:300;letter-spacing:.04em;text-transform:none;font-size:11px;color:var(--ink3)}
+/* agent list: hairlines, no boxes */
+#aglist li,body:not(.inside) #aglist li{margin:0;padding:11px 0;border:0!important;border-top:1px solid var(--hair)!important;border-radius:0;background:none;gap:12px;
+  transition:padding .4s var(--ease),opacity .4s}
+#aglist li:first-child{border-top:0!important}
+#aglist li:hover{padding-left:4px}
+#aglist li .sw{width:5px;height:5px;box-shadow:0 0 10px var(--c)}
+#aglist li .nm{font-family:var(--sans);font-size:13px;font-weight:300;letter-spacing:.01em;text-transform:none;color:var(--ink)}
+#aglist li .meta{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.badge,.fn .badge{display:inline-flex;align-items:center;gap:6px;padding:0;border:0!important;background:none!important;border-radius:0;
+  font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:.02em;color:var(--ink3)}
+.badge:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}
+.badge.live{color:var(--gn)}.badge.live:before{opacity:1;box-shadow:0 0 8px var(--gn);animation:dotpulse 2.4s ease-in-out infinite}
+.badge.wait{color:var(--am)}.badge.wait:before{opacity:1;box-shadow:0 0 8px var(--am)}
+.badge.idle{color:var(--ink2)}.badge.planned{color:var(--ink3)}.badge.planned:before{background:none;box-shadow:inset 0 0 0 1px currentColor}
+@keyframes dotpulse{50%{box-shadow:0 0 14px var(--gn);transform:scale(1.25)}}
+#workers .w,#workers .tot{border-color:var(--hair)}
+#workers .w .l1{font-size:13px}#workers .w .l2,#workers .tot{font-family:var(--mono);font-size:10px}
+#workers .bar{height:1px}
+.row{padding:10px 0;border-top:1px solid var(--hair)}
+.row .k{font-size:12px}
+.row .v{font-family:var(--mono);font-weight:300;font-size:17px;letter-spacing:-.01em}
+.chart .c b,.chart .c span{font-family:var(--mono)}
+/* 3D labels: no boxes, light type over the field */
+.lb,body:not(.inside) .lb{background:none;border:0;padding:4px 6px;border-radius:0;text-shadow:0 1px 12px rgba(0,0,24,.95),0 0 2px rgba(0,0,24,.9)}
+.lb b{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.14em}
+.lb span{font-family:var(--mono);font-size:10px;color:rgba(210,232,255,.7)}
+.lb.hot b{color:#fff}
+#leaders line{stroke:rgba(200,230,255,.28)}
+/* top bar: plain words, no chips */
+#pill,#pill.glass{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;padding:4px 0;
+  font-family:var(--sans);font-size:10px;letter-spacing:.18em}
+#pill .dot{width:5px;height:5px}#pill.live .dot{box-shadow:0 0 10px var(--gn)}
+#pill .sep{height:10px;background:var(--hair)}
+#pill-ago{font-size:12px;font-weight:300;letter-spacing:.02em}
+#views,#views.glass{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;gap:18px}
+#views button{padding:4px 0;border-radius:0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;position:relative;transition:color .4s}
+#views button.on{background:none;color:var(--ink)}
+#views button:after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--ink);transform:scaleX(0);transition:transform .5s var(--ease)}
+#views button.on:after{transform:scaleX(1)}
+#depth,#depth.glass{left:calc(var(--pad) + 150px);background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;padding:4px 0;
+  font-size:11px;letter-spacing:.16em;color:var(--ink2)}
+#depth:hover{color:var(--ink);box-shadow:none!important}
+/* agent sheet */
+#agentview{padding:24px 24px 20px}
+#agentview .back{font-size:12px;letter-spacing:.02em;color:var(--ink3);transition:color .3s}#agentview .back:hover{color:var(--ink)}
+.av-head .sw{width:7px;height:7px}
+.av-head h2{font-weight:200;font-size:30px;letter-spacing:-.005em}
+#av-feed li{border-top:1px solid var(--hair);padding:8px 0}
+#av-feed li time{font-family:var(--mono)}
+/* flow nodes */
+.fn{background:rgba(10,16,40,.5);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.fn .fh{font-weight:300;font-size:12.5px}.fn .fh b{font-weight:300}
+.fn .fpb{height:1px}
+/* gentle entrances */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#aglist li,.row,#av-deep .tasks li,#av-deep .names li,#av-feed li,#workers .w{animation:rise .7s var(--ease) both}
+#aglist li:nth-child(2),.row:nth-of-type(2),#av-deep li:nth-child(2){animation-delay:.04s}
+#aglist li:nth-child(3),.row:nth-of-type(3),#av-deep li:nth-child(3){animation-delay:.08s}
+#aglist li:nth-child(4),.row:nth-of-type(4),#av-deep li:nth-child(4){animation-delay:.12s}
+#aglist li:nth-child(5),.row:nth-of-type(5),#av-deep li:nth-child(5){animation-delay:.16s}
+#aglist li:nth-child(6),.row:nth-of-type(6),#av-deep li:nth-child(6){animation-delay:.2s}
+#aglist li:nth-child(n+7),.row:nth-of-type(n+7),#av-deep li:nth-child(n+7){animation-delay:.24s}
+#right,#left,#agentview{transition:opacity .6s var(--ease),transform .6s var(--ease)}
+@media (max-width:860px){
+  .glass,#cortex,body:not(.inside) .glass,body:not(.inside) #cortex{background:rgba(8,13,34,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:16px}
+  #agentview{background:rgba(8,13,34,.9)}#left{background:rgba(8,13,34,.95)}
+  .card{padding:14px 16px}
+  #aglist{column-gap:18px}#aglist li,body:not(.inside) #aglist li{padding:8px 0}
+  #aglist li .nm{font-size:12px;letter-spacing:0}
+  .badge{font-size:10px}
+  .lb b{font-size:9px;letter-spacing:.1em}.lb span{font-size:8.5px}
+  #depth{left:12px;top:calc(76px + env(safe-area-inset-top));font-size:10px}
+  #views{gap:14px}#views button{padding:4px 0;font-size:10px}
+  #crumbs{max-width:calc(100vw - 24px);overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
