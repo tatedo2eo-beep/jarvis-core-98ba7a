@@ -1,0 +1,7 @@
+{
+  "_note": "Public, non-sensitive work-status feed. Anyone who reads the page source can see (and post to) this topic. Never post secrets or private data.",
+  "ntfyServer": "https://ntfy.sh",
+  "topic": "jarvis-core-yfivt36jwj3hx7wq0oqn29wwthw14hwk",
+  "historySince": "12h",
+  "dataRefreshSeconds": 300
+}

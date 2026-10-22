@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+<title>Jarvis Core · Board v3</title>
+<meta name="theme-color" content="#02030a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Ccircle cx=%2232%22 cy=%2232%22 r=%2228%22 fill=%22none%22 stroke=%22%233df2ff%22 stroke-width=%224%22/%3E%3Ccircle cx=%2232%22 cy=%2232%22 r=%2212%22 fill=%22%23ff3df0%22/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/jsm/"}}</script>
+<script src="vendor/gsap.min.js"></script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="vignette"></div>
+<div id="labels"></div>
+<div id="rlabels"></div>
+<div id="pops"></div>
+<div id="flash"></div>
+
+<!-- OUTSIDE -->
+<div id="outer" class="layer">
+  <i class="brk a"></i><i class="brk b"></i><i class="brk c"></i><i class="brk d"></i>
+  <div class="corner" id="c-tl">
+    <div class="team">TEAM&nbsp;<i>JOE</i></div>
+    <div>Jarvis core · board v3 · <b id="agcount">9</b> agents</div>
+    <div>SYS <span id="clock">--:--:--</span> CAI · UTC+3</div>
+  </div>
+  <div class="corner" id="c-tc"><div>NODE MAP // ORBITAL · <span id="coords">00.000 / 00.000</span></div><div class="tick"></div></div>
+  <div class="corner" id="c-tr">
+    <div><div id="live"><i></i><span>OFFLINE</span></div><div style="margin-top:6px">stream <b id="evcount">0</b> ev · data <b id="dstamp">--</b></div></div>
+    <svg id="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <defs><radialGradient id="lg"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#3df2ff"/><stop offset="1" stop-color="#3df2ff" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="32" cy="32" r="10" fill="url(#lg)"/>
+      <g class="r1" fill="none" stroke="#3df2ff" stroke-width="1.4"><circle cx="32" cy="32" r="20" stroke-dasharray="22 8 4 8" opacity=".9"/></g>
+      <g class="r2" fill="none" stroke="#ff3df0" stroke-width="1"><circle cx="32" cy="32" r="27" stroke-dasharray="3 5" opacity=".8"/><circle cx="32" cy="5" r="2" fill="#ff3df0"/></g>
+      <circle cx="32" cy="32" r="30.5" fill="none" stroke="#ffe93d" stroke-width=".6" opacity=".5"/>
+    </svg>
+  </div>
+
+  <section class="panel" id="left">
+    <div class="ph"><span>OUTPUT · <b id="chartlbl">7 DAYS</b></span><span class="tabs"><span data-r="7d" class="on">7D</span><span data-r="24h">24H</span></span></div>
+    <canvas class="chart" id="chart"></canvas>
+    <div class="metrics">
+      <div class="metric"><div class="k">Dishes written</div><div class="v" id="m-d">–</div><span class="pct mono" id="m-dp" style="color:var(--cy)"></span><div class="bar"><i id="m-db" style="background:var(--cy);box-shadow:0 0 8px var(--cy)"></i></div></div>
+      <div class="metric"><div class="k">Book flavours</div><div class="v" id="m-f">–</div><span class="pct mono" id="m-fp" style="color:var(--mg)"></span><div class="bar"><i id="m-fb" style="background:var(--mg);box-shadow:0 0 8px var(--mg)"></i></div></div>
+    </div>
+    <div class="mini"><div>Recipes live<b id="m-live">–</b></div><div>Extra flav.<b id="m-x">–</b></div><div>Chapters done<b id="m-ch">–</b></div><div>Sources<b id="m-src">–</b></div></div>
+    <div class="sec"><div class="ph"><span>PIPELINE</span><span class="tag real">REAL</span></div><div id="stages"></div></div>
+    <div class="sec"><div class="ph"><span>FOCUS · <b id="focusn">–</b></span><span class="mono" id="focusv"></span></div><div class="pbar" style="--ac:var(--yl)"><i id="focusb" style="width:0"></i></div></div>
+  </section>
+
+  <section class="panel" id="right">
+    <div id="agents">
+      <div class="ph"><span>SYSTEMS · <b>AGENTS</b></span><span class="tag lv">LIVE</span></div>
+      <div id="aglist"></div>
+    </div>
+    <div id="heat"><div class="ph"><span>ACTIVITY · 12H</span><span class="mono" id="heatsum"></span></div><div id="heatgrid"></div><div class="heataxis"><span>-12h</span><span>-6h</span><span>now</span></div></div>
+    <div class="ph" style="margin-top:12px"><span>EVENT STREAM</span><span class="mono" id="lastev"></span></div>
+    <div id="log"></div>
+  </section>
+
+  <div id="hint">click any node to enter its brain</div>
+  <div id="cards"></div>
+  <div id="bl">ntfy/sse · <b id="topicshort">–</b><br>render <b id="fps">–</b> fps · <b id="pcount">–</b> particles</div>
+  <div id="br">data.json <b id="dsrc">–</b><br>noindex · status feed only · no private data</div>
+</div>
+
+<!-- INSIDE -->
+<div id="inner" class="layer hidden">
+  <div class="back" id="back">◂ back to core <span style="color:var(--dim2)">[esc]</span></div>
+  <div id="ititle"><div class="code" id="i-code"></div><h1 id="i-name"></h1><div class="role" id="i-role"></div><div class="stl"><span class="st" id="i-st" style="padding:3px 9px;border:1px solid;border-radius:4px;font-family:var(--mono);font-size:9px;letter-spacing:.16em"></span></div></div>
+  <section class="panel" id="ileft"><div class="ph"><span>VITALS</span><span class="tag" id="i-vtag">REAL</span></div><div id="i-vitals"></div></section>
+  <section class="panel" id="iright">
+    <div class="task"><div class="ph"><span>CURRENT TASK</span><span class="tag lv">LIVE</span></div><div class="tt" id="i-task">–</div>
+      <div class="pbar"><i id="i-pb" style="width:0"></i></div><div class="pmeta"><span id="i-pt">no live task yet</span><b id="i-pp">0%</b></div></div>
+    <div class="sec"><div class="ph"><span>REGIONS · <b id="i-rc"></b></span><span>FIRING</span></div><div id="i-regions"></div><div id="detail"></div></div>
+    <div class="sec" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0"><div class="ph"><span>LIVE STEP FEED</span><span class="mono" id="i-fc"></span></div><div id="feed"></div></div>
+    <div class="sec"><div class="ph"><span>RESULTS</span><span class="tag" id="i-rtag">LIVE</span></div><div id="results"></div></div>
+  </section>
+  <div id="fbmsg">filter the feed · try /region drafting · /back · /clear</div>
+  <form id="feedbar" autocomplete="off"><span style="color:var(--ac,#3df2ff);font-size:16px">✦</span><input id="fbin" placeholder="Feed the brain… (filter or /command)" maxlength="80"><button>FEED</button></form>
+</div>
+
+<div id="viewsw"><span data-v="core" class="on">◉ CORE</span><span data-v="flow">⇢ FLOW</span></div>
+<!-- FLOW -->
+<div id="flow" class="layer hidden">
+  <svg id="fsvg"><defs><filter id="fglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.5"/></filter></defs><g id="fedges"></g></svg>
+  <div id="fnodes"></div>
+  <div class="fhead"><div class="mono">FLOW // HOW WORK MOVES</div><div>Research → Recipe Writer → Checker → Publish</div></div>
+  <div class="fhelp mono">drag nodes · double-click to enter a brain · <span id="freset">reset layout</span> · [F] toggle</div>
+</div>
+<div id="subs"><div class="who" id="who"><i></i>JARVIS<i></i></div><div class="txt" id="subtxt"></div></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

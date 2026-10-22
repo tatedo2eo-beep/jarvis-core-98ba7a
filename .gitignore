@@ -1,0 +1,5 @@
+__pycache__/
+shots/
+frames/
+*.mp4
+tools_*.py

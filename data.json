@@ -1,0 +1,1875 @@
+{
+  "schemaVersion": 2,
+  "brand": "Grok Bot × Joe",
+  "title": "Jarvis Board",
+  "updatedAt": "2026-10-22T22:51:23+03:00",
+  "timeZone": "Africa/Cairo",
+  "refreshSeconds": 60,
+  "site": {
+    "label": "Test site",
+    "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
+    "status": "LIVE (TEST)",
+    "note": "Preview build. The real domain is bought when the site goes public."
+  },
+  "headline": {
+    "label": "Dishes written",
+    "done": 150,
+    "total": 885
+  },
+  "chapters": [
+    {
+      "no": 1,
+      "key": "fries-potatoes",
+      "name": "Fries & Potatoes",
+      "done": 0,
+      "total": 27,
+      "flavours": {
+        "done": 0,
+        "total": 8
+      },
+      "extra": 0
+    },
+    {
+      "no": 2,
+      "key": "burgers",
+      "name": "Burgers",
+      "done": 8,
+      "total": 8,
+      "flavours": {
+        "done": 5,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 3,
+      "key": "chicken",
+      "name": "Chicken",
+      "done": 38,
+      "total": 38,
+      "flavours": {
+        "done": 5,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 4,
+      "key": "meat",
+      "name": "Meat",
+      "done": 1,
+      "total": 42,
+      "flavours": {
+        "done": 0,
+        "total": 9
+      },
+      "extra": 0
+    },
+    {
+      "no": 5,
+      "key": "seafood",
+      "name": "Seafood",
+      "done": 0,
+      "total": 31,
+      "flavours": {
+        "done": 0,
+        "total": 3
+      },
+      "extra": 0
+    },
+    {
+      "no": 6,
+      "key": "pizza",
+      "name": "Pizza",
+      "done": 0,
+      "total": 17,
+      "flavours": {
+        "done": 0,
+        "total": 0
+      },
+      "extra": 0
+    },
+    {
+      "no": 7,
+      "key": "pasta",
+      "name": "Pasta",
+      "done": 46,
+      "total": 46,
+      "flavours": {
+        "done": 11,
+        "total": 11
+      },
+      "extra": 6
+    },
+    {
+      "no": 8,
+      "key": "dumplings",
+      "name": "Dumplings",
+      "done": 0,
+      "total": 3,
+      "flavours": {
+        "done": 0,
+        "total": 2
+      },
+      "extra": 0
+    },
+    {
+      "no": 9,
+      "key": "rice",
+      "name": "Rice",
+      "done": 0,
+      "total": 26,
+      "flavours": {
+        "done": 0,
+        "total": 9
+      },
+      "extra": 0
+    },
+    {
+      "no": 10,
+      "key": "curries",
+      "name": "Curries",
+      "done": 0,
+      "total": 9,
+      "flavours": {
+        "done": 0,
+        "total": 7
+      },
+      "extra": 0
+    },
+    {
+      "no": 11,
+      "key": "mexican-latin-american",
+      "name": "Mexican & Latin American",
+      "done": 0,
+      "total": 19,
+      "flavours": {
+        "done": 0,
+        "total": 11
+      },
+      "extra": 0
+    },
+    {
+      "no": 12,
+      "key": "eggs",
+      "name": "Eggs",
+      "done": 0,
+      "total": 15,
+      "flavours": {
+        "done": 0,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 13,
+      "key": "soups",
+      "name": "Soups",
+      "done": 1,
+      "total": 39,
+      "flavours": {
+        "done": 0,
+        "total": 9
+      },
+      "extra": 0
+    },
+    {
+      "no": 14,
+      "key": "salads",
+      "name": "Salads",
+      "done": 0,
+      "total": 19,
+      "flavours": {
+        "done": 0,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 15,
+      "key": "vegetables-sides",
+      "name": "Vegetables & Sides",
+      "done": 0,
+      "total": 45,
+      "flavours": {
+        "done": 0,
+        "total": 4
+      },
+      "extra": 0
+    },
+    {
+      "no": 16,
+      "key": "grains-legumes",
+      "name": "Grains & Legumes",
+      "done": 0,
+      "total": 27,
+      "flavours": {
+        "done": 0,
+        "total": 4
+      },
+      "extra": 0
+    },
+    {
+      "no": 17,
+      "key": "sauces-dressings",
+      "name": "Sauces & Dressings",
+      "done": 0,
+      "total": 46,
+      "flavours": {
+        "done": 0,
+        "total": 9
+      },
+      "extra": 0
+    },
+    {
+      "no": 18,
+      "key": "sandwiches-wraps",
+      "name": "Sandwiches & Wraps",
+      "done": 1,
+      "total": 18,
+      "flavours": {
+        "done": 0,
+        "total": 12
+      },
+      "extra": 0
+    },
+    {
+      "no": 19,
+      "key": "appetizers-dips",
+      "name": "Appetizers & Dips",
+      "done": 1,
+      "total": 51,
+      "flavours": {
+        "done": 0,
+        "total": 13
+      },
+      "extra": 0
+    },
+    {
+      "no": 20,
+      "key": "savory-pies-pastries",
+      "name": "Savory Pies & Pastries",
+      "done": 0,
+      "total": 5,
+      "flavours": {
+        "done": 0,
+        "total": 1
+      },
+      "extra": 0
+    },
+    {
+      "no": 21,
+      "key": "preserves-pickles-ferments",
+      "name": "Preserves, Pickles & Ferments",
+      "done": 0,
+      "total": 7,
+      "flavours": {
+        "done": 0,
+        "total": 4
+      },
+      "extra": 0
+    },
+    {
+      "no": 22,
+      "key": "breakfast",
+      "name": "Breakfast",
+      "done": 1,
+      "total": 22,
+      "flavours": {
+        "done": 0,
+        "total": 1
+      },
+      "extra": 0
+    },
+    {
+      "no": 23,
+      "key": "breads-viennoiserie",
+      "name": "Breads & Viennoiserie",
+      "done": 1,
+      "total": 58,
+      "flavours": {
+        "done": 0,
+        "total": 7
+      },
+      "extra": 0
+    },
+    {
+      "no": 24,
+      "key": "cookies-bars-brownies",
+      "name": "Cookies, Bars & Brownies",
+      "done": 32,
+      "total": 32,
+      "flavours": {
+        "done": 7,
+        "total": 7
+      },
+      "extra": 0
+    },
+    {
+      "no": 25,
+      "key": "muffins",
+      "name": "Muffins",
+      "done": 0,
+      "total": 4,
+      "flavours": {
+        "done": 0,
+        "total": 3
+      },
+      "extra": 0
+    },
+    {
+      "no": 26,
+      "key": "donuts",
+      "name": "Donuts",
+      "done": 0,
+      "total": 12,
+      "flavours": {
+        "done": 0,
+        "total": 2
+      },
+      "extra": 0
+    },
+    {
+      "no": 27,
+      "key": "cakes-cupcakes",
+      "name": "Cakes & Cupcakes",
+      "done": 19,
+      "total": 28,
+      "flavours": {
+        "done": 12,
+        "total": 13
+      },
+      "extra": 0
+    },
+    {
+      "no": 28,
+      "key": "pies-crumbles",
+      "name": "Pies & Crumbles",
+      "done": 0,
+      "total": 17,
+      "flavours": {
+        "done": 0,
+        "total": 15
+      },
+      "extra": 0
+    },
+    {
+      "no": 29,
+      "key": "tarts-french-pastry",
+      "name": "Tarts & French Pastry",
+      "done": 0,
+      "total": 27,
+      "flavours": {
+        "done": 0,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 30,
+      "key": "custards-puddings-mousses",
+      "name": "Custards, Puddings & Mousses",
+      "done": 0,
+      "total": 19,
+      "flavours": {
+        "done": 0,
+        "total": 11
+      },
+      "extra": 0
+    },
+    {
+      "no": 31,
+      "key": "chocolate-confections",
+      "name": "Chocolate & Confections",
+      "done": 0,
+      "total": 19,
+      "flavours": {
+        "done": 0,
+        "total": 5
+      },
+      "extra": 0
+    },
+    {
+      "no": 32,
+      "key": "ice-cream-frozen-desserts",
+      "name": "Ice Cream & Frozen Desserts",
+      "done": 0,
+      "total": 17,
+      "flavours": {
+        "done": 0,
+        "total": 8
+      },
+      "extra": 0
+    },
+    {
+      "no": 33,
+      "key": "world-desserts-sweets",
+      "name": "World Desserts & Sweets",
+      "done": 0,
+      "total": 44,
+      "flavours": {
+        "done": 0,
+        "total": 7
+      },
+      "extra": 0
+    },
+    {
+      "no": 34,
+      "key": "drinks",
+      "name": "Drinks",
+      "done": 1,
+      "total": 48,
+      "flavours": {
+        "done": 0,
+        "total": 7
+      },
+      "extra": 0
+    }
+  ],
+  "stages": [
+    {
+      "name": "Research",
+      "pct": 100
+    },
+    {
+      "name": "Plan",
+      "pct": 100
+    },
+    {
+      "name": "Animations",
+      "pct": 95
+    },
+    {
+      "name": "Recipes",
+      "pct": 12
+    },
+    {
+      "name": "Site build",
+      "pct": 75
+    },
+    {
+      "name": "Full book",
+      "pct": 12
+    }
+  ],
+  "running": [
+    {
+      "name": "Chef knowledge base",
+      "detail": "New: the chef's reference notes the recipes are written from",
+      "status": "NEW",
+      "node": "Knowledge"
+    },
+    {
+      "name": "Recipes (all 34 chapters)",
+      "detail": "103 of 885 dishes, 22 of 227 book flavours; pasta 18/46 next, then cakes 0/28. No new recipe files since 17:28",
+      "status": "IN PROGRESS",
+      "node": "Recipes"
+    },
+    {
+      "name": "Per-design photos + 5 design animations",
+      "detail": "A photo set for each site design, plus 5 design animations",
+      "status": "IN PROGRESS",
+      "node": "Animations"
+    },
+    {
+      "name": "Board redesign",
+      "detail": "Two switchable layouts: Command Room and Spider",
+      "status": "IN PROGRESS",
+      "node": "Board"
+    }
+  ],
+  "waiting": [
+    {
+      "name": "Brand name",
+      "detail": "Joe to pick",
+      "owner": "Joe"
+    },
+    {
+      "name": "Healthy section",
+      "detail": "Paused",
+      "owner": "Paused"
+    },
+    {
+      "name": "Tax setup",
+      "detail": "Pending",
+      "owner": "Pending"
+    }
+  ],
+  "knowledge": {
+    "status": "NEW",
+    "detail": "Chef knowledge base: techniques, ratios and sources behind every recipe",
+    "items": [
+      {
+        "name": "Started",
+        "done": true
+      },
+      {
+        "name": "Linked to recipe writing",
+        "done": false
+      }
+    ],
+    "stats": {
+      "files": 6,
+      "techniques": 74,
+      "sources": 157
+    }
+  },
+  "animations": {
+    "status": "IN PROGRESS",
+    "detail": "Per-design photos + 5 design animations",
+    "total": 5,
+    "done": null
+  },
+  "milestones": [
+    {
+      "name": "Full plan (19-page PDF)",
+      "date": "Oct 19",
+      "done": true
+    },
+    {
+      "name": "Board live",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Build go-ahead",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Test site live",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Burgers chapter complete (13/13)",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Chicken chapter complete (43/43)",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Cookies chapter complete (39/39)",
+      "date": "Oct 22",
+      "done": true
+    },
+    {
+      "name": "Brand name picked",
+      "date": "Waiting on Joe",
+      "done": false
+    },
+    {
+      "name": "All 885 dishes written",
+      "date": "",
+      "done": false
+    },
+    {
+      "name": "All 227 book flavours written",
+      "date": "",
+      "done": false
+    }
+  ],
+  "graph": {
+    "root": "Joe",
+    "hub": "Jarvis",
+    "children": [
+      {
+        "name": "Claude Code",
+        "active": true
+      },
+      {
+        "name": "Recipes",
+        "active": true
+      },
+      {
+        "name": "Knowledge",
+        "active": true
+      },
+      {
+        "name": "Animations",
+        "active": true
+      },
+      {
+        "name": "Site",
+        "active": false
+      },
+      {
+        "name": "Full book",
+        "active": false
+      }
+    ]
+  },
+  "setup": [
+    {
+      "k": "Claude Code",
+      "v": "Connected"
+    },
+    {
+      "k": "Tami's site",
+      "v": "Live · untouched"
+    },
+    {
+      "k": "Hosting",
+      "v": "Cloudflare Pages Free · at build time"
+    },
+    {
+      "k": "Domain",
+      "v": "Bought when the site goes public · about $10/yr"
+    },
+    {
+      "k": "Site link",
+      "v": "tatedo2eo-beep.github.io/stack-site-5fa39e"
+    }
+  ],
+  "log": [
+    {
+      "t": "Oct 22 18:24",
+      "e": "Board now tracks the full book: 34 chapters, 885 dishes, 227 book flavours and extra flavours (Command Room + Spider)"
+    },
+    {
+      "t": "Oct 22 18:23",
+      "e": "Inspired-by credit line added under every recipe title, plus a no-affiliation note in the footer (live on test site). Still 103 of 885 dishes, 22 of 227 book flavours; no new recipes since 17:28"
+    },
+    {
+      "t": "Oct 22 18:18",
+      "e": "Scope now all 34 chapters: 103 of 885 dishes, 22 of 227 book flavours; no new recipes since 17:28"
+    },
+    {
+      "t": "Oct 22 18:11",
+      "e": "Recipes 118 of 193 launch dishes; pasta 23/57; no new work since 17:28"
+    },
+    {
+      "t": "Oct 22 17:51",
+      "e": "Check: 118/193 launch recipes; recipe writing had stalled since 17:28, restarted with pasta batch 3 then cakes; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 17:40",
+      "e": "Check: 118/193 launch recipes; pasta 23/57 (batch 3 next, no new files since 17:28); test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 17:30",
+      "e": "Check: 118/193 launch recipes; pasta batch 2 done (23/57, pushed 17:28); test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 17:17",
+      "e": "Check: 106/193 launch recipes; pasta batch 1 done (11/57, pushed 17:14); test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 17:08",
+      "e": "Check: 95/193 launch recipes (burgers, chicken, cookies done); chicken files being re-checked (updated 17:04); pasta 0/57 next; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 17:00",
+      "e": "Check: 95/193 launch recipes; cookies, bars and brownies done 39/39 (37 new); photo originals and salt re-checked; pasta next; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 16:44",
+      "e": "Board rebuilt with two layouts: Command Room and Spider (toggle at the top); per-dish status now derived from the site content"
+    },
+    {
+      "t": "Oct 22 16:43",
+      "e": "Check: 58/193 launch recipes (burgers 13/13, chicken 43/43, cookies 2/39); design C home story (pizza pull) pushed, design D home story in progress; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 16:36",
+      "e": "Check: 58/193 launch recipes (burgers 13/13, chicken 43/43, cookies 2/39); chicken recipes and nutrition notes being finalised; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 16:27",
+      "e": "Check: 58/193 launch recipes; chicken chapter done 43/43; design B home story (chocolate layer cake) pushed; cookies next; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 16:20",
+      "e": "Check: 40/193 launch recipes (chicken 25/43); chicken batch 3 being written now; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 16:11",
+      "e": "Recipes 40 of 193 launch dishes; chicken 25/43; test site up"
+    },
+    {
+      "t": "Oct 22 15:55",
+      "e": "Board redesign started; chef knowledge base added; brand name waiting on Joe; healthy section paused"
+    },
+    {
+      "t": "Oct 22 15:55",
+      "e": "Board redesign started; chef knowledge base added; brand name waiting on Joe; healthy section paused"
+    },
+    {
+      "t": "Oct 22 15:54",
+      "e": "Check: 27/193 launch recipes, chicken 12/43 next; test site live; anim v3 19 shots"
+    },
+    {
+      "t": "Oct 22 15:50",
+      "e": "Chicken batch 1 live: 12 recipes; burgers re-sourced to top-tier sources"
+    },
+    {
+      "t": "Oct 22 15:32",
+      "e": "13 recipe files after rework to Tami's dishes; home/design work active locally; test site live"
+    },
+    {
+      "t": "Oct 22 15:22",
+      "e": "27 of 100 recipes; burger v4 home images in progress locally; test site live"
+    },
+    {
+      "t": "Oct 22 15:15",
+      "e": "27 of 100 recipes; next recipe drafting; 15-design work in progress locally; test site live"
+    },
+    {
+      "t": "Oct 22 14:53",
+      "e": "Recipes written: 10 of 25 in batch 1; site builds locally, not live yet"
+    },
+    {
+      "t": "Oct 22 14:43",
+      "e": "Recipes on site: 2 (2 test recipes, batch of 25 in progress)"
+    },
+    {
+      "t": "Oct 22 14:42",
+      "e": "Animation v3 done: 5 s futuristic hero + new step clip"
+    },
+    {
+      "t": "Oct 22 14:42",
+      "e": "2 of 100 recipes written; site build script and page templates in progress (not live yet)"
+    },
+    {
+      "t": "Oct 22 14:38",
+      "e": "Site code started (pages, build script, themes); animation v3 recorded, being checked"
+    },
+    {
+      "t": "Oct 22 14:28",
+      "e": "Joe gave the build go-ahead. Site build and recipe writing started"
+    },
+    {
+      "t": "Oct 22 14:25",
+      "e": "Realistic demo done: Stack hero, recipe list, tap-to-play step clip (phone + PC)"
+    },
+    {
+      "t": "Oct 22 14:10",
+      "e": "Studied 61 animation videos from 10 creators, 3 concepts ready"
+    },
+    {
+      "t": "Oct 22 14:02",
+      "e": "Started studying Joe's 11 animation videos and their creators"
+    },
+    {
+      "t": "Oct 22 14:00",
+      "e": "AI chat cost checked: about $1.50 to $3 per 10,000 messages"
+    },
+    {
+      "t": "Oct 22 13:55",
+      "e": "Board went live with auto-updates"
+    },
+    {
+      "t": "Oct 22 13:53",
+      "e": "Animation preview v1 done (Joe: too flat, redo)"
+    },
+    {
+      "t": "Oct 22 13:45",
+      "e": "Dashboard created"
+    },
+    {
+      "t": "Oct 22",
+      "e": "Healthy rules set (High Protein ≥10 g/100 kcal, plus WHO Healthy)"
+    },
+    {
+      "t": "Oct 22",
+      "e": "Claude Code installed and logged in"
+    },
+    {
+      "t": "Oct 19",
+      "e": "Your 6 animation videos reviewed"
+    },
+    {
+      "t": "Oct 19",
+      "e": "19-page full plan PDF"
+    },
+    {
+      "t": "Oct 19",
+      "e": "TikTok promo estimates"
+    },
+    {
+      "t": "Oct 19",
+      "e": "Legal, age and payment research"
+    }
+  ],
+  "derived": {
+    "at": "2026-10-22T22:51:23+03:00",
+    "from": "rw/tami_manifest.json + public-site/content (read-only)",
+    "recipesOnSite": 196,
+    "chaptersComplete": 4
+  },
+  "history": [
+    {
+      "t": "2026-10-22T13:55:00+03:00",
+      "recipes": 0,
+      "total": 100
+    },
+    {
+      "t": "2026-10-22T14:41:19+03:00",
+      "recipes": 2,
+      "total": 100
+    },
+    {
+      "t": "2026-10-22T14:52:52+03:00",
+      "recipes": 10,
+      "total": 100
+    },
+    {
+      "t": "2026-10-22T14:58:13+03:00",
+      "recipes": 27,
+      "total": 100
+    },
+    {
+      "t": "2026-10-22T15:31:35+03:00",
+      "recipes": 13,
+      "total": 100
+    },
+    {
+      "t": "2026-10-22T15:50:14+03:00",
+      "recipes": 27,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T16:19:28+03:00",
+      "recipes": 40,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T16:27:01+03:00",
+      "recipes": 58,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T17:00:11+03:00",
+      "recipes": 95,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T17:16:59+03:00",
+      "recipes": 106,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T17:29:53+03:00",
+      "recipes": 118,
+      "total": 193
+    },
+    {
+      "t": "2026-10-22T18:20:07+03:00",
+      "recipes": 103,
+      "total": 885,
+      "flavours": 22,
+      "extra": 0,
+      "metric": "dishes"
+    },
+    {
+      "t": "2026-10-22T22:51:14+03:00",
+      "recipes": 150,
+      "total": 885,
+      "flavours": 40,
+      "extra": 6,
+      "metric": "dishes"
+    }
+  ],
+  "focus": "Cakes & Cupcakes",
+  "dishesInProgress": [],
+  "flavours": {
+    "label": "Book flavours",
+    "done": 40,
+    "total": 227
+  },
+  "extraFlavours": {
+    "label": "Extra flavours",
+    "done": 6
+  },
+  "recent": [
+    {
+      "title": "Lemony Red Lentil Soup",
+      "chapter": "more",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/red-lentil-soup/",
+      "t": "2026-10-22T22:05:55+03:00"
+    },
+    {
+      "title": "Juicy Lucy (Cheese-Stuffed Burger)",
+      "chapter": "burgers",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/juicy-lucy/",
+      "t": "2026-10-22T20:53:40+03:00"
+    },
+    {
+      "title": "Chiffon Cake",
+      "chapter": "cakes-cupcakes",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chiffon-cake/",
+      "t": "2026-10-22T20:53:40+03:00"
+    },
+    {
+      "title": "Pancit Canton (Filipino Stir-Fried Egg Noodles with Chicken and Prawns)",
+      "chapter": "pasta",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pancit-canton/",
+      "t": "2026-10-22T20:53:28+03:00"
+    },
+    {
+      "title": "Sticky BBQ Chicken Wings",
+      "chapter": "chicken",
+      "flavour": "BBQ",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/bbq-chicken-wings/",
+      "t": "2026-10-22T20:53:28+03:00"
+    },
+    {
+      "title": "Naengmyeon (Cold Buckwheat Noodles in Chilled Beef Broth)",
+      "chapter": "pasta",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/naengmyeon/",
+      "t": "2026-10-22T20:52:42+03:00"
+    },
+    {
+      "title": "Spaghetti with Garlic, Anchovies and Toasted Breadcrumbs",
+      "chapter": "pasta",
+      "flavour": "Anchovy and breadcrumbs",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/spaghetti-anchovy-breadcrumbs/",
+      "t": "2026-10-22T20:52:42+03:00"
+    },
+    {
+      "title": "Mee Goreng (Spicy Fried Noodles with Prawns, Tofu and Fried Egg)",
+      "chapter": "pasta",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/mee-goreng/",
+      "t": "2026-10-22T20:52:42+03:00"
+    },
+    {
+      "title": "Pizzoccheri (Buckwheat Pasta with Savoy Cabbage, Potato and Fontina)",
+      "chapter": "pasta",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pizzoccheri/",
+      "t": "2026-10-22T20:52:42+03:00"
+    },
+    {
+      "title": "Coronation Chicken",
+      "chapter": "chicken",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/coronation-chicken/",
+      "t": "2026-10-22T20:52:42+03:00"
+    },
+    {
+      "title": "Yellow Sheet Cake with Chocolate Frosting",
+      "chapter": "cakes-cupcakes",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/yellow-sheet-cake/",
+      "t": "2026-10-22T20:51:40+03:00"
+    },
+    {
+      "title": "Cinnamon Streusel Coffee Cake",
+      "chapter": "cakes-cupcakes",
+      "flavour": "Cinnamon streusel",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/cinnamon-streusel-coffee-cake/",
+      "t": "2026-10-22T20:51:40+03:00"
+    },
+    {
+      "title": "Brown Sugar Shortbread",
+      "chapter": "cookies-bars-brownies",
+      "flavour": "Brown sugar",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/brown-sugar-shortbread/",
+      "t": "2026-10-22T20:51:40+03:00"
+    },
+    {
+      "title": "Vanilla Bundt Cake with Glaze",
+      "chapter": "cakes-cupcakes",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/vanilla-bundt-cake/",
+      "t": "2026-10-22T20:51:40+03:00"
+    }
+  ],
+  "recipeFiles": 196,
+  "dishes": [
+    {"s":"french-fries-double-fried","n":"French fries (double-fried)","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"wedges","n":"Wedges","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"mashed","n":"Mashed","c":1,"b":0,"f":[0,3],"x":0},
+    {"s":"baked-jacket","n":"Baked/jacket","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"roast-potatoes","n":"Roast potatoes","c":1,"b":0,"f":[0,1],"x":0},
+    {"s":"hash-browns","n":"Hash browns","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"rosti","n":"Rösti","c":1,"b":0,"f":[0,1],"x":0},
+    {"s":"potato-salad","n":"Potato salad","c":1,"b":0,"f":[0,1],"x":0},
+    {"s":"gratin","n":"Gratin","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"home-fries","n":"Home fries","c":1,"b":0,"f":[0,1],"x":0},
+    {"s":"latkes-potato-pancakes","n":"Latkes/potato pancakes","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"sweet-potato-fries","n":"Sweet-potato fries","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"steak-fries","n":"Steak fries","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"poutine","n":"Poutine","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"pommes-anna","n":"Pommes Anna","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"gratin-dauphinois","n":"Gratin dauphinois","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"pommes-dauphine","n":"Pommes dauphine","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"duchesse","n":"Duchesse","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"fondant-potatoes","n":"Fondant potatoes","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"pont-neuf-triple-cooked-chips","n":"Pont-Neuf/triple-cooked chips","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"aligot","n":"Aligot","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"tortilla-espanola","n":"Tortilla española","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"patatas-bravas","n":"Patatas bravas","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"hasselback","n":"Hasselback","c":1,"b":0,"f":[0,1],"x":0},
+    {"s":"lyonnaise-potatoes","n":"Lyonnaise potatoes","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"potatoes-sarladaises","n":"Potatoes sarladaises","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"crispy-smashed-potatoes","n":"Crispy smashed potatoes","c":1,"b":0,"f":[0,0],"x":0},
+    {"s":"smash-burger","n":"Smash burger","c":2,"b":1,"f":[1,1],"x":0},
+    {"s":"cheeseburger","n":"Cheeseburger","c":2,"b":1,"f":[2,2],"x":0},
+    {"s":"chicken-burger","n":"Chicken burger","c":2,"b":1,"f":[2,2],"x":0},
+    {"s":"veggie-bean-burger","n":"Veggie/bean burger","c":2,"b":1,"f":[0,0],"x":0},
+    {"s":"sliders","n":"Sliders","c":2,"b":1,"f":[0,0],"x":0},
+    {"s":"juicy-lucy-stuffed","n":"Juicy Lucy (stuffed)","c":2,"b":1,"f":[0,0],"x":0},
+    {"s":"oklahoma-onion-burger","n":"Oklahoma onion burger","c":2,"b":1,"f":[0,0],"x":0},
+    {"s":"patty-melt","n":"Patty melt","c":2,"b":1,"f":[0,0],"x":0},
+    {"s":"whole-roast-chicken","n":"Whole roast chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"fried-chicken-southern","n":"Fried chicken (Southern)","c":3,"b":1,"f":[1,1],"x":0},
+    {"s":"chicken-wings","n":"Chicken wings","c":3,"b":1,"f":[4,4],"x":0},
+    {"s":"cutlet-schnitzel","n":"Cutlet/schnitzel","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"nuggets-tenders","n":"Nuggets/tenders","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-curry","n":"Chicken curry","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"poached","n":"Poached","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-pot-pie","n":"Chicken pot pie","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-adobo","n":"Chicken adobo","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-65","n":"Chicken 65","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-inasal","n":"Chicken inasal","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"yassa","n":"Yassa","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"musakhan","n":"Musakhan","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"samgyetang","n":"Samgyetang","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"yangnyeom-chicken","n":"Yangnyeom chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"gai-yang","n":"Gai yang","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-paprikash","n":"Chicken paprikash","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"coronation-chicken","n":"Coronation chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"nashville-hot-chicken","n":"Nashville hot chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-fried-steak","n":"Chicken fried steak","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-maryland","n":"Chicken Maryland","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"ohn-no-khao-swe","n":"Ohn no khao swè","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"high-heat-roast-chicken","n":"High-heat roast chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-kiev","n":"Chicken Kiev","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"yakitori","n":"Yakitori","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"tandoori","n":"Tandoori","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"butter-chicken","n":"Butter chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"hainanese-chicken-rice","n":"Hainanese chicken rice","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"piri-piri","n":"Piri-piri","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"jerk","n":"Jerk","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-parmigiana","n":"Chicken parmigiana","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"peking-duck","n":"Peking duck","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"kung-pao-chicken","n":"Kung Pao chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"fesenjan","n":"Fesenjan","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-and-dumplings","n":"Chicken and dumplings","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"pollo-al-mattone-chicken-under-a-brick","n":"Pollo al mattone (chicken under a brick)","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"general-tsos-chicken","n":"General Tso's chicken","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"chicken-souvlaki","n":"Chicken souvlaki","c":3,"b":1,"f":[0,0],"x":0},
+    {"s":"pan-seared-steak","n":"Pan-seared steak","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"roast-beef","n":"Roast beef","c":4,"b":0,"f":[0,1],"x":0},
+    {"s":"pot-roast","n":"Pot roast","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"meatballs","n":"Meatballs","c":4,"b":0,"f":[0,2],"x":0},
+    {"s":"meatloaf","n":"Meatloaf","c":4,"b":0,"f":[0,1],"x":0},
+    {"s":"kebabs-skewers","n":"Kebabs/skewers","c":4,"b":0,"f":[0,1],"x":0},
+    {"s":"adana-kebab","n":"Adana kebabı","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"bo-luc-lac","n":"Bò lúc lắc","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"beef-stroganoff","n":"Beef stroganoff","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"shashlik","n":"Shashlik","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"goulash","n":"Goulash","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"tafelspitz","n":"Tafelspitz","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"kare-kare","n":"Kare-kare","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"suya","n":"Suya","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"tibs","n":"Tibs","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"seekh-kebab","n":"Seekh kebab","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"curry-goat","n":"Curry goat","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"oxtail-stew","n":"Oxtail stew","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"irish-stew","n":"Irish stew","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"chili-con-carne","n":"Chili con carne","c":4,"b":1,"f":[0,0],"x":0},
+    {"s":"bunny-chow","n":"Bunny chow","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"harees","n":"Harees","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"porkolt","n":"Pörkölt","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"reverse-sear-steak","n":"Reverse-sear steak","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"rack-of-lamb-persillade","n":"Rack of lamb/persillade","c":4,"b":0,"f":[0,1],"x":0},
+    {"s":"tagine","n":"Tagine","c":4,"b":0,"f":[0,1],"x":0},
+    {"s":"bulgogi-galbi","n":"Bulgogi/galbi","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"shawarma-doner","n":"Shawarma/döner","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"wiener-schnitzel","n":"Wiener schnitzel","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"brisket-smoked","n":"Brisket (smoked)","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"chateaubriand","n":"Châteaubriand","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"duck-a-lorange","n":"Duck à l'orange","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"duck-confit","n":"Duck confit","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"steak-tartare","n":"Steak tartare","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"bistecca-alla-fiorentina","n":"Bistecca alla fiorentina","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"lomo-saltado","n":"Lomo saltado","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"anticucho","n":"Anticucho","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"ghormeh-sabzi","n":"Ghormeh sabzi","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"mansaf","n":"Mansaf","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"mechoui","n":"Mechoui","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"keema","n":"Keema","c":4,"b":0,"f":[0,2],"x":0},
+    {"s":"corned-beef-and-cabbage","n":"Corned beef and cabbage","c":4,"b":0,"f":[0,0],"x":0},
+    {"s":"fish-cakes","n":"Fish cakes","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"calamari","n":"Calamari","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"moqueca","n":"Moqueca","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"kinilaw","n":"Kinilaw","c":5,"b":0,"f":[0,1],"x":0},
+    {"s":"chili-crab","n":"Chili crab","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"ackee-and-saltfish","n":"Ackee and saltfish","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"cullen-skink","n":"Cullen skink","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"brandade","n":"Brandade","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"fritto-misto","n":"Fritto misto","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"crawfish-etouffee","n":"Crawfish étouffée","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"shrimp-cocktail","n":"Shrimp cocktail","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"chraime","n":"Chraime","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"fish-head-curry","n":"Fish head curry","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"sole-meuniere","n":"Sole meunière","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"en-papillote","n":"En papillote","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"salt-crusted-fish","n":"Salt-crusted fish","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"ceviche","n":"Ceviche","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"sashimi-sushi","n":"Sashimi/sushi","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"poke","n":"Poke","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"gravlax","n":"Gravlax","c":5,"b":0,"f":[0,1],"x":0},
+    {"s":"tartare","n":"Tartare","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"crudo","n":"Crudo","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"crab-cakes","n":"Crab cakes","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"fish-curry","n":"Fish curry","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"tiradito","n":"Tiradito","c":5,"b":0,"f":[0,1],"x":0},
+    {"s":"pulpo-a-la-gallega","n":"Pulpo a la gallega","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"cha-ca-la-vong","n":"Chả cá Lã Vọng","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"gefilte-fish","n":"Gefilte fish","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"seared-scallops","n":"Seared scallops","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"cantonese-steamed-whole-fish","n":"Cantonese steamed whole fish","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"salt-and-pepper-squid","n":"Salt and pepper squid","c":5,"b":0,"f":[0,0],"x":0},
+    {"s":"neapolitan","n":"Neapolitan","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"new-york","n":"New York","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"pan-detroit","n":"Pan/Detroit","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"chicago-deep-dish","n":"Chicago deep-dish","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"sicilian-sfincione","n":"Sicilian/sfincione","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"stromboli","n":"Stromboli","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"pizza-al-taglio-roman-teglia","n":"Pizza al taglio (Roman teglia)","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"pizza-fritta-montanara","n":"Pizza fritta/montanara","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"lahmacun","n":"Lahmacun","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"pissaladiere","n":"Pissaladière","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"manakish","n":"Manakish","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"khachapuri","n":"Khachapuri","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"okonomiyaki-japanese-pizza-debatable","n":"Okonomiyaki (Japanese \"pizza\" – debatable)","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"calzone","n":"Calzone","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"grandma-pizza","n":"Grandma pizza","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"st-louis-style-pizza","n":"St. Louis-style pizza","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"bar-tavern-style-pizza","n":"Bar/tavern-style pizza","c":6,"b":0,"f":[0,0],"x":0},
+    {"s":"long-dried-spaghetti-linguine-bucatini","n":"Long dried (spaghetti, linguine, bucatini)","c":7,"b":1,"f":[0,0],"x":1},
+    {"s":"short-penne-rigatoni-fusilli","n":"Short (penne, rigatoni, fusilli)","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"ribbons-fresh-egg-tagliatelle-fettuccine-pappardelle","n":"Ribbons/fresh egg (tagliatelle, fettuccine, pappardelle)","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"sheets-baked-lasagne","n":"Sheets/baked (lasagne)","c":7,"b":1,"f":[1,1],"x":1},
+    {"s":"filled-ravioli-tortellini-agnolotti","n":"Filled (ravioli, tortellini, agnolotti)","c":7,"b":1,"f":[1,1],"x":0},
+    {"s":"gnocchi","n":"Gnocchi","c":7,"b":1,"f":[3,3],"x":0},
+    {"s":"mac-and-cheese","n":"Mac and cheese","c":7,"b":1,"f":[0,0],"x":1},
+    {"s":"cacio-e-pepe","n":"Cacio e pepe","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"aglio-e-olio","n":"Aglio e olio","c":7,"b":1,"f":[0,0],"x":1},
+    {"s":"puttanesca","n":"Puttanesca","c":7,"b":1,"f":[0,0],"x":1},
+    {"s":"alfredo-roman-original","n":"Alfredo (Roman original)","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"alla-norma","n":"Alla Norma","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pasta-e-fagioli","n":"Pasta e fagioli","c":7,"b":1,"f":[0,0],"x":1},
+    {"s":"pad-thai","n":"Pad thai","c":7,"b":1,"f":[1,1],"x":0},
+    {"s":"chow-mein-lo-mein","n":"Chow mein/lo mein","c":7,"b":1,"f":[3,3],"x":0},
+    {"s":"biang-biang-hand-pulled-lamian","n":"Biang biang/hand-pulled lamian","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"japchae","n":"Japchae","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pancit","n":"Pancit","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"spatzle","n":"Spätzle","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"kugel","n":"Kugel","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"haluski","n":"Haluski","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pancit-bihon","n":"Pancit bihon","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"mee-goreng","n":"Mee goreng","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"kasespatzle","n":"Käsespätzle","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"vareniki","n":"Vareniki","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"kalguksu","n":"Kalguksu","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"hot-dry-noodles","n":"Hot dry noodles","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"beef-chow-fun","n":"Beef chow fun","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"yakisoba","n":"Yakisoba","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pad-see-ew","n":"Pad see ew","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pesto-alla-trapanese","n":"Pesto alla trapanese","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"trenette-al-pesto","n":"Trenette al pesto","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"malloreddus","n":"Malloreddus","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"spaghetti-with-meatballs","n":"Spaghetti with meatballs","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"lo-mein","n":"Lo mein","c":7,"b":1,"f":[2,2],"x":0},
+    {"s":"somen","n":"Somen","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"trofie","n":"Trofie","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pappardelle","n":"Pappardelle","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"cannelloni","n":"Cannelloni","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pastitsio","n":"Pastitsio","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"hand-rolled-shapes-orecchiette-pici-trofie-cavatelli","n":"Hand-rolled shapes (orecchiette, pici, trofie, cavatelli)","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"naengmyeon","n":"Naengmyeon","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pizzoccheri","n":"Pizzoccheri","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pasta-primavera","n":"Pasta primavera","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"baked-ziti","n":"Baked ziti","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pasta-al-limone","n":"Pasta al limone","c":7,"b":1,"f":[0,0],"x":0},
+    {"s":"pierogi","n":"Pierogi","c":8,"b":0,"f":[0,2],"x":0},
+    {"s":"manti","n":"Manti","c":8,"b":0,"f":[0,0],"x":0},
+    {"s":"potstickers-guotie-jiaozi","n":"Potstickers (guotie/jiaozi)","c":8,"b":0,"f":[0,0],"x":0},
+    {"s":"steamed-pilaf","n":"Steamed/pilaf","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"fried-rice","n":"Fried rice","c":9,"b":0,"f":[0,3],"x":0},
+    {"s":"biryani","n":"Biryani","c":9,"b":0,"f":[0,2],"x":0},
+    {"s":"sushi-rice","n":"Sushi rice","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"congee-porridge","n":"Congee/porridge","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"stuffed-peppers","n":"Stuffed peppers","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"maqluba","n":"Maqluba","c":9,"b":0,"f":[0,2],"x":0},
+    {"s":"kabsa","n":"Kabsa","c":9,"b":0,"f":[0,1],"x":0},
+    {"s":"arroz-caldo","n":"Arroz caldo","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"nasi-lemak","n":"Nasi lemak","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"khichdi","n":"Khichdi","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"curd-rice","n":"Curd rice","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"lemon-rice","n":"Lemon rice","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"kimchi-fried-rice","n":"Kimchi fried rice","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"omurice","n":"Omurice","c":9,"b":0,"f":[0,1],"x":0},
+    {"s":"maki-sushi","n":"Maki sushi","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"arroz-negro","n":"Arroz negro","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"tahdig-persian-polo","n":"Tahdig/Persian polo","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"jollof","n":"Jollof","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"nasi-goreng","n":"Nasi goreng","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"bibimbap-dolsot","n":"Bibimbap (dolsot)","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"onigiri","n":"Onigiri","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"kedgeree","n":"Kedgeree","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"dolma-stuffed-vine-leaves","n":"Dolma/stuffed vine leaves","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"kimbap","n":"Kimbap","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"mexican-rice-arroz-rojo","n":"Mexican rice (arroz rojo)","c":9,"b":0,"f":[0,0],"x":0},
+    {"s":"massaman","n":"Massaman","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"green-curry","n":"Green curry","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"rendang","n":"Rendang","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"korma","n":"Korma","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"japanese-curry","n":"Japanese curry","c":10,"b":0,"f":[0,0],"x":0},
+    {"s":"khao-soi","n":"Khao soi","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"panang-curry","n":"Panang curry","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"thai-yellow-curry-kaeng-kari","n":"Thai yellow curry (kaeng kari)","c":10,"b":0,"f":[0,1],"x":0},
+    {"s":"gaeng-som-thai-sour-curry","n":"Gaeng som (Thai sour curry)","c":10,"b":0,"f":[0,0],"x":0},
+    {"s":"taco","n":"Taco","c":11,"b":0,"f":[0,3],"x":0},
+    {"s":"birria","n":"Birria","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"enchilada","n":"Enchilada","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"pupusa","n":"Pupusa","c":11,"b":0,"f":[0,2],"x":0},
+    {"s":"tostada","n":"Tostada","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"huarache","n":"Huarache","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"chimichanga","n":"Chimichanga","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"fajita","n":"Fajita","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"saltena","n":"Salteña","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"pao-de-queijo","n":"Pão de queijo","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"milanesa","n":"Milanesa","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"arroz-con-pollo","n":"Arroz con pollo","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"aji-de-gallina","n":"Ají de gallina","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"causa-limena","n":"Causa limeña","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"pastel-de-choclo","n":"Pastel de choclo","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"gallo-pinto","n":"Gallo pinto","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"tamal","n":"Tamal","c":11,"b":0,"f":[0,1],"x":0},
+    {"s":"carne-asada","n":"Carne asada","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"pozole-verde","n":"Pozole verde","c":11,"b":0,"f":[0,0],"x":0},
+    {"s":"boiled-soft-hard","n":"Boiled (soft/hard)","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"fried","n":"Fried","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"scrambled","n":"Scrambled","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"omelette","n":"Omelette","c":12,"b":0,"f":[0,2],"x":0},
+    {"s":"frittata","n":"Frittata","c":12,"b":0,"f":[0,2],"x":0},
+    {"s":"egg-salad","n":"Egg salad","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"baked-eggs-en-cocotte","n":"Baked eggs (en cocotte)","c":12,"b":0,"f":[0,1],"x":0},
+    {"s":"souffle-savory","n":"Soufflé (savory)","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"menemen","n":"Menemen","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"century-salted-egg","n":"Century/salted egg","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"clbr","n":"Çılbır","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"egg-curry","n":"Egg curry","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"oeufs-mayonnaise","n":"Oeufs mayonnaise","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"eggs-royale-smoked-salmon-benedict","n":"Eggs Royale (smoked-salmon Benedict)","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"poached-eggs","n":"Poached eggs","c":12,"b":0,"f":[0,0],"x":0},
+    {"s":"white-brown-chicken","n":"White/brown chicken","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"vegetable","n":"Vegetable","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"dashi","n":"Dashi","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"chicken-noodle","n":"Chicken noodle","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"minestrone","n":"Minestrone","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"french-onion","n":"French onion","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"potato-leek","n":"Potato-leek","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"lentil","n":"Lentil","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"butternut-squash","n":"Butternut squash","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"gazpacho","n":"Gazpacho","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"ash-reshteh","n":"Ash reshteh","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"canh-chua","n":"Canh chua","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"bulalo","n":"Bulalo","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"soto","n":"Soto","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"groundnut-soup","n":"Groundnut soup","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"egusi-soup","n":"Egusi soup","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"pepper-soup","n":"Pepper soup","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"miyeok-guk","n":"Miyeok-guk","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"galbitang","n":"Galbitang","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"doenjang-jjigae","n":"Doenjang-jjigae","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"egg-drop-soup","n":"Egg drop soup","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"pappa-al-pomodoro","n":"Pappa al pomodoro","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"scotch-broth","n":"Scotch broth","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"chorba","n":"Chorba","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"matzah-ball-soup","n":"Matzah ball soup","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"pumpkin-soup","n":"Pumpkin soup","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"vichyssoise","n":"Vichyssoise","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"pho","n":"Pho","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"miso","n":"Miso","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"tom-yum","n":"Tom yum","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"tom-kha","n":"Tom kha","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"borscht","n":"Borscht","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"avgolemono","n":"Avgolemono","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"harira","n":"Harira","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"mulligatawny","n":"Mulligatawny","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"ribollita","n":"Ribollita","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"laksa","n":"Laksa","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"ajo-blanco","n":"Ajo blanco","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"beef-stock","n":"Beef stock","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"green-garden","n":"Green/garden","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"caesar","n":"Caesar","c":14,"b":0,"f":[0,2],"x":0},
+    {"s":"greek","n":"Greek","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"caprese","n":"Caprese","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"coleslaw","n":"Coleslaw","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"pasta-salad","n":"Pasta salad","c":14,"b":0,"f":[0,1],"x":0},
+    {"s":"chicken-salad","n":"Chicken salad","c":14,"b":0,"f":[0,1],"x":0},
+    {"s":"tuna-salad","n":"Tuna salad","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"fruit-salad","n":"Fruit salad","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"waldorf","n":"Waldorf","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"nicoise","n":"Niçoise","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"panzanella","n":"Panzanella","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"tabbouleh","n":"Tabbouleh","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"fattoush","n":"Fattoush","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"som-tam","n":"Som tam","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"larb","n":"Larb","c":14,"b":0,"f":[0,1],"x":0},
+    {"s":"celeriac-remoulade","n":"Celeriac rémoulade","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"shirazi","n":"Shirazi","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"ensaladilla-rusa","n":"Ensaladilla rusa","c":14,"b":0,"f":[0,0],"x":0},
+    {"s":"steamed-blanched","n":"Steamed/blanched","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"glazed-carrots","n":"Glazed carrots","c":15,"b":0,"f":[0,1],"x":0},
+    {"s":"creamed-spinach","n":"Creamed spinach","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"corn-on-the-cob","n":"Corn on the cob","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"green-beans-almondine","n":"Green beans almondine","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"cauliflower-cheese","n":"Cauliflower cheese","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"sarma","n":"Sarma","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"kashk-e-bademjan","n":"Kashk-e bademjan","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"borani","n":"Borani","c":15,"b":0,"f":[0,1],"x":0},
+    {"s":"mutabbal","n":"Mutabbal","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"pinakbet","n":"Pinakbet","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"gado-gado","n":"Gado-gado","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"zaalouk","n":"Zaalouk","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"aloo-gobi","n":"Aloo gobi","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"palak-paneer","n":"Palak paneer","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"saag","n":"Saag","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"di-san-xian","n":"Di san xian","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"stir-fried-tomato-and-scrambled-eggs","n":"Stir-fried tomato and scrambled eggs","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"namul","n":"Namul","c":15,"b":0,"f":[0,1],"x":0},
+    {"s":"rice-and-peas","n":"Rice and peas","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"festival","n":"Festival","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"tostones","n":"Tostones","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"bubble-and-squeak","n":"Bubble and squeak","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"colcannon","n":"Colcannon","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"champ","n":"Champ","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"mushy-peas","n":"Mushy peas","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"yorkshire-pudding","n":"Yorkshire pudding","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"green-bean-casserole","n":"Green bean casserole","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"succotash","n":"Succotash","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"escalivada","n":"Escalivada","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"peperonata","n":"Peperonata","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"carciofi-alla-romana","n":"Carciofi alla romana","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"carciofi-alla-giudia","n":"Carciofi alla giudia","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"israeli-salad","n":"Israeli salad","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"sukuma-wiki","n":"Sukuma wiki","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"ratatouille-confit-byaldi","n":"Ratatouille (& confit byaldi)","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"purees-celeriac-parsnip","n":"Purées (celeriac, parsnip)","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"tian","n":"Tian","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"caponata","n":"Caponata","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"parmigiana-di-melanzane","n":"Parmigiana di melanzane","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"imam-bayildi","n":"Imam bayildi","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"stir-fried-gai-lan","n":"Stir-fried gai lan","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"brussels-sprouts","n":"Brussels sprouts","c":15,"b":0,"f":[0,1],"x":0},
+    {"s":"braised-endive","n":"Braised endive","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"dunlop-fish-fragrant-aubergine-yuxiang-qiezi","n":"Dunlop fish-fragrant aubergine (yuxiang qiezi)","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"polenta","n":"Polenta","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"couscous","n":"Couscous","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"bulgur","n":"Bulgur","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"quinoa","n":"Quinoa","c":16,"b":0,"f":[0,1],"x":0},
+    {"s":"farro","n":"Farro","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"barley","n":"Barley","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"grits","n":"Grits","c":16,"b":0,"f":[0,1],"x":0},
+    {"s":"freekeh","n":"Freekeh","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"millet","n":"Millet","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"lentil-dishes-dal-lentil-salad-lentils-du-puy","n":"Lentil dishes (dal, lentil salad, lentils du Puy)","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"chickpeas-chana-masala-falafel","n":"Chickpeas (chana masala, falafel)","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"beans-baked-beans-refried-black-beans","n":"Beans (baked beans, refried, black beans)","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"ful-medames","n":"Ful medames","c":16,"b":0,"f":[0,2],"x":0},
+    {"s":"edamame","n":"Edamame","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"tofu-dishes","n":"Tofu dishes","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"ugali-pap","n":"Ugali / pap","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"farinata","n":"Farinata","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"moi-moi","n":"Moi moi","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"kasha","n":"Kasha","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"moros-y-cristianos","n":"Moros y cristianos","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"refried-beans","n":"Refried beans","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"dal-makhani","n":"Dal makhani","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"mujaddara","n":"Mujaddara","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"koshari","n":"Koshari","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"dubu-jorim-spicy-braised-tofu","n":"Dubu jorim (spicy braised tofu)","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"silken-tofu-with-soy-and-chili-oil","n":"Silken tofu with soy and chili oil","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"home-style-tofu","n":"Home-style tofu","c":16,"b":0,"f":[0,0],"x":0},
+    {"s":"bechamel","n":"Béchamel","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"tomato","n":"Tomato","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"hollandaise-bearnaise-mousseline","n":"Hollandaise (béarnaise, mousseline)","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"beurre-noisette","n":"Beurre noisette","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"vinaigrette","n":"Vinaigrette","c":17,"b":0,"f":[0,3],"x":0},
+    {"s":"mayonnaise-tartare-remoulade","n":"Mayonnaise (tartare, remoulade)","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"pesto","n":"Pesto","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"gravy","n":"Gravy","c":17,"b":0,"f":[0,2],"x":0},
+    {"s":"bbq","n":"BBQ","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"ketchup","n":"Ketchup","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"cheese-sauce","n":"Cheese sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"salsa","n":"Salsa","c":17,"b":0,"f":[0,1],"x":0},
+    {"s":"tzatziki","n":"Tzatziki","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"chimichurri","n":"Chimichurri","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"salsa-verde","n":"Salsa verde","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"romesco","n":"Romesco","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"gremolata","n":"Gremolata","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"nuoc-cham","n":"Nuoc cham","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"peanut-satay","n":"Peanut/satay","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"tahini-sauce","n":"Tahini sauce","c":17,"b":0,"f":[0,1],"x":0},
+    {"s":"mole","n":"Mole","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"chermoula","n":"Chermoula","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"harissa","n":"Harissa","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"sambal","n":"Sambal","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"gochujang-sauce","n":"Gochujang sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"sofrito","n":"Sofrito","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"mojo","n":"Mojo","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"aioli","n":"Aioli","c":17,"b":0,"f":[0,1],"x":0},
+    {"s":"rouille","n":"Rouille","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"mornay-sauce","n":"Mornay sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"ravigote","n":"Ravigote","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"zhug","n":"Zhug","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"toum","n":"Toum","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"ssamjang","n":"Ssamjang","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"hoisin-sauce","n":"Hoisin sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"raita","n":"Raita","c":17,"b":0,"f":[0,1],"x":0},
+    {"s":"mint-sauce","n":"Mint sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"bread-sauce","n":"Bread sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"ranch-dressing","n":"Ranch dressing","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"thousand-island-dressing","n":"Thousand Island dressing","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"tartar-sauce","n":"Tartar sauce","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"green-goddess-dressing","n":"Green goddess dressing","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"garam-masala","n":"Garam masala","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"zaatar","n":"Za'atar","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"dukkah","n":"Dukkah","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"ras-el-hanout","n":"Ras el hanout","c":17,"b":0,"f":[0,0],"x":0},
+    {"s":"grilled-cheese","n":"Grilled cheese","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"tuna-melt","n":"Tuna melt","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"pb-j","n":"PB&J","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"wraps","n":"Wraps","c":18,"b":0,"f":[0,1],"x":0},
+    {"s":"panini","n":"Panini","c":18,"b":0,"f":[0,1],"x":0},
+    {"s":"quesadilla","n":"Quesadilla","c":18,"b":0,"f":[0,2],"x":0},
+    {"s":"burrito","n":"Burrito","c":18,"b":0,"f":[0,1],"x":0},
+    {"s":"reuben","n":"Reuben","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"katsu-sando","n":"Katsu sando","c":18,"b":0,"f":[0,1],"x":0},
+    {"s":"philly-cheesesteak","n":"Philly cheesesteak","c":18,"b":0,"f":[0,2],"x":0},
+    {"s":"po-boy","n":"Po' boy","c":18,"b":0,"f":[0,3],"x":0},
+    {"s":"pan-bagnat","n":"Pan bagnat","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"falafel-pita","n":"Falafel pita","c":18,"b":1,"f":[0,0],"x":0},
+    {"s":"arepa","n":"Arepa","c":18,"b":0,"f":[0,1],"x":0},
+    {"s":"lobster-roll","n":"Lobster roll","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"french-dip","n":"French dip","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"smrrebrd-open","n":"Smørrebrød (open)","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"sloppy-joes","n":"Sloppy Joes","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"hummus","n":"Hummus","c":19,"b":0,"f":[0,1],"x":0},
+    {"s":"baba-ghanoush","n":"Baba ghanoush","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"guacamole","n":"Guacamole","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"muhammara","n":"Muhammara","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"labneh","n":"Labneh","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"spinach-artichoke","n":"Spinach-artichoke","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"french-onion-dip","n":"French onion dip","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"queso","n":"Queso","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"tapenade","n":"Tapenade","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"skordalia","n":"Skordalia","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"bagna-cauda","n":"Bagna cauda","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"bruschetta","n":"Bruschetta","c":19,"b":0,"f":[0,2],"x":0},
+    {"s":"deviled-eggs","n":"Deviled eggs","c":19,"b":0,"f":[0,2],"x":0},
+    {"s":"stuffed-mushrooms","n":"Stuffed mushrooms","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"spring-rolls","n":"Spring rolls","c":19,"b":0,"f":[0,2],"x":0},
+    {"s":"samosas","n":"Samosas","c":19,"b":0,"f":[0,1],"x":0},
+    {"s":"empanadas","n":"Empanadas","c":19,"b":0,"f":[0,3],"x":0},
+    {"s":"croquetas","n":"Croquetas","c":19,"b":0,"f":[0,1],"x":0},
+    {"s":"gougeres","n":"Gougères","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"ksr","n":"Kısır","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"fatayer","n":"Fatayer","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"provoleta","n":"Provoleta","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"puff-puff","n":"Puff-puff","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"akara","n":"Akara","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"briouat","n":"Briouat","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"tiropita","n":"Tiropita","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"saganaki","n":"Saganaki","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pirozhki","n":"Pirozhki","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pakora","n":"Pakora","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pani-puri","n":"Pani puri","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"aloo-tikki","n":"Aloo tikki","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"cong-you-bing","n":"Cong you bing","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pajeon","n":"Pajeon","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"miang-kham","n":"Miang kham","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"jamaican-patty","n":"Jamaican patty","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pastel-de-bacalhau","n":"Pastel de bacalhau","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pimientos-de-padron","n":"Pimientos de Padrón","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"crostini","n":"Crostini","c":19,"b":0,"f":[0,1],"x":0},
+    {"s":"socca","n":"Socca","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"nachos","n":"Nachos","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"onion-ring","n":"Onion ring","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"seven-layer-dip","n":"Seven-layer dip","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"brik","n":"Brik","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"carpaccio","n":"Carpaccio","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"canapes","n":"Canapés","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"gildas-pintxos","n":"Gildas/pintxos","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"tapas-gambas-al-ajillo","n":"Tapas (gambas al ajillo)","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"kibbeh","n":"Kibbeh","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"cheese-straws","n":"Cheese straws","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"parmesan-crackers","n":"Parmesan crackers","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"popcorn","n":"Popcorn","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"cornish-pasty","n":"Cornish pasty","c":20,"b":0,"f":[0,0],"x":0},
+    {"s":"spanakopita","n":"Spanakopita","c":20,"b":0,"f":[0,0],"x":0},
+    {"s":"borek","n":"Börek","c":20,"b":0,"f":[0,1],"x":0},
+    {"s":"pastilla","n":"Pastilla","c":20,"b":0,"f":[0,0],"x":0},
+    {"s":"quiche-cheese","n":"Quiche (cheese)","c":20,"b":0,"f":[0,0],"x":0},
+    {"s":"kimchi","n":"Kimchi","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"sauerkraut","n":"Sauerkraut","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"marmalade","n":"Marmalade","c":21,"b":0,"f":[0,2],"x":0},
+    {"s":"chutney","n":"Chutney","c":21,"b":0,"f":[0,2],"x":0},
+    {"s":"preserved-lemon","n":"Preserved lemon","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"sour-dill-pickles","n":"Sour dill pickles","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"strawberry-jam","n":"Strawberry jam","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"pancakes-american","n":"Pancakes (American)","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"crepes","n":"Crêpes","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"waffles-belgian","n":"Waffles (Belgian)","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"french-toast","n":"French toast","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"porridge-oatmeal","n":"Porridge/oatmeal","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"granola","n":"Granola","c":22,"b":0,"f":[0,1],"x":0},
+    {"s":"muesli","n":"Muesli","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"sabich","n":"Sabich","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"upma","n":"Upma","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"poha-rice","n":"Poha (rice)","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"aloo-paratha","n":"Aloo paratha","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"pan-con-tomate","n":"Pan con tomate","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"dutch-baby","n":"Dutch baby","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"liege-waffles","n":"Liège waffles","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"blini","n":"Blini","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"dosa","n":"Dosa","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"idli","n":"Idli","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"shakshuka","n":"Shakshuka","c":22,"b":1,"f":[0,0],"x":0},
+    {"s":"huevos-rancheros","n":"Huevos rancheros","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"chilaquiles","n":"Chilaquiles","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"kaya-toast","n":"Kaya toast","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"acai-bowl","n":"Açaí bowl","c":22,"b":0,"f":[0,0],"x":0},
+    {"s":"white-sandwich-loaf","n":"White sandwich loaf","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"whole-wheat","n":"Whole wheat","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"baguette","n":"Baguette","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"sourdough-boule","n":"Sourdough boule","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"focaccia","n":"Focaccia","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"ciabatta","n":"Ciabatta","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"dinner-rolls","n":"Dinner rolls","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"brioche","n":"Brioche","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"challah","n":"Challah","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pita","n":"Pita","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"naan","n":"Naan","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"flatbreads","n":"Flatbreads","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"bagels","n":"Bagels","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"soda-bread","n":"Soda bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"banana-bread-quick-breads","n":"Banana bread/quick breads","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"cornbread","n":"Cornbread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pretzels","n":"Pretzels","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"english-muffins","n":"English muffins","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"croissant","n":"Croissant","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pain-au-chocolat","n":"Pain au chocolat","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"danish","n":"Danish","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"chausson-aux-pommes","n":"Chausson aux pommes","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"simit","n":"Simit","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"barbari-bread","n":"Barbari bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"kaak","n":"Ka'ak","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pandesal","n":"Pandesal","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"roti-canai","n":"Roti canai","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"msemen","n":"Msemen","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"harcha","n":"Harcha","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"tsoureki","n":"Tsoureki","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"kaiser-roll","n":"Kaiser roll","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"stollen","n":"Stollen","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"lefse","n":"Lefse","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"kulcha","n":"Kulcha","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"bhatura","n":"Bhatura","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"chapati","n":"Chapati","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"swedish-kanelbullar","n":"Swedish kanelbullar","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"sticky-pecan-buns","n":"Sticky/pecan buns","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"coco-bread","n":"Coco bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"zopf","n":"Zopf","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pain-depices","n":"Pain d'épices","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"grissini","n":"Grissini","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"pain-de-mie","n":"Pain de mie","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"crumpet","n":"Crumpet","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"scone","n":"Scone","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"biscuit","n":"Biscuit","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"pain-de-campagne-levain","n":"Pain de campagne (levain)","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"fougasse","n":"Fougasse","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"rye-pumpernickel","n":"Rye/pumpernickel","c":23,"b":0,"f":[0,2],"x":0},
+    {"s":"japanese-milk-bread-tangzhong","n":"Japanese milk bread (tangzhong)","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"tortillas-corn-flour","n":"Tortillas (corn/flour)","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"lavash","n":"Lavash","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"roti-paratha","n":"Roti/paratha","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"babka","n":"Babka","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"kubaneh","n":"Kubaneh","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"cinnamon-rolls","n":"Cinnamon rolls","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"hot-cross-buns","n":"Hot cross buns","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"monkey-bread","n":"Monkey bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"brownie-fudgy-or-cakey","n":"Brownie (fudgy or cakey)","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"blondies","n":"Blondies","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"flourless","n":"Flourless","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"brookies","n":"Brookies","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"bars-magic-bars-millionaires-shortbread","n":"Bars (magic bars, millionaire's shortbread)","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"drop-chocolate-chip-oatmeal","n":"Drop (chocolate chip, oatmeal)","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"sugar-cut-out","n":"Sugar/cut-out","c":24,"b":1,"f":[1,1],"x":0},
+    {"s":"shortbread","n":"Shortbread","c":24,"b":1,"f":[2,2],"x":0},
+    {"s":"peanut-butter","n":"Peanut butter","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"snickerdoodle","n":"Snickerdoodle","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"gingerbread","n":"Gingerbread","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"biscotti","n":"Biscotti","c":24,"b":1,"f":[2,2],"x":0},
+    {"s":"thumbprints","n":"Thumbprints","c":24,"b":1,"f":[1,1],"x":0},
+    {"s":"sandwich-cookies","n":"Sandwich cookies","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"nanaimo-bar","n":"Nanaimo bar","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"anzac-biscuit","n":"Anzac biscuit","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"diamant","n":"Diamant","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"tuiles","n":"Tuiles","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"langues-de-chat","n":"Langues de chat","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"madeleines-cake-like","n":"Madeleines (cake-like)","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"florentines","n":"Florentines","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"amaretti","n":"Amaretti","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"speculoos","n":"Speculoos","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"alfajores","n":"Alfajores","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"stroopwafel","n":"Stroopwafel","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"rugelach","n":"Rugelach","c":24,"b":1,"f":[1,1],"x":0},
+    {"s":"pizzelle","n":"Pizzelle","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"black-and-white","n":"Black-and-white","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"kitchen-sink-cookie","n":"Kitchen-sink cookie","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"brown-butter-chocolate-chip-cookie","n":"Brown-butter chocolate chip cookie","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"lemon-bars","n":"Lemon bars","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"graham-crackers","n":"Graham crackers","c":24,"b":1,"f":[0,0],"x":0},
+    {"s":"american-muffin-blueberry-style-muffin-method","n":"American muffin (blueberry style, muffin method)","c":25,"b":0,"f":[0,0],"x":0},
+    {"s":"bran-muffins","n":"Bran muffins","c":25,"b":0,"f":[0,1],"x":0},
+    {"s":"popovers","n":"Popovers","c":25,"b":0,"f":[0,1],"x":0},
+    {"s":"corn-muffin","n":"Corn muffin","c":25,"b":0,"f":[0,1],"x":0},
+    {"s":"yeast-raised-ring","n":"Yeast-raised ring","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"filled-berliner-bomboloni-jam","n":"Filled (Berliner/bomboloni/jam)","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"cake-doughnut","n":"Cake doughnut","c":26,"b":0,"f":[0,1],"x":0},
+    {"s":"cruller-french-cruller-choux","n":"Cruller/French cruller (choux)","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"churros","n":"Churros","c":26,"b":0,"f":[0,1],"x":0},
+    {"s":"beignets","n":"Beignets","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"sufganiyot","n":"Sufganiyot","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"zeppole","n":"Zeppole","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"malasadas","n":"Malasadas","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"cronut-style-laminated","n":"Cronut-style laminated","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"youtiao","n":"Youtiao","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"fritters-apple-fritters","n":"Fritters/apple fritters","c":26,"b":0,"f":[0,0],"x":0},
+    {"s":"new-york-baked-dense","n":"New York (baked, dense)","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"basque-burnt-san-sebastian","n":"Basque burnt (San Sebastián)","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"japanese-souffle-cotton","n":"Japanese soufflé/cotton","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"butter-layer-cake-yellow-vanilla","n":"Butter/layer cake (yellow/vanilla)","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"chocolate-layer","n":"Chocolate layer","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"sponge-genoise","n":"Sponge (genoise)","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"chiffon","n":"Chiffon","c":27,"b":1,"f":[3,3],"x":0},
+    {"s":"angel-food","n":"Angel food","c":27,"b":1,"f":[1,1],"x":0},
+    {"s":"pound-cake","n":"Pound cake","c":27,"b":1,"f":[2,2],"x":0},
+    {"s":"bundt","n":"Bundt","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"carrot","n":"Carrot","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"red-velvet","n":"Red velvet","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"coffee-cake","n":"Coffee cake","c":27,"b":1,"f":[2,2],"x":0},
+    {"s":"upside-down","n":"Upside-down","c":27,"b":1,"f":[2,2],"x":0},
+    {"s":"sheet-cake","n":"Sheet cake","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"cupcakes","n":"Cupcakes","c":27,"b":1,"f":[1,1],"x":0},
+    {"s":"boston-cream-pie","n":"Boston cream pie","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"whoopie-pie","n":"Whoopie pie","c":27,"b":1,"f":[1,1],"x":0},
+    {"s":"entremets-mousse-cake","n":"Entremets (mousse cake)","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"black-forest","n":"Black Forest","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"sachertorte","n":"Sachertorte","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"swiss-roll-buche-de-noel","n":"Swiss roll/bûche de Noël","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"basque-cake","n":"Basque cake","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"pain-de-genes","n":"Pain de Gênes","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"tres-leches","n":"Tres leches","c":27,"b":0,"f":[0,1],"x":0},
+    {"s":"molten-chocolate","n":"Molten chocolate","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"german-chocolate-cake","n":"German chocolate cake","c":27,"b":0,"f":[0,0],"x":0},
+    {"s":"hummingbird-cake","n":"Hummingbird cake","c":27,"b":1,"f":[0,0],"x":0},
+    {"s":"double-crust-fruit-pie-apple-cherry","n":"Double-crust fruit pie (apple, cherry)","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"custard-pie","n":"Custard pie","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"cream-pie-banana-coconut","n":"Cream pie (banana, coconut)","c":28,"b":0,"f":[0,3],"x":0},
+    {"s":"meringue-pie-lemon","n":"Meringue pie (lemon)","c":28,"b":0,"f":[0,1],"x":0},
+    {"s":"pecan","n":"Pecan","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"key-lime","n":"Key lime","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"chess","n":"Chess","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"crumble","n":"Crumble","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"crisp","n":"Crisp","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"cobbler","n":"Cobbler","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"clafoutis","n":"Clafoutis","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"pandowdy","n":"Pandowdy","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"pumpkin-pie","n":"Pumpkin pie","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"sweet-potato-pie","n":"Sweet potato pie","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"galette-crostata","n":"Galette/crostata","c":28,"b":0,"f":[0,1],"x":0},
+    {"s":"banoffee","n":"Banoffee","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"gooey-butter-oat-pie","n":"Gooey butter oat pie","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"tarte-tatin","n":"Tarte Tatin","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"lemon-tart","n":"Lemon tart","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"fruit-tart-creme-patissiere","n":"Fruit tart (crème pâtissière)","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"chocolate-tart","n":"Chocolate tart","c":29,"b":0,"f":[0,1],"x":0},
+    {"s":"linzer","n":"Linzer","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"frangipane","n":"Frangipane","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"pasteis-de-nata","n":"Pastéis de nata","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"bakewell","n":"Bakewell","c":29,"b":0,"f":[0,2],"x":0},
+    {"s":"eclair","n":"Éclair","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"profiteroles","n":"Profiteroles","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"paris-brest","n":"Paris-Brest","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"saint-honore","n":"Saint-Honoré","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"croquembouche","n":"Croquembouche","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"chouquettes","n":"Chouquettes","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"mille-feuille","n":"Mille-feuille","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"pithivier","n":"Pithivier","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"palmiers","n":"Palmiers","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"galette-des-rois","n":"Galette des rois","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"macarons","n":"Macarons","c":29,"b":0,"f":[0,1],"x":0},
+    {"s":"financiers","n":"Financiers","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"meringues-french-swiss-italian","n":"Meringues (French/Swiss/Italian)","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"pavlova","n":"Pavlova","c":29,"b":0,"f":[0,1],"x":0},
+    {"s":"dacquoise","n":"Dacquoise","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"tropezienne","n":"Tropézienne","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"petit-four","n":"Petit four","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"treacle-tart","n":"Treacle tart","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"kouign-amann","n":"Kouign-amann","c":29,"b":0,"f":[0,0],"x":0},
+    {"s":"vanilla-pudding","n":"Vanilla pudding","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"rice-pudding","n":"Rice pudding","c":30,"b":0,"f":[0,1],"x":0},
+    {"s":"bread-pudding","n":"Bread pudding","c":30,"b":0,"f":[0,1],"x":0},
+    {"s":"chocolate-pudding","n":"Chocolate pudding","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"creme-caramel-flan","n":"Crème caramel/flan","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"panna-cotta","n":"Panna cotta","c":30,"b":0,"f":[0,2],"x":0},
+    {"s":"jelly-gelatin","n":"Jelly (gelatin)","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"creme-brulee","n":"Crème brûlée","c":30,"b":0,"f":[0,1],"x":0},
+    {"s":"pot-de-creme","n":"Pot de crème","c":30,"b":0,"f":[0,2],"x":0},
+    {"s":"creme-anglaise","n":"Crème anglaise","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"creme-patissiere","n":"Crème pâtissière","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"chocolate-mousse","n":"Chocolate mousse","c":30,"b":0,"f":[0,1],"x":0},
+    {"s":"ile-flottante-oeufs-a-la-neige","n":"Île flottante/oeufs à la neige","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"eton-mess","n":"Eton mess","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"sticky-toffee-pudding","n":"Sticky toffee pudding","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"sticky-toffee-pudding-custards-puddings-mousses","n":"Sticky toffee pudding","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"mahalabia","n":"Mahalabia","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"kheer","n":"Kheer","c":30,"b":0,"f":[0,0],"x":0},
+    {"s":"posset","n":"Posset","c":30,"b":0,"f":[0,3],"x":0},
+    {"s":"ganache","n":"Ganache","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"truffles","n":"Truffles","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"fudge","n":"Fudge","c":31,"b":0,"f":[0,1],"x":0},
+    {"s":"sauce","n":"Sauce","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"mendiants","n":"Mendiants","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"gelatin-gummies","n":"Gelatin gummies","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"agar-jellies","n":"Agar jellies","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"caramels","n":"Caramels","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"toffee","n":"Toffee","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"brittle","n":"Brittle","c":31,"b":0,"f":[0,2],"x":0},
+    {"s":"marshmallows","n":"Marshmallows","c":31,"b":0,"f":[0,2],"x":0},
+    {"s":"nougat","n":"Nougat","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"dulce-de-leche","n":"Dulce de leche","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"pate-damande-marzipan","n":"Pâte d'amande/marzipan","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"turron","n":"Turrón","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"halva","n":"Halva","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"brigadeiros","n":"Brigadeiros","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"candied-citrus-peel","n":"Candied citrus peel","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"honeycomb","n":"Honeycomb","c":31,"b":0,"f":[0,0],"x":0},
+    {"s":"custard-base-french","n":"Custard-base (French)","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"philadelphia-no-egg","n":"Philadelphia (no egg)","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"gelato","n":"Gelato","c":32,"b":0,"f":[0,2],"x":0},
+    {"s":"sorbet","n":"Sorbet","c":32,"b":0,"f":[0,3],"x":0},
+    {"s":"sherbet","n":"Sherbet","c":32,"b":0,"f":[0,1],"x":0},
+    {"s":"granita","n":"Granita","c":32,"b":0,"f":[0,1],"x":0},
+    {"s":"semifreddo","n":"Semifreddo","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"parfait-glace","n":"Parfait (glacé)","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"frozen-yogurt","n":"Frozen yogurt","c":32,"b":0,"f":[0,1],"x":0},
+    {"s":"affogato","n":"Affogato","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"sundaes","n":"Sundaes","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"ice-cream-cake","n":"Ice-cream cake","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"baked-alaska","n":"Baked Alaska","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"bombe","n":"Bombe","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"popsicles","n":"Popsicles","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"cornflake-milk-ice-cream","n":"Cornflake milk ice cream","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"frozen-smore","n":"Frozen s'more","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"peach-melba","n":"Peach Melba","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"baklava","n":"Baklava","c":33,"b":0,"f":[0,1],"x":0},
+    {"s":"knafeh","n":"Knafeh","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"basbousa","n":"Basbousa","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"umm-ali","n":"Umm Ali","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"gulab-jamun","n":"Gulab jamun","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"rasgulla","n":"Rasgulla","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"jalebi","n":"Jalebi","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"mango-sticky-rice","n":"Mango sticky rice","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"faloodeh","n":"Faloodeh","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"maamoul","n":"Maamoul","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"qatayef","n":"Qatayef","c":33,"b":0,"f":[0,3],"x":0},
+    {"s":"che","n":"Chè","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"halo-halo","n":"Halo-halo","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"ube-halaya","n":"Ube halaya","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"bibingka","n":"Bibingka","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"puto","n":"Puto","c":33,"b":0,"f":[0,1],"x":0},
+    {"s":"turon","n":"Turon","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"bougatsa","n":"Bougatsa","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"melomakarona","n":"Melomakarona","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"pasteli","n":"Pasteli","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"paczki","n":"Paczki","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"bleskiver","n":"Æbleskiver","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"apfelstrudel","n":"Apfelstrudel","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"kaiserschmarrn","n":"Kaiserschmarrn","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"bienenstich","n":"Bienenstich","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"gajar-ka-halwa","n":"Gajar ka halwa","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"egg-tart","n":"Egg tart","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"tangyuan","n":"Tangyuan","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"sesame-ball","n":"Sesame ball","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"hotteok","n":"Hotteok","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"khanom-chan","n":"Khanom chan","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"torrijas","n":"Torrijas","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"cannoli","n":"Cannoli","c":33,"b":0,"f":[0,1],"x":0},
+    {"s":"bread-and-butter-pudding","n":"Bread and butter pudding","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"funnel-cake","n":"Funnel cake","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"butter-tart","n":"Butter tart","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"pouding-chomeur","n":"Pouding chômeur","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"haupia","n":"Haupia","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"phirni","n":"Phirni","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"galaktoboureko","n":"Galaktoboureko","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"prinsesstarta","n":"Prinsesstårta","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"mooncake","n":"Mooncake","c":33,"b":0,"f":[0,1],"x":0},
+    {"s":"panettone","n":"Panettone","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"espresso","n":"Espresso","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cappuccino","n":"Cappuccino","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"latte","n":"Latte","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cortado","n":"Cortado","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"macchiato","n":"Macchiato","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"americano","n":"Americano","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"pour-over","n":"Pour-over","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"french-press","n":"French press","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cold-brew","n":"Cold brew","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"iced-coffee","n":"Iced coffee","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"vietnamese-ca-phe","n":"Vietnamese cà phê","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"hot-brewed-black-green-oolong","n":"Hot brewed (black/green/oolong)","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"matcha-whisked","n":"Matcha (whisked)","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"masala-chai","n":"Masala chai","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"iced-tea","n":"Iced tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"milk-tea-bubble-tea","n":"Milk tea/bubble tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"moroccan-mint","n":"Moroccan mint","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"herbal-infusions","n":"Herbal infusions","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"hot-chocolate-french-chocolat-chaud-spanish-thick","n":"Hot chocolate (French chocolat chaud, Spanish thick)","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"smoothies","n":"Smoothies","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"lemonade","n":"Lemonade","c":34,"b":0,"f":[0,2],"x":0},
+    {"s":"agua-fresca","n":"Agua fresca","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"lassi","n":"Lassi","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"milkshakes","n":"Milkshakes","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"horchata","n":"Horchata","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"shrubs","n":"Shrubs","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"tonics","n":"Tonics","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"salep","n":"Salep","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"teh-tarik","n":"Teh tarik","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"frappe-coffee","n":"Frappé coffee","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"hong-kong-style-milk-tea","n":"Hong Kong-style milk tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"sujeonggwa","n":"Sujeonggwa","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"thai-tea","n":"Thai tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"agua-de-jamaica","n":"Agua de jamaica","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"champurrado","n":"Champurrado","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"atole","n":"Atole","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"sweet-tea","n":"Sweet tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"iced-tea-lemonade","n":"Iced tea lemonade","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"egg-cream","n":"Egg cream","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"malted-milk","n":"Malted milk","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cream-soda","n":"Cream soda","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"flat-white","n":"Flat white","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cafe-de-olla","n":"Café de olla","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"dalgona-coffee","n":"Dalgona coffee","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"limeade","n":"Limeade","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"chocolate-milk","n":"Chocolate milk","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"switchel","n":"Switchel","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"ginger-ale","n":"Ginger ale","c":34,"b":0,"f":[0,0],"x":0}
+  ]
+}

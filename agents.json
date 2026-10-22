@@ -1,0 +1,418 @@
+{
+ "_note": "Agents shown on Jarvis Board v3. status: active | idle | planned (planned = dim standby node). regions = the agent's sub-tasks/skills shown as brain regions. color = hex.",
+ "agents": [
+  {
+   "id": "jarvis",
+   "name": "Jarvis",
+   "code": "JRV-00",
+   "role": "Core assistant · orchestrates every agent",
+   "color": "#3df2ff",
+   "status": "active",
+   "core": true,
+   "regions": [
+    {
+     "id": "listen",
+     "name": "Listen",
+     "desc": "Reads Joe's requests and turns them into tasks"
+    },
+    {
+     "id": "plan",
+     "name": "Plan",
+     "desc": "Breaks work into jobs and picks the right agent"
+    },
+    {
+     "id": "dispatch",
+     "name": "Dispatch",
+     "desc": "Hands jobs to agents and watches their progress"
+    },
+    {
+     "id": "verify",
+     "name": "Verify",
+     "desc": "Checks results before anything is reported"
+    },
+    {
+     "id": "report",
+     "name": "Report",
+     "desc": "Updates Joe and this board"
+    }
+   ]
+  },
+  {
+   "id": "recipe-writer",
+   "name": "Recipe Writer",
+   "code": "RCP-W1",
+   "role": "Writes the book's recipes, chapter by chapter",
+   "color": "#ff3df0",
+   "status": "active",
+   "regions": [
+    {
+     "id": "research",
+     "name": "Research",
+     "desc": "Reads locked-list sources for the dish"
+    },
+    {
+     "id": "specs",
+     "name": "Specs",
+     "desc": "Servings, ratios, timings, equipment"
+    },
+    {
+     "id": "drafting",
+     "name": "Drafting",
+     "desc": "Writes ingredients, steps and tips"
+    },
+    {
+     "id": "review",
+     "name": "Review",
+     "desc": "Self-check: salt, safety, nutrition"
+    },
+    {
+     "id": "publish",
+     "name": "Publish",
+     "desc": "Pushes the recipe to the test site"
+    }
+   ]
+  },
+  {
+   "id": "recipe-checker",
+   "name": "Recipe Checker",
+   "code": "RCP-C1",
+   "role": "Audits every recipe against sources and rules",
+   "color": "#ffe93d",
+   "status": "active",
+   "regions": [
+    {
+     "id": "sources",
+     "name": "Sources",
+     "desc": "Second source from a different locked-list site"
+    },
+    {
+     "id": "audit",
+     "name": "Audit",
+     "desc": "Automated rule checks (salt, temps, banned words)"
+    },
+    {
+     "id": "photo",
+     "name": "Photo match",
+     "desc": "Recipe matches the dish photo"
+    },
+    {
+     "id": "fixes",
+     "name": "Fixes",
+     "desc": "Applies corrections and logs them"
+    }
+   ]
+  },
+  {
+   "id": "claude-code",
+   "name": "Claude Code",
+   "code": "HLP-CC",
+   "role": "Helper · code and draft generation",
+   "color": "#ff9a3d",
+   "status": "idle",
+   "regions": [
+    {
+     "id": "read",
+     "name": "Read",
+     "desc": "Reads the brief and the files"
+    },
+    {
+     "id": "draft",
+     "name": "Draft",
+     "desc": "Drafts code or text"
+    },
+    {
+     "id": "test",
+     "name": "Test",
+     "desc": "Runs it and checks the output"
+    },
+    {
+     "id": "handoff",
+     "name": "Hand-off",
+     "desc": "Returns the draft to Jarvis for review"
+    }
+   ]
+  },
+  {
+   "id": "research",
+   "name": "Research",
+   "code": "RSC-01",
+   "role": "Chef knowledge base · techniques and sources",
+   "color": "#3d7bff",
+   "status": "active",
+   "regions": [
+    {
+     "id": "search",
+     "name": "Search",
+     "desc": "Finds trusted sources"
+    },
+    {
+     "id": "read",
+     "name": "Read",
+     "desc": "Reads and extracts techniques"
+    },
+    {
+     "id": "techniques",
+     "name": "Techniques",
+     "desc": "Writes technique notes with IDs"
+    },
+    {
+     "id": "sources",
+     "name": "Sources",
+     "desc": "Tracks every source URL"
+    }
+   ]
+  },
+  {
+   "id": "planner",
+   "name": "Planner",
+   "code": "PLN-01",
+   "role": "Milestones, schedule and open decisions",
+   "color": "#7dff3d",
+   "status": "idle",
+   "regions": [
+    {
+     "id": "milestones",
+     "name": "Milestones",
+     "desc": "What is done and what is next"
+    },
+    {
+     "id": "schedule",
+     "name": "Schedule",
+     "desc": "Order of chapters and jobs"
+    },
+    {
+     "id": "decisions",
+     "name": "Decisions",
+     "desc": "Things waiting on Joe"
+    },
+    {
+     "id": "risks",
+     "name": "Risks",
+     "desc": "Blockers and follow-ups"
+    }
+   ]
+  },
+  {
+   "id": "social-media",
+   "name": "Social Media",
+   "code": "SOC-01",
+   "role": "Planned · TikTok, Instagram, YouTube Shorts",
+   "color": "#ff3d7b",
+   "status": "planned",
+   "regions": [
+    {
+     "id": "ideas",
+     "name": "Ideas",
+     "desc": "Post ideas from new recipes"
+    },
+    {
+     "id": "captions",
+     "name": "Captions",
+     "desc": "Hooks, captions, hashtags"
+    },
+    {
+     "id": "schedule",
+     "name": "Schedule",
+     "desc": "Posting calendar"
+    },
+    {
+     "id": "replies",
+     "name": "Replies",
+     "desc": "Comment replies"
+    }
+   ]
+  },
+  {
+   "id": "video-maker",
+   "name": "Video Maker",
+   "code": "VID-M1",
+   "role": "Planned · shoots and generates recipe clips",
+   "color": "#b83dff",
+   "status": "planned",
+   "regions": [
+    {
+     "id": "script",
+     "name": "Script",
+     "desc": "Short scripts per recipe"
+    },
+    {
+     "id": "shots",
+     "name": "Shots",
+     "desc": "Shot list and footage"
+    },
+    {
+     "id": "voice",
+     "name": "Voice",
+     "desc": "Voice-over"
+    },
+    {
+     "id": "render",
+     "name": "Render",
+     "desc": "First cut"
+    }
+   ]
+  },
+  {
+   "id": "video-editor",
+   "name": "Video Editor",
+   "code": "VID-E1",
+   "role": "Planned · cuts, captions and exports",
+   "color": "#3dffb8",
+   "status": "planned",
+   "regions": [
+    {
+     "id": "cut",
+     "name": "Cut",
+     "desc": "Trims and pacing"
+    },
+    {
+     "id": "captions",
+     "name": "Captions",
+     "desc": "On-screen text"
+    },
+    {
+     "id": "grade",
+     "name": "Grade",
+     "desc": "Colour and sound"
+    },
+    {
+     "id": "export",
+     "name": "Export",
+     "desc": "Formats per platform"
+    }
+   ]
+  }
+ ],
+ "flow": {
+  "_note": "Flow view: virtual nodes (not agents) and edges = how work moves between agents. x,y are 0..1 positions in the flow area (drag to change; saved in the browser).",
+  "virtual": [
+   {
+    "id": "joe",
+    "name": "Joe",
+    "code": "OWNER",
+    "role": "Requests and decisions",
+    "color": "#ffffff"
+   },
+   {
+    "id": "site",
+    "name": "Test site",
+    "code": "PUBLISH",
+    "role": "Recipes go live here",
+    "color": "#3dff8a"
+   }
+  ],
+  "layout": {
+   "joe": [
+    0,
+    0.5
+   ],
+   "jarvis": [
+    0.135,
+    0.5
+   ],
+   "planner": [
+    0.315,
+    0.04
+   ],
+   "research": [
+    0.315,
+    0.5
+   ],
+   "claude-code": [
+    0.315,
+    0.96
+   ],
+   "recipe-writer": [
+    0.5,
+    0.5
+   ],
+   "recipe-checker": [
+    0.665,
+    0.5
+   ],
+   "site": [
+    0.83,
+    0.5
+   ],
+   "social-media": [
+    1,
+    0.12
+   ],
+   "video-maker": [
+    0.83,
+    0.92
+   ],
+   "video-editor": [
+    1,
+    0.92
+   ]
+  },
+  "edges": [
+   [
+    "joe",
+    "jarvis",
+    "requests"
+   ],
+   [
+    "jarvis",
+    "planner",
+    "goals"
+   ],
+   [
+    "jarvis",
+    "research",
+    "topics"
+   ],
+   [
+    "jarvis",
+    "claude-code",
+    "briefs"
+   ],
+   [
+    "planner",
+    "recipe-writer",
+    "chapter order"
+   ],
+   [
+    "research",
+    "recipe-writer",
+    "techniques"
+   ],
+   [
+    "claude-code",
+    "recipe-writer",
+    "drafts"
+   ],
+   [
+    "recipe-writer",
+    "recipe-checker",
+    "recipes"
+   ],
+   [
+    "recipe-checker",
+    "site",
+    "publish"
+   ],
+   [
+    "site",
+    "social-media",
+    "new recipes"
+   ],
+   [
+    "site",
+    "video-maker",
+    "clip briefs"
+   ],
+   [
+    "video-maker",
+    "video-editor",
+    "raw cuts"
+   ],
+   [
+    "video-editor",
+    "social-media",
+    "videos"
+   ]
+  ]
+ }
+}
