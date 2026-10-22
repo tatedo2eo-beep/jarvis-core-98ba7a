@@ -520,6 +520,7 @@ function logLine(ev, prepend = true) {
 const popsEl = $('#pops'); let popSide = 1; const coreScr = new THREE.Vector3();
 function pop(numText, label, color, numeric = null) {
   while (popsEl.children.length > 1) popsEl.firstChild.remove();
+  if (inner.visible) [...popsEl.children].forEach(o => { gsap.killTweensOf(o); gsap.to(o, { opacity: 0, scale: .9, filter: 'blur(8px)', duration: .25, onComplete: () => o.remove() }); });
   coreScr.set(0, 0, 0).project(camera);
   const cx = (coreScr.x * .5 + .5) * innerWidth, cy = (-coreScr.y * .5 + .5) * innerHeight;
   popSide *= -1; const dx = MOBILE ? 0 : popSide * (200 + Math.random() * 40), dy = MOBILE ? -innerHeight * .18 : (-130 + Math.random() * 90);
