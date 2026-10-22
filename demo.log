@@ -1,9 +1,9 @@
-150 frames 32 s outer
-300 frames 63 s outer
-450 frames 97 s outer
-600 frames 128 s toIn
-750 frames 157 s inner
-900 frames 191 s inner
-1050 frames 218 s toOut
-events 20 errors []
-size 26535784
+150 frames 31 s outer
+300 frames 62 s outer
+450 frames 94 s outer
+600 frames 124 s toIn
+750 frames 152 s inner
+900 frames 183 s inner
+1050 frames 213 s toOut
+events 30 errors []
+size 26463009

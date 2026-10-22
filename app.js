@@ -751,8 +751,8 @@ $('#feedbar').onsubmit = e => {
 // CAMERA + TRANSITIONS
 // =====================================================================================
 let mode = 'outer';   // outer | toIn | inner | toOut | flow
-const HOME = MOBILE ? { x: 0, y: 4.6, z: 23, fov: 55 } : { x: 0, y: 3.9, z: 16.2, fov: 50 };
-const cam = { x: HOME.x, y: HOME.y + 6, z: HOME.z + 10, tx: 0, ty: -.25, tz: 0, fov: HOME.fov, boost: 0 };
+const HOME = MOBILE ? { x: 0, y: 5.6, z: 30, fov: 55, ty: -4.2 } : { x: 0, y: 3.9, z: 16.2, fov: 50, ty: -.25 };
+const cam = { x: HOME.x, y: HOME.y + 6, z: HOME.z + 10, tx: 0, ty: HOME.ty, tz: 0, fov: HOME.fov, boost: 0 };
 const flashEl = $('#flash');
 let mouse = { x: 0, y: 0 }, hoverId = null;
 const outerUI = ['#outer', '#labels'];
@@ -808,7 +808,7 @@ function exitAgent(after) {
     curAgent = null;
   }, 1.18 * DUR);
   tl.to(flashEl, { opacity: 0, duration: .8 * DUR + .01 }, 1.2 * DUR);
-  tl.to(cam, { x: HOME.x, y: HOME.y, z: HOME.z, tx: 0, ty: -.25, tz: 0, fov: HOME.fov, boost: 0, duration: 2.0 * DUR + .01, ease: 'power3.inOut' }, 1.2 * DUR);
+  tl.to(cam, { x: HOME.x, y: HOME.y, z: HOME.z, tx: 0, ty: HOME.ty, tz: 0, fov: HOME.fov, boost: 0, duration: 2.0 * DUR + .01, ease: 'power3.inOut' }, 1.2 * DUR);
   tl.add(() => fadeUI(outerUI, true, .6), 2.2 * DUR);
   tl.to('#subs', { autoAlpha: 1, duration: .4 }, 2.4 * DUR);
   tl.add(() => { mode = 'outer'; after && after(); });
@@ -865,7 +865,8 @@ for (const m of flowMetas) {
   d.addEventListener('pointermove', e => {
     if (!drag) return; const n = FN[m.id], r = drag.r;
     drag.moved = Math.max(drag.moved, Math.hypot(e.clientX - drag.ox, e.clientY - drag.oy));
-    n.x = clamp(drag.x + (e.clientX - drag.ox) / Math.max(1, r.w - r.cw)); n.y = clamp(drag.y + (e.clientY - drag.oy) / Math.max(1, r.h - r.ch));
+    if (MOBILE) { n.y = clamp(drag.y + (e.clientX - drag.ox) / Math.max(1, r.w - r.cw)); n.x = clamp(drag.x + (e.clientY - drag.oy) / Math.max(1, r.h - r.ch)); }
+    else { n.x = clamp(drag.x + (e.clientX - drag.ox) / Math.max(1, r.w - r.cw)); n.y = clamp(drag.y + (e.clientY - drag.oy) / Math.max(1, r.h - r.ch)); }
     layoutFlow();
   });
   const end = () => { if (!drag) return; d.classList.remove('drag'); if (drag.moved > 3) { savedLayout[m.id] = [+FN[m.id].x.toFixed(4), +FN[m.id].y.toFixed(4)]; try { localStorage.setItem(LSKEY, JSON.stringify(savedLayout)); } catch { } } drag = null; };
@@ -882,17 +883,17 @@ for (const [from, to, label] of FLOW.edges) {
   const flowL = svgEl('path', { fill: 'none', stroke: planned ? '#6b7a96' : col, 'stroke-width': 2, 'stroke-dasharray': '2 14', 'stroke-linecap': 'round', opacity: planned ? .35 : .9 });
   const arrow = svgEl('path', { d: 'M-5,-4 L3,0 L-5,4', fill: 'none', stroke: planned ? '#6b7a96' : col, 'stroke-width': 1.6 });
   const dots = [0, 1, 2].map(() => svgEl('circle', { r: 2.6, fill: '#fff', opacity: 0 }));
-  const lblBg = svgEl('rect', { rx: 4, fill: 'rgba(4,8,18,.85)', stroke: planned ? '#2a3348' : col, 'stroke-opacity': .5 });
+  const lblBg = svgEl('rect', { class: 'elbg', rx: 4, fill: 'rgba(4,8,18,.85)', stroke: planned ? '#2a3348' : col, 'stroke-opacity': .5 });
   const lbl = svgEl('text', { class: 'elab', fill: planned ? '#6b7a96' : '#cfe0f5', 'text-anchor': 'middle', 'dominant-baseline': 'central' }); lbl.textContent = label;
   g.append(glow, base, flowL, arrow, ...dots, lblBg, lbl); fedgesEl.appendChild(g);
   FE.push({ from, to, label, planned, col, glow, base, flowL, arrow, dots, lblBg, lbl, E: 0, len: 1, pkt: [] });
 }
 function flowRect() {
   const m = MOBILE, W = innerWidth, H = innerHeight;
-  const cw = m ? 112 : 150, ch = m ? 56 : 86;
-  return m ? { l: 10, t: 80, w: W - 20, h: H - 230, cw, ch } : { l: 70, t: 170, w: W - 140, h: H - 170 - 190, cw, ch };
+  const cw = m ? 104 : 150, ch = m ? 50 : 86;
+  return m ? { l: 8, t: 78, w: W - 16, h: H - 210, cw, ch } : { l: 70, t: 170, w: W - 140, h: H - 170 - 190, cw, ch };
 }
-function nodeBox(id) { const n = FN[id], r = flowRect(); return { x: r.l + r.cw / 2 + n.x * (r.w - r.cw), y: r.t + r.ch / 2 + n.y * (r.h - r.ch), w: r.cw, h: r.ch }; }
+function nodeBox(id) { const n = FN[id], r = flowRect(), nx = MOBILE ? n.y : n.x, ny = MOBILE ? n.x : n.y; return { x: r.l + r.cw / 2 + nx * (r.w - r.cw), y: r.t + r.ch / 2 + ny * (r.h - r.ch), w: r.cw, h: r.ch }; }  // mobile: flow runs top → bottom
 function layoutFlow() {
   for (const id in FN) { const b = nodeBox(id); FN[id].d.style.left = b.x + 'px'; FN[id].d.style.top = b.y + 'px'; }
   for (const e of FE) {
@@ -970,7 +971,7 @@ function setView(v, instant = false) {
     mode = 'outer'; const d = instant ? .01 : .5 * DUR + .01;
     gsap.to('#flow', { autoAlpha: 0, duration: d, onComplete: () => flowEl.classList.add('hidden') });
     gsap.to(['#left', '#right', '#cards', '#labels', '#hint', '#pops'], { autoAlpha: 1, duration: d });
-    gsap.to(cam, { x: HOME.x, y: HOME.y, z: HOME.z, ty: -.25, duration: instant ? .01 : 1.1 * DUR + .01, ease: 'power3.inOut' });
+    gsap.to(cam, { x: HOME.x, y: HOME.y, z: HOME.z, ty: HOME.ty, duration: instant ? .01 : 1.1 * DUR + .01, ease: 'power3.inOut' });
     if (instant) { mode = 'outer'; flowEl.classList.add('hidden'); }
   }
   document.querySelectorAll('#viewsw span').forEach(s => s.classList.toggle('on', s.dataset.v === (mode === 'flow' ? 'flow' : 'core')));

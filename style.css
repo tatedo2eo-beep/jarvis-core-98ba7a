@@ -234,3 +234,17 @@ body:not([data-mode="outer"]):not([data-mode="flow"]) #viewsw{opacity:0;pointer-
 .nl.hot b{text-shadow:0 0 12px currentColor}
 .fcard{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .pop.inpop .num{font-size:64px}
+@media (max-width:860px){
+ #flow{position:fixed!important;inset:0!important;padding:0!important;min-height:0!important}
+ #c-tr > div:first-child > div:last-child{display:none}
+ #subs{bottom:12px}
+ body[data-mode="outer"] #subs{opacity:.95}
+ .fn .fh{font-size:11px}.fn .fm{display:none}.fn .fh .st{display:none}
+ .elab,.elbg{display:none}
+}
+@media (max-width:860px){
+ #outer{padding-top:58vh}
+ .nl .s{display:none}
+ #viewsw{top:84px!important;bottom:auto!important}
+ #subs{background:linear-gradient(0deg,rgba(2,3,10,.92) 55%,rgba(2,3,10,0));padding:22px 4vw 6px;width:100vw;left:0;transform:none;bottom:0}
+}
