@@ -651,7 +651,9 @@ async function connect(first = false) {
   es.addEventListener('open', () => { lastBeat = Date.now(); setLive('on'); });
   es.onerror = () => { setLive('err'); es.close(); setTimeout(() => connect(false), retry); retry = Math.min(30000, retry * 2); };
 }
-setInterval(() => { if (es && Date.now() - lastBeat > 100000) { es.close(); connect(false); } }, 15000);
+// watchdog: ntfy sends a keepalive every ~45 s; if the stream goes quiet, re-poll and reconnect (dedupe by id)
+setInterval(() => { if (es && Date.now() - lastBeat > 62000) { try { es.close(); } catch { } lastBeat = Date.now(); connect(false); } }, 10000);
+window.__reconnect = () => { lastBeat = Date.now(); connect(false); };
 document.addEventListener('visibilitychange', () => { if (!document.hidden && (!es || es.readyState === 2)) connect(false); });
 setInterval(() => { renderAgents(); renderHeat(); }, 30000);
 
