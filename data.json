@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T01:10:19+03:00",
+  "updatedAt": "2026-10-23T01:29:06+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -13,7 +13,7 @@
   },
   "headline": {
     "label": "Dishes written",
-    "done": 332,
+    "done": 342,
     "total": 885
   },
   "chapters": [
@@ -165,7 +165,7 @@
       "no": 13,
       "key": "soups",
       "name": "Soups",
-      "done": 12,
+      "done": 22,
       "total": 39,
       "flavours": {
         "done": 3,
@@ -795,9 +795,9 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T01:10:19+03:00",
+    "at": "2026-10-23T01:29:06+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
-    "recipesOnSite": 450,
+    "recipesOnSite": 453,
     "chaptersComplete": 8
   },
   "history": [
@@ -895,6 +895,14 @@
       "flavours": 99,
       "extra": 12,
       "metric": "dishes"
+    },
+    {
+      "t": "2026-10-23T01:29:06+03:00",
+      "recipes": 342,
+      "total": 885,
+      "flavours": 99,
+      "extra": 12,
+      "metric": "dishes"
     }
   ],
   "focus": "Meat",
@@ -910,110 +918,110 @@
   },
   "recent": [
     {
-      "title": "Fried Mini Pizzas with Tomato, Mozzarella and Basil",
-      "chapter": "pizza",
+      "title": "Pho Bo: Vietnamese Beef and Rice Noodle Soup",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/fried-mini-pizzas-tomato-mozzarella-basil/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pho-bo-vietnamese-beef-noodle-soup/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Spinach, Ricotta and Mozzarella Stromboli with Garlic Crust",
-      "chapter": "pizza",
+      "title": "Matzah Ball Soup with Chicken and Dill",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/spinach-ricotta-mozzarella-stromboli-garlic-crust/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/matzah-ball-soup-chicken-dill/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Roman-Style Sheet-Pan Pizza with Tomato-Mozzarella and Rosemary-Potato Halves",
-      "chapter": "pizza",
+      "title": "Ukrainian Borscht with Beef, Beetroot and Cabbage",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/roman-style-sheet-pan-pizza-tomato-mozzarella-rosemary-potato/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/ukrainian-borscht-beef-beetroot-cabbage/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Chicago-Style Deep-Dish Cheese Pizza with Buttery Crust and Chunky Tomato",
-      "chapter": "pizza",
+      "title": "Pumpkin Soup with Caramelised Onion and Crisp Sage",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chicago-style-deep-dish-pizza-buttery-crust-chunky-tomato/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pumpkin-soup-caramelised-onion-sage/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Sicilian-Style Thick Pan Pizza with Onion, Tomato and Crisp Crumbs",
-      "chapter": "pizza",
+      "title": "Miso Soup with Tofu and Wakame",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/sicilian-style-thick-pan-pizza-onion-tomato-crisp-crumbs/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/miso-soup-tofu-wakame/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Detroit-Style Pan Pizza with Crisp Cheese Edges and Tomato Stripes",
-      "chapter": "pizza",
+      "title": "Pappa al Pomodoro: Tuscan Tomato and Bread Soup",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/detroit-style-pan-pizza-crisp-cheese-edges-tomato-stripes/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pappa-al-pomodoro-tuscan-tomato-bread-soup/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "New York-Style Cheese Pizza with Oregano Tomato Sauce",
-      "chapter": "pizza",
+      "title": "Ribollita: Tuscan Bean, Cavolo Nero and Bread Soup",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/new-york-style-cheese-pizza-oregano-tomato-sauce/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/ribollita-tuscan-bean-kale-bread-soup/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Neapolitan-Style Margherita Pizza with Tomato, Mozzarella and Basil",
-      "chapter": "pizza",
+      "title": "Vichyssoise: Chilled Leek and Potato Soup",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/neapolitan-style-margherita-pizza-tomato-mozzarella-basil/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/vichyssoise-chilled-leek-potato-soup/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Malaysian-Style Fish Head Curry with Okra and Aubergine",
-      "chapter": "seafood",
+      "title": "Scotch Broth with Lamb, Barley and Kale",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/malaysian-style-fish-head-curry-okra-aubergine/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/scotch-broth-lamb-barley-kale/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Libyan-Style Fish in Spicy Tomato and Pepper Sauce",
-      "chapter": "seafood",
+      "title": "Mulligatawny with Chicken, Red Lentils and Coconut",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/libyan-style-fish-spicy-tomato-pepper-sauce/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/mulligatawny-chicken-red-lentil-coconut/",
+      "t": "2026-10-23T01:27:44+03:00"
     },
     {
-      "title": "Gently Poached Prawns with Classic Cocktail Sauce",
-      "chapter": "seafood",
+      "title": "Slow-Roasted Spiced Lamb Shoulder with Cumin Salt and Flatbread",
+      "chapter": "meat",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/poached-prawns-classic-cocktail-sauce/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/slow-roasted-spiced-lamb-shoulder-cumin-salt/",
+      "t": "2026-10-23T01:13:12+03:00"
     },
     {
-      "title": "Louisiana-Style Crayfish Tail Stew with Rice",
-      "chapter": "seafood",
+      "title": "Harira: Moroccan Lentil and Chickpea Soup with Herbs",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/louisiana-style-crayfish-tail-stew-rice/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/harira-moroccan-lentil-chickpea-soup/",
+      "t": "2026-10-23T01:13:11+03:00"
     },
     {
-      "title": "Crisp Fried Mixed Seafood and Courgette with Lemon",
-      "chapter": "seafood",
+      "title": "Egg Drop Soup with Ginger and Spring Onion",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/crisp-fried-mixed-seafood-courgette/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/egg-drop-soup-ginger-spring-onion/",
+      "t": "2026-10-23T01:13:11+03:00"
     },
     {
-      "title": "Brazilian-Style Fish and Prawn Stew with Coconut and Peppers",
-      "chapter": "seafood",
+      "title": "Avgolemono: Greek Chicken and Rice Soup with Egg and Lemon",
+      "chapter": "soups",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/brazilian-style-fish-prawn-coconut-stew/",
-      "t": "2026-10-23T01:06:59+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/avgolemono-greek-chicken-rice-soup-egg-lemon/",
+      "t": "2026-10-23T01:13:11+03:00"
     }
   ],
-  "recipeFiles": 450,
+  "recipeFiles": 453,
   "real": {
-    "at": "2026-10-23T01:10:19+03:00",
+    "at": "2026-10-23T01:29:06+03:00",
     "book": {
       "dishes": [
-        332,
+        342,
         885
       ],
       "flavours": [
@@ -1027,8 +1035,8 @@
       ],
       "focus": "Meat"
     },
-    "pages": 450,
-    "pagesInGit": 352,
+    "pages": 453,
+    "pagesInGit": 453,
     "knowledge": {
       "files": 6,
       "techniques": 74,
@@ -1062,7 +1070,7 @@
         },
         {
           "d": "2026-10-23",
-          "n": 60
+          "n": 161
         }
       ],
       "hours": [
@@ -1184,58 +1192,68 @@
         {
           "h": "01",
           "t": 1792706400,
-          "n": 0
+          "n": 101
         }
       ],
       "source": "public-site git history: first commit that added each content/recipes/*.json (Cairo time)"
     },
     "commits": [
       {
+        "t": 1792708092,
+        "s": "Soups sp4: 10 new soup dishes (manual prose)"
+      },
+      {
+        "t": 1792707346,
+        "s": "Publish cakes cx1 (6); update PROGRESS"
+      },
+      {
+        "t": 1792707333,
+        "s": "Publish pizza z1 (8), z2 (9)"
+      },
+      {
+        "t": 1792707319,
+        "s": "Publish dumplings d1 (4), seafood s1 (9)"
+      },
+      {
+        "t": 1792707300,
+        "s": "Publish meat m4 (5), m5 (8), m6 (7), m7 (1)"
+      },
+      {
+        "t": 1792707287,
+        "s": "Publish rice r3 (5), r4 (5), eggs e2 (6), e3 (4)"
+      },
+      {
+        "t": 1792707263,
+        "s": "Publish soups sp1 (4), sp2 (4), sp3 (6)"
+      },
+      {
         "t": 1792704663,
         "s": "Publish home kitchen fly-through + drinks showcase (built from 6308dd05)"
-      },
-      {
-        "t": 1792704635,
-        "s": "Home: kitchen fly-through hero with real recipes (featured, numbers, cravings); drinks cha"
-      },
-      {
-        "t": 1792703741,
-        "s": "Publish mexican mx6 (3), rice r1 (5)"
-      },
-      {
-        "t": 1792703415,
-        "s": "Publish eggs e1 (6), rice r2 (3), salads sl4 (6)"
-      },
-      {
-        "t": 1792703280,
-        "s": "Publish salads sl3 (7)"
-      },
-      {
-        "t": 1792703231,
-        "s": "Publish meat m3 (7), mexican mx5 (4), salads sl1 (5)"
-      },
-      {
-        "t": 1792702903,
-        "s": "meat m2 (8) + mexican mx3 (3), mx4 (3) [Sonnet prose]"
-      },
-      {
-        "t": 1792702735,
-        "s": "meat m1 (9) + salads sl2 (6) [Sonnet prose]"
       }
     ],
-    "commitCount": 54,
+    "commitCount": 61,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
-    "livePages": 352,
+    "livePages": 453,
     "tonight": {
-      "n": 76,
-      "batches": 12,
+      "n": 109,
+      "batches": 17,
       "first": "00:54",
-      "last": "01:00",
+      "last": "01:28",
       "recent": [
+        [
+          "01:28",
+          "sp4",
+          10
+        ],
         [
           "01:00",
           "z2",
           9
+        ],
+        [
+          "00:59",
+          "m4",
+          6
         ],
         [
           "00:58",
@@ -1243,23 +1261,13 @@
           8
         ],
         [
+          "00:58",
+          "cx1",
+          6
+        ],
+        [
           "00:57",
           "d1",
-          4
-        ],
-        [
-          "00:56",
-          "m7",
-          8
-        ],
-        [
-          "00:56",
-          "sp1",
-          4
-        ],
-        [
-          "00:56",
-          "sp2",
           4
         ]
       ]
@@ -1568,21 +1576,21 @@
     {"s":"galbitang","n":"Galbitang","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"doenjang-jjigae","n":"Doenjang-jjigae","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"egg-drop-soup","n":"Egg drop soup","c":13,"b":1,"f":[1,1],"x":0},
-    {"s":"pappa-al-pomodoro","n":"Pappa al pomodoro","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"scotch-broth","n":"Scotch broth","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"pappa-al-pomodoro","n":"Pappa al pomodoro","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"scotch-broth","n":"Scotch broth","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"chorba","n":"Chorba","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"matzah-ball-soup","n":"Matzah ball soup","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"pumpkin-soup","n":"Pumpkin soup","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"vichyssoise","n":"Vichyssoise","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"pho","n":"Pho","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"miso","n":"Miso","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"matzah-ball-soup","n":"Matzah ball soup","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"pumpkin-soup","n":"Pumpkin soup","c":13,"b":1,"f":[0,1],"x":0},
+    {"s":"vichyssoise","n":"Vichyssoise","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"pho","n":"Pho","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"miso","n":"Miso","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"tom-yum","n":"Tom yum","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"tom-kha","n":"Tom kha","c":13,"b":0,"f":[0,1],"x":0},
-    {"s":"borscht","n":"Borscht","c":13,"b":0,"f":[0,1],"x":0},
+    {"s":"borscht","n":"Borscht","c":13,"b":1,"f":[0,1],"x":0},
     {"s":"avgolemono","n":"Avgolemono","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"harira","n":"Harira","c":13,"b":1,"f":[0,0],"x":0},
-    {"s":"mulligatawny","n":"Mulligatawny","c":13,"b":0,"f":[0,0],"x":0},
-    {"s":"ribollita","n":"Ribollita","c":13,"b":0,"f":[0,0],"x":0},
+    {"s":"mulligatawny","n":"Mulligatawny","c":13,"b":1,"f":[0,0],"x":0},
+    {"s":"ribollita","n":"Ribollita","c":13,"b":1,"f":[0,0],"x":0},
     {"s":"laksa","n":"Laksa","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"ajo-blanco","n":"Ajo blanco","c":13,"b":0,"f":[0,0],"x":0},
     {"s":"beef-stock","n":"Beef stock","c":13,"b":0,"f":[0,0],"x":0},
