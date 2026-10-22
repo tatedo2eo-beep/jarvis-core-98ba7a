@@ -94,3 +94,28 @@ Built with three.js r169 and GSAP, vendored. Fonts: Inter and JetBrains Mono (OF
 - INSIDE (tap/click the core, or "Enter core"): the v6 dot-brain look from commit 5613e14 (same fibres, tips, background, bloom, brain colours, grey glass panels). "Outside" or Esc goes back. The two looks cross-fade during a smooth camera zoom.
 - Orbit controls in both views (three.js OrbitControls, as in v3 fcd8240): drag/touch to rotate freely, pinch/scroll to zoom, damped glide, gentle auto-rotate when idle (pauses while dragging, resumes after 3.5 s). Labels on the far side of the brain dim.
 - `tools_fps2.py` measures fps idle and while actively dragging (desktop mouse, phone CDP touch at 4x CPU throttle), both views. Results in shots/fps_rotate.json.
+
+## v8: three levels
+
+1. **Outside**: a glowing core with coloured tendrils. The glow is always on; bloom is never switched off. Slow devices only lose dots, tendrils and resolution. The colours drift in slow waves through one shared cyclic palette (`wpal` in the shaders).
+2. **Inside**: the dot brain from v7, unchanged.
+3. **Deeper**: tap an agent, or pick it from the list, to fly into its own dot cloud.
+   - Each cluster is one real task, labelled with its real count (for example `sp5 · 7 recipes`). Dots are capped at 90 per cluster for speed; the label always shows the true count.
+   - Tap a cluster, or its row in the side sheet, to open it. It lists the real recipe names, files or chapters where they were recorded.
+   - The breadcrumb at the top, the back button or Esc go up one level.
+   - Agents with no tasks show "Nothing running".
+
+   Where each agent's tasks come from:
+
+   | Agent | Source |
+   |---|---|
+   | Recipe Writer | live worker processes plus the logged batches |
+   | Recipe Checker | site publishes |
+   | Research | knowledge files |
+   | Planner | chapters by state |
+   | Claude Code | live processes |
+   | Jarvis | real events from the last 12 h, grouped by agent |
+
+Panels: frosted sheets, thin Inter type with JetBrains Mono for numbers, hairline rows, and a glowing dot plus a word for status.
+
+The ntfy topic names are still in the public page source. That is accepted for this non-sensitive work-status feed, which posts only work-status text and never secrets or private data.

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T02:09:00+03:00",
+  "updatedAt": "2026-10-23T02:12:55+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -795,7 +795,7 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T02:09:00+03:00",
+    "at": "2026-10-23T02:12:55+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
     "recipesOnSite": 489,
     "chaptersComplete": 8
@@ -1042,7 +1042,7 @@
   ],
   "recipeFiles": 489,
   "real": {
-    "at": "2026-10-23T02:09:00+03:00",
+    "at": "2026-10-23T02:12:55+03:00",
     "book": {
       "dishes": [
         378,
