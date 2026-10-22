@@ -25,7 +25,9 @@ const setHTML = (node, h) => { if (node && node._h !== h) { node._h = h; node.in
 let simMs = 0;
 const wall0 = Date.now();
 let wallOff = 0;   // capture mode: frames render slower than real time, so the virtual clock jumps forward to each real message's timestamp
-const NOW = () => CAPTURE ? wall0 + simMs + wallOff : Date.now();   // ms
+const REALCLOCK = Q.has('realclock');   // capture with real wall-clock text (time-lapse) instead of the virtual clock
+const NOW = () => CAPTURE && !REALCLOCK ? wall0 + simMs + wallOff : Date.now();   // ms
+const ANIM = () => CAPTURE ? wall0 + simMs : Date.now();   // animation timing only (subtitle typing, panel cycling)
 const nowS = () => NOW() / 1000;
 function ago(sec) {
   const d = Math.max(0, Math.floor(nowS() - sec));
@@ -483,20 +485,20 @@ function renderBlocks() {
 }
 function showLeft(block, ms = 45000) {
   if (block != null) blockIdx = BLOCKS.indexOf(block);
-  blockAt = NOW(); leftUntil = Math.max(leftUntil, NOW() + ms); renderBlocks();
+  blockAt = ANIM(); leftUntil = Math.max(leftUntil, ANIM() + ms); renderBlocks();
   if (!leftShown && view === 'core' && focusId == null) {
-    leftShown = true; const L = $('#left');
+    leftShown = true; document.body.classList.add('leftopen'); const L = $('#left');
     gsap.killTweensOf(L); gsap.set(L, { visibility: 'visible' }); gsap.to(L, { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' });
   }
 }
 function hideLeft() {
-  if (!leftShown) return; leftShown = false; const L = $('#left');
+  if (!leftShown) return; leftShown = false; document.body.classList.remove('leftopen'); const L = $('#left');
   gsap.killTweensOf(L); gsap.to(L, { opacity: 0, x: -16, duration: 0.7, ease: 'power2.in', onComplete: () => gsap.set(L, { visibility: 'hidden' }) });
 }
 function tickLeft() {
   if (!leftShown) return;
-  if (NOW() > leftUntil) return hideLeft();
-  if (NOW() - blockAt > 7000) { blockIdx = (blockIdx + 1) % BLOCKS.length; blockAt = NOW(); renderBlocks(); }
+  if (ANIM() > leftUntil) return hideLeft();
+  if (ANIM() - blockAt > 7000) { blockIdx = (blockIdx + 1) % BLOCKS.length; blockAt = ANIM(); renderBlocks(); }
 }
 $('#pill').onclick = () => leftShown ? (leftUntil = 0, hideLeft()) : showLeft(null, 60000);
 
@@ -504,7 +506,7 @@ function renderTop() {
   const live = liveFeed(), pill = $('#pill');
   pill.classList.toggle('live', !!live);
   setText($('#pill-state'), live ? 'LIVE' : lastLiveMsg ? 'RECONNECTING' : 'CONNECTING');
-  setText($('#pill-ago'), lastReal ? `last real event ${ago(lastReal)}` : 'no real event yet');
+  setText($('#pill-ago'), lastReal ? `${MOBILE ? 'last event' : 'last real event'} ${ago(lastReal)}` : 'no real event yet');
   $('#brand').classList.toggle('ok', !!live);
   setText($('#link span'), live ? 'CONNECTED' : lastLiveMsg ? 'RECONNECTING' : 'CONNECTING');
   const ws = workers(), run = ws.filter(w => w.state === 'running').length;
@@ -528,13 +530,13 @@ const CPS = 38;
 function say(ev) { SUBQ.push({ who: (AGENTS[IDX[ev.agent]] || AGENTS[0]).name, text: ev.text }); if (SUBQ.length > 4) SUBQ.shift(); }
 let beamV = 0;
 function tickSubs() {
-  const t = NOW();
-  if (!sub && SUBQ.length) { sub = { ...SUBQ.shift(), t0: t }; setText($('#who'), sub.who.toUpperCase()); $('#subs').classList.add('on'); }
+  const t = ANIM();
+  if (!sub && SUBQ.length) { sub = { ...SUBQ.shift(), t0: t }; setText($('#who'), sub.who.toUpperCase()); $('#subs').classList.add('on'); document.body.classList.add('saying'); }
   if (!sub) return 0;
   const typeMs = sub.text.length / CPS * 1000, hold = 5500;
   const n = Math.min(sub.text.length, Math.floor((t - sub.t0) / 1000 * CPS));
   setText($('#subtxt'), sub.text.slice(0, n));
-  if (t - sub.t0 > typeMs + hold) { sub = null; setText($('#subtxt'), ''); if (!SUBQ.length) $('#subs').classList.remove('on'); return 0; }
+  if (t - sub.t0 > typeMs + hold) { sub = null; setText($('#subtxt'), ''); if (!SUBQ.length) { $('#subs').classList.remove('on'); document.body.classList.remove('saying'); } return 0; }
   return t - sub.t0 < typeMs ? 1 : 0.55;          // beam: full while typing, softer while holding
 }
 

@@ -177,8 +177,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(7,10,18,.86)}
   #brand .mark{font-size:14px;letter-spacing:.42em}
   #brand .micro{font-size:8px;margin-top:6px}
-  #pill{top:auto;bottom:calc(16px + env(safe-area-inset-bottom));left:16px;transform:none;padding:7px 12px;font-size:8.5px;gap:9px}
-  #pill-ago{font-size:11px}
+  #pill{top:auto;bottom:calc(16px + env(safe-area-inset-bottom));left:12px;transform:none;padding:7px 11px;font-size:8.5px;gap:8px}
+  #pill-ago{font-size:10.5px;letter-spacing:.02em}
   #status .st{font-size:10px;letter-spacing:.32em;gap:8px}#globe{width:20px;height:20px}
   #status .clock{font-size:18px;margin-top:5px}#status .micro{font-size:8px}
   #right{left:12px;right:12px;width:auto;top:52vh;bottom:64px;max-height:none;overflow:auto;gap:10px;-webkit-overflow-scrolling:touch}
@@ -187,14 +187,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   #aglist li{padding:6px 0;border-top:1px solid rgba(255,255,255,.05)!important;gap:7px}
   #aglist li .nm{font-size:11.5px}#aglist li .meta{display:none}
   .badge{font-size:7.5px;padding:2px 5px 1px;letter-spacing:.14em}
-  #left{left:12px;right:12px;width:auto;top:auto;bottom:64px;z-index:5;background:rgba(7,10,18,.94)}
+  #left{left:12px;right:12px;width:auto;top:47vh;bottom:64px;z-index:5;background:rgba(6,9,16,.985);overflow:auto;padding:14px 18px 12px}
+  body.leftopen #right{opacity:0!important;pointer-events:none}
+  #labels,#leaders{transition:opacity .6s}
+  body.saying #labels,body.saying #leaders{opacity:.12!important}
   .blocks{min-height:224px}
   #agentview{left:12px;right:12px;width:auto;top:auto;bottom:64px;max-height:56vh;z-index:6;background:rgba(7,10,18,.95)}
   #subs{bottom:auto;top:43vh;width:calc(100vw - 32px)}
   #subs .txt{font-size:13.5px}
   #listen{display:none!important}
   #foot{display:none}
-  #views{top:auto;left:auto;right:16px;bottom:calc(14px + env(safe-area-inset-bottom))}
+  #views{top:auto;left:auto;right:12px;bottom:calc(14px + env(safe-area-inset-bottom))}
+  #views button{padding:5px 10px;font-size:10px}
   .lb{padding:4px 7px}.lb b{font-size:8.5px;letter-spacing:.12em}.lb span{display:none}
   .fn{width:118px;padding:8px 9px}.fn .ft{display:none}
   .fhead{top:70px}.fhead .ft2{font-size:12px}
