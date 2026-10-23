@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T15:31:58+03:00",
+  "updatedAt": "2026-10-23T15:39:01+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -13,7 +13,7 @@
   },
   "headline": {
     "label": "Dishes written",
-    "done": 496,
+    "done": 507,
     "total": 885
   },
   "chapters": [
@@ -345,7 +345,7 @@
       "no": 28,
       "key": "pies-crumbles",
       "name": "Pies & Crumbles",
-      "done": 0,
+      "done": 11,
       "total": 17,
       "flavours": {
         "done": 0,
@@ -795,9 +795,9 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T15:31:58+03:00",
+    "at": "2026-10-23T15:39:01+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
-    "recipesOnSite": 627,
+    "recipesOnSite": 638,
     "chaptersComplete": 9
   },
   "history": [
@@ -935,6 +935,14 @@
       "flavours": 119,
       "extra": 12,
       "metric": "dishes"
+    },
+    {
+      "t": "2026-10-23T15:39:01+03:00",
+      "recipes": 507,
+      "total": 885,
+      "flavours": 119,
+      "extra": 12,
+      "metric": "dishes"
     }
   ],
   "focus": "Meat",
@@ -949,6 +957,83 @@
     "done": 12
   },
   "recent": [
+    {
+      "title": "Peach Cobbler with Buttermilk Biscuits",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/peach-cobbler-buttermilk-biscuits/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Skillet Apple Pandowdy",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/skillet-apple-pandowdy/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Silky Egg Custard Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/silky-egg-custard-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Apple Oat Crumble",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/apple-oat-crumble/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Key Lime Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/key-lime-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Lemon Meringue Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/lemon-meringue-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Cherry Clafoutis",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/cherry-clafoutis/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Classic Pecan Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/classic-pecan-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Classic Pumpkin Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/classic-pumpkin-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Double-Crust Apple Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/double-crust-apple-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
+    {
+      "title": "Banana Cream Pie",
+      "chapter": "pies-crumbles",
+      "flavour": "Classic",
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/banana-cream-pie/",
+      "t": "2026-10-23T15:38:24+03:00"
+    },
     {
       "title": "Strawberry Jam",
       "chapter": "preserves-pickles-ferments",
@@ -969,91 +1054,14 @@
       "flavour": "Classic",
       "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/fermented-sour-dill-pickles/",
       "t": "2026-10-23T15:28:29+03:00"
-    },
-    {
-      "title": "Homemade Sauerkraut",
-      "chapter": "preserves-pickles-ferments",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/homemade-sauerkraut/",
-      "t": "2026-10-23T15:28:29+03:00"
-    },
-    {
-      "title": "Napa Cabbage Kimchi",
-      "chapter": "preserves-pickles-ferments",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/napa-cabbage-kimchi/",
-      "t": "2026-10-23T15:28:29+03:00"
-    },
-    {
-      "title": "Moroccan Chicken Pastilla",
-      "chapter": "savory-pies-pastries",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/moroccan-chicken-pastilla-almonds-cinnamon/",
-      "t": "2026-10-23T15:24:55+03:00"
-    },
-    {
-      "title": "Pain de Campagne (Rustic Sourdough Boule)",
-      "chapter": "breads-viennoiserie",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pain-de-campagne-rustic-sourdough-boule/",
-      "t": "2026-10-23T15:23:03+03:00"
-    },
-    {
-      "title": "Soft Coconut Milk Coco Bread",
-      "chapter": "breads-viennoiserie",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/soft-coconut-milk-coco-bread/",
-      "t": "2026-10-23T15:23:03+03:00"
-    },
-    {
-      "title": "Thin Soft Lavash",
-      "chapter": "breads-viennoiserie",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/thin-soft-lavash-flatbread/",
-      "t": "2026-10-23T15:23:03+03:00"
-    },
-    {
-      "title": "Classic Cheese Quiche",
-      "chapter": "savory-pies-pastries",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/classic-cheese-quiche/",
-      "t": "2026-10-23T15:22:50+03:00"
-    },
-    {
-      "title": "Cornish Pasty",
-      "chapter": "savory-pies-pastries",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/cornish-beef-pasty/",
-      "t": "2026-10-23T15:22:50+03:00"
-    },
-    {
-      "title": "Spanakopita (Spinach and Feta Phyllo Pie)",
-      "chapter": "savory-pies-pastries",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/spanakopita-spinach-feta-phyllo-squares/",
-      "t": "2026-10-23T15:22:50+03:00"
-    },
-    {
-      "title": "Chile con Queso",
-      "chapter": "appetizers-dips",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/tex-mex-chile-con-queso-dip/",
-      "t": "2026-10-23T15:16:25+03:00"
-    },
-    {
-      "title": "Tomato and Basil Bruschetta",
-      "chapter": "appetizers-dips",
-      "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/tomato-basil-bruschetta/",
-      "t": "2026-10-23T15:16:25+03:00"
     }
   ],
-  "recipeFiles": 627,
+  "recipeFiles": 638,
   "real": {
-    "at": "2026-10-23T15:31:58+03:00",
+    "at": "2026-10-23T15:39:01+03:00",
     "book": {
       "dishes": [
-        496,
+        507,
         885
       ],
       "flavours": [
@@ -1067,8 +1075,8 @@
       ],
       "focus": "Meat"
     },
-    "pages": 627,
-    "pagesInGit": 627,
+    "pages": 638,
+    "pagesInGit": 638,
     "knowledge": {
       "files": 6,
       "techniques": 74,
@@ -1102,7 +1110,7 @@
         },
         {
           "d": "2026-10-23",
-          "n": 335
+          "n": 346
         }
       ],
       "hours": [
@@ -1224,12 +1232,16 @@
         {
           "h": "15",
           "t": 1792756800,
-          "n": 16
+          "n": 27
         }
       ],
       "source": "public-site git history: first commit that added each content/recipes/*.json (Cairo time)"
     },
     "commits": [
+      {
+        "t": 1792759127,
+        "s": "pi1: 11 pies, crumbles, cobblers (own prose)"
+      },
       {
         "t": 1792758527,
         "s": "Add 9 recipes: savoury pies (pasty, spanakopita, cheese quiche, chicken pastilla) and pres"
@@ -1257,13 +1269,9 @@
       {
         "t": 1792716227,
         "s": "ap3: 5 appetizer Classics (skordalia, provoleta, seven-layer dip, Jamaican patty, labneh)"
-      },
-      {
-        "t": 1792715746,
-        "s": "Hold massaman chicken and yellow curry prawns Classics (photo mismatch); moved to rw/held/"
       }
     ],
-    "commitCount": 84,
+    "commitCount": 85,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
     "livePages": 627,
     "tonight": {
@@ -1708,6 +1716,25 @@
       ],
       "publishes": [
         {
+          "h": "acb282082",
+          "t": 1792759127,
+          "s": "pi1: 11 pies, crumbles, cobblers (own prose)",
+          "n": 11,
+          "names": [
+            "Apple Oat Crumble",
+            "Banana Cream Pie",
+            "Cherry Clafoutis",
+            "Classic Pecan Pie",
+            "Classic Pumpkin Pie",
+            "Double-Crust Apple Pie",
+            "Key Lime Pie",
+            "Lemon Meringue Pie",
+            "Peach Cobbler with Buttermilk Biscuits",
+            "Silky Egg Custard Pie",
+            "Skillet Apple Pandowdy"
+          ]
+        },
+        {
           "h": "22fd3d9ac",
           "t": 1792758527,
           "s": "Add 9 recipes: savoury pies (pasty, spanakopita, cheese quiche, chicke",
@@ -1822,23 +1849,6 @@
             "Potato and Sauerkraut Dumplings with Caramelised Onions",
             "Thai Green Coconut Curry with Cod, Aubergine and Red Chilli",
             "Vegetable and Paneer Korma with Cashew Cream and Toasted Almonds"
-          ]
-        },
-        {
-          "h": "1d4506c32",
-          "t": 1792715100,
-          "s": "sw2: 9 sandwiches/appetizers (tuna melt, panini, wraps, French dip, pa",
-          "n": 9,
-          "names": [
-            "Curry Deviled Eggs with Parsley",
-            "Dill Pickle Deviled Eggs",
-            "French Dip Roast Beef Sandwiches with Thyme Jus",
-            "Mediterranean Chicken Wraps with Feta, Red Pepper and Olives",
-            "Open-Faced Cheddar Tuna Melts with Dill Pickles",
-            "Pan Bagnat with Tuna, Egg and Olives",
-            "Pressed Pesto, Mozzarella and Tomato Panini",
-            "Provolone Philly Cheesesteaks with Golden Onions",
-            "Roasted Red Pepper Hummus with Toasted Almonds"
           ]
         }
       ],
@@ -2097,7 +2107,7 @@
         },
         {
           "name": "Pies & Crumbles",
-          "done": 0,
+          "done": 11,
           "total": 17
         },
         {
@@ -2839,19 +2849,19 @@
     {"s":"molten-chocolate","n":"Molten chocolate","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"german-chocolate-cake","n":"German chocolate cake","c":27,"b":1,"f":[0,0],"x":0},
     {"s":"hummingbird-cake","n":"Hummingbird cake","c":27,"b":1,"f":[0,0],"x":0},
-    {"s":"double-crust-fruit-pie-apple-cherry","n":"Double-crust fruit pie (apple, cherry)","c":28,"b":0,"f":[0,0],"x":0},
-    {"s":"custard-pie","n":"Custard pie","c":28,"b":0,"f":[0,0],"x":0},
-    {"s":"cream-pie-banana-coconut","n":"Cream pie (banana, coconut)","c":28,"b":0,"f":[0,3],"x":0},
-    {"s":"meringue-pie-lemon","n":"Meringue pie (lemon)","c":28,"b":0,"f":[0,1],"x":0},
-    {"s":"pecan","n":"Pecan","c":28,"b":0,"f":[0,0],"x":0},
-    {"s":"key-lime","n":"Key lime","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"double-crust-fruit-pie-apple-cherry","n":"Double-crust fruit pie (apple, cherry)","c":28,"b":1,"f":[0,0],"x":0},
+    {"s":"custard-pie","n":"Custard pie","c":28,"b":1,"f":[0,0],"x":0},
+    {"s":"cream-pie-banana-coconut","n":"Cream pie (banana, coconut)","c":28,"b":1,"f":[0,3],"x":0},
+    {"s":"meringue-pie-lemon","n":"Meringue pie (lemon)","c":28,"b":1,"f":[0,1],"x":0},
+    {"s":"pecan","n":"Pecan","c":28,"b":1,"f":[0,0],"x":0},
+    {"s":"key-lime","n":"Key lime","c":28,"b":1,"f":[0,0],"x":0},
     {"s":"chess","n":"Chess","c":28,"b":0,"f":[0,2],"x":0},
-    {"s":"crumble","n":"Crumble","c":28,"b":0,"f":[0,2],"x":0},
+    {"s":"crumble","n":"Crumble","c":28,"b":1,"f":[0,2],"x":0},
     {"s":"crisp","n":"Crisp","c":28,"b":0,"f":[0,2],"x":0},
-    {"s":"cobbler","n":"Cobbler","c":28,"b":0,"f":[0,2],"x":0},
-    {"s":"clafoutis","n":"Clafoutis","c":28,"b":0,"f":[0,2],"x":0},
-    {"s":"pandowdy","n":"Pandowdy","c":28,"b":0,"f":[0,0],"x":0},
-    {"s":"pumpkin-pie","n":"Pumpkin pie","c":28,"b":0,"f":[0,0],"x":0},
+    {"s":"cobbler","n":"Cobbler","c":28,"b":1,"f":[0,2],"x":0},
+    {"s":"clafoutis","n":"Clafoutis","c":28,"b":1,"f":[0,2],"x":0},
+    {"s":"pandowdy","n":"Pandowdy","c":28,"b":1,"f":[0,0],"x":0},
+    {"s":"pumpkin-pie","n":"Pumpkin pie","c":28,"b":1,"f":[0,0],"x":0},
     {"s":"sweet-potato-pie","n":"Sweet potato pie","c":28,"b":0,"f":[0,0],"x":0},
     {"s":"galette-crostata","n":"Galette/crostata","c":28,"b":0,"f":[0,1],"x":0},
     {"s":"banoffee","n":"Banoffee","c":28,"b":0,"f":[0,0],"x":0},

@@ -147,16 +147,17 @@ const bKind = new Uint8Array(BN);          // 0 cortex, 1 cerebellum, 2 stem
     } else {
       const s = rnd() < .5 ? -1 : 1; v.copy(randDir());
       fold = Math.sin(v.x * 9 + Math.sin(v.z * 7) * 1.5) * Math.sin(v.y * 11 + v.z * 6);
-      const sr = rnd(); const surf = sr < .78 ? (0.9 + rnd() * .1) : Math.pow(rnd(), .5) * .88;
+      const sr = rnd(); const surf = sr < .86 ? (0.94 + rnd() * .06) : Math.pow(rnd(), .5) * .84;
       const rr = surf * (1 + .11 * fold);
-      let vx = v.x; if (vx * s < 0) vx *= .22;             // flat medial face
-      x = s * .25 + vx * .5 * rr; y = v.y * .66 * rr; z = v.z * .98 * rr;
+      let vx = v.x; if (vx * s < 0) vx *= .14;             // flat medial face
+      x = s * .34 + vx * .5 * rr; y = v.y * .66 * rr; z = v.z * .98 * rr;
       if (y < -.3) y = -.3 + (y + .3) * .55;               // flatter base
       if (z > .2) y += .06 * (z - .2);                       // taller frontal lobe
-      surface = sr < .78;
+      surface = sr < .86;
     }
     // v3 shading term: inner dots faint, outer shell bright (was computed in the v3 vertex shader from the same expression)
-    bSh[i] = THREE.MathUtils.lerp(.08, 1.15, THREE.MathUtils.smoothstep(Math.hypot(x * 1.6, y * 1.45, z), .5, .9));
+    bSh[i] = THREE.MathUtils.lerp(.06, 1.15, THREE.MathUtils.smoothstep(Math.hypot(x * 1.6, y * 1.45, z), .5, .9));
+    if (surface && bKind[i] === 0) bSh[i] *= .12 + .88 * THREE.MathUtils.smoothstep(Math.abs(fold), .08, .5);   // v9: dark sulci between the gyri
     // side view: v3 (x, y, z) -> scene (-z, y, x)
     bPos.set([-z * BR, y * BR + BY, x * BR], i * 3);
     bSeed[i] = rnd(); bSize[i] = (.55 + Math.pow(rnd(), 3) * 2.0) * (fold > .25 ? 1.35 : 1);
@@ -164,20 +165,28 @@ const bKind = new Uint8Array(BN);          // 0 cortex, 1 cerebellum, 2 stem
   }
 }
 // regions: each dot belongs to the agent whose sector direction (screen-like x/y) is closest; the stem is Jarvis
-const JI = AGENTS.findIndex(a => a.core);
+const JI = AGENTS.findIndex(a => a.core), bRegS = new Float32Array(BN);
+for (let i = 0; i < BN; i++) if (bKind[i] === 2) bRegS[i] = JI;
 {
   const d = new V3();
   for (let i = 0; i < BN; i++) {
     if (bKind[i] === 2) { bReg[i] = JI; continue; }
     d.set(bPos[i * 3] / (BR * .98), (bPos[i * 3 + 1] - BY) / (BR * .66), bPos[i * 3 + 2] / BR * .35).normalize();
+    bRegS[i] = nearest(d)[0];
+    d.set(bPos[i * 3] / (BR * .98), -bPos[i * 3 + 2] / (BR * .84), (bPos[i * 3 + 1] - BY) / BR * .35).normalize();   // v9: sectors as seen from the raised inside view
     bReg[i] = nearest(d)[0];
   }
 }
 // label anchors: mean of each region's camera-facing surface dots, pushed a little outward
 const ANCH = AGENTS.map(() => new V3()), ANCHN = new Array(NA).fill(0);
-for (const i of bSurf) { const r = bReg[i]; if (bPos[i * 3 + 2] > 0.2) { ANCH[r].x += bPos[i * 3]; ANCH[r].y += bPos[i * 3 + 1]; ANCH[r].z += bPos[i * 3 + 2]; ANCHN[r]++; } }
+for (const i of bSurf) { const r = bRegS[i]; if (bPos[i * 3 + 2] > 0.2) { ANCH[r].x += bPos[i * 3]; ANCH[r].y += bPos[i * 3 + 1]; ANCH[r].z += bPos[i * 3 + 2]; ANCHN[r]++; } }
 ANCH.forEach((p, r) => { if (ANCHN[r]) p.divideScalar(ANCHN[r]); });
 ANCH[JI].set(0.95, BY - 0.95 * BR, 0.1);            // brainstem
+// inside anchors: mean of each region's top-surface dots (the raised inside view looks down on both hemispheres)
+const ANCHI = AGENTS.map(() => new V3()), ANCHIN = new Array(NA).fill(0);
+for (const i of bSurf) { const r = bReg[i]; if (bPos[i * 3 + 1] > BY + .25 * BR) { ANCHI[r].x += bPos[i * 3]; ANCHI[r].y += bPos[i * 3 + 1]; ANCHI[r].z += bPos[i * 3 + 2]; ANCHIN[r]++; } }
+ANCHI.forEach((p, r) => { if (ANCHIN[r]) p.divideScalar(ANCHIN[r]); else p.copy(ANCH[r]); });
+ANCHI[JI].set(0.95, BY + .1 * BR, 0);
 const brainU = {
   uT: U.uT, uMo: U.uMo, uPR: U.uPR, uAct: U.uAct, uPulse: U.uPulse, uFocus: U.uFocus, uFocusAmt: U.uFocusAmt,
   uPS: { value: MOBILE ? 21 : 21 }, uBeam: { value: 0 },
@@ -202,9 +211,9 @@ const brainMat = new THREE.ShaderMaterial({
       vec3 wv = wpal(uT * .035 + aSeed * .08 - rr * .55 + position.x * .05);
       vec3 col = mix(mix(uCol[r], wv, .55 * (.6 + .4 * sin(uT * .7 - rr * 5. + aSeed * 3.))), uColIn[r], uM);
       vC = mix(col * (1.15 + .3 * fire + .05 * (1. - uM)), vec3(1.), clamp(spark * .35 + hot * .5, 0., 1.));
-      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .5) * dim * max(aSh, hot * .6) * mix(.78, 1., uM) * mix(1., .22, uDeep);
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .5) * dim * max(aSh, hot * .6) * mix(.78, ${MOBILE ? '1.45' : '1.'}, uM) * mix(1., .22, uDeep);
       vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
-      gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
+      gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z) * mix(1., ${MOBILE ? '1.05' : '.74'}, uM);
     }`,
   fragmentShader: `varying vec3 vC; varying float vA; void main(){ float d = length(gl_PointCoord - .5); if (d > .5) discard; float a = smoothstep(.5, .0, d); gl_FragColor = vec4(vC * vA * a * a * 1.05, 1.); }`,
 });
@@ -233,7 +242,7 @@ const FCFG = {
          curl: (l) => (rnd() - .5) * 2.6 / l, bend: .04, roll: .015, gain: MOBILE ? 0.5 : 0.42, ws: 'uWo',
          vc: 'vC = mix(aCol, wpal(uT * .035 + sd * .3 - t * .5) * 1.1, .55);', va: 'vA = smoothstep(.03, .16, t) * pow(1. - t, .85) * I * uG * uFib * uWo;', head: 'head * (.4 + vI) * .75 * uWo' },
   in:  { nf: MOBILE ? 1500 : 3600, seg: MOBILE ? 14 : 22, pal: FCOL_IN, wOut: .55, wSec: .45, wRnd: .35, hero: .14, len: [4.2, 1.6, 4.5, 3.6, 1.4], br: [1.25, .6, .5],
-         curl: () => (rnd() - .5) * 1.3, bend: .1, roll: .05, gain: 0.15, ws: 'uWi',
+         curl: () => (rnd() - .5) * 1.3, bend: .1, roll: .05, gain: 0.07, ws: 'uWi',
          vc: 'vC = mix(aCol * .8 + vec3(.1, .2, .3), aCol, smoothstep(.0, .25, t));', va: 'vA = smoothstep(.05, .3, t) * pow(1. - t, 1.2) * I * uG * uFib * uWi;',
          head: 'head * (.5 + vI) * uG * 3.2 * uWi' },
 };
@@ -480,7 +489,7 @@ bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 // ---- post: half-resolution bloom ----
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const BLOOM_OUT = [MOBILE ? 0.56 : 0.6, 0.28, 0.72], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
+const BLOOM_OUT = [MOBILE ? 0.56 : 0.6, 0.28, 0.72], BLOOM_IN = [MOBILE ? 0.62 : 0.66, 0.34, 0.3];   // [strength, radius, threshold]; IN = v6
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), ...BLOOM_OUT);
 let BDIV = 2;   // bloom buffer divisor: half resolution, quarter on slow devices (bloom is NEVER switched off)
 const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / BDIV), Math.max(2, h / BDIV));
@@ -571,6 +580,7 @@ function placeLabels() {
   for (const L of LBL) {
     const show = labelsOn && focusId == null;
     if (!show) { if (L.vis !== 0) { L.d.style.opacity = 0; L.line.style.opacity = 0; L.dot.style.opacity = 0; L.vis = 0; } continue; }
+    L.anchor.lerpVectors(ANCH[L.i], ANCHI[L.i], U.uM.value);
     if (L.vis !== 1) { L.hid = false; L.d.style.opacity = 1; L.line.style.opacity = 1; L.dot.style.opacity = 1; L.vis = 1; }
     const back = !L.a.core && _w.copy(L.anchor).setY(L.anchor.y - BY).normalize().dot(_cd) < -0.15;   // anchor on the far side of the brain
     if (back !== L.back) { L.back = back; L.d.classList.toggle('far', back); L.line.style.opacity = back ? 0.3 : 1; L.dot.style.opacity = back ? 0.3 : 1; }
@@ -915,13 +925,14 @@ function flyStep() {
 const camAt = (dist, look = HOME.look) => { const d = camera.position.clone().sub(controls.target); if (d.lengthSq() < 1e-6) d.set(0, 0, 1); return d.setLength(dist).add(look); };
 // ---- outside (neon burst) <-> inside (v6 dot brain), cross-faded by U.uM with a zoom ----
 let depth = 'out';
+const IN_DIR = new V3(-.1, .93, .35).normalize();   // v9: inside opens on a raised three-quarter view so both hemispheres read
 function setDepth(d, instant) {
   if (d === depth && !instant) return;
   if (focusId) exitAgent(true);
   depth = d; setTimeout(renderCrumbs, 0); const inn = d === 'in', dur = instant ? 0.01 : 1.9;
   document.body.classList.toggle('inside', inn);
   controls.minDistance = Math.min(LIM[d][0], camera.position.distanceTo(controls.target)); controls.maxDistance = Math.max(LIM[d][1], camera.position.distanceTo(controls.target));
-  flyTo(camAt(DIST[d]), HOME.look, dur, 'power3.inOut');
+  flyTo(inn && !instant ? IN_DIR.clone().multiplyScalar(DIST.in).add(HOME.look) : camAt(DIST[d]), HOME.look, dur, 'power3.inOut');
   gsap.to(U.uM, { value: inn ? 1 : 0, duration: dur * 0.9, ease: 'sine.inOut', onComplete: () => { controls.minDistance = LIM[d][0]; controls.maxDistance = LIM[d][1]; } });
   $('#depth').innerHTML = inn ? '<i>←</i> Outside' : '<i>◉</i> Enter core';
   $('#depth').classList.toggle('in', inn);
@@ -1172,7 +1183,7 @@ canvas.addEventListener('pointerup', e => {
   }
   if (depth === 'in') {
     let bi = -1, bd = 80;
-    AGENTS.forEach((a, i) => { const [x, y] = scr(ANCH[i].clone().applyMatrix4(group.matrixWorld)); const d = Math.hypot(px - x, py - y); if (d < bd) { bd = d; bi = i; } });
+    AGENTS.forEach((a, i) => { const [x, y] = scr(ANCHI[i].clone().applyMatrix4(group.matrixWorld)); const d = Math.hypot(px - x, py - y); if (d < bd) { bd = d; bi = i; } });
     if (bi >= 0) enterAgent(AGENTS[bi].id);
     return;
   }
@@ -1336,7 +1347,7 @@ function frame(dt) {
   burst.scale.set(BR * (2.3 + 0.1 * wv), BR * (3.0 + 0.12 * wv), 1);
   haloWide.material.opacity = (0.32 + 0.08 * wv) * O * (1 - U.uDeep.value * 0.5);
   wpalJS(t * 0.035 + 0.1, haloWide.material.color); halo.material.color.copy(haloWide.material.color).lerp(WHITE, 0.35);
-  haloIn.material.opacity = (0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1) * M;
+  haloIn.material.opacity = (0.06 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1) * M;
   U.uWo.value = 1 - M; U.uWi.value = M; FIB.visible = TEND.visible = TEND.userData.tips.visible = M < 0.999; FIBI.visible = TIPS.visible = M > 0.001;
   bloom.strength = BLOOM_OUT[0] + (BLOOM_IN[0] - BLOOM_OUT[0]) * M; bloom.radius = BLOOM_OUT[1] + (BLOOM_IN[1] - BLOOM_OUT[1]) * M; bloom.threshold = BLOOM_OUT[2] + (BLOOM_IN[2] - BLOOM_OUT[2]) * M;
   if (fly) flyStep(); else controls.update(dt * U.uMo.value);
