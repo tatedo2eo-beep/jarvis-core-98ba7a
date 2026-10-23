@@ -324,7 +324,7 @@ const TIPS = (() => {
 // ---- OUTSIDE tendrils (v8): fewer, thick, curvy, tapering camera-facing ribbons. Each ribbon carries its own hot core line and
 // soft halo in the fragment shader, so the glow never depends on bloom. Bright nodes ride the tips; colour waves travel outward.
 const TEND = (() => {
-  const NT = MOBILE ? 44 : 72, SG = MOBILE ? 22 : 30, ctr = new V3(0, BY, 0), up = new V3(0, 1, 0);
+  const NT = MOBILE ? 64 : 118, SG = MOBILE ? 22 : 30, ctr = new V3(0, BY, 0), up = new V3(0, 1, 0);
   const paths = [];
   const pickCol = d => {   // reference: cyan dominant, magenta/violet to one side, green low
     const r = rnd();
@@ -349,10 +349,10 @@ const TEND = (() => {
     const i = bSurf[(rnd() * bSurf.length) | 0], ai = bReg[i];
     const out = new V3(bPos[i * 3], bPos[i * 3 + 1], bPos[i * 3 + 2]).sub(ctr).normalize();
     const d = out.clone().add(randDir().multiplyScalar(.4)); d.z *= .5; d.y *= .85; d.normalize();
-    const hero = rnd() < .5, len = hero ? 4.2 + rnd() * 3.6 : 2.0 + rnd() * 2.2, w = hero ? .11 + rnd() * .06 : .06 + rnd() * .04;
+    const hero = rnd() < .45, len = hero ? 4.4 + rnd() * 3.8 : 1.8 + rnd() * 2.4, w = hero ? .075 + rnd() * .045 : .035 + rnd() * .03;
     const col = pickCol(d);
     const pts = grow(ctr.clone().addScaledVector(out, BR * (.25 + rnd() * .25)), d, len, w, col, ai, null);
-    const nb = hero ? 1 + (rnd() < .6) + (rnd() < .3) : (rnd() < .35 ? 1 : 0);
+    const nb = hero ? 1 + (rnd() < .7) + (rnd() < .4) : (rnd() < .4 ? 1 : 0);
     for (let b = 0; b < nb; b++) {
       const k = Math.floor(SG * (.3 + rnd() * .45)), dd = pts[k + 1].clone().sub(pts[k]).normalize().add(randDir().multiplyScalar(.75)).normalize();
       grow(pts[k], dd, len * (.25 + rnd() * .35), w * (.45 + rnd() * .2), rnd() < .7 ? col : pickCol(dd), ai, true);
@@ -593,7 +593,8 @@ function placeLabels() {
   for (let i = 0; i < n; i++) clear(_LB[i]);
   // keep boxes from overlapping: a few passes pushing overlapping pairs apart vertically
   const TOP = MOBILE ? 124 : 60, BOT = (MOBILE && !focusId && !leftShown ? H * 0.52 : H) - 8;
-  const clamp = L => { L._l = Math.max(8, Math.min(W - L.w - 8, L._l)); L._t = Math.max(TOP, Math.min(BOT - L.h, L._t)); };
+  const mc = MCARD_ON ? $('#mcard').getBoundingClientRect() : null;
+  const clamp = L => { L._l = Math.max(mc && L._t < mc.bottom + 6 && L._t + L.h > mc.top - 6 ? mc.right + 12 : 8, Math.min(W - L.w - 8, L._l)); L._t = Math.max(TOP, Math.min(BOT - L.h, L._t)); };
   const sep = () => { for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
     const A = _LB[i], B = _LB[j];
     if (A._l < B._l + B.w + 4 && B._l < A._l + A.w + 4 && A._t < B._t + B.h + 3 && B._t < A._t + A.h + 3) {
@@ -746,7 +747,22 @@ function tickLeft() {
 }
 $('#pill').onclick = () => leftShown ? (leftUntil = 0, hideLeft()) : showLeft(null, 60000);
 
+let MCARD_ON = false;
+// compact metrics card + subtitle line (outside view, like the reference); every value is a real number from the reporter or data.json
+function renderMetrics() {
+  const on = !MOBILE && view === 'core' && focusId == null && depth !== 'in' && !leftShown;
+  if (on !== MCARD_ON) { MCARD_ON = on; $('#mcard').classList.toggle('on', on); }
+  const R = DATA && DATA.real, t = tonightD(), b = book(), lp = livePages();
+  const m = [[t && t.n != null ? fmt(t.n) : '–', 'recipes written tonight'], [lp != null ? fmt(lp) : '–', 'recipes live on the site'],
+    [b ? `${fmt(b.chapters[0])}<small>/${fmt(b.chapters[1])}</small>` : '–', 'chapters complete'], [R && R.knowledge ? fmt(R.knowledge.techniques) : '–', 'techniques researched'],
+    [`${AGENTS.filter(a => status(a) === 'live').length}<small>/${NA}</small>`, 'agents live now']];
+  setHTML($('#mc-rows'), m.map(([v, k]) => `<div class="mr"><b>${v}</b><span>${k}</span></div>`).join(''));
+  const ev = EVENTS[EVENTS.length - 1];
+  setHTML($('#subline'), ev ? `<i>${esc(hm(ev.t))}</i> ${esc((AGENTS[IDX[ev.agent]] || AGENTS[0]).name)} <em>·</em> ${esc(ev.text.slice(0, 120))}` : 'no real event in the last 12 h');
+  $('#subline').classList.toggle('on', !MOBILE && view === 'core' && focusId == null);
+}
 function renderTop() {
+  renderMetrics();
   const live = liveFeed(), pill = $('#pill');
   pill.classList.toggle('live', !!live);
   setText($('#pill-state'), live ? 'LIVE' : lastLiveMsg ? 'RECONNECTING' : 'CONNECTING');
