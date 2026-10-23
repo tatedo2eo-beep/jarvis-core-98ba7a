@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T15:39:01+03:00",
+  "updatedAt": "2026-10-23T15:43:54+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -795,7 +795,7 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T15:39:01+03:00",
+    "at": "2026-10-23T15:43:54+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
     "recipesOnSite": 638,
     "chaptersComplete": 9
@@ -1058,7 +1058,7 @@
   ],
   "recipeFiles": 638,
   "real": {
-    "at": "2026-10-23T15:39:01+03:00",
+    "at": "2026-10-23T15:43:54+03:00",
     "book": {
       "dishes": [
         507,
@@ -1273,7 +1273,7 @@
     ],
     "commitCount": 85,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
-    "livePages": 627,
+    "livePages": 638,
     "tonight": {
       "n": 255,
       "batches": 34,

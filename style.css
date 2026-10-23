@@ -389,3 +389,24 @@ body:not(.inside) .lb{background:rgba(6,20,90,.5);border-color:rgba(100,170,255,
 #subline i{font-style:normal;color:rgba(120,220,255,.85);margin-right:6px;font-variant-numeric:tabular-nums}
 #subline em{font-style:normal;color:var(--ink3)}
 body.saying #subline{opacity:0}
+
+/* v9 flow view */
+#flow{background:radial-gradient(120% 90% at 50% 45%,rgba(4,8,30,.62),rgba(1,2,12,.9) 70%)}
+@media (min-width:861px){#flow{backdrop-filter:blur(6px) saturate(115%);-webkit-backdrop-filter:blur(6px) saturate(115%)}}
+#flayer{position:absolute;inset:0}
+#gl{will-change:transform}
+#fedges path.base{stroke-width:1.1;stroke-linecap:round}
+#fedges path.glow{fill:none;stroke-width:7;stroke-linecap:round}
+#fedges .ph{mix-blend-mode:screen}
+#fedges text{font-family:var(--sans);font-weight:400;font-size:8.5px;letter-spacing:.22em;fill:rgba(225,238,255,.55);paint-order:stroke;stroke:rgba(2,4,18,.9);stroke-width:4px;stroke-linejoin:round}
+.fn{width:158px;padding:15px 16px 13px;border-radius:16px;background:linear-gradient(160deg,rgba(22,30,70,.42),rgba(6,10,30,.5));border:1px solid rgba(255,255,255,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 50px -18px rgba(0,0,10,.8)}
+.fn::before{content:"";position:absolute;left:16px;right:16px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--nc),transparent);opacity:.55}
+.fn.hot{box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 34px -6px color-mix(in srgb,var(--nc) 45%,transparent),0 18px 50px -18px rgba(0,0,10,.8)}
+.fn .fh{font-size:13px;letter-spacing:.01em}
+.fn .fh i{box-shadow:0 0 8px var(--nc)}
+.fn .ft{margin-top:8px;font-size:10.5px;line-height:1.45;color:rgba(225,236,255,.55)}
+.fn .fpb{margin-top:10px}
+.fhead .ft2{font-size:17px;font-weight:200;letter-spacing:.06em}
+@media (max-width:860px){.fn{width:96px;padding:9px 10px;border-radius:12px}.fn .fh{font-size:11.5px}#fedges text{font-size:7.5px;letter-spacing:.16em}}
+@media (max-width:860px){.fn .badge{font-size:0;gap:0;padding:0;margin-left:auto}.fn .fh{gap:6px}}

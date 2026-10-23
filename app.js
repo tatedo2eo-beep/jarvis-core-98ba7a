@@ -1194,8 +1194,11 @@ canvas.addEventListener('pointerup', e => {
 
 // ================= FLOW VIEW (draggable nodes, bezier edges; values are real only) =================
 const FLOW = AG.flow || { virtual: [], layout: {}, edges: [] };
+// v9 layout: Joe sits above Jarvis so the main line gets five wide columns (more air for links, labels and particles)
+Object.assign(FLOW.layout, { joe: [0, 0.08], jarvis: [0, 0.5], planner: [0.2, 0.06], research: [0.2, 0.5], 'claude-code': [0.2, 0.94], 'recipe-writer': [0.4, 0.5],
+  'recipe-checker': [0.6, 0.5], site: [0.8, 0.5], 'social-media': [1, 0.12], 'video-maker': [0.8, 0.92], 'video-editor': [1, 0.92] });
 const FN = {}, FE = [];
-const LSKEY = 'jb4-flow-layout-v1';
+const LSKEY = 'jb4-flow-layout-v9';
 let savedLayout = {}; try { savedLayout = JSON.parse(localStorage.getItem(LSKEY) || '{}'); } catch { }
 const SVGNS = 'http://www.w3.org/2000/svg';
 const svgEl = (t, at = {}) => { const e = document.createElementNS(SVGNS, t); for (const k in at) e.setAttribute(k, at[k]); return e; };
@@ -1222,16 +1225,21 @@ for (const m of [...FLOW.virtual.map(v => ({ ...v, virtual: true })), ...AGENTS.
 for (const [from, to, label] of FLOW.edges) {
   if (!FN[from] || !FN[to]) continue;
   const planned = FN[from].m.status === 'planned' || FN[to].m.status === 'planned', col = FN[from].m.color;
-  const g = svgEl('g');
-  const base = svgEl('path', { class: 'base', stroke: planned ? 'rgba(255,255,255,.14)' : col, 'stroke-opacity': planned ? 1 : 0.28, 'stroke-dasharray': planned ? '2 6' : 'none' });
-  const flowL = svgEl('path', { class: 'flowl', stroke: col, 'stroke-opacity': planned ? 0.25 : 0.8 });
-  const bgR = svgEl('rect', { rx: 3 }); const t = svgEl('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = label;
-  g.append(base, flowL, bgR, t); $('#fedges').appendChild(g);
-  FE.push({ from, to, label, planned, base, flowL, bgR, t, E: 0 });
+  const g = svgEl('g'), gid = 'fg' + FE.length, col2 = FN[to].m.color;
+  // v9: thin gradient link (source colour -> target colour), a faint wide glow under it, and particles riding along it
+  const grad = svgEl('linearGradient', { id: gid, gradientUnits: 'userSpaceOnUse' });
+  grad.append(svgEl('stop', { offset: '0', 'stop-color': col }), svgEl('stop', { offset: '1', 'stop-color': col2 })); $('#fdefs').appendChild(grad);
+  const glow = svgEl('path', { class: 'glow', stroke: `url(#${gid})`, 'stroke-opacity': planned ? 0 : 0.07 });
+  const base = svgEl('path', { class: 'base', stroke: planned ? 'rgba(255,255,255,.16)' : `url(#${gid})`, 'stroke-opacity': planned ? 1 : 0.5, 'stroke-dasharray': planned ? '1 7' : 'none' });
+  const flowL = svgEl('g', { class: 'parts' }), parts = [];
+  for (let k = 0; k < (planned ? 0 : 7); k++) { const c = svgEl('circle', { r: 1.5 }), h = svgEl('circle', { r: 5, class: 'ph' }); flowL.append(h, c); parts.push({ c, h, o: k / 7 }); }
+  const bgR = svgEl('g'); const t = svgEl('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = label;
+  g.append(glow, base, flowL, t); $('#fedges').appendChild(g);
+  FE.push({ from, to, label, planned, base, glow, grad, flowL, parts, pts: [], bgR, t, E: 0, col });
 }
 function flowRect() {
-  const W = innerWidth, H = innerHeight, cw = MOBILE ? 118 : 156, ch = MOBILE ? 46 : 92;
-  return MOBILE ? { l: 10, t: 110, w: W - 20, h: H - 200, cw, ch } : { l: 60, t: 190, w: W - 120, h: H - 190 - 150, cw, ch };
+  const W = innerWidth, H = innerHeight, cw = MOBILE ? 116 : 158, ch = MOBILE ? 50 : 100;
+  return MOBILE ? { l: 10, t: 158, w: W - 20, h: H - 250, cw, ch } : { l: 70, t: 180, w: W - 140, h: H - 180 - 130, cw, ch };
 }
 function nodeBox(id) { const n = FN[id], r = flowRect(), nx = MOBILE ? n.y : n.x, ny = MOBILE ? n.x : n.y; return { x: r.l + r.cw / 2 + nx * (r.w - r.cw), y: r.t + r.ch / 2 + ny * (r.h - r.ch), w: r.cw, h: r.ch }; }
 function layoutFlow() {
@@ -1240,10 +1248,20 @@ function layoutFlow() {
     const a = nodeBox(e.from), b = nodeBox(e.to), dx = b.x - a.x, dy = b.y - a.y; let d;
     if (Math.abs(dx) >= Math.abs(dy) * 0.9) { const s = Math.sign(dx) || 1, sx = a.x + s * a.w / 2, tx = b.x - s * b.w / 2, k = Math.max(40, Math.abs(tx - sx) * 0.5); d = `M${sx},${a.y} C${sx + s * k},${a.y} ${tx - s * k},${b.y} ${tx},${b.y}`; }
     else { const s = Math.sign(dy) || 1, sy = a.y + s * a.h / 2, ty = b.y - s * b.h / 2, k = Math.max(30, Math.abs(ty - sy) * 0.5); d = `M${a.x},${sy} C${a.x},${sy + s * k} ${b.x},${ty - s * k} ${b.x},${ty}`; }
-    e.base.setAttribute('d', d); e.flowL.setAttribute('d', d);
-    const L = e.base.getTotalLength(), mid = e.base.getPointAtLength(L / 2);
-    e.t.setAttribute('x', mid.x); e.t.setAttribute('y', mid.y);
-    const w = e.label.length * 6.2 + 14; e.bgR.setAttribute('x', mid.x - w / 2); e.bgR.setAttribute('y', mid.y - 8); e.bgR.setAttribute('width', w); e.bgR.setAttribute('height', 16);
+    e.base.setAttribute('d', d); e.glow.setAttribute('d', d);
+    const L = e.base.getTotalLength(), mid = e.base.getPointAtLength(L / 2); e.len = L;
+    e.pts = []; for (let k = 0; k <= 48; k++) { const q = e.base.getPointAtLength(L * k / 48); e.pts.push(q.x, q.y); }   // sampled once per layout; particles interpolate
+    e.grad.setAttribute('x1', a.x); e.grad.setAttribute('y1', a.y); e.grad.setAttribute('x2', b.x); e.grad.setAttribute('y2', b.y);
+    e.t.setAttribute('x', mid.x); e.t.setAttribute('y', mid.y - 9); e.t.style.display = '';
+  }
+  // v9: hide a link label if it would collide with a node or an earlier label (keeps the map clean on narrow screens)
+  const boxes = Object.keys(FN).map(id => { const b = nodeBox(id); return [b.x - b.w / 2, b.y - b.h / 2, b.x + b.w / 2, b.y + b.h / 2]; });
+  const hit = (p, q) => p[0] < q[2] && p[2] > q[0] && p[1] < q[3] && p[3] > q[1];
+  for (const e of FE) {
+    const x = +e.t.getAttribute('x'), y = +e.t.getAttribute('y'), w = (e.t.textContent.length * (MOBILE ? 6 : 7)) / 2 + 3;
+    const r = [x - w, y - 8, x + w, y + 3];
+    if (boxes.some(q => hit(r, q))) { e.t.style.display = 'none'; continue; }
+    boxes.push(r);
   }
 }
 $('#freset').onclick = () => { savedLayout = {}; try { localStorage.removeItem(LSKEY); } catch { } for (const id in FN) [FN[id].x, FN[id].y] = FLOW.layout[id]; layoutFlow(); };
@@ -1274,8 +1292,18 @@ function tickFlow(dt, t) {
   for (const e of FE) {
     e.E *= Math.exp(-dt * 0.5);
     const a = AGENTS[IDX[e.from]], E = Math.max(e.E, a && status(a) === 'live' ? 0.35 : 0);
-    e.flowL.setAttribute('stroke-dashoffset', (-t * (e.planned ? 6 : 16 + E * 50) * U.uMo.value).toFixed(1));
-    e.base.setAttribute('stroke-opacity', e.planned ? 1 : (0.22 + E * 0.5).toFixed(3));
+    e.base.setAttribute('stroke-opacity', e.planned ? 1 : (0.34 + E * 0.5).toFixed(3));
+    e.glow.setAttribute('stroke-opacity', e.planned ? 0 : (0.05 + E * 0.12).toFixed(3));
+    if (!e.parts.length || !e.pts.length) continue;
+    e.ph = (e.ph || 0) + dt * (14 + E * 60) * U.uMo.value / Math.max(60, e.len || 1);   // px/s along the link: faster while the source is live
+    const np = e.parts.length;
+    for (let k = 0; k < np; k++) {
+      const P = e.parts[k], u = (e.ph + P.o) % 1, f = u * 48, j = Math.min(47, f | 0), r = f - j, x = e.pts[j * 2] + (e.pts[j * 2 + 2] - e.pts[j * 2]) * r, y = e.pts[j * 2 + 1] + (e.pts[j * 2 + 3] - e.pts[j * 2 + 1]) * r;
+      const fade = Math.sin(Math.PI * u), op = (0.25 + 0.75 * fade) * (0.45 + E * 0.55);
+      P.c.setAttribute('cx', x.toFixed(1)); P.c.setAttribute('cy', y.toFixed(1)); P.c.setAttribute('opacity', op.toFixed(2));
+      P.h.setAttribute('cx', x.toFixed(1)); P.h.setAttribute('cy', y.toFixed(1)); P.h.setAttribute('opacity', (op * 0.22).toFixed(2));
+      if (!P.f) { P.f = 1; P.c.setAttribute('fill', '#fff'); P.h.setAttribute('fill', e.col); }
+    }
   }
 }
 function setView(v, instant) {
@@ -1286,15 +1314,22 @@ function setView(v, instant) {
     view = 'flow'; $('#flow').classList.remove('hidden'); layoutFlow(); renderFlowCards(); hideLeft();
     gsap.to(['#right', '#labels', '#leaders', '#subs', '#depth'], { autoAlpha: 0, duration: d * 0.6 });
     gsap.fromTo('#flow', { autoAlpha: 0 }, { autoAlpha: 1, duration: d });
-    gsap.fromTo('.fn', { opacity: 0, y: 8 }, { opacity: (i, x) => x.classList.contains('planned') ? 0.5 : 1, y: 0, duration: d, stagger: instant ? 0 : 0.03, ease: 'power3.out', clearProps: 'transform' });
+    gsap.fromTo('.fn', { opacity: 0, scale: 0.94, filter: 'blur(6px)' }, { opacity: (i, x) => x.classList.contains('planned') ? 0.55 : 1, scale: 1, filter: 'blur(0px)', duration: instant ? 0.01 : 0.9, stagger: instant ? 0 : 0.045, ease: 'power3.out', clearProps: 'filter' });
+    for (const e of FE) { const L = e.len || 600; gsap.fromTo(e.base, { strokeDasharray: e.planned ? '1 7' : `${L} ${L}`, strokeDashoffset: e.planned ? 0 : L }, { strokeDashoffset: 0, duration: instant ? 0.01 : 1.4, delay: instant ? 0 : 0.25, ease: 'power2.inOut', onComplete: () => { if (!e.planned) e.base.style.strokeDasharray = 'none'; } }); }
+    gsap.fromTo('#gl', { scale: 1 }, { scale: 1.06, duration: instant ? 0.01 : 1.2, ease: 'power3.out' });
   } else {
     view = 'core';
     gsap.to('#flow', { autoAlpha: 0, duration: d, onComplete: () => $('#flow').classList.add('hidden') });
+    gsap.to('#gl', { scale: 1, x: 0, y: 0, duration: instant ? 0.01 : 1.0, ease: 'power3.inOut' });
     gsap.to(['#right', '#labels', '#leaders', '#subs', '#depth'], { autoAlpha: 1, duration: d });
   }
   document.querySelectorAll('#views button').forEach(b => b.classList.toggle('on', b.dataset.v === view));
 }
 document.querySelectorAll('#views button').forEach(b => b.onclick = () => setView(b.dataset.v));
+// v9 subtle depth: in the flow view the scene behind drifts against the pointer, the node layer a little the other way
+{ const px = gsap.quickTo('#gl', 'x', { duration: 1.2, ease: 'power3.out' }), py = gsap.quickTo('#gl', 'y', { duration: 1.2, ease: 'power3.out' });
+  const lx = gsap.quickTo('#flayer', 'x', { duration: 1.2, ease: 'power3.out' }), ly = gsap.quickTo('#flayer', 'y', { duration: 1.2, ease: 'power3.out' });
+  addEventListener('pointermove', e => { if (view !== 'flow' || e.pointerType === 'touch') return; const mx = e.clientX / innerWidth - .5, my = e.clientY / innerHeight - .5; px(-mx * 22); py(-my * 14); lx(mx * 6); ly(my * 4); }, { passive: true }); }
 
 // ================= FRAME LOOP =================
 const perf = { level: +(Q.get('q') ?? -1), frames: [], measureFrom: 0, checks: 0 };

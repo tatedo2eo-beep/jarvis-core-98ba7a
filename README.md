@@ -119,3 +119,9 @@ Built with three.js r169 and GSAP, vendored. Fonts: Inter and JetBrains Mono (OF
 Panels: frosted sheets, thin Inter type with JetBrains Mono for numbers, hairline rows, and a glowing dot plus a word for status.
 
 The ntfy topic names are still in the public page source. That is accepted for this non-sensitive work-status feed, which posts only work-status text and never secrets or private data.
+
+## v9 (Oct 23, 2026)
+- Readability: capped core blowout (lower bloom/burst), labels get dark halos, are pushed outside the core radius and de-overlapped.
+- Outside: denser thin tendrils with tip nodes and tags; left metrics card and bottom subtitle line (desktop), real values only.
+- Inside: top-view two-hemisphere dot brain with a clear fissure and sulci; agent regions mapped onto the top surface.
+- Flow: glass node cards, thin gradient curved links with particle flow (speed from real live status/events), staggered eased entry, parallax, wider layout (Joe above Jarvis), colliding link labels hidden. Saved layouts reset (key v9).
