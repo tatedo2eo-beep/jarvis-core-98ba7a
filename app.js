@@ -197,12 +197,12 @@ const brainMat = new THREE.ShaderMaterial({
       float spark = pow(max(0., sin(uT * (1.5 + aSeed * 5.) * (1. + fire * 2.) + aSeed * 120.)), 14.) * (.25 + fire * 2.4);
       float dim = (uFocus >= 0 && r != uFocus) ? mix(1., .45, uFocusAmt) : 1.;
       float rr = length(position - vec3(0., .15, 0.)) / 2.75;
-      float hot = (1. - smoothstep(.04, .62, rr)) * (1. - uM);   // outside only: white-cyan burst
+      float hot = (1. - smoothstep(.02, .36, rr)) * (1. - uM);   // outside only: white-cyan burst
       // outside only: slow colour waves travelling outward through the core
       vec3 wv = wpal(uT * .035 + aSeed * .08 - rr * .55 + position.x * .05);
       vec3 col = mix(mix(uCol[r], wv, .55 * (.6 + .4 * sin(uT * .7 - rr * 5. + aSeed * 3.))), uColIn[r], uM);
-      vC = mix(col * (1.15 + .3 * fire + .05 * (1. - uM)), vec3(1.), clamp(spark * .35 + hot * .6, 0., 1.));
-      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .9) * dim * max(aSh, hot * .8) * mix(1., .22, uDeep);
+      vC = mix(col * (1.15 + .3 * fire + .05 * (1. - uM)), vec3(1.), clamp(spark * .35 + hot * .5, 0., 1.));
+      vA = (.35 + .8 * fire + spark * .8 + uBeam * .25 + hot * .5) * dim * max(aSh, hot * .6) * mix(.78, 1., uM) * mix(1., .22, uDeep);
       vec4 mv = modelViewMatrix * vec4(p, 1.); gl_Position = projectionMatrix * mv;
       gl_PointSize = aSize * (1. + spark * 1.4) * uPR * (uPS / -mv.z);
     }`,
@@ -435,7 +435,7 @@ const halo = mkHalo(mkGlow([[0, 'rgba(235,255,255,1)'], [0.18, 'rgba(90,225,255,
 // v8: a baked starburst (hot white core + fine rays) and a wide royal-blue halo. Sprites, so the glow is there at every quality level.
 const burstTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const x = c.getContext('2d'); x.globalCompositeOperation = 'lighter';
   let g = x.createRadialGradient(256, 256, 0, 256, 256, 256);
-  [[0, 'rgba(255,255,255,1)'], [.12, 'rgba(235,252,255,.95)'], [.26, 'rgba(150,235,255,.5)'], [.5, 'rgba(40,150,255,.14)'], [1, 'rgba(0,0,0,0)']].forEach(([o, k]) => g.addColorStop(o, k));
+  [[0, 'rgba(255,255,255,1)'], [.06, 'rgba(240,253,255,.9)'], [.16, 'rgba(150,235,255,.38)'], [.4, 'rgba(40,150,255,.1)'], [1, 'rgba(0,0,0,0)']].forEach(([o, k]) => g.addColorStop(o, k));
   x.fillStyle = g; x.fillRect(0, 0, 512, 512);
   for (let i = 0; i < 220; i++) { const a = rnd() * 6.2832, L = 60 + Math.pow(rnd(), 1.6) * 190, w = .6 + rnd() * 1.6;
     const lg = x.createLinearGradient(256, 256, 256 + Math.cos(a) * L, 256 + Math.sin(a) * L); lg.addColorStop(0, 'rgba(230,250,255,.5)'); lg.addColorStop(1, 'rgba(80,200,255,0)');
@@ -480,7 +480,7 @@ bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
 // ---- post: half-resolution bloom ----
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const BLOOM_OUT = [MOBILE ? 0.62 : 0.66, 0.3, 0.62], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
+const BLOOM_OUT = [MOBILE ? 0.56 : 0.6, 0.28, 0.72], BLOOM_IN = [MOBILE ? 0.85 : 0.9, 0.5, 0.16];   // [strength, radius, threshold]; IN = v6
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight / 2), ...BLOOM_OUT);
 let BDIV = 2;   // bloom buffer divisor: half resolution, quarter on slow devices (bloom is NEVER switched off)
 const _bs = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => _bs(Math.max(2, w / BDIV), Math.max(2, h / BDIV));
@@ -585,16 +585,29 @@ function placeLabels() {
     L._t = Math.max(60, Math.min(H - L.h - 8, by - L.h / 2));
     _LB[n++] = L;
   }
+  // keep every label clear of the bright core: push it out along its ray until its box is outside the core radius
+  _v.set(0, BY, 0).add(_w.set(1, 0, 0).applyQuaternion(camera.quaternion).multiplyScalar(BR)).project(camera);
+  const rPx = Math.hypot((_v.x * 0.5 + 0.5) * W - cx, (-_v.y * 0.5 + 0.5) * H - cy) * (U.uM.value < 0.5 ? 1.18 : 0.98);
+  const clear = L => { for (let k = 0; k < 60; k++) { const qx = Math.max(L._l, Math.min(cx, L._l + L.w)), qy = Math.max(L._t, Math.min(cy, L._t + L.h));
+      if (Math.hypot(qx - cx, qy - cy) >= rPx) return; let dx = L._x - cx, dy = L._y - cy; const dl = Math.hypot(dx, dy) || 1; L._l += dx / dl * 6; L._t += dy / dl * 6; } };
+  for (let i = 0; i < n; i++) clear(_LB[i]);
   // keep boxes from overlapping: a few passes pushing overlapping pairs apart vertically
-  for (let pass = 0; pass < 6; pass++) for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+  const TOP = MOBILE ? 124 : 60, BOT = (MOBILE && !focusId && !leftShown ? H * 0.52 : H) - 8;
+  const clamp = L => { L._l = Math.max(8, Math.min(W - L.w - 8, L._l)); L._t = Math.max(TOP, Math.min(BOT - L.h, L._t)); };
+  const sep = () => { for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
     const A = _LB[i], B = _LB[j];
     if (A._l < B._l + B.w + 4 && B._l < A._l + A.w + 4 && A._t < B._t + B.h + 3 && B._t < A._t + A.h + 3) {
-      const ov = (Math.min(A._t + A.h, B._t + B.h) - Math.max(A._t, B._t) + 3) / 2;
-      if (A._t <= B._t) { A._t -= ov; B._t += ov; } else { A._t += ov; B._t -= ov; }
+      const ov = (Math.min(A._t + A.h, B._t + B.h) - Math.max(A._t, B._t) + 3) / 2, ox = (Math.min(A._l + A.w, B._l + B.w) - Math.max(A._l, B._l) + 4) / 2;
+      const wall = L => L._l <= 8.5 || L._l >= W - L.w - 8.5;
+      if (ox < ov * 0.8 && !wall(A) && !wall(B)) { if (A._l <= B._l) { A._l -= ox; B._l += ox; } else { A._l += ox; B._l -= ox; } }
+      else if (A._t <= B._t) { A._t -= ov; B._t += ov; } else { A._t += ov; B._t -= ov; }
     }
-  }
+  } };
+  for (let pass = 0; pass < 6; pass++) { for (let i = 0; i < n; i++) { clear(_LB[i]); clamp(_LB[i]); } sep(); }
+  for (let pass = 0; pass < 6; pass++) { for (let i = 0; i < n; i++) clamp(_LB[i]); sep(); }
+  for (let i = 0; i < n; i++) clamp(_LB[i]);
   for (let i = 0; i < n; i++) {
-    const L = _LB[i], left = L._l, top = Math.max(60, Math.min(H - L.h - 8, L._t)), x = L._x, y = L._y, right = L._r;
+    const L = _LB[i], left = L._l, top = L._t, x = L._x, y = L._y, right = L._r;
     L.d.style.transform = `translate3d(${left.toFixed(1)}px,${top.toFixed(1)}px,0)`;
     const hit = lr && lr.height > 0 && left < lr.right + 8 && left + L.w > lr.left && top < lr.bottom + 24 && top + L.h > lr.top - 8;
     if (hit !== !!L.hid) { L.hid = hit; const o = hit ? 0 : 1; L.d.style.opacity = o; L.line.style.opacity = o; L.dot.style.opacity = o; }
@@ -1080,6 +1093,7 @@ function renderCrumbs() {
   if (a) parts.push(['agent', a.name]); if (c) parts.push(['item', c.name]);
   const lvl = c ? 'item' : a ? 'agent' : depth;
   setHTML($('#crumbs'), parts.filter((p, i) => i <= parts.findIndex(q => q[0] === lvl)).map(([k, t]) => `<button data-k="${k}" class="${k === lvl ? 'on' : ''}">${esc(t)}</button>`).join('<i>/</i>'));
+  $('#crumbs').style.display = lvl === 'out' ? 'none' : '';
   $('#back').innerHTML = lvl === 'item' ? `← ${esc(a.name)}` : '← Core';
 }
 $('#crumbs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const k = b.dataset.k;
@@ -1301,9 +1315,9 @@ function frame(dt) {
   beam.material.uniforms.uBeam.value = beamV * pulse; core.material.uniforms.uBeam.value = beamV;
   const M = U.uM.value;
   const O = 1 - M, wv = 0.5 + 0.5 * Math.sin(t * 0.7);
-  halo.material.opacity = (0.75 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15) * O;
-  burst.material.opacity = (0.82 + 0.1 * wv + beamV * 0.15) * O * (1 - U.uDeep.value * 0.6); burst.material.rotation = t * 0.012;
-  burst.scale.set(BR * (2.5 + 0.1 * wv), BR * (3.6 + 0.14 * wv), 1);
+  halo.material.opacity = (0.42 + ACT[0] * 0.08 + beamV * 0.25 + PULSE[0] * 0.15) * O;
+  burst.material.opacity = (0.62 + 0.08 * wv + beamV * 0.15) * O * (1 - U.uDeep.value * 0.6); burst.material.rotation = t * 0.012;
+  burst.scale.set(BR * (2.3 + 0.1 * wv), BR * (3.0 + 0.12 * wv), 1);
   haloWide.material.opacity = (0.32 + 0.08 * wv) * O * (1 - U.uDeep.value * 0.5);
   wpalJS(t * 0.035 + 0.1, haloWide.material.color); halo.material.color.copy(haloWide.material.color).lerp(WHITE, 0.35);
   haloIn.material.opacity = (0.16 + ACT[0] * 0.05 + beamV * 0.2 + PULSE[0] * 0.1) * M;

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "brand": "Grok Bot × Joe",
   "title": "Jarvis Board",
-  "updatedAt": "2026-10-23T02:12:55+03:00",
+  "updatedAt": "2026-10-23T15:30:04+03:00",
   "timeZone": "Africa/Cairo",
   "refreshSeconds": 60,
   "site": {
@@ -13,7 +13,7 @@
   },
   "headline": {
     "label": "Dishes written",
-    "done": 378,
+    "done": 496,
     "total": 885
   },
   "chapters": [
@@ -105,7 +105,7 @@
       "no": 8,
       "key": "dumplings",
       "name": "Dumplings",
-      "done": 2,
+      "done": 3,
       "total": 3,
       "flavours": {
         "done": 2,
@@ -129,7 +129,7 @@
       "no": 10,
       "key": "curries",
       "name": "Curries",
-      "done": 2,
+      "done": 4,
       "total": 9,
       "flavours": {
         "done": 7,
@@ -189,7 +189,7 @@
       "no": 15,
       "key": "vegetables-sides",
       "name": "Vegetables & Sides",
-      "done": 0,
+      "done": 1,
       "total": 45,
       "flavours": {
         "done": 0,
@@ -225,10 +225,10 @@
       "no": 18,
       "key": "sandwiches-wraps",
       "name": "Sandwiches & Wraps",
-      "done": 4,
+      "done": 13,
       "total": 18,
       "flavours": {
-        "done": 0,
+        "done": 8,
         "total": 12
       },
       "extra": 0
@@ -237,10 +237,10 @@
       "no": 19,
       "key": "appetizers-dips",
       "name": "Appetizers & Dips",
-      "done": 1,
+      "done": 34,
       "total": 51,
       "flavours": {
-        "done": 0,
+        "done": 5,
         "total": 13
       },
       "extra": 0
@@ -249,7 +249,7 @@
       "no": 20,
       "key": "savory-pies-pastries",
       "name": "Savory Pies & Pastries",
-      "done": 0,
+      "done": 4,
       "total": 5,
       "flavours": {
         "done": 0,
@@ -261,7 +261,7 @@
       "no": 21,
       "key": "preserves-pickles-ferments",
       "name": "Preserves, Pickles & Ferments",
-      "done": 0,
+      "done": 5,
       "total": 7,
       "flavours": {
         "done": 0,
@@ -285,10 +285,10 @@
       "no": 23,
       "key": "breads-viennoiserie",
       "name": "Breads & Viennoiserie",
-      "done": 1,
+      "done": 39,
       "total": 58,
       "flavours": {
-        "done": 0,
+        "done": 4,
         "total": 7
       },
       "extra": 0
@@ -393,7 +393,7 @@
       "no": 32,
       "key": "ice-cream-frozen-desserts",
       "name": "Ice Cream & Frozen Desserts",
-      "done": 0,
+      "done": 1,
       "total": 17,
       "flavours": {
         "done": 0,
@@ -405,7 +405,7 @@
       "no": 33,
       "key": "world-desserts-sweets",
       "name": "World Desserts & Sweets",
-      "done": 0,
+      "done": 1,
       "total": 44,
       "flavours": {
         "done": 0,
@@ -417,10 +417,10 @@
       "no": 34,
       "key": "drinks",
       "name": "Drinks",
-      "done": 1,
+      "done": 24,
       "total": 48,
       "flavours": {
-        "done": 0,
+        "done": 3,
         "total": 7
       },
       "extra": 0
@@ -795,10 +795,10 @@
     }
   ],
   "derived": {
-    "at": "2026-10-23T02:12:55+03:00",
+    "at": "2026-10-23T15:30:04+03:00",
     "from": "rw/tami_manifest.json + public-site/content (read-only)",
-    "recipesOnSite": 489,
-    "chaptersComplete": 8
+    "recipesOnSite": 627,
+    "chaptersComplete": 9
   },
   "history": [
     {
@@ -927,13 +927,21 @@
       "flavours": 99,
       "extra": 12,
       "metric": "dishes"
+    },
+    {
+      "t": "2026-10-23T15:30:04+03:00",
+      "recipes": 496,
+      "total": 885,
+      "flavours": 119,
+      "extra": 12,
+      "metric": "dishes"
     }
   ],
   "focus": "Meat",
   "dishesInProgress": [],
   "flavours": {
     "label": "Book flavours",
-    "done": 99,
+    "done": 119,
     "total": 227
   },
   "extraFlavours": {
@@ -942,125 +950,125 @@
   },
   "recent": [
     {
-      "title": "Chipotle-Lime Chicken, Black Bean and Rice Burritos",
-      "chapter": "sandwiches-wraps",
+      "title": "Strawberry Jam",
+      "chapter": "preserves-pickles-ferments",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/chipotle-lime-chicken-black-bean-rice-burritos/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/classic-strawberry-jam/",
+      "t": "2026-10-23T15:28:29+03:00"
     },
     {
-      "title": "Yeasted Buckwheat Blini with Soured Cream and Jam",
-      "chapter": "breakfast",
+      "title": "Salt-Preserved Lemons",
+      "chapter": "preserves-pickles-ferments",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/yeasted-buckwheat-blini-soured-cream-jam/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/salt-preserved-lemons/",
+      "t": "2026-10-23T15:28:29+03:00"
     },
     {
-      "title": "Soft Steamed Rice and Lentil Idli with Coconut Chutney",
-      "chapter": "breakfast",
+      "title": "Fermented Sour Dill Pickles",
+      "chapter": "preserves-pickles-ferments",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/soft-steamed-rice-lentil-idli-coconut-chutney/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/fermented-sour-dill-pickles/",
+      "t": "2026-10-23T15:28:29+03:00"
     },
     {
-      "title": "Pandan Coconut Kaya Toast with Cold Butter and Set Soft Eggs",
-      "chapter": "breakfast",
+      "title": "Homemade Sauerkraut",
+      "chapter": "preserves-pickles-ferments",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pandan-coconut-kaya-toast-butter-soft-boiled-eggs/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/homemade-sauerkraut/",
+      "t": "2026-10-23T15:28:29+03:00"
     },
     {
-      "title": "Thick Açaí Bowl with Banana, Berries and Granola",
-      "chapter": "breakfast",
+      "title": "Napa Cabbage Kimchi",
+      "chapter": "preserves-pickles-ferments",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/thick-acai-bowl-banana-berries-granola/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/napa-cabbage-kimchi/",
+      "t": "2026-10-23T15:28:29+03:00"
     },
     {
-      "title": "Liège Waffles with Caramelised Pearl Sugar",
-      "chapter": "breakfast",
+      "title": "Moroccan Chicken Pastilla",
+      "chapter": "savory-pies-pastries",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/liege-waffles-caramelised-pearl-sugar/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/moroccan-chicken-pastilla-almonds-cinnamon/",
+      "t": "2026-10-23T15:24:55+03:00"
     },
     {
-      "title": "Crisp Melted Monterey Jack Cheese Quesadillas with Fresh Tomato Salsa",
-      "chapter": "sandwiches-wraps",
+      "title": "Pain de Campagne (Rustic Sourdough Boule)",
+      "chapter": "breads-viennoiserie",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/crisp-melted-monterey-jack-cheese-quesadillas-fresh-salsa/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/pain-de-campagne-rustic-sourdough-boule/",
+      "t": "2026-10-23T15:23:03+03:00"
     },
     {
-      "title": "Red Chile Chicken Enchiladas with Cheddar and Lime Crema",
-      "chapter": "mexican-latin-american",
+      "title": "Soft Coconut Milk Coco Bread",
+      "chapter": "breads-viennoiserie",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/red-chile-chicken-enchiladas-cheddar-crema/",
-      "t": "2026-10-23T02:05:57+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/soft-coconut-milk-coco-bread/",
+      "t": "2026-10-23T15:23:03+03:00"
     },
     {
-      "title": "Smoky Chipotle and Lime Chicken Fajitas with Peppers and Guacamole",
-      "chapter": "mexican-latin-american",
+      "title": "Thin Soft Lavash",
+      "chapter": "breads-viennoiserie",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/smoky-chipotle-lime-chicken-fajitas-peppers-guacamole/",
-      "t": "2026-10-23T01:57:04+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/thin-soft-lavash-flatbread/",
+      "t": "2026-10-23T15:23:03+03:00"
     },
     {
-      "title": "Carne Asada Street Tacos with Onion, Coriander and Lime",
-      "chapter": "mexican-latin-american",
+      "title": "Classic Cheese Quiche",
+      "chapter": "savory-pies-pastries",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/carne-asada-street-tacos-onion-coriander-lime/",
-      "t": "2026-10-23T01:57:04+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/classic-cheese-quiche/",
+      "t": "2026-10-23T15:22:50+03:00"
     },
     {
-      "title": "Golden Crisp Cheddar Grilled Cheese Sandwich",
-      "chapter": "sandwiches-wraps",
+      "title": "Cornish Pasty",
+      "chapter": "savory-pies-pastries",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/golden-crisp-cheddar-grilled-cheese-sandwich/",
-      "t": "2026-10-23T01:57:04+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/cornish-beef-pasty/",
+      "t": "2026-10-23T15:22:50+03:00"
     },
     {
-      "title": "Honey-Maple Granola with Walnuts, Almonds, Seeds and Raisins",
-      "chapter": "breakfast",
+      "title": "Spanakopita (Spinach and Feta Phyllo Pie)",
+      "chapter": "savory-pies-pastries",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/honey-maple-nut-granola-raisins/",
-      "t": "2026-10-23T01:51:42+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/spanakopita-spinach-feta-phyllo-squares/",
+      "t": "2026-10-23T15:22:50+03:00"
     },
     {
-      "title": "Dutch Baby Pancake with Berries, Lemon and Icing Sugar",
-      "chapter": "breakfast",
+      "title": "Chile con Queso",
+      "chapter": "appetizers-dips",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/dutch-baby-pancake-berries-lemon/",
-      "t": "2026-10-23T01:51:42+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/tex-mex-chile-con-queso-dip/",
+      "t": "2026-10-23T15:16:25+03:00"
     },
     {
-      "title": "Huevos Rancheros with Refried Black Beans, Ranchero Sauce and Fresh Salsa",
-      "chapter": "breakfast",
+      "title": "Tomato and Basil Bruschetta",
+      "chapter": "appetizers-dips",
       "flavour": "Classic",
-      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/huevos-rancheros-black-beans-fresh-salsa/",
-      "t": "2026-10-23T01:51:42+03:00"
+      "url": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/recipes/tomato-basil-bruschetta/",
+      "t": "2026-10-23T15:16:25+03:00"
     }
   ],
-  "recipeFiles": 489,
+  "recipeFiles": 627,
   "real": {
-    "at": "2026-10-23T02:12:55+03:00",
+    "at": "2026-10-23T15:30:04+03:00",
     "book": {
       "dishes": [
-        378,
+        496,
         885
       ],
       "flavours": [
-        99,
+        119,
         227
       ],
       "extra": 12,
       "chapters": [
-        8,
+        9,
         34
       ],
       "focus": "Meat"
     },
-    "pages": 489,
-    "pagesInGit": 489,
+    "pages": 627,
+    "pagesInGit": 627,
     "knowledge": {
       "files": 6,
       "techniques": 74,
@@ -1094,75 +1102,10 @@
         },
         {
           "d": "2026-10-23",
-          "n": 197
+          "n": 335
         }
       ],
       "hours": [
-        {
-          "h": "03",
-          "t": 1792627200,
-          "n": 0
-        },
-        {
-          "h": "04",
-          "t": 1792630800,
-          "n": 0
-        },
-        {
-          "h": "05",
-          "t": 1792634400,
-          "n": 0
-        },
-        {
-          "h": "06",
-          "t": 1792638000,
-          "n": 0
-        },
-        {
-          "h": "07",
-          "t": 1792641600,
-          "n": 0
-        },
-        {
-          "h": "08",
-          "t": 1792645200,
-          "n": 0
-        },
-        {
-          "h": "09",
-          "t": 1792648800,
-          "n": 0
-        },
-        {
-          "h": "10",
-          "t": 1792652400,
-          "n": 0
-        },
-        {
-          "h": "11",
-          "t": 1792656000,
-          "n": 0
-        },
-        {
-          "h": "12",
-          "t": 1792659600,
-          "n": 0
-        },
-        {
-          "h": "13",
-          "t": 1792663200,
-          "n": 0
-        },
-        {
-          "h": "14",
-          "t": 1792666800,
-          "n": 8
-        },
-        {
-          "h": "15",
-          "t": 1792670400,
-          "n": 26
-        },
         {
           "h": "16",
           "t": 1792674000,
@@ -1216,82 +1159,147 @@
         {
           "h": "02",
           "t": 1792710000,
-          "n": 8
+          "n": 70
+        },
+        {
+          "h": "03",
+          "t": 1792713600,
+          "n": 46
+        },
+        {
+          "h": "04",
+          "t": 1792717200,
+          "n": 9
+        },
+        {
+          "h": "05",
+          "t": 1792720800,
+          "n": 0
+        },
+        {
+          "h": "06",
+          "t": 1792724400,
+          "n": 0
+        },
+        {
+          "h": "07",
+          "t": 1792728000,
+          "n": 0
+        },
+        {
+          "h": "08",
+          "t": 1792731600,
+          "n": 0
+        },
+        {
+          "h": "09",
+          "t": 1792735200,
+          "n": 5
+        },
+        {
+          "h": "10",
+          "t": 1792738800,
+          "n": 0
+        },
+        {
+          "h": "11",
+          "t": 1792742400,
+          "n": 0
+        },
+        {
+          "h": "12",
+          "t": 1792746000,
+          "n": 0
+        },
+        {
+          "h": "13",
+          "t": 1792749600,
+          "n": 0
+        },
+        {
+          "h": "14",
+          "t": 1792753200,
+          "n": 0
+        },
+        {
+          "h": "15",
+          "t": 1792756800,
+          "n": 16
         }
       ],
       "source": "public-site git history: first commit that added each content/recipes/*.json (Cairo time)"
     },
     "commits": [
       {
-        "t": 1792710391,
-        "s": "nb2: enchilada, quesadilla, burrito, Liège waffles, blini, idli, kaya toast, açaí bowl (8 "
+        "t": 1792758527,
+        "s": "Add 9 recipes: savoury pies (pasty, spanakopita, cheese quiche, chicken pastilla) and pres"
       },
       {
-        "t": 1792709832,
-        "s": "nx1: 3 recipes (carne asada tacos, chicken fajitas, grilled cheese)"
+        "t": 1792757851,
+        "s": "br5+ap4: 7 recipes (coco bread, pain de campagne, lavash, queso, bruschetta, samosas, bagn"
       },
       {
-        "t": 1792709520,
-        "s": "bf1: 10 breakfast recipes (pancakes, crepes, Belgian waffles, French toast, granola, Birch"
+        "t": 1792737828,
+        "s": "Breads br4: soft yoghurt flatbreads, raspberry and cheese danish, nan-e barbari, kaiser ro"
       },
       {
-        "t": 1792709135,
-        "s": "mx6: brandade, white chicken stock, chicken fried rice, chicken biryani, kedgeree, poached"
+        "t": 1792719573,
+        "s": "Breads br3: brioche, croissants, pain au chocolat, chocolate babka, monkey bread, sourdoug"
       },
       {
-        "t": 1792708580,
-        "s": "Soups sp5: soto ayam, groundnut, galbitang, chorba, laksa, egusi, dashi (7 recipes)"
+        "t": 1792717141,
+        "s": "Remove 'halal' wording from public content; sabich labelled Palestinian, intro rewritten"
       },
       {
-        "t": 1792708092,
-        "s": "Soups sp4: 10 new soup dishes (manual prose)"
+        "t": 1792716679,
+        "s": "br2: 9 bread Classics (white loaf, whole-wheat, baguette, ciabatta, pretzels, crumpets, mi"
       },
       {
-        "t": 1792707346,
-        "s": "Publish cakes cx1 (6); update PROGRESS"
+        "t": 1792716227,
+        "s": "ap3: 5 appetizer Classics (skordalia, provoleta, seven-layer dip, Jamaican patty, labneh)"
       },
       {
-        "t": 1792707333,
-        "s": "Publish pizza z1 (8), z2 (9)"
+        "t": 1792715746,
+        "s": "Hold massaman chicken and yellow curry prawns Classics (photo mismatch); moved to rw/held/"
       }
     ],
-    "commitCount": 66,
+    "commitCount": 84,
     "site": "https://tatedo2eo-beep.github.io/stack-site-5fa39e/",
-    "livePages": 489,
+    "livePages": 627,
     "tonight": {
-      "n": 145,
-      "batches": 22,
+      "n": 255,
+      "batches": 34,
       "first": "00:54",
-      "last": "02:07",
+      "last": "03:51",
       "recent": [
         [
-          "02:07",
-          "nb2",
-          8
+          "03:51",
+          "br2",
+          9
         ],
         [
-          "01:57",
-          "nx1",
-          3
+          "03:43",
+          "ap3",
+          5
         ],
         [
-          "01:52",
-          "bf1",
+          "03:33",
+          "cu3",
+          5
+        ],
+        [
+          "03:25",
+          "sw2",
+          9
+        ],
+        [
+          "03:16",
+          "ap2",
           10
         ],
         [
-          "01:45",
-          "mx6",
-          8
-        ],
-        [
-          "01:36",
-          "sp5",
-          7
-        ],
-        [
-          "01:28",
-          "sp4",
+          "03:07",
+          "dr3",
           10
         ]
       ]
@@ -1529,180 +1537,308 @@
             "Thick Açaí Bowl with Banana, Berries and Granola",
             "Yeasted Buckwheat Blini with Soured Cream and Jam"
           ]
+        },
+        {
+          "id": "dr1",
+          "t": "02:16",
+          "n": 12,
+          "ch": null,
+          "names": [
+            "Agua de Jamaica (Hibiscus Cooler) with Allspice and Orange",
+            "Cinnamon-Almond Rice Horchata with Lime Zest",
+            "Classic Fresh-Squeezed Lemonade",
+            "Frothy Whisked Matcha Green Tea",
+            "Crisp Iced Black Tea with Lemon and Mint",
+            "Moroccan Mint Tea with Gunpowder Green Tea",
+            "Rich Dark Hot Chocolate (Chocolat Chaud)",
+            "Smooth Cold Brew Coffee from Concentrate",
+            "Spiced Masala Chai with Ginger and Cardamom",
+            "Thai Iced Tea with Condensed Milk and Star Anise",
+            "Watermelon-Lime Agua Fresca with Mint",
+            "Whipped Dalgona Coffee over Cold Milk"
+          ]
+        },
+        {
+          "id": "dr2",
+          "t": "02:24",
+          "n": 10,
+          "ch": null,
+          "names": [
+            "Arnold Palmer: Layered Iced Tea and Lemonade",
+            "Champurrado: Thick Mexican Chocolate and Masa Drink",
+            "Fresh Ginger Ale with Lime and Honey Syrup",
+            "Fresh Limeade with Mashed Lime Zest and Mint",
+            "Homemade Chocolate Milk with Cocoa Syrup",
+            "Mango Lassi with Cardamom and Pistachio",
+            "Mixed Berry and Banana Yoghurt Smoothie with Orange",
+            "New York Chocolate Egg Cream with Seltzer",
+            "Peach and Ginger Shrub with Cider Vinegar and Soda",
+            "Southern Sweet Tea with Lemon and Mint"
+          ]
+        },
+        {
+          "id": "sw1",
+          "t": "02:34",
+          "n": 10,
+          "ch": null,
+          "names": []
+        },
+        {
+          "id": "ap1",
+          "t": "02:43",
+          "n": 10,
+          "ch": null,
+          "names": [
+            "Black Olive Tapenade with Capers, Anchovy and Thyme",
+            "Classic Deviled Eggs with Paprika and Chives",
+            "Crisp Socca with Onions, Rosemary and Black Olives",
+            "Deeply Caramelised French Onion Dip with Chives and Crisps",
+            "Hot Spinach and Artichoke Dip with Parmesan and Mozzarella",
+            "Muhammara with Roasted Red Peppers, Walnuts and Pomegranate Mola",
+            "Silky Hummus with Tahini, Lemon and Cumin",
+            "Sizzling Garlic Prawns (Gambas al Ajillo) with Chilli and Parsle",
+            "Smoky Baba Ghanoush with Charred Aubergine, Tahini and Lemon",
+            "Tomato and Basil Bruschetta with Gentle Garlic Oil"
+          ]
+        },
+        {
+          "id": "br1",
+          "t": "02:51",
+          "n": 11,
+          "ch": null,
+          "names": []
+        },
+        {
+          "id": "rs1",
+          "t": "02:58",
+          "n": 9,
+          "ch": null,
+          "names": []
+        },
+        {
+          "id": "dr3",
+          "t": "03:07",
+          "n": 10,
+          "ch": null,
+          "names": [
+            "Cheesy Gruyère Gougères",
+            "Classic Italian Affogato: Vanilla Ice Cream Drowned in Espresso",
+            "Crisp Onion, Potato and Spinach Pakora with Green Chutney",
+            "Extra-Crunchy Buttermilk Onion Rings with Horseradish Dip",
+            "Layered Espresso Tonic with Orange",
+            "Mexican Atole with Cinnamon and Brown Sugar",
+            "Parmesan and Thyme Stuffed Mushrooms",
+            "Potato and Pea Samosas with Mint-Coriander Chutney",
+            "Shaken Iced Coffee Frappé with Milk",
+            "Thick Chocolate Milkshake with Whipped Cream"
+          ]
+        },
+        {
+          "id": "ap2",
+          "t": "03:16",
+          "n": 10,
+          "ch": null,
+          "names": [
+            "Akara Black-Eyed Pea Fritters with Pepper Sauce",
+            "Baked Beef Empanadas with Olives and Raisins",
+            "Cheese and Jalapeño Nachos",
+            "Crisp Korean Pajeon Scallion Pancake",
+            "Crispy Vegetable Spring Rolls with Sweet Chilli Dip",
+            "Flaky Cong You Bing Chinese Scallion Pancakes",
+            "Garlic and Herb Olive Oil Crostini",
+            "Nigerian Puff-Puff with Nutmeg",
+            "Stovetop Buttered Popcorn",
+            "Twisted Parmesan Puff Pastry Cheese Straws"
+          ]
+        },
+        {
+          "id": "sw2",
+          "t": "03:25",
+          "n": 9,
+          "ch": null,
+          "names": [
+            "Curry Deviled Eggs with Parsley",
+            "Dill Pickle Deviled Eggs",
+            "French Dip Roast Beef Sandwiches with Thyme Jus",
+            "Mediterranean Chicken Wraps with Feta, Red Pepper and Olives",
+            "Open-Faced Cheddar Tuna Melts with Dill Pickles",
+            "Pan Bagnat with Tuna, Egg and Olives",
+            "Pressed Pesto, Mozzarella and Tomato Panini",
+            "Provolone Philly Cheesesteaks with Golden Onions",
+            "Roasted Red Pepper Hummus with Toasted Almonds"
+          ]
+        },
+        {
+          "id": "cu3",
+          "t": "03:33",
+          "n": 5,
+          "ch": null,
+          "names": []
+        },
+        {
+          "id": "ap3",
+          "t": "03:43",
+          "n": 5,
+          "ch": null,
+          "names": [
+            "Garlic, Potato and Almond Skordalia with Crisp Fried Cod",
+            "Grilled Provolone Provoleta with Oregano, Chilli and Toasted Bre",
+            "Jamaican Curried Beef Patties in Flaky Turmeric Pastry",
+            "Seven-Layer Bean Dip with Guacamole, Cheddar and Pico de Gallo",
+            "Strained Yoghurt Labneh with Olive Oil and Fresh Mint"
+          ]
+        },
+        {
+          "id": "br2",
+          "t": "03:51",
+          "n": 9,
+          "ch": null,
+          "names": [
+            "Crisp-Crusted French Baguettes",
+            "Griddled Holey English Crumpets with Butter",
+            "Honey Whole-Wheat Sandwich Loaf",
+            "Open-Crumb Rustic Italian Ciabatta",
+            "Soft Baked Pretzels with Coarse Salt and Mustard",
+            "Soft Cinnamon Rolls with Cream Cheese Icing",
+            "Soft White Sandwich Loaf",
+            "Spiced Hot Cross Buns with Raisins and Orange Peel",
+            "Fluffy Tangzhong Japanese Milk Bread"
+          ]
         }
       ],
       "publishes": [
         {
-          "h": "a7f47d9a",
-          "t": 1792710391,
-          "s": "nb2: enchilada, quesadilla, burrito, Liège waffles, blini, idli, kaya ",
-          "n": 8,
+          "h": "22fd3d9ac",
+          "t": 1792758527,
+          "s": "Add 9 recipes: savoury pies (pasty, spanakopita, cheese quiche, chicke",
+          "n": 9,
           "names": [
-            "Chipotle-Lime Chicken, Black Bean and Rice Burritos",
-            "Crisp Melted Monterey Jack Cheese Quesadillas with Fresh Tomato ",
-            "Liège Waffles with Caramelised Pearl Sugar",
-            "Pandan Coconut Kaya Toast with Cold Butter and Set Soft Eggs",
-            "Red Chile Chicken Enchiladas with Cheddar and Lime Crema",
-            "Soft Steamed Rice and Lentil Idli with Coconut Chutney",
-            "Thick Açaí Bowl with Banana, Berries and Granola",
-            "Yeasted Buckwheat Blini with Soured Cream and Jam"
+            "Classic Cheese Quiche",
+            "Strawberry Jam",
+            "Cornish Pasty",
+            "Fermented Sour Dill Pickles",
+            "Homemade Sauerkraut",
+            "Moroccan Chicken Pastilla",
+            "Napa Cabbage Kimchi",
+            "Salt-Preserved Lemons",
+            "Spanakopita (Spinach and Feta Phyllo Pie)"
           ]
         },
         {
-          "h": "0599346a",
-          "t": 1792709832,
-          "s": "nx1: 3 recipes (carne asada tacos, chicken fajitas, grilled cheese)",
-          "n": 3,
-          "names": [
-            "Carne Asada Street Tacos with Onion, Coriander and Lime",
-            "Golden Crisp Cheddar Grilled Cheese Sandwich",
-            "Smoky Chipotle and Lime Chicken Fajitas with Peppers and Guacamo"
-          ]
-        },
-        {
-          "h": "c399a2fc",
-          "t": 1792709520,
-          "s": "bf1: 10 breakfast recipes (pancakes, crepes, Belgian waffles, French t",
-          "n": 10,
-          "names": [
-            "Overnight Bircher Muesli with Grated Apple, Pecans and Raspberri",
-            "Classic French Toast with Cinnamon Sugar and Maple Syrup",
-            "Crisp Belgian Waffles with Strawberries and Whipped Cream",
-            "Dutch Baby Pancake with Berries, Lemon and Icing Sugar",
-            "Fluffy Buttermilk Pancakes with Butter and Maple Syrup",
-            "Honey-Maple Granola with Walnuts, Almonds, Seeds and Raisins",
-            "Huevos Rancheros with Refried Black Beans, Ranchero Sauce and Fr",
-            "Pan con Tomate: Grilled Bread with Grated Tomato, Garlic and Oli",
-            "Sabich: Pita with Fried Aubergine, Eggs, Hummus, Tahini and Chop",
-            "Thin French Crêpes with Sugar and Lemon"
-          ]
-        },
-        {
-          "h": "d0f661fc",
-          "t": 1792709135,
-          "s": "mx6: brandade, white chicken stock, chicken fried rice, chicken biryan",
-          "n": 8,
-          "names": [
-            "Brandade de Morue: Baked Salt Cod and Potato Gratin with Garlic ",
-            "Chicken Fried Rice with Egg, Peas and Carrot",
-            "Clear White Chicken Stock, Slow Simmered",
-            "Eggs Royale: Smoked Salmon and Poached Eggs with Lemon Hollandai",
-            "Kedgeree: Curried Basmati Rice with Smoked Haddock and Eggs",
-            "Panang Chicken Curry with Makrut Lime Leaves and Peanuts",
-            "Poached Eggs on Buttered Sourdough Toast with Chives",
-            "Saffron Layered Chicken Biryani with Golden Onions and Boiled Eg"
-          ]
-        },
-        {
-          "h": "4418d4f7",
-          "t": 1792708580,
-          "s": "Soups sp5: soto ayam, groundnut, galbitang, chorba, laksa, egusi, dash",
+          "h": "952bcbf38",
+          "t": 1792757851,
+          "s": "br5+ap4: 7 recipes (coco bread, pain de campagne, lavash, queso, brusc",
           "n": 7,
           "names": [
-            "Chorba: Algerian Lamb, Chickpea and Tomato Soup",
-            "Curry Laksa with Chicken, Prawns and Tofu Puffs",
-            "Dashi: Japanese Kombu and Bonito Stock",
-            "Egusi Soup with Beef and Greens",
-            "Galbitang: Korean Beef Short Rib and Radish Soup",
-            "Groundnut Soup with Sweet Potato and Kale",
-            "Soto Ayam: Indonesian Chicken and Turmeric Noodle Soup"
+            "Bagna Cauda (Warm Anchovy and Garlic Dip)",
+            "Pain de Campagne (Rustic Sourdough Boule)",
+            "Potato and Pea Samosas with Coriander-Mint Chutney",
+            "Soft Coconut Milk Coco Bread",
+            "Chile con Queso",
+            "Thin Soft Lavash",
+            "Tomato and Basil Bruschetta"
           ]
         },
         {
-          "h": "a8243510",
-          "t": 1792708092,
-          "s": "Soups sp4: 10 new soup dishes (manual prose)",
-          "n": 10,
+          "h": "acc8dac9e",
+          "t": 1792737828,
+          "s": "Breads br4: soft yoghurt flatbreads, raspberry and cheese danish, nan-",
+          "n": 5,
           "names": [
-            "Matzah Ball Soup with Chicken and Dill",
-            "Miso Soup with Tofu and Wakame",
-            "Mulligatawny with Chicken, Red Lentils and Coconut",
-            "Pappa al Pomodoro: Tuscan Tomato and Bread Soup",
-            "Pho Bo: Vietnamese Beef and Rice Noodle Soup",
-            "Pumpkin Soup with Caramelised Onion and Crisp Sage",
-            "Ribollita: Tuscan Bean, Cavolo Nero and Bread Soup",
-            "Scotch Broth with Lamb, Barley and Kale",
-            "Ukrainian Borscht with Beef, Beetroot and Cabbage",
-            "Vichyssoise: Chilled Leek and Potato Soup"
+            "Glossy Five-Point Kaiser Rolls",
+            "Nan-e Barbari (Ridged Persian Sesame Bread)",
+            "Raspberry and Cream Cheese Danish Pastries",
+            "Soft Yoghurt Pan Flatbreads with Olive Oil",
+            "Sweet Cheese Danish Pastries with Lemon"
           ]
         },
         {
-          "h": "a4976b17",
-          "t": 1792707346,
-          "s": "Publish cakes cx1 (6); update PROGRESS",
-          "n": 6,
+          "h": "31fc734e0",
+          "t": 1792719573,
+          "s": "Breads br3: brioche, croissants, pain au chocolat, chocolate babka, mo",
+          "n": 9,
           "names": [
-            "Chocolate Cheesecake",
-            "Lemon Angel Food Cake",
-            "Lemon Bundt Cake with Lemon Glaze",
-            "Red Velvet Cupcakes with Cream Cheese Frosting",
-            "Spiced Pumpkin Cheesecake",
-            "Texas-Style Chocolate Sheet Cake with Pecan Icing"
+            "Braided Greek Tsoureki",
+            "Cinnamon-Sugar Monkey Bread",
+            "Flaky Butter Croissants",
+            "Fruit and Almond Stollen with Marzipan Centre",
+            "Golden Butter Brioche Loaf",
+            "Country Sourdough Boule",
+            "Pain au Chocolat with Dark Chocolate",
+            "Soft Norwegian Potato Lefse",
+            "Swirled Chocolate Babka"
           ]
         },
         {
-          "h": "5ec4eaf2",
-          "t": 1792707333,
-          "s": "Publish pizza z1 (8), z2 (9)",
-          "n": 17,
+          "h": "f13dd9159",
+          "t": 1792717141,
+          "s": "Remove 'halal' wording from public content; sabich labelled Palestinia",
+          "n": 0,
+          "names": []
+        },
+        {
+          "h": "8259cf7b9",
+          "t": 1792716679,
+          "s": "br2: 9 bread Classics (white loaf, whole-wheat, baguette, ciabatta, pr",
+          "n": 9,
           "names": [
-            "Caramelised Onion Flatbread with Anchovies, Black Olives and Thy",
-            "Cheese Bread Boats with Melted Mozzarella, Feta and Baked Egg",
-            "Chicago-Style Deep-Dish Cheese Pizza with Buttery Crust and Chun",
-            "Cracker-Thin Pizza with Three-Cheese Blend and Sweet Oregano Sau",
-            "Crisp Thin-Crust Tavern Pizza with Peppers, Onion and Fennel Tom",
-            "Detroit-Style Pan Pizza with Crisp Cheese Edges and Tomato Strip",
-            "Fried Mini Pizzas with Tomato, Mozzarella and Basil",
-            "Neapolitan-Style Margherita Pizza with Tomato, Mozzarella and Ba",
-            "New York-Style Cheese Pizza with Oregano Tomato Sauce",
-            "Roman-Style Sheet-Pan Pizza with Tomato-Mozzarella and Rosemary-",
-            "Savoury Cabbage Pancakes with Spring Onion, Tangy Sauce and Mayo",
-            "Sicilian-Style Thick Pan Pizza with Onion, Tomato and Crisp Crum",
-            "Spinach and Ricotta Calzones with Tomato Dipping Sauce",
-            "Spinach, Ricotta and Mozzarella Stromboli with Garlic Crust"
+            "Crisp-Crusted French Baguettes",
+            "Griddled Holey English Crumpets with Butter",
+            "Honey Whole-Wheat Sandwich Loaf",
+            "Open-Crumb Rustic Italian Ciabatta",
+            "Soft Baked Pretzels with Coarse Salt and Mustard",
+            "Soft Cinnamon Rolls with Cream Cheese Icing",
+            "Soft White Sandwich Loaf",
+            "Spiced Hot Cross Buns with Raisins and Orange Peel",
+            "Fluffy Tangzhong Japanese Milk Bread"
           ]
         },
         {
-          "h": "e20feefa",
-          "t": 1792707319,
-          "s": "Publish dumplings d1 (4), seafood s1 (9)",
-          "n": 13,
+          "h": "167aba33f",
+          "t": 1792716227,
+          "s": "ap3: 5 appetizer Classics (skordalia, provoleta, seven-layer dip, Jama",
+          "n": 5,
           "names": [
-            "Brazilian-Style Fish and Prawn Stew with Coconut and Peppers",
-            "Crisp Cod and Potato Fish Cakes with Lemon-Herb Mayonnaise",
-            "Crisp Fried Mixed Seafood and Courgette with Lemon",
-            "Crisp Fried Squid Rings with Garlic Tomato Dip",
-            "Libyan-Style Fish in Spicy Tomato and Pepper Sauce",
-            "Louisiana-Style Crayfish Tail Stew with Rice",
-            "Malaysian-Style Fish Head Curry with Okra and Aubergine",
-            "Pan-Fried Beef and Cabbage Dumplings with Ginger Dipping Sauce",
-            "Gently Poached Prawns with Classic Cocktail Sauce",
-            "Potato and Cheese Dumplings with Buttery Golden Onions",
-            "Singapore-Style Chilli Crab in Tomato and Egg Sauce",
-            "Sweet Cheese Dumplings with Sour Cream and Berries",
-            "Tiny Lamb Dumplings with Garlic Yoghurt and Paprika Butter"
+            "Garlic, Potato and Almond Skordalia with Crisp Fried Cod",
+            "Grilled Provolone Provoleta with Oregano, Chilli and Toasted Bre",
+            "Jamaican Curried Beef Patties in Flaky Turmeric Pastry",
+            "Seven-Layer Bean Dip with Guacamole, Cheddar and Pico de Gallo",
+            "Strained Yoghurt Labneh with Olive Oil and Fresh Mint"
           ]
         },
         {
-          "h": "70f68faf",
-          "t": 1792707300,
-          "s": "Publish meat m4 (5), m5 (8), m6 (7), m7 (1)",
-          "n": 21,
+          "h": "1a90926f2",
+          "t": 1792715746,
+          "s": "Hold massaman chicken and yellow curry prawns Classics (photo mismatch",
+          "n": 0,
+          "names": []
+        },
+        {
+          "h": "9173adf93",
+          "t": 1792715573,
+          "s": "cu3: pierogi, massaman, green curry, korma, yellow curry Classics (cha",
+          "n": 3,
           "names": [
-            "Breaded Veal Schnitzel with Warm Potato Salad",
-            "Grilled Thick-Cut Porterhouse Steak with Rosemary, Olive Oil and",
-            "Herb-Crusted Rack of Lamb with a Mustard Layer",
-            "Herb-Crusted Rack of Lamb with Parsley and Garlic",
-            "Hungarian Paprika Beef Stew with Egg Dumplings",
-            "Korean-Style Marinated Grilled Beef with Lettuce Wraps",
-            "Lamb Tagine with Preserved Lemon and Green Olives",
-            "Lamb Tagine with Prunes, Apricots and Almonds",
-            "Pan-Roasted Duck Breast with Orange Sauce",
-            "Persian Herb, Lamb and Kidney Bean Stew with Dried Lime",
-            "Peruvian-Style Beef and Tomato Stir-Fry with Chips and Rice",
-            "Reverse-Seared Rib-Eye Steak with Thyme and Garlic",
-            "Roast Centre-Cut Beef Fillet with Tarragon Butter Sauce and Roas",
-            "Slow-Cooked Crisp Duck Legs with Fried Potatoes and Frisée Salad"
+            "Potato and Sauerkraut Dumplings with Caramelised Onions",
+            "Thai Green Coconut Curry with Cod, Aubergine and Red Chilli",
+            "Vegetable and Paneer Korma with Cashew Cream and Toasted Almonds"
+          ]
+        },
+        {
+          "h": "1d4506c32",
+          "t": 1792715100,
+          "s": "sw2: 9 sandwiches/appetizers (tuna melt, panini, wraps, French dip, pa",
+          "n": 9,
+          "names": [
+            "Curry Deviled Eggs with Parsley",
+            "Dill Pickle Deviled Eggs",
+            "French Dip Roast Beef Sandwiches with Thyme Jus",
+            "Mediterranean Chicken Wraps with Feta, Red Pepper and Olives",
+            "Open-Faced Cheddar Tuna Melts with Dill Pickles",
+            "Pan Bagnat with Tuna, Egg and Olives",
+            "Pressed Pesto, Mozzarella and Tomato Panini",
+            "Provolone Philly Cheesesteaks with Golden Onions",
+            "Roasted Red Pepper Hummus with Toasted Almonds"
           ]
         }
       ],
@@ -1861,7 +1997,7 @@
         },
         {
           "name": "Dumplings",
-          "done": 2,
+          "done": 3,
           "total": 3
         },
         {
@@ -1871,7 +2007,7 @@
         },
         {
           "name": "Curries",
-          "done": 2,
+          "done": 4,
           "total": 9
         },
         {
@@ -1896,7 +2032,7 @@
         },
         {
           "name": "Vegetables & Sides",
-          "done": 0,
+          "done": 1,
           "total": 45
         },
         {
@@ -1911,22 +2047,22 @@
         },
         {
           "name": "Sandwiches & Wraps",
-          "done": 4,
+          "done": 13,
           "total": 18
         },
         {
           "name": "Appetizers & Dips",
-          "done": 1,
+          "done": 34,
           "total": 51
         },
         {
           "name": "Savory Pies & Pastries",
-          "done": 0,
+          "done": 4,
           "total": 5
         },
         {
           "name": "Preserves, Pickles & Ferments",
-          "done": 0,
+          "done": 5,
           "total": 7
         },
         {
@@ -1936,7 +2072,7 @@
         },
         {
           "name": "Breads & Viennoiserie",
-          "done": 1,
+          "done": 39,
           "total": 58
         },
         {
@@ -1981,17 +2117,17 @@
         },
         {
           "name": "Ice Cream & Frozen Desserts",
-          "done": 0,
+          "done": 1,
           "total": 17
         },
         {
           "name": "World Desserts & Sweets",
-          "done": 0,
+          "done": 1,
           "total": 44
         },
         {
           "name": "Drinks",
-          "done": 1,
+          "done": 24,
           "total": 48
         }
       ],
@@ -2218,7 +2354,7 @@
     {"s":"pasta-primavera","n":"Pasta primavera","c":7,"b":1,"f":[0,0],"x":0},
     {"s":"baked-ziti","n":"Baked ziti","c":7,"b":1,"f":[0,0],"x":0},
     {"s":"pasta-al-limone","n":"Pasta al limone","c":7,"b":1,"f":[0,0],"x":0},
-    {"s":"pierogi","n":"Pierogi","c":8,"b":0,"f":[2,2],"x":0},
+    {"s":"pierogi","n":"Pierogi","c":8,"b":1,"f":[2,2],"x":0},
     {"s":"manti","n":"Manti","c":8,"b":1,"f":[0,0],"x":0},
     {"s":"potstickers-guotie-jiaozi","n":"Potstickers (guotie/jiaozi)","c":8,"b":1,"f":[0,0],"x":0},
     {"s":"steamed-pilaf","n":"Steamed/pilaf","c":9,"b":1,"f":[0,0],"x":0},
@@ -2248,9 +2384,9 @@
     {"s":"kimbap","n":"Kimbap","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"mexican-rice-arroz-rojo","n":"Mexican rice (arroz rojo)","c":9,"b":1,"f":[0,0],"x":0},
     {"s":"massaman","n":"Massaman","c":10,"b":0,"f":[1,1],"x":0},
-    {"s":"green-curry","n":"Green curry","c":10,"b":0,"f":[1,1],"x":0},
+    {"s":"green-curry","n":"Green curry","c":10,"b":1,"f":[1,1],"x":0},
     {"s":"rendang","n":"Rendang","c":10,"b":0,"f":[1,1],"x":0},
-    {"s":"korma","n":"Korma","c":10,"b":0,"f":[1,1],"x":0},
+    {"s":"korma","n":"Korma","c":10,"b":1,"f":[1,1],"x":0},
     {"s":"japanese-curry","n":"Japanese curry","c":10,"b":1,"f":[0,0],"x":0},
     {"s":"khao-soi","n":"Khao soi","c":10,"b":0,"f":[1,1],"x":0},
     {"s":"panang-curry","n":"Panang curry","c":10,"b":1,"f":[1,1],"x":0},
@@ -2361,7 +2497,7 @@
     {"s":"pinakbet","n":"Pinakbet","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"gado-gado","n":"Gado-gado","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"zaalouk","n":"Zaalouk","c":15,"b":0,"f":[0,0],"x":0},
-    {"s":"aloo-gobi","n":"Aloo gobi","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"aloo-gobi","n":"Aloo gobi","c":15,"b":1,"f":[0,0],"x":0},
     {"s":"palak-paneer","n":"Palak paneer","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"saag","n":"Saag","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"di-san-xian","n":"Di san xian","c":15,"b":0,"f":[0,0],"x":0},
@@ -2381,7 +2517,7 @@
     {"s":"peperonata","n":"Peperonata","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"carciofi-alla-romana","n":"Carciofi alla romana","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"carciofi-alla-giudia","n":"Carciofi alla giudia","c":15,"b":0,"f":[0,0],"x":0},
-    {"s":"israeli-salad","n":"Israeli salad","c":15,"b":0,"f":[0,0],"x":0},
+    {"s":"palestinian-salad","n":"Palestinian salad","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"sukuma-wiki","n":"Sukuma wiki","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"ratatouille-confit-byaldi","n":"Ratatouille (& confit byaldi)","c":15,"b":0,"f":[0,0],"x":0},
     {"s":"purees-celeriac-parsnip","n":"Purées (celeriac, parsnip)","c":15,"b":0,"f":[0,0],"x":0},
@@ -2467,86 +2603,86 @@
     {"s":"dukkah","n":"Dukkah","c":17,"b":0,"f":[0,0],"x":0},
     {"s":"ras-el-hanout","n":"Ras el hanout","c":17,"b":0,"f":[0,0],"x":0},
     {"s":"grilled-cheese","n":"Grilled cheese","c":18,"b":1,"f":[0,0],"x":0},
-    {"s":"tuna-melt","n":"Tuna melt","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"tuna-melt","n":"Tuna melt","c":18,"b":1,"f":[0,0],"x":0},
     {"s":"pb-j","n":"PB&J","c":18,"b":0,"f":[0,0],"x":0},
-    {"s":"wraps","n":"Wraps","c":18,"b":0,"f":[0,1],"x":0},
-    {"s":"panini","n":"Panini","c":18,"b":0,"f":[0,1],"x":0},
-    {"s":"quesadilla","n":"Quesadilla","c":18,"b":1,"f":[0,2],"x":0},
-    {"s":"burrito","n":"Burrito","c":18,"b":1,"f":[0,1],"x":0},
+    {"s":"wraps","n":"Wraps","c":18,"b":1,"f":[1,1],"x":0},
+    {"s":"panini","n":"Panini","c":18,"b":1,"f":[0,1],"x":0},
+    {"s":"quesadilla","n":"Quesadilla","c":18,"b":1,"f":[2,2],"x":0},
+    {"s":"burrito","n":"Burrito","c":18,"b":1,"f":[1,1],"x":0},
     {"s":"reuben","n":"Reuben","c":18,"b":0,"f":[0,0],"x":0},
-    {"s":"katsu-sando","n":"Katsu sando","c":18,"b":0,"f":[0,1],"x":0},
-    {"s":"philly-cheesesteak","n":"Philly cheesesteak","c":18,"b":0,"f":[0,2],"x":0},
-    {"s":"po-boy","n":"Po' boy","c":18,"b":0,"f":[0,3],"x":0},
-    {"s":"pan-bagnat","n":"Pan bagnat","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"katsu-sando","n":"Katsu sando","c":18,"b":0,"f":[1,1],"x":0},
+    {"s":"philly-cheesesteak","n":"Philly cheesesteak","c":18,"b":1,"f":[1,2],"x":0},
+    {"s":"po-boy","n":"Po' boy","c":18,"b":0,"f":[1,3],"x":0},
+    {"s":"pan-bagnat","n":"Pan bagnat","c":18,"b":1,"f":[0,0],"x":0},
     {"s":"falafel-pita","n":"Falafel pita","c":18,"b":1,"f":[0,0],"x":0},
-    {"s":"arepa","n":"Arepa","c":18,"b":0,"f":[0,1],"x":0},
-    {"s":"lobster-roll","n":"Lobster roll","c":18,"b":0,"f":[0,0],"x":0},
-    {"s":"french-dip","n":"French dip","c":18,"b":0,"f":[0,0],"x":0},
+    {"s":"arepa","n":"Arepa","c":18,"b":1,"f":[1,1],"x":0},
+    {"s":"lobster-roll","n":"Lobster roll","c":18,"b":1,"f":[0,0],"x":0},
+    {"s":"french-dip","n":"French dip","c":18,"b":1,"f":[0,0],"x":0},
     {"s":"smrrebrd-open","n":"Smørrebrød (open)","c":18,"b":0,"f":[0,0],"x":0},
-    {"s":"sloppy-joes","n":"Sloppy Joes","c":18,"b":0,"f":[0,0],"x":0},
-    {"s":"hummus","n":"Hummus","c":19,"b":0,"f":[0,1],"x":0},
-    {"s":"baba-ghanoush","n":"Baba ghanoush","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"sloppy-joes","n":"Sloppy Joes","c":18,"b":1,"f":[0,0],"x":0},
+    {"s":"hummus","n":"Hummus","c":19,"b":1,"f":[1,1],"x":0},
+    {"s":"baba-ghanoush","n":"Baba ghanoush","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"guacamole","n":"Guacamole","c":19,"b":1,"f":[0,0],"x":0},
-    {"s":"muhammara","n":"Muhammara","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"labneh","n":"Labneh","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"spinach-artichoke","n":"Spinach-artichoke","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"french-onion-dip","n":"French onion dip","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"queso","n":"Queso","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"tapenade","n":"Tapenade","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"skordalia","n":"Skordalia","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"bagna-cauda","n":"Bagna cauda","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"bruschetta","n":"Bruschetta","c":19,"b":0,"f":[0,2],"x":0},
-    {"s":"deviled-eggs","n":"Deviled eggs","c":19,"b":0,"f":[0,2],"x":0},
-    {"s":"stuffed-mushrooms","n":"Stuffed mushrooms","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"spring-rolls","n":"Spring rolls","c":19,"b":0,"f":[0,2],"x":0},
-    {"s":"samosas","n":"Samosas","c":19,"b":0,"f":[0,1],"x":0},
-    {"s":"empanadas","n":"Empanadas","c":19,"b":0,"f":[0,3],"x":0},
+    {"s":"muhammara","n":"Muhammara","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"labneh","n":"Labneh","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"spinach-artichoke","n":"Spinach-artichoke","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"french-onion-dip","n":"French onion dip","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"queso","n":"Queso","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"tapenade","n":"Tapenade","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"skordalia","n":"Skordalia","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"bagna-cauda","n":"Bagna cauda","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"bruschetta","n":"Bruschetta","c":19,"b":1,"f":[1,2],"x":0},
+    {"s":"deviled-eggs","n":"Deviled eggs","c":19,"b":1,"f":[2,2],"x":0},
+    {"s":"stuffed-mushrooms","n":"Stuffed mushrooms","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"spring-rolls","n":"Spring rolls","c":19,"b":1,"f":[0,2],"x":0},
+    {"s":"samosas","n":"Samosas","c":19,"b":1,"f":[1,1],"x":0},
+    {"s":"empanadas","n":"Empanadas","c":19,"b":1,"f":[0,3],"x":0},
     {"s":"croquetas","n":"Croquetas","c":19,"b":0,"f":[0,1],"x":0},
-    {"s":"gougeres","n":"Gougères","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"gougeres","n":"Gougères","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"ksr","n":"Kısır","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"fatayer","n":"Fatayer","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"provoleta","n":"Provoleta","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"puff-puff","n":"Puff-puff","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"akara","n":"Akara","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"provoleta","n":"Provoleta","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"puff-puff","n":"Puff-puff","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"akara","n":"Akara","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"briouat","n":"Briouat","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"tiropita","n":"Tiropita","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"saganaki","n":"Saganaki","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"pirozhki","n":"Pirozhki","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"pakora","n":"Pakora","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"pakora","n":"Pakora","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"pani-puri","n":"Pani puri","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"aloo-tikki","n":"Aloo tikki","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"cong-you-bing","n":"Cong you bing","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"pajeon","n":"Pajeon","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"aloo-tikki","n":"Aloo tikki","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"cong-you-bing","n":"Cong you bing","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"pajeon","n":"Pajeon","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"miang-kham","n":"Miang kham","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"jamaican-patty","n":"Jamaican patty","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"jamaican-patty","n":"Jamaican patty","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"pastel-de-bacalhau","n":"Pastel de bacalhau","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"pimientos-de-padron","n":"Pimientos de Padrón","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"crostini","n":"Crostini","c":19,"b":0,"f":[0,1],"x":0},
-    {"s":"socca","n":"Socca","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"nachos","n":"Nachos","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"onion-ring","n":"Onion ring","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"seven-layer-dip","n":"Seven-layer dip","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"crostini","n":"Crostini","c":19,"b":1,"f":[0,1],"x":0},
+    {"s":"socca","n":"Socca","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"nachos","n":"Nachos","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"onion-ring","n":"Onion ring","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"seven-layer-dip","n":"Seven-layer dip","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"brik","n":"Brik","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"carpaccio","n":"Carpaccio","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"canapes","n":"Canapés","c":19,"b":0,"f":[0,0],"x":0},
     {"s":"gildas-pintxos","n":"Gildas/pintxos","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"tapas-gambas-al-ajillo","n":"Tapas (gambas al ajillo)","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"tapas-gambas-al-ajillo","n":"Tapas (gambas al ajillo)","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"kibbeh","n":"Kibbeh","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"cheese-straws","n":"Cheese straws","c":19,"b":0,"f":[0,0],"x":0},
+    {"s":"cheese-straws","n":"Cheese straws","c":19,"b":1,"f":[0,0],"x":0},
     {"s":"parmesan-crackers","n":"Parmesan crackers","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"popcorn","n":"Popcorn","c":19,"b":0,"f":[0,0],"x":0},
-    {"s":"cornish-pasty","n":"Cornish pasty","c":20,"b":0,"f":[0,0],"x":0},
-    {"s":"spanakopita","n":"Spanakopita","c":20,"b":0,"f":[0,0],"x":0},
+    {"s":"popcorn","n":"Popcorn","c":19,"b":1,"f":[0,0],"x":0},
+    {"s":"cornish-pasty","n":"Cornish pasty","c":20,"b":1,"f":[0,0],"x":0},
+    {"s":"spanakopita","n":"Spanakopita","c":20,"b":1,"f":[0,0],"x":0},
     {"s":"borek","n":"Börek","c":20,"b":0,"f":[0,1],"x":0},
-    {"s":"pastilla","n":"Pastilla","c":20,"b":0,"f":[0,0],"x":0},
-    {"s":"quiche-cheese","n":"Quiche (cheese)","c":20,"b":0,"f":[0,0],"x":0},
-    {"s":"kimchi","n":"Kimchi","c":21,"b":0,"f":[0,0],"x":0},
-    {"s":"sauerkraut","n":"Sauerkraut","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"pastilla","n":"Pastilla","c":20,"b":1,"f":[0,0],"x":0},
+    {"s":"quiche-cheese","n":"Quiche (cheese)","c":20,"b":1,"f":[0,0],"x":0},
+    {"s":"kimchi","n":"Kimchi","c":21,"b":1,"f":[0,0],"x":0},
+    {"s":"sauerkraut","n":"Sauerkraut","c":21,"b":1,"f":[0,0],"x":0},
     {"s":"marmalade","n":"Marmalade","c":21,"b":0,"f":[0,2],"x":0},
     {"s":"chutney","n":"Chutney","c":21,"b":0,"f":[0,2],"x":0},
-    {"s":"preserved-lemon","n":"Preserved lemon","c":21,"b":0,"f":[0,0],"x":0},
-    {"s":"sour-dill-pickles","n":"Sour dill pickles","c":21,"b":0,"f":[0,0],"x":0},
-    {"s":"strawberry-jam","n":"Strawberry jam","c":21,"b":0,"f":[0,0],"x":0},
+    {"s":"preserved-lemon","n":"Preserved lemon","c":21,"b":1,"f":[0,0],"x":0},
+    {"s":"sour-dill-pickles","n":"Sour dill pickles","c":21,"b":1,"f":[0,0],"x":0},
+    {"s":"strawberry-jam","n":"Strawberry jam","c":21,"b":1,"f":[0,0],"x":0},
     {"s":"pancakes-american","n":"Pancakes (American)","c":22,"b":1,"f":[0,0],"x":0},
     {"s":"crepes","n":"Crêpes","c":22,"b":1,"f":[0,0],"x":0},
     {"s":"waffles-belgian","n":"Waffles (Belgian)","c":22,"b":1,"f":[0,0],"x":0},
@@ -2569,64 +2705,64 @@
     {"s":"chilaquiles","n":"Chilaquiles","c":22,"b":0,"f":[0,0],"x":0},
     {"s":"kaya-toast","n":"Kaya toast","c":22,"b":1,"f":[0,0],"x":0},
     {"s":"acai-bowl","n":"Açaí bowl","c":22,"b":1,"f":[0,0],"x":0},
-    {"s":"white-sandwich-loaf","n":"White sandwich loaf","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"whole-wheat","n":"Whole wheat","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"baguette","n":"Baguette","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"sourdough-boule","n":"Sourdough boule","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"focaccia","n":"Focaccia","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"ciabatta","n":"Ciabatta","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"dinner-rolls","n":"Dinner rolls","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"brioche","n":"Brioche","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"challah","n":"Challah","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"pita","n":"Pita","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"naan","n":"Naan","c":23,"b":0,"f":[0,1],"x":0},
-    {"s":"flatbreads","n":"Flatbreads","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"bagels","n":"Bagels","c":23,"b":0,"f":[0,1],"x":0},
-    {"s":"soda-bread","n":"Soda bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"white-sandwich-loaf","n":"White sandwich loaf","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"whole-wheat","n":"Whole wheat","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"baguette","n":"Baguette","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"sourdough-boule","n":"Sourdough boule","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"focaccia","n":"Focaccia","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"ciabatta","n":"Ciabatta","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"dinner-rolls","n":"Dinner rolls","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"brioche","n":"Brioche","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"challah","n":"Challah","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"pita","n":"Pita","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"naan","n":"Naan","c":23,"b":1,"f":[1,1],"x":0},
+    {"s":"flatbreads","n":"Flatbreads","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"bagels","n":"Bagels","c":23,"b":1,"f":[1,1],"x":0},
+    {"s":"soda-bread","n":"Soda bread","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"banana-bread-quick-breads","n":"Banana bread/quick breads","c":23,"b":1,"f":[0,0],"x":0},
-    {"s":"cornbread","n":"Cornbread","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"pretzels","n":"Pretzels","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"english-muffins","n":"English muffins","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"croissant","n":"Croissant","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"pain-au-chocolat","n":"Pain au chocolat","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"danish","n":"Danish","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"cornbread","n":"Cornbread","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"pretzels","n":"Pretzels","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"english-muffins","n":"English muffins","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"croissant","n":"Croissant","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"pain-au-chocolat","n":"Pain au chocolat","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"danish","n":"Danish","c":23,"b":1,"f":[1,1],"x":0},
     {"s":"chausson-aux-pommes","n":"Chausson aux pommes","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"simit","n":"Simit","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"barbari-bread","n":"Barbari bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"barbari-bread","n":"Barbari bread","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"kaak","n":"Ka'ak","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"pandesal","n":"Pandesal","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"roti-canai","n":"Roti canai","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"msemen","n":"Msemen","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"harcha","n":"Harcha","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"tsoureki","n":"Tsoureki","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"kaiser-roll","n":"Kaiser roll","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"stollen","n":"Stollen","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"lefse","n":"Lefse","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"tsoureki","n":"Tsoureki","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"kaiser-roll","n":"Kaiser roll","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"stollen","n":"Stollen","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"lefse","n":"Lefse","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"kulcha","n":"Kulcha","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"bhatura","n":"Bhatura","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"chapati","n":"Chapati","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"chapati","n":"Chapati","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"swedish-kanelbullar","n":"Swedish kanelbullar","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"sticky-pecan-buns","n":"Sticky/pecan buns","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"coco-bread","n":"Coco bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"coco-bread","n":"Coco bread","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"zopf","n":"Zopf","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"pain-depices","n":"Pain d'épices","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"grissini","n":"Grissini","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"grissini","n":"Grissini","c":23,"b":1,"f":[1,1],"x":0},
     {"s":"pain-de-mie","n":"Pain de mie","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"crumpet","n":"Crumpet","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"scone","n":"Scone","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"biscuit","n":"Biscuit","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"pain-de-campagne-levain","n":"Pain de campagne (levain)","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"crumpet","n":"Crumpet","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"scone","n":"Scone","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"biscuit","n":"Biscuit","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"pain-de-campagne-levain","n":"Pain de campagne (levain)","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"fougasse","n":"Fougasse","c":23,"b":0,"f":[0,0],"x":0},
     {"s":"rye-pumpernickel","n":"Rye/pumpernickel","c":23,"b":0,"f":[0,2],"x":0},
-    {"s":"japanese-milk-bread-tangzhong","n":"Japanese milk bread (tangzhong)","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"japanese-milk-bread-tangzhong","n":"Japanese milk bread (tangzhong)","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"tortillas-corn-flour","n":"Tortillas (corn/flour)","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"lavash","n":"Lavash","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"lavash","n":"Lavash","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"roti-paratha","n":"Roti/paratha","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"babka","n":"Babka","c":23,"b":0,"f":[0,1],"x":0},
+    {"s":"babka","n":"Babka","c":23,"b":1,"f":[0,1],"x":0},
     {"s":"kubaneh","n":"Kubaneh","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"cinnamon-rolls","n":"Cinnamon rolls","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"hot-cross-buns","n":"Hot cross buns","c":23,"b":0,"f":[0,0],"x":0},
-    {"s":"monkey-bread","n":"Monkey bread","c":23,"b":0,"f":[0,0],"x":0},
+    {"s":"cinnamon-rolls","n":"Cinnamon rolls","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"hot-cross-buns","n":"Hot cross buns","c":23,"b":1,"f":[0,0],"x":0},
+    {"s":"monkey-bread","n":"Monkey bread","c":23,"b":1,"f":[0,0],"x":0},
     {"s":"brownie-fudgy-or-cakey","n":"Brownie (fudgy or cakey)","c":24,"b":1,"f":[0,0],"x":0},
     {"s":"blondies","n":"Blondies","c":24,"b":1,"f":[0,0],"x":0},
     {"s":"flourless","n":"Flourless","c":24,"b":1,"f":[0,0],"x":0},
@@ -2794,7 +2930,7 @@
     {"s":"semifreddo","n":"Semifreddo","c":32,"b":0,"f":[0,0],"x":0},
     {"s":"parfait-glace","n":"Parfait (glacé)","c":32,"b":0,"f":[0,0],"x":0},
     {"s":"frozen-yogurt","n":"Frozen yogurt","c":32,"b":0,"f":[0,1],"x":0},
-    {"s":"affogato","n":"Affogato","c":32,"b":0,"f":[0,0],"x":0},
+    {"s":"affogato","n":"Affogato","c":32,"b":1,"f":[0,0],"x":0},
     {"s":"sundaes","n":"Sundaes","c":32,"b":0,"f":[0,0],"x":0},
     {"s":"ice-cream-cake","n":"Ice-cream cake","c":32,"b":0,"f":[0,0],"x":0},
     {"s":"baked-alaska","n":"Baked Alaska","c":32,"b":0,"f":[0,0],"x":0},
@@ -2811,7 +2947,7 @@
     {"s":"rasgulla","n":"Rasgulla","c":33,"b":0,"f":[0,0],"x":0},
     {"s":"jalebi","n":"Jalebi","c":33,"b":0,"f":[0,0],"x":0},
     {"s":"mango-sticky-rice","n":"Mango sticky rice","c":33,"b":0,"f":[0,0],"x":0},
-    {"s":"faloodeh","n":"Faloodeh","c":33,"b":0,"f":[0,0],"x":0},
+    {"s":"faloodeh","n":"Faloodeh","c":33,"b":1,"f":[0,0],"x":0},
     {"s":"maamoul","n":"Maamoul","c":33,"b":0,"f":[0,0],"x":0},
     {"s":"qatayef","n":"Qatayef","c":33,"b":0,"f":[0,3],"x":0},
     {"s":"che","n":"Chè","c":33,"b":0,"f":[0,0],"x":0},
@@ -2854,45 +2990,45 @@
     {"s":"americano","n":"Americano","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"pour-over","n":"Pour-over","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"french-press","n":"French press","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"cold-brew","n":"Cold brew","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"cold-brew","n":"Cold brew","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"iced-coffee","n":"Iced coffee","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"vietnamese-ca-phe","n":"Vietnamese cà phê","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"hot-brewed-black-green-oolong","n":"Hot brewed (black/green/oolong)","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"matcha-whisked","n":"Matcha (whisked)","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"masala-chai","n":"Masala chai","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"iced-tea","n":"Iced tea","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"matcha-whisked","n":"Matcha (whisked)","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"masala-chai","n":"Masala chai","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"iced-tea","n":"Iced tea","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"milk-tea-bubble-tea","n":"Milk tea/bubble tea","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"moroccan-mint","n":"Moroccan mint","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"moroccan-mint","n":"Moroccan mint","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"herbal-infusions","n":"Herbal infusions","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"hot-chocolate-french-chocolat-chaud-spanish-thick","n":"Hot chocolate (French chocolat chaud, Spanish thick)","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"smoothies","n":"Smoothies","c":34,"b":0,"f":[0,1],"x":0},
-    {"s":"lemonade","n":"Lemonade","c":34,"b":0,"f":[0,2],"x":0},
-    {"s":"agua-fresca","n":"Agua fresca","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"lassi","n":"Lassi","c":34,"b":0,"f":[0,1],"x":0},
-    {"s":"milkshakes","n":"Milkshakes","c":34,"b":0,"f":[0,1],"x":0},
-    {"s":"horchata","n":"Horchata","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"shrubs","n":"Shrubs","c":34,"b":0,"f":[0,1],"x":0},
-    {"s":"tonics","n":"Tonics","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"hot-chocolate-french-chocolat-chaud-spanish-thick","n":"Hot chocolate (French chocolat chaud, Spanish thick)","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"smoothies","n":"Smoothies","c":34,"b":1,"f":[0,1],"x":0},
+    {"s":"lemonade","n":"Lemonade","c":34,"b":1,"f":[0,2],"x":0},
+    {"s":"agua-fresca","n":"Agua fresca","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"lassi","n":"Lassi","c":34,"b":0,"f":[1,1],"x":0},
+    {"s":"milkshakes","n":"Milkshakes","c":34,"b":1,"f":[0,1],"x":0},
+    {"s":"horchata","n":"Horchata","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"shrubs","n":"Shrubs","c":34,"b":0,"f":[1,1],"x":0},
+    {"s":"tonics","n":"Tonics","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"salep","n":"Salep","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"teh-tarik","n":"Teh tarik","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"frappe-coffee","n":"Frappé coffee","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"frappe-coffee","n":"Frappé coffee","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"hong-kong-style-milk-tea","n":"Hong Kong-style milk tea","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"sujeonggwa","n":"Sujeonggwa","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"thai-tea","n":"Thai tea","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"agua-de-jamaica","n":"Agua de jamaica","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"champurrado","n":"Champurrado","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"atole","n":"Atole","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"sweet-tea","n":"Sweet tea","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"iced-tea-lemonade","n":"Iced tea lemonade","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"egg-cream","n":"Egg cream","c":34,"b":0,"f":[0,1],"x":0},
+    {"s":"thai-tea","n":"Thai tea","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"agua-de-jamaica","n":"Agua de jamaica","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"champurrado","n":"Champurrado","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"atole","n":"Atole","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"sweet-tea","n":"Sweet tea","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"iced-tea-lemonade","n":"Iced tea lemonade","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"egg-cream","n":"Egg cream","c":34,"b":0,"f":[1,1],"x":0},
     {"s":"malted-milk","n":"Malted milk","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"cream-soda","n":"Cream soda","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"flat-white","n":"Flat white","c":34,"b":0,"f":[0,0],"x":0},
     {"s":"cafe-de-olla","n":"Café de olla","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"dalgona-coffee","n":"Dalgona coffee","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"limeade","n":"Limeade","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"chocolate-milk","n":"Chocolate milk","c":34,"b":0,"f":[0,0],"x":0},
+    {"s":"dalgona-coffee","n":"Dalgona coffee","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"limeade","n":"Limeade","c":34,"b":1,"f":[0,0],"x":0},
+    {"s":"chocolate-milk","n":"Chocolate milk","c":34,"b":1,"f":[0,0],"x":0},
     {"s":"switchel","n":"Switchel","c":34,"b":0,"f":[0,0],"x":0},
-    {"s":"ginger-ale","n":"Ginger ale","c":34,"b":0,"f":[0,0],"x":0}
+    {"s":"ginger-ale","n":"Ginger ale","c":34,"b":1,"f":[0,0],"x":0}
   ]
 }
